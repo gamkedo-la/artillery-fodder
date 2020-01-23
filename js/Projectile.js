@@ -91,7 +91,7 @@ function threeShotClass() {
 	this.launch = function launch(angle, power) {
 		var newProjectileC = new basicShotClass();
 		newProjectileC.x = this.x;
-		newProjectileC.y = this.y - 10;
+		newProjectileC.y = this.y;
 		newProjectileC.size = this.size;
 		newProjectileC.tank = this.tank;
 		newProjectileC.launch(angle, power);
@@ -99,7 +99,7 @@ function threeShotClass() {
 
 		var newProjectileL = new basicShotClass();
 		newProjectileL.x = this.x;
-		newProjectileL.y = this.y - 10;
+		newProjectileL.y = this.y;
 		newProjectileL.size = this.size;
 		newProjectileL.tank = this.tank;
 		newProjectileL.primary = false;
@@ -108,7 +108,7 @@ function threeShotClass() {
 
 		var newProjectileR = new basicShotClass();
 		newProjectileR.x = this.x;
-		newProjectileR.y = this.y - 10;
+		newProjectileR.y = this.y;
 		newProjectileR.size = this.size;
 		newProjectileR.tank = this.tank;
 		newProjectileR.primary = false;
