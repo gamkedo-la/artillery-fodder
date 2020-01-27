@@ -25,6 +25,9 @@ var groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 var groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 
 const UI_HEIGHT = 100
+const MAX_CLOUDS = 10;
+var cloudPositions = [];
+var cloudImg;
 
 var map = new terrain();
 
@@ -32,7 +35,7 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 
-	gameStart();
+	imageLoader.loadImages().then(gameStart);
 }
 
 function gameStart() {
@@ -49,6 +52,13 @@ function gameStart() {
 
 	arrayOfPlayers[0].myTurn = true;
 
+	cloudImg = imageLoader.getImage("cloud1");
+	for (let i=0; i<MAX_CLOUDS; i++) {
+		cloudPositions[i] = {
+			x: Math.floor(Math.random()*(canvas.width - cloudImg.width/2)),
+			y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
+		};
+	}
 	window.requestAnimationFrame(frameLoop);
 }
 
@@ -107,8 +117,13 @@ function modeGame(frameTime) {
 
 
 	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
-	colorText(arrayOfPlayers[playerTurn].weapon, 400, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial") 
+	colorText(arrayOfPlayers[playerTurn].weapon, 400, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial")
 
+
+	for (let i=0; i<cloudPositions.length; i++) {
+		let pos = cloudPositions[i];
+		canvasContext.drawImage(cloudImg, pos.x, pos.y);
+	}
 	map.draw();
 
 	for (var i = 0; i < numberOfPlayers; i++) {
