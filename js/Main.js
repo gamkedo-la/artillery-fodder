@@ -15,9 +15,11 @@ var elapsed = 0;
 var frameStepSize = 1/60;
 var now;
 
+//Scenes
 const GAME_MODE = 0;
 const TITLE_SCREEN = 1;
 const CREDITS_SCREEN = 2;
+const MAIN_MENU = 3;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -90,6 +92,9 @@ function update(frameTime) {
 		case CREDITS_SCREEN:
 			modeCredits(frameTime);
 			break;
+		case MAIN_MENU:
+			modeMainMenu(frameTime);
+			break;
 	}
 
 	if (Key.isJustPressed(Key.BRACKET_LEFT)){
@@ -151,6 +156,9 @@ function modeGame(frameTime) {
 	}
 	if (Key.isJustPressed(Key.CREDITS)){
 		mode = CREDITS_SCREEN;
+	}
+	if (Key.isJustPressed(Key.m)){
+		mode = MAIN_MENU;
 	}
 }
 

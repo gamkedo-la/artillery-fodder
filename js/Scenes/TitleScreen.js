@@ -10,4 +10,3 @@ function modeTitle(frameTime) {
 		mode = MAIN_MENU;
 	}
 }
-
