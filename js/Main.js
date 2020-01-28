@@ -141,6 +141,10 @@ function modeGame(frameTime) {
 
 	cleanLists();
 	nextTurn()
+
+	if (Key.isJustPressed(Key.t)){
+		mode = TITLE_SCREEN;
+	}
 }
 
 function nextTurn() {
