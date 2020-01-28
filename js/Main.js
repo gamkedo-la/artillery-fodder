@@ -17,6 +17,7 @@ var now;
 
 const GAME_MODE = 0;
 const TITLE_SCREEN = 1;
+const CREDITS_SCREEN = 2;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -86,6 +87,9 @@ function update(frameTime) {
 		case TITLE_SCREEN:
 			modeTitle(frameTime);
 			break;
+		case CREDITS_SCREEN:
+			modeCredits(frameTime);
+			break;
 	}
 
 	if (Key.isJustPressed(Key.BRACKET_LEFT)){
@@ -144,6 +148,9 @@ function modeGame(frameTime) {
 
 	if (Key.isJustPressed(Key.t)){
 		mode = TITLE_SCREEN;
+	}
+	if (Key.isJustPressed(Key.CREDITS)){
+		mode = CREDITS_SCREEN;
 	}
 }
 
