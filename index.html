@@ -2,16 +2,23 @@
 <html lang="en">
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">
-
+    <meta content="utf-8" http-equiv="encoding">
+    <style>
+        body { margin:0; padding:0; overflow:hidden; }
+        #speechRecognitionDisplay { position:absolute; bottom:8px; right:8px; background:rgba(200,160,120,0.25) }
+    </style>
 </head>
 <body>
 	<canvas id="gameCanvas" width="800" height="600"></canvas>
-	<p id="instructions">UP and DOWN for power<br>
+    
+    <p id="instructions">UP and DOWN for power<br>
 	LEFT and RIGHT for angle<br>
 	SPACE to fire and start the game<br>
 	COMMA and PERIOD to change weapons<br>
-	[T] for Title Screen<br>
+    [T] for Title Screen<br></p>
+
+    <p id='speechRecognitionDisplay'></p>
+    
 	<script src="js/Math.js"></script>
 	<script src="js/Input.js"></script>
 	<script src="js/ImageLoading.js"></script>
@@ -20,7 +27,9 @@
 	<script src="js/Terrain.js"></script>
 	<script src="js/Explosion.js"></script>
 	<script src="js/Projectile.js"></script>
-	<script src="js/Tank.js"></script>
+    <script src="js/Tank.js"></script>
+    <script src="js/SpeechRecognition.annyang.min.js"></script>
+    <script src="js/SpeechRecognition.js"></script>
 	<script src="js/Scenes/TitleScreen.js"></script>
 	<script src="js/Scenes/CreditScreen.js"></script>
 	<script src="js/Scenes/MainMenu.js"></script>

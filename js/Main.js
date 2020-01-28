@@ -33,16 +33,21 @@ var cloudPositions = [];
 var cloudImg;
 
 var map = new terrain();
+var SpeechRecognition = new SpeechRecognitionEngine();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 
-	imageLoader.loadImages().then(gameStart);
+    imageLoader.loadImages().then(gameStart);
+    
 }
 
 function gameStart() {
-	map.init(canvas.width, canvas.height-UI_HEIGHT);
+
+    SpeechRecognition.init(); // ask permission for mic input of game actions
+
+    map.init(canvas.width, canvas.height-UI_HEIGHT);
 
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i] = new tankClass();
