@@ -17,7 +17,7 @@ var now;
 
 const GAME_MODE = 0;
 const TITLE_SCREEN = 1;
-var mode = GAME_MODE;
+var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 var skyColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -141,16 +141,6 @@ function modeGame(frameTime) {
 
 	cleanLists();
 	nextTurn()
-}
-
-function modeTitle(frameTime) {
-	colorRect(0, 0, canvas.width, canvas.height, "LightGrey");	
-	colorRect(100, 100, canvas.width-200, canvas.height-200, "Grey");
-	colorText("Tank Game", canvas.width/2 - 125, canvas.height/2, "White", "50px Arial");
-
-	if (Key.isJustPressed(Key.SPACE)){
-		mode = GAME_MODE;
-	}
 }
 
 function nextTurn() {
