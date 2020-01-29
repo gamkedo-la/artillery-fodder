@@ -45,7 +45,7 @@ window.onload = function() {
 
 function gameStart() {
 
-    SpeechRecognition.init(); // ask permission for mic input of game actions
+    //SpeechRecognition.init(); // ask permission for mic input of game actions
 
     map.init(canvas.width, canvas.height-UI_HEIGHT);
 
@@ -157,12 +157,6 @@ function modeGame(frameTime) {
 	cleanLists();
 	nextTurn()
 
-	if (Key.isJustPressed(Key.t)){
-		mode = TITLE_SCREEN;
-	}
-	if (Key.isJustPressed(Key.CREDITS)){
-		mode = CREDITS_SCREEN;
-	}
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
 	}
