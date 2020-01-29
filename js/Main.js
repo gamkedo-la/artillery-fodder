@@ -22,6 +22,7 @@ const CREDITS_SCREEN = 2;
 const MAIN_MENU = 3;
 const CONTROLS_SCREEN = 4;
 const TERRAIN_SCREEN = 5;
+const PLAYER_SCREEN = 6;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -108,6 +109,9 @@ function update(frameTime) {
 			break;
 		case TERRAIN_SCREEN:
 			modeTerrain(frameTime);
+			break;
+		case PLAYER_SCREEN:
+			modePlayer(frameTime);
 			break;
 	}
 

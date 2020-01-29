@@ -7,7 +7,7 @@ function modeMainMenu(frameTime) {
 	colorText("Press [C] for CREDITS", canvas.width/2 - 150, canvas.height/2 + 30, "Black", "20px Arial");
 	colorText("Press [L] for CONTROLS", canvas.width/2 - 150, canvas.height/2 + 60, "Black", "20px Arial");
 	colorText("Press [T] for TERRAIN SCREEN", canvas.width/2 - 150, canvas.height/2 + 90, "Black", "20px Arial");
-	//colorText("Press [P] for PLAYER SCREEN", canvas.width/2 - 150, canvas.height/2 + 60, "Black", "20px Arial");
+	colorText("Press [P] for PLAYER SCREEN", canvas.width/2 - 150, canvas.height/2 + 120, "Black", "20px Arial");
 	//colorText("Press [P] for OPTIONS", canvas.width/2 - 150, canvas.height/2 + 60, "Black", "20px Arial");
 	//colorText("Press [P] for WEAPON INVENTORY", canvas.width/2 - 150, canvas.height/2 + 60, "Black", "20px Arial");
 
@@ -22,5 +22,8 @@ function modeMainMenu(frameTime) {
 	}
 	if (Key.isJustPressed(Key.t)){
 		mode = TERRAIN_SCREEN;
+	}
+	if (Key.isJustPressed(Key.p)){
+		mode = PLAYER_SCREEN;
 	}
 }
