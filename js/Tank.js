@@ -21,12 +21,23 @@ function tankClass() {
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
 
-		if (xVel < 1) {xVel = 0;}
-		if (yVel < 1) {yVel = 0;}
+		if (xVel < 0.1) {xVel = 0;}
+		if (yVel < 0.1) {yVel = 0;}
 
 		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
-		if (this.y > mapHeight) {
+		if (this.y < mapHeight) {
+			yVel += 90 * frameTime;
+			this.x += xVel * frameTime;
+			this.y += yVel * frameTime;
+		}else if (Math.floor(this.y) == mapHeight) {
 			this.y = mapHeight;
+			xVel *= -0.5;
+			yVel *= -0.5;
+		} else if (this.y > mapHeight - 5) {
+			this.y = mapHeight;
+			xVel *= -0.5;
+			yVel *= -0.5;
+		} else if (this.y > mapHeight) {
 			xVel *= -0.5;
 			yVel *= -0.5;
 		}
