@@ -18,7 +18,9 @@ function modeMainMenu(frameTime) {
 
 	colorText("Press [C] for CREDITS", canvas.width/2 - 150, canvas.height/2 + 180, "Black", "20px Arial");
 
-	if (Key.isJustPressed(Key.SPACE)){
+    if (Key.isJustPressed(Key.SPACE) 
+        || SpeechRecognition.pendingStartCommand()
+        ){
 		mode = GAME_MODE;
 	}
 	if (Key.isJustPressed(Key.CREDITS)){

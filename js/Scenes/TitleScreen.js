@@ -6,7 +6,9 @@ function modeTitle(frameTime) {
 	colorText("Artillery Fodder", canvas.width/2 - 160, canvas.height/2, "White", "50px Arial");
 	colorText("Press [Space Bar] to START", canvas.width/2 - 125, canvas.height/2 + 100, "Black", "20px Arial");
 
-	if (Key.isJustPressed(Key.SPACE)){
+    if (Key.isJustPressed(Key.SPACE)
+        || SpeechRecognition.pendingStartCommand()
+    ){
 		mode = MAIN_MENU;
 	}
 }

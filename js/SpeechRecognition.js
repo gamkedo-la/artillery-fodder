@@ -10,6 +10,8 @@ function SpeechRecognitionEngine() {
         // menu commands
         '(please) help (me)': speechCommandHelp,
         'pause': speechCommandPause,
+        'start (game)': speechCommandStart,
+        'play (game)': speechCommandStart,
 
         // synonyms for commencing your attack
         'fire (at) *deets': speechCommandFire,
@@ -24,6 +26,7 @@ function SpeechRecognitionEngine() {
         'set (the) aim (to) :num (degrees)': speechCommandAim,
         'aim (at) :num (degrees)': speechCommandAim,
         ':num degrees': speechCommandAim,
+        'set (the) angle (to) :num (degrees)': speechCommandAim,
         'angle :num (degrees)': speechCommandAim,
 
         // synonyms for setting the shot power
@@ -32,6 +35,7 @@ function SpeechRecognitionEngine() {
         ':num power': speechCommandPower,
     };
 
+    var pendingStart = false;
     var pendingFire = false;
     
     this.pendingFireCommand = function() {
@@ -44,6 +48,16 @@ function SpeechRecognitionEngine() {
         }
     }
     
+    this.pendingStartCommand = function() {
+        if (pendingStart) {
+            // reset now that we've told the game about it
+            pendingstart = false; 
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function speechError() { // generic error including unintelligible sound
         debugSpeech("Speech recognition was unable to parse that last bit.");
     }
@@ -68,6 +82,11 @@ function SpeechRecognitionEngine() {
     function speechCommandFire(deets) {
         debugSpeech("Speech recognition command: FIRE! at " + deets);
         pendingFire = true;
+    }
+
+    function speechCommandStart() {
+        debugSpeech("Speech recognition command: START GAME!");
+        pendingStart = true;
     }
 
     function speechCommandPause() {
