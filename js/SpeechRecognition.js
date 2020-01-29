@@ -100,6 +100,11 @@ function SpeechRecognitionEngine() {
     function speechCommandAim(angle) {
         debugSpeech("Speech recognition command: AIM! at " + angle);
         angle = parseInt(angle); // force integer just in case
+        // ignore unknown numbers - just leave the angle alone
+        if (isNaN(angle)) {
+            debugSpeech("Speech could not understand the aim angle specified, ignoring command.");
+            return;
+        }
         // FIXME we could accept "northwest" or "10 o'clock"
         if (angle < 0) angle = 0;
         if (angle > 360) angle = 360;
@@ -110,6 +115,11 @@ function SpeechRecognitionEngine() {
     function speechCommandPower(power) {
         debugSpeech("Speech recognition command: POWER! " + power);
         power = parseInt(power); // force integer just in case
+        // ignore unknown numbers - just leave the angle alone
+        if (isNaN(power)) {
+            debugSpeech("Speech could not understand the power level specified, ignoring command.");
+            return;
+        }
         if (power < 1) power = 1;
         if (power > 100) power = 100;
         // tell the tank to use this new value
