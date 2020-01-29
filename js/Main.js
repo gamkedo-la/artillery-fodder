@@ -23,6 +23,8 @@ const MAIN_MENU = 3;
 const CONTROLS_SCREEN = 4;
 const TERRAIN_SCREEN = 5;
 const PLAYER_SCREEN = 6;
+const OPTIONS_SCREEN = 7;
+const INVENTORY_SCREEN = 8;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -112,6 +114,12 @@ function update(frameTime) {
 			break;
 		case PLAYER_SCREEN:
 			modePlayer(frameTime);
+			break;
+		case OPTIONS_SCREEN:
+			modeOptions(frameTime);
+			break;
+		case INVENTORY_SCREEN:
+			modeInventory(frameTime);
 			break;
 	}
 
