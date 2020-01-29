@@ -44,7 +44,9 @@ function tankClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
-				if (Key.isJustPressed(Key.SPACE)){
+                if (Key.isJustPressed(Key.SPACE) || 
+                    SpeechRecognition.pendingFireCommand()
+                    ){
 					var newProjectile;
 					switch (this.weapon) {
 						case 0:

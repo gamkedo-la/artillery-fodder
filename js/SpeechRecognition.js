@@ -4,8 +4,48 @@
 
 function SpeechRecognitionEngine() {
     
-    function speechError() {
-        debugSpeech("Speech recognition ERROR!");
+    // attach functions to speech regocnition results
+    var commands = {
+
+        // menu commands
+        '(please) help (me)': speechCommandHelp,
+        'pause': speechCommandPause,
+
+        // synonyms for commencing your attack
+        'fire (at) *deets': speechCommandFire,
+        'shoot (at) *deets': speechCommandFire,
+        'engage': speechCommandFire,
+        'make it so': speechCommandFire,
+        'attack': speechCommandFire,
+        'end turn': speechCommandFire,
+        'ready': speechCommandFire,
+        
+        // synonyms for setting the aim angle
+        'set (the) aim (to) :num (degrees)': speechCommandAim,
+        'aim (at) :num (degrees)': speechCommandAim,
+        ':num degrees': speechCommandAim,
+        'angle :num (degrees)': speechCommandAim,
+
+        // synonyms for setting the shot power
+        'set (the) power (to) :num': speechCommandPower,
+        'power :num': speechCommandPower,
+        ':num power': speechCommandPower,
+    };
+
+    var pendingFire = false;
+    
+    this.pendingFireCommand = function() {
+        if (pendingFire) {
+            // reset now that we've told the game about it
+            pendingFire = false; 
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    function speechError() { // generic error including unintelligible sound
+        debugSpeech("Speech recognition was unable to parse that last bit.");
     }
     
     function speechErrorNetwork() {
@@ -27,6 +67,7 @@ function SpeechRecognitionEngine() {
 
     function speechCommandFire(deets) {
         debugSpeech("Speech recognition command: FIRE! at " + deets);
+        pendingFire = true;
     }
 
     function speechCommandPause() {
@@ -39,15 +80,28 @@ function SpeechRecognitionEngine() {
 
     function speechCommandAim(angle) {
         debugSpeech("Speech recognition command: AIM! at " + angle);
+        angle = parseInt(angle); // force integer just in case
+        // FIXME we could accept "northwest" or "10 o'clock"
+        if (angle < 0) angle = 0;
+        if (angle > 360) angle = 360;
+        // tell the tank to use this new value
+        arrayOfPlayers[playerTurn].angle = angle;
+    }
+
+    function speechCommandPower(power) {
+        debugSpeech("Speech recognition command: POWER! " + power);
+        power = parseInt(power); // force integer just in case
+        if (power < 1) power = 1;
+        if (power > 100) power = 100;
+        // tell the tank to use this new value
+        arrayOfPlayers[playerTurn].power = power;
     }
 
     function debugSpeech(txt) {
-        
         console.log(txt);
-        
         // maybe show it on screen
         var ele = document.getElementById('speechRecognitionDisplay');
-        if (ele) ele.innerHTML = txt;
+        if (ele) ele.innerHTML = ele.innerHTML + '<br>' + txt;
     }
 
     this.init = function() {
@@ -57,14 +111,6 @@ function SpeechRecognitionEngine() {
         if (annyang) {
             
             debugSpeech("Speech recognition is enabled!");
-
-            // attach functions to speech regocnition results
-            var commands = {
-            'fire (at) *deets': speechCommandFire,
-            'pause': speechCommandPause,
-            '(please) help (me)': speechCommandHelp,
-            'aim (at) :angle (degrees)': speechCommandAim
-            };
 
             // track any problems
             annyang.addCallback('error', speechError);
