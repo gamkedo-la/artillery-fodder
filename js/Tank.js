@@ -10,12 +10,21 @@ function tankClass() {
 
 	var w = 20;
 	var h = 10;
+	var xVel = 0;
+	var yVel = 0;
 
 	this.myTurn = false;
 	this.active = true;
 
 	this.update = function update(frameTime) {
-		this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+		yVel += 1.5;
+		this.x += xVel * frameTime;
+		this.y += yVel * frameTime;
+
+		if (this.y > canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
+			this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+			yVel = 0;
+		}
 
 		if (this.myTurn) {
 			if (this.active) {
