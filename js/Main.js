@@ -20,6 +20,7 @@ const GAME_MODE = 0;
 const TITLE_SCREEN = 1;
 const CREDITS_SCREEN = 2;
 const MAIN_MENU = 3;
+const CONTROLS_SCREEN = 4;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -100,6 +101,9 @@ function update(frameTime) {
 			break;
 		case MAIN_MENU:
 			modeMainMenu(frameTime);
+			break;
+		case CONTROLS_SCREEN:
+			modeControls(frameTime);
 			break;
 	}
 
