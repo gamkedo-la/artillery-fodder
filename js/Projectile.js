@@ -13,7 +13,7 @@ function basicShotClass() {
 
 	this.update = function update(frameTime) {
 		if (this.active) {
-			yVel += 1.5;
+			yVel += 90 * frameTime;
 
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
@@ -73,9 +73,6 @@ function threeShotClass() {
 	this.damage = 10;
 	this.tank;
 
-	var xVel = 0;
-	var yVel = 0;
-
 	this.active = false;
 
 	this.update = function update(frameTime) {
@@ -132,7 +129,7 @@ function sniperShotClass() {
 
 	this.update = function update(frameTime) {
 		if (this.active) {
-			yVel += 1.5;
+			yVel += 90 * frameTime;
 
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;

@@ -17,12 +17,13 @@ function tankClass() {
 	this.active = true;
 
 	this.update = function update(frameTime) {
-		yVel += 1.5;
+		yVel += 90 * frameTime;
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
 
 		if (this.y > canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
 			this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+			xVel = 0;
 			yVel = 0;
 		}
 
