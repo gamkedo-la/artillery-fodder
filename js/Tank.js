@@ -21,10 +21,14 @@ function tankClass() {
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
 
-		if (this.y > canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
-			this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
-			xVel = 0;
-			yVel = 0;
+		if (xVel < 1) {xVel = 0;}
+		if (yVel < 1) {yVel = 0;}
+
+		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+		if (this.y > mapHeight) {
+			this.y = mapHeight;
+			xVel *= -0.5;
+			yVel *= -0.5;
 		}
 
 		if (this.myTurn) {
@@ -113,8 +117,13 @@ function tankClass() {
 		}
 	}
 
-	this.takeDamage = function takeDamage(amount) {
+	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
+
+		var radians = degreesToRadians(angle);
+		xVel = Math.cos(radians) * amount * 20;
+		yVel = -Math.sin(radians) * amount * 20;
+
 		if (this.health <= 0) {
 			this.destroy();
 		}

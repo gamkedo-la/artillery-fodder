@@ -33,9 +33,17 @@ function rndOneIn(max = 2){
 }
 
 function distance (a,b) {
-	const dx = a.x - b.x;
-	const dy = a.y - b.y;
+	var dx = a.x - b.x;
+	var dy = a.y - b.y;
 	return Math.sqrt(dx * dx + dy * dy);
+}
+
+function angleBetween2Points (a, b) {
+	var angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / pi;
+	angle *= -1;
+	if (angle >= 360) {angle -= 360;}
+	if (angle < 0) {angle += 360;}
+	return angle;
 }
 
 function clamp(x, min, max) {
