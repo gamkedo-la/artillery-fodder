@@ -25,6 +25,7 @@ const TERRAIN_SCREEN = 5;
 const PLAYER_SCREEN = 6;
 const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
+const WIN_SCREEN = 9;
 var mode = TITLE_SCREEN;
 
 var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
@@ -50,7 +51,7 @@ window.onload = function() {
 
 function gameStart() {
 
-    SpeechRecognition.init(); // ask permission for mic input of game actions
+   // SpeechRecognition.init(); // ask permission for mic input of game actions
 
     map.init(canvas.width, canvas.height-UI_HEIGHT);
 
@@ -120,6 +121,9 @@ function update(frameTime) {
 			break;
 		case INVENTORY_SCREEN:
 			modeInventory(frameTime);
+			break;
+		case WIN_SCREEN:
+			modeWinScreen(frameTime);
 			break;
 	}
 

@@ -41,4 +41,7 @@ function modeMainMenu(frameTime) {
 	if (Key.isJustPressed(Key.i)){
 		mode = INVENTORY_SCREEN;
 	}
+	if (Key.isJustPressed(Key.g)){
+		mode = WIN_SCREEN;
+	}
 }
