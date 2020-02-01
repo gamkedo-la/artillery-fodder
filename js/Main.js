@@ -8,6 +8,9 @@ var arrayOfExplosions = [];
 
 var playerTurn = 0;
 var incrementTurn = false;
+var nextPlayersTurn = false;
+var bufferRunTimePlayersNextTurn = 0;
+var runTimePlayersNextTurn = 0;
 
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
@@ -139,11 +142,16 @@ function update(frameTime) {
 }
 
 function modeGame(frameTime) {
+
+	
+
 	// colorRect(0, 0, canvas.width, canvas.height, skyColor);	
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
+	
 
 	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
 	
@@ -179,7 +187,8 @@ function modeGame(frameTime) {
 	}
 
 	cleanLists();
-	nextTurn()
+	nextTurn();
+	nextPlayersTurnAnnounced();
 
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
@@ -188,6 +197,7 @@ function modeGame(frameTime) {
 
 function nextTurn() {
 	if (incrementTurn) {
+		nextPlayersTurn = true;
 		arrayOfPlayers[playerTurn].myTurn = false;
 
 		playerTurn++;
@@ -199,6 +209,23 @@ function nextTurn() {
 
 		incrementTurn = false;
 	}
+}
+
+function nextPlayersTurnAnnounced() {
+	if(nextPlayersTurn) {
+		bufferRunTimePlayersNextTurn ++;
+		if(bufferRunTimePlayersNextTurn >= 90) {
+			console.log ("next player!");
+			colorText("Next Player's Turn", canvas.width/2 - 150, 150, "White", "50px Arial");
+			runTimePlayersNextTurn ++;
+		}		
+	}
+	if(runTimePlayersNextTurn >= 120) {
+		nextPlayersTurn = false;		
+	}
+
+
+
 }
 
 function cleanLists() {

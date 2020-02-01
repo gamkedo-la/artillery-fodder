@@ -41,6 +41,7 @@ function modeMainMenu(frameTime) {
 	if (Key.isJustPressed(Key.i)){
 		mode = INVENTORY_SCREEN;
 	}
+	//eliminate G shortcut after implementing win conditions and screen
 	if (Key.isJustPressed(Key.g)){
 		mode = WIN_SCREEN;
 	}
