@@ -11,6 +11,7 @@ var incrementTurn = false;
 var nextPlayersTurn = false;
 var bufferRunTimePlayersNextTurn = 0;
 var runTimePlayersNextTurn = 0;
+var fadeVariable = 1.0;
 
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
@@ -213,19 +214,27 @@ function nextTurn() {
 
 function nextPlayersTurnAnnounced() {
 	if(nextPlayersTurn) {
+
 		bufferRunTimePlayersNextTurn ++;
+
 		if(bufferRunTimePlayersNextTurn >= 90) {
-			console.log ("next player!");
-			colorText("Next Player's Turn", canvas.width/2 - 150, 150, "White", "50px Arial");
+			colorText("Next Player's Turn", canvas.width/2 - 180, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
 			runTimePlayersNextTurn ++;
+
+			if(runTimePlayersNextTurn >= 60) {
+				fadeVariable -= 0.01;
+
+			}
 		}		
 	}
-	if(runTimePlayersNextTurn >= 120) {
-		nextPlayersTurn = false;		
+
+	if(runTimePlayersNextTurn >= 150) {
+		nextPlayersTurn = false;	
+		fadeVariable = 1.0;
+		bufferRunTimePlayersNextTurn = 0;
+		runTimePlayersNextTurn = 0;
+
 	}
-
-
-
 }
 
 function cleanLists() {
