@@ -9,8 +9,10 @@ var arrayOfExplosions = [];
 var playerTurn = 0;
 var incrementTurn = false;
 var nextPlayersTurn = false;
-var bufferRunTimePlayersNextTurn = 0;
-var runTimePlayersNextTurn = 0;
+var bufferTimerHeadline = 0;
+var runTimerHeadline = 0;
+var runTimerHeadlineDestroyed = 0;
+var destroyedHeadline = false;
 var fadeVariable = 1.0;
 
 var deltaTime = 0;
@@ -144,8 +146,6 @@ function update(frameTime) {
 
 function modeGame(frameTime) {
 
-	
-
 	// colorRect(0, 0, canvas.width, canvas.height, skyColor);	
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
@@ -215,25 +215,23 @@ function nextTurn() {
 function nextPlayersTurnAnnounced() {
 	if(nextPlayersTurn) {
 
-		bufferRunTimePlayersNextTurn ++;
+		bufferTimerHeadline ++;
 
-		if(bufferRunTimePlayersNextTurn >= 90) {
-			colorText("Next Player's Turn", canvas.width/2 - 180, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
-			runTimePlayersNextTurn ++;
+		if(bufferTimerHeadline >= 90) {
+			colorText("Next Player's Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
+			runTimerHeadline ++;
 
-			if(runTimePlayersNextTurn >= 60) {
+			if(runTimerHeadline >= 60) {
 				fadeVariable -= 0.01;
-
 			}
 		}		
 	}
 
-	if(runTimePlayersNextTurn >= 150) {
+	if(runTimerHeadline >= 180) {
 		nextPlayersTurn = false;	
 		fadeVariable = 1.0;
-		bufferRunTimePlayersNextTurn = 0;
-		runTimePlayersNextTurn = 0;
-
+		bufferTimerHeadline = 0;
+		runTimerHeadline = 0;
 	}
 }
 

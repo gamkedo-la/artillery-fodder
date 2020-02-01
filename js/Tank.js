@@ -108,6 +108,11 @@ function tankClass() {
 				incrementTurn = true;
 			}
 		}
+				//cheat code
+		if (Key.isJustPressed(Key.f)){
+			this.health = 0;
+			//this.destroy();
+		}
 	}
 
 	this.draw = function draw(frameTime) {
@@ -119,6 +124,8 @@ function tankClass() {
 		cannonY = -Math.sin(radians) * 10;
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, this.color);
+
+		this.destroyedTankHeadline();
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -146,7 +153,25 @@ function tankClass() {
 		if (this.active) {
 			this.color = "Black"
 			this.active = false;
-			console.log("Destroy Player " + (playerTurn+1));
+			console.log("Destroy Player " + (playerTurn+2));
+			destroyedHeadline = true;
+
 		}
 	}
+
+	this.destroyedTankHeadline = function destroyedTankHeadline() {
+		if(destroyedHeadline) {
+			colorText("Tank " + (playerTurn+2) + ", Destroyed!", canvas.width/2 - 200, 150, 'white', "50px Arial");
+			runTimerHeadlineDestroyed ++;
+			console.log ("working");
+
+			if(runTimerHeadlineDestroyed >= 60) {
+				fadeVariable -= 0.05;
+			}		
+			if(runTimerHeadlineDestroyed >= 180) {
+				destroyedHeadline = false;
+			}			
+		}
+	}
+
 }
