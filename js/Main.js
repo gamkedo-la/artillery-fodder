@@ -51,15 +51,15 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 
-    imageLoader.loadImages().then(gameStart);
-    
+	imageLoader.loadImages().then(gameStart);
+
 }
 
 function gameStart() {
 
-   // SpeechRecognition.init(); // ask permission for mic input of game actions
+	//SpeechRecognition.init(); // ask permission for mic input of game actions
 
-    map.init(canvas.width, canvas.height-UI_HEIGHT);
+	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i] = new tankClass();
@@ -210,6 +210,16 @@ function nextTurn() {
 		arrayOfPlayers[playerTurn].myTurn = true;
 
 		incrementTurn = false;
+
+		var remaningPlayers = numberOfPlayers;
+		console.log(numberOfPlayers)
+		for (var i = 0; i < numberOfPlayers; i++) {
+			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
+			console.log(remaningPlayers)
+		}
+		if (remaningPlayers <= 1) {
+			mode = WIN_SCREEN;
+		}
 	}
 }
 

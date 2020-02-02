@@ -103,7 +103,6 @@ function tankClass() {
 				} else if (this.weapon < 0) {
 					this.weapon = 2;
 				}
-
 			} else {
 				incrementTurn = true;
 			}
