@@ -206,7 +206,6 @@ function sniperShotClass() {
 	}
 }
 
-
 function teleportShot() {
 	this.x = 0;
 	this.y = 0;
@@ -256,5 +255,91 @@ function teleportShot() {
 
 		this.tank.x = this.x;
 		this.tank.y = this.y;
+	}
+}
+
+function rollShotClass() {
+	this.x = 0;
+	this.y = 0;
+	this.size = 20;
+	this.damage = 20;
+	this.tank;
+
+	var xVel = 0;
+	var yVel = 0;
+	var grounded = false;
+
+	this.active = false;
+	this.coundDown = 2;
+	this.speed = 30;
+
+	this.update = function update(frameTime) {
+		if (this.active) {
+			if (!grounded) {
+				yVel += 90 * frameTime;
+
+				this.x += xVel * frameTime;
+				this.y += yVel * frameTime;
+			} else {
+				if (this.coundDown <= 0) {
+					this.hit();
+				}
+
+				if (xVel >= 0) {
+					this.x += this.speed * frameTime;
+					this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+					this.coundDown -= frameTime;
+				} else if (xVel < 0) {
+					this.x -= this.speed * frameTime;
+					this.y = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+					this.coundDown -= frameTime;
+				}
+			}
+
+			for (var i = 0; i < numberOfPlayers; i++) {
+				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
+					if (this.tank != arrayOfPlayers[i]) {
+						this.hit();
+					}
+				}
+			}
+
+			if (this.y >= canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
+				grounded = true;
+			} else if (this.y >= canvas.height - UI_HEIGHT) {
+				grounded = true;
+			} else if (this.x < 0 || this.x > canvas.width) {
+				this.active = false;
+				incrementTurn = true;
+			}
+		}
+	}
+
+	this.draw = function draw(frameTime) {
+		colorCircle(this.x, this.y, 2, "Black");
+	}
+
+	this.launch = function launch(angle, power) {
+		var radians = degreesToRadians(angle);
+		xVel = Math.cos(radians) * power;
+		yVel = -Math.sin(radians) * power;
+		this.active = true;
+	}
+
+	this.hit = function hit() {
+		yVel = 0;
+					
+		this.active = false;
+		incrementTurn = true;
+
+		var newExplosion = new basicExplosionClass();
+		newExplosion.x = this.x;
+		newExplosion.y = this.y;
+		newExplosion.size = this.size;
+		newExplosion.damage = this.damage;
+		newExplosion.color = "White";
+		newExplosion.tank = this.tank;
+		newExplosion.active = true;
+		arrayOfExplosions.push(newExplosion);
 	}
 }

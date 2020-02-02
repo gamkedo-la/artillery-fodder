@@ -80,6 +80,9 @@ function tankClass() {
 							newProjectile = new basicShotClass();
 							newProjectile.size = 50;
 							break;
+						case 6:
+							newProjectile = new rollShotClass();
+							break;
 					}
 					newProjectile.x = this.x;
 					newProjectile.y = this.y - 10;
@@ -120,10 +123,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 5) {
+				if (this.weapon > 6) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 5;
+					this.weapon = 6;
 				}
 			} else {
 				incrementTurn = true;
