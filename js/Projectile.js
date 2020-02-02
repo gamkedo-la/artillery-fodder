@@ -1,3 +1,36 @@
+function empty() {
+	this.x = 0;
+	this.y = 0;
+	this.size = 20;
+	this.damage = 20;
+	this.tank;
+
+	var xVel = 0;
+	var yVel = 0;
+
+	this.active = false;
+
+	this.update = function update(frameTime) {
+		if (this.active) {
+			this.active = false;
+			incrementTurn = true;
+		}
+	}
+
+	this.draw = function draw(frameTime) {
+		return;
+	}
+
+	this.launch = function launch(angle, power) {
+		this.active = true;
+		incrementTurn = true;
+	}
+
+	this.hit = function hit() {
+		return;
+	}
+}
+
 function basicShotClass() {
 	this.x = 0;
 	this.y = 0;
@@ -38,7 +71,7 @@ function basicShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black")
+		colorCircle(this.x, this.y, 2, "Black");
 	}
 
 	this.launch = function launch(angle, power) {
@@ -155,7 +188,7 @@ function sniperShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 1, "Black")
+		colorCircle(this.x, this.y, 1, "Black");
 	}
 
 	this.launch = function launch(angle, power) {
@@ -172,3 +205,4 @@ function sniperShotClass() {
 		this.active = false;
 	}
 }
+

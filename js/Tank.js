@@ -21,8 +21,8 @@ function tankClass() {
 		if (Math.floor(this.y) >= mapHeight) {
 			this.y = mapHeight;
 		}
-		if (this.x > canvas.width) {
-			this.x = canvas.width;
+		if (this.x > canvas.width-1) {
+			this.x = canvas.width-1;
 			xVel = 0;
 		}
 		if (this.x < 0) {
@@ -67,6 +67,12 @@ function tankClass() {
 						case 2:
 							newProjectile = new sniperShotClass();
 							break;
+						case 3:
+							newProjectile = new empty();
+							var radians = degreesToRadians(this.angle);
+							xVel += Math.cos(radians) * this.power*10;
+							yVel += -Math.sin(radians) * this.power*10;
+							break;
 					}
 					newProjectile.x = this.x;
 					newProjectile.y = this.y - 10;
@@ -107,10 +113,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 2) {
+				if (this.weapon > 3) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 2;
+					this.weapon = 3;
 				}
 			} else {
 				incrementTurn = true;
@@ -169,7 +175,7 @@ function tankClass() {
 
 	this.destroyedTankHeadline = function destroyedTankHeadline() {
 		if(destroyedHeadline) {
-			colorText("Tank " + (playerTurn+2) + ", Destroyed!", canvas.width/2 - 200, 150, 'white', "50px Arial");
+			colorText(this.name + ", Destroyed!", canvas.width/2 - 200, 150, 'white', "50px Arial");
 			runTimerHeadlineDestroyed ++;
 			console.log ("working");
 
