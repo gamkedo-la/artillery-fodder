@@ -5,7 +5,7 @@ function tankClass() {
 	this.power = 75;
 	this.health = 100;
 	this.color = "White";
-	this.player = "Player";
+	this.name = "Player";
 	this.weapon = 0;
 
 	var w = 20;

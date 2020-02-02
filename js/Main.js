@@ -8,7 +8,7 @@ var arrayOfExplosions = [];
 
 var playerTurn = 0;
 var incrementTurn = false;
-var nextPlayersTurn = false;
+var nextPlayersTurn = true;
 var bufferTimerHeadline = 0;
 var runTimerHeadline = 0;
 var runTimerHeadlineDestroyed = 0;
@@ -64,6 +64,7 @@ function gameStart() {
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i] = new tankClass();
 
+		arrayOfPlayers[i].name = "Player " + pad(i+1, 2);
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
@@ -157,10 +158,10 @@ function modeGame(frameTime) {
 	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
 	
 	colorRect(100, canvas.height - UI_HEIGHT + 20, canvas.width - 200, 20, "White");
-	colorText("Player " + pad(playerTurn+1, 2) + 
-		" Angle "  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
-		" Power " + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
-		" Health " + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
+	colorText(arrayOfPlayers[playerTurn].name + " " + 
+		" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
+		" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
+		" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
 		250, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
 
 
@@ -218,7 +219,7 @@ function nextPlayersTurnAnnounced() {
 		bufferTimerHeadline ++;
 
 		if(bufferTimerHeadline >= 90) {
-			colorText("Next Player's Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
+			colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
 			runTimerHeadline ++;
 
 			if(runTimerHeadline >= 60) {
