@@ -151,8 +151,6 @@ function tankClass() {
 		cannonY = -Math.sin(radians) * 10;
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, this.color);
-
-		this.destroyedTankHeadline();
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -183,21 +181,6 @@ function tankClass() {
 			console.log("Destroy Player " + (playerTurn+2));
 			destroyedHeadline = true;
 
-		}
-	}
-
-	this.destroyedTankHeadline = function destroyedTankHeadline() {
-		if(destroyedHeadline) {
-			colorText(this.name + ", Destroyed!", canvas.width/2 - 200, 150, 'white', "50px Arial");
-			runTimerHeadlineDestroyed ++;
-			console.log ("working");
-
-			if(runTimerHeadlineDestroyed >= 60) {
-				fadeVariable -= 0.05;
-			}		
-			if(runTimerHeadlineDestroyed >= 180) {
-				destroyedHeadline = false;
-			}			
 		}
 	}
 

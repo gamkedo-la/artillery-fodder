@@ -8,12 +8,10 @@ var arrayOfExplosions = [];
 
 var playerTurn = 0;
 var incrementTurn = false;
-var nextPlayersTurn = true;
-var bufferTimerHeadline = 0;
-var runTimerHeadline = 0;
-var runTimerHeadlineDestroyed = 0;
-var destroyedHeadline = false;
 var fadeVariable = 1.0;
+var destroyedHeadline = false;
+var nextTurnHeadline = false;
+var timerHeadline = 0;
 
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
@@ -190,7 +188,7 @@ function modeGame(frameTime) {
 
 	cleanLists();
 	nextTurn();
-	nextPlayersTurnAnnounced();
+	inGameAnnoucements();
 
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
@@ -199,7 +197,7 @@ function modeGame(frameTime) {
 
 function nextTurn() {
 	if (incrementTurn) {
-		nextPlayersTurn = true;
+		nextTurnHeadline = true;
 		arrayOfPlayers[playerTurn].myTurn = false;
 
 		playerTurn++;
@@ -221,28 +219,38 @@ function nextTurn() {
 	}
 }
 
-function nextPlayersTurnAnnounced() {
-	if(nextPlayersTurn) {
+function inGameAnnoucements() {
+	if(destroyedHeadline || nextTurnHeadline) {
+		timerHeadline ++;
 
-		bufferTimerHeadline ++;
+		if(destroyedHeadline) {
+			if(timerHeadline >= 60) {
+				colorText("Tank Destroyed!", canvas.width/2 - 200, 250, 'white', "50px Arial");
+				
+				}
+			if(timerHeadline >= 120) {
+				destroyedHeadline = false;	
+			}
+		}
 
-		if(bufferTimerHeadline >= 90) {
-			colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial", );
-			runTimerHeadline ++;
-
-			if(runTimerHeadline >= 60) {
+		if(nextTurnHeadline) {
+			if(timerHeadline >= 120) {
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
+			}
+			if(timerHeadline >= 180) {
 				fadeVariable -= 0.01;
 			}
-		}		
-	}
+		}
 
-	if(runTimerHeadline >= 180) {
-		nextPlayersTurn = false;	
-		fadeVariable = 1.0;
-		bufferTimerHeadline = 0;
-		runTimerHeadline = 0;
+		if(timerHeadline >= 270) {
+			destroyedHeadline = false;
+			nextTurnHeadline = false;
+			fadeVariable = 1.0;
+			timerHeadline = 0;
+		}
 	}
-}
+}	
+
 
 function cleanLists() {
 	for (var i = 0; i < arrayOfProjectiles.length; i++) {
