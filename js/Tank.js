@@ -83,6 +83,9 @@ function tankClass() {
 						case 6:
 							newProjectile = new rollShotClass();
 							break;
+						case 7:
+							newProjectile = new crazyBombShotClass();
+							break;
 					}
 					newProjectile.x = this.x;
 					newProjectile.y = this.y - 10;
@@ -123,10 +126,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 6) {
+				if (this.weapon > 7) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 6;
+					this.weapon = 7;
 				}
 			} else {
 				incrementTurn = true;

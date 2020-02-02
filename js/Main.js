@@ -212,7 +212,6 @@ function nextTurn() {
 		incrementTurn = false;
 
 		var remaningPlayers = numberOfPlayers;
-		console.log(numberOfPlayers)
 		for (var i = 0; i < numberOfPlayers; i++) {
 			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
 		}
