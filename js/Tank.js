@@ -76,6 +76,10 @@ function tankClass() {
 						case 4:
 							newProjectile = new teleportShot();
 							break;
+						case 5:
+							newProjectile = new basicShotClass();
+							newProjectile.size = 50;
+							break;
 					}
 					newProjectile.x = this.x;
 					newProjectile.y = this.y - 10;
@@ -116,10 +120,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 4) {
+				if (this.weapon > 5) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 4;
+					this.weapon = 5;
 				}
 			} else {
 				incrementTurn = true;

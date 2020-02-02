@@ -25,16 +25,17 @@ function terrain() {
 	}
 
 	this.createImpactAtXandY = function(x, y, size) {
+		var radius = size;
 
 		var localY = Math.abs(y - canvas.height + UI_HEIGHT);
 		var localX = Math.round(x);
 
-		for (var i = -size + localX; i <= size + localX; i++) {
-			var reduction = -Math.abs(i-localX) + size;
+		for (var i = -radius + localX; i <= radius + localX; i++) {
+			var reduction = -Math.abs(i-localX) + radius;
 
 			if (i < 0) {
 				i = 0;
-				reduction = -Math.abs(i) + size;
+				reduction = -Math.abs(i) + radius;
 			} else if (i >= heightMap.length) {
 				i = heightMap.length-1;
 				reduction = 0;
