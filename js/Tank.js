@@ -17,6 +17,19 @@ function tankClass() {
 	this.active = true;
 
 	this.update = function update(frameTime) {
+
+		if (Math.floor(this.y) >= mapHeight) {
+			this.y = mapHeight;
+		}
+		if (this.x > canvas.width) {
+			this.x = canvas.width;
+			xVel = 0;
+		}
+		if (this.x < 0) {
+			this.x = 0;
+			xVel = 0;
+		}
+
 		yVel += 90 * frameTime;
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
@@ -31,13 +44,9 @@ function tankClass() {
 			this.y += yVel * frameTime;
 		}else if (Math.floor(this.y) == mapHeight) {
 			this.y = mapHeight;
-			xVel *= -0.5;
-			yVel *= -0.5;
-		} else if (this.y > mapHeight - 5) {
-			this.y = mapHeight;
-			xVel *= -0.5;
 			yVel *= -0.5;
 		} else if (this.y > mapHeight) {
+			this.y = mapHeight;
 			xVel *= -0.5;
 			yVel *= -0.5;
 		}

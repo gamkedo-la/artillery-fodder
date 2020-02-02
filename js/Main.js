@@ -215,7 +215,6 @@ function nextTurn() {
 		console.log(numberOfPlayers)
 		for (var i = 0; i < numberOfPlayers; i++) {
 			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
-			console.log(remaningPlayers)
 		}
 		if (remaningPlayers <= 1) {
 			mode = WIN_SCREEN;
