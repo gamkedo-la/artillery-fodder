@@ -73,6 +73,9 @@ function tankClass() {
 							xVel += Math.cos(radians) * this.power*10;
 							yVel += -Math.sin(radians) * this.power*10;
 							break;
+						case 4:
+							newProjectile = new teleportShot();
+							break;
 					}
 					newProjectile.x = this.x;
 					newProjectile.y = this.y - 10;
@@ -113,10 +116,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 3) {
+				if (this.weapon > 4) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 3;
+					this.weapon = 4;
 				}
 			} else {
 				incrementTurn = true;
