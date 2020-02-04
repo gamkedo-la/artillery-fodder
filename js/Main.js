@@ -13,6 +13,8 @@ var destroyedHeadline = false;
 var nextTurnHeadline = false;
 var timerHeadline = 0;
 
+
+
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
 var elapsed = 0;
@@ -189,9 +191,47 @@ function modeGame(frameTime) {
 	cleanLists();
 	nextTurn();
 	inGameAnnoucements();
+	gameClock();
 
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
+	}
+}
+
+//clock
+var clockLimit = 12;
+var clockMinute = 0;
+var clockHour = 0;
+var clockTime = 0;
+var clockHourCountdown = 0;
+var clockMinuteCountdown = 0;
+
+function gameClock() {
+	clockHourCountdown ++;
+	clockMinuteCountdown ++;
+
+	colorText(clockHour + " : " + clockMinute, 700, 30, 'white', "20px Arial");
+
+	if(clockMinuteCountdown >= 60) {
+		for (var i = 0; i < 1; i++) {
+			clockMinute += 15;
+			clockMinuteCountdown = 0;
+
+			if(clockMinute >= 60) {
+				clockMinute = 0;
+			}
+		}
+	}
+
+	if (clockHourCountdown >= 240) {
+		for (var i = 0; i < 1; i++) {
+			clockHour += 1;
+			clockHourCountdown = 0;
+
+			if (clockHour >= 4) {
+				clockHour = 0;
+			}
+		}
 	}
 }
 
