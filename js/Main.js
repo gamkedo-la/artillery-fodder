@@ -205,12 +205,14 @@ var clockHour = 0;
 var clockTime = 0;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
+var amPM = "am";
+var stateOfDay = 1;
 
 function gameClock() {
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
-	colorText(clockHour + " : " + clockMinute, 700, 30, 'white', "20px Arial");
+	colorText(clockHour + ":" + clockMinute + " " + amPM, 700, 30, 'white', "15px Arial");
 
 	if(clockMinuteCountdown >= 60) {
 		for (var i = 0; i < 1; i++) {
@@ -228,8 +230,18 @@ function gameClock() {
 			clockHour += 1;
 			clockHourCountdown = 0;
 
-			if (clockHour >= 4) {
-				clockHour = 0;
+			if (clockHour >= 13) {
+				clockHour = 1;
+
+				amPM = "pm";
+
+				switch(amPM) {
+					case "am":
+						stateOfDay = "day";
+						break;
+					case "pm":
+						stateOfDay = "night";
+				}
 			}
 		}
 	}
