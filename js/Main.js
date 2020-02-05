@@ -199,9 +199,8 @@ function modeGame(frameTime) {
 }
 
 //clock
-var clockLimit = 12;
 var clockMinute = 0;
-var clockHour = 11;
+var clockHour = 12;
 var clockTime = 0;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
@@ -223,7 +222,7 @@ function gameClock() {
 				clockMinute = 0;
 			}
 		}
-	}
+	} 
 
 	if (clockHourCountdown >= 240) {
 		for (var i = 0; i < 1; i++) {
@@ -231,22 +230,27 @@ function gameClock() {
 			clockHourCountdown = 0;
 
 			if (clockHour >= 13) {
-				clockHour = 1;
+				clockHour = 1;	
+			}
 
-				if(dayTime == true) {
-					amPM = "pm";
-					dayTime = false;
-					console.log ("night");
-				}
-				else {
-					amPm = "pm";
-					dayTime = true;
-					console.log("day");
-				}
+			if(clockHour >= 12) {
+				dayTime = !dayTime;
+				console.log ("change!");
 			}
 		}
 	}
-}
+
+	if (dayTime == true) {
+		amPM = "am";
+		console.log ("day");
+	}
+
+	if (dayTime == false) { 
+		amPM = "pm";
+		console.log ("night");
+	}
+}// end of gameClock()
+
 
 function nextTurn() {
 	if (incrementTurn) {
