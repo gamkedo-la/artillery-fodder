@@ -201,12 +201,12 @@ function modeGame(frameTime) {
 //clock
 var clockLimit = 12;
 var clockMinute = 0;
-var clockHour = 0;
+var clockHour = 11;
 var clockTime = 0;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var amPM = "am";
-var stateOfDay = 1;
+var dayTime = true;
 
 function gameClock() {
 	clockHourCountdown ++;
@@ -233,14 +233,15 @@ function gameClock() {
 			if (clockHour >= 13) {
 				clockHour = 1;
 
-				amPM = "pm";
-
-				switch(amPM) {
-					case "am":
-						stateOfDay = "day";
-						break;
-					case "pm":
-						stateOfDay = "night";
+				if(dayTime == true) {
+					amPM = "pm";
+					dayTime = false;
+					console.log ("night");
+				}
+				else {
+					amPm = "pm";
+					dayTime = true;
+					console.log("day");
 				}
 			}
 		}
