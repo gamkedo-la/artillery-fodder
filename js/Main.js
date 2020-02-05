@@ -13,13 +13,22 @@ var destroyedHeadline = false;
 var nextTurnHeadline = false;
 var timerHeadline = 0;
 
-
-
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
 var elapsed = 0;
 var frameStepSize = 1/60;
 var now;
+
+//clock
+var clockMinute = 0;
+var clockHour = 7;
+var clockTime = 0;
+var clockHourCountdown = 0;
+var clockMinuteCountdown = 0;
+var amPM = "am";
+var dayTime = true;
+var colorOfTextforClock;
+var labelForTime;
 
 //Scenes
 const GAME_MODE = 0;
@@ -198,20 +207,13 @@ function modeGame(frameTime) {
 	}
 }
 
-//clock
-var clockMinute = 0;
-var clockHour = 12;
-var clockTime = 0;
-var clockHourCountdown = 0;
-var clockMinuteCountdown = 0;
-var amPM = "am";
-var dayTime = true;
-
 function gameClock() {
+ 
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
-	colorText(clockHour + ":" + clockMinute + " " + amPM, 700, 30, 'white', "15px Arial");
+	colorText(clockHour + ":" + clockMinute + " " + amPM, 700, 30, colorOfTextforClock, "15px Arial");
+	colorText(labelForTime, 700, 50, colorOfTextforClock, "15px Arial");
 
 	if(clockMinuteCountdown >= 60) {
 		for (var i = 0; i < 1; i++) {
@@ -235,19 +237,24 @@ function gameClock() {
 
 			if(clockHour >= 12) {
 				dayTime = !dayTime;
-				console.log ("change!");
 			}
 		}
 	}
 
 	if (dayTime == true) {
 		amPM = "am";
-		console.log ("day");
+		labelForTime = "Day Time";
+		colorOfTextforClock = 'black';
+		skyColorGradient = 'yellow';
+		skyColor = "white";
 	}
 
 	if (dayTime == false) { 
 		amPM = "pm";
-		console.log ("night");
+		labelForTime = "Night Time";
+		colorOfTextforClock = 'white';
+		skyColorGradient = 'black';
+		skyColor = "blue";
 	}
 }// end of gameClock()
 
@@ -275,6 +282,7 @@ function nextTurn() {
 		}
 	}
 }
+
 
 function inGameAnnoucements() {
 	if(destroyedHeadline || nextTurnHeadline) {
