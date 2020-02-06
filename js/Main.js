@@ -48,8 +48,10 @@ var skyColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255))
 var groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 var groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 
+//clouds
 const UI_HEIGHT = 100
 const MAX_CLOUDS = 10;
+const cloudSpeeds = [0.3,0.1,0.4,0.2,0.1];
 var cloudPositions = [];
 var cloudImg;
 
@@ -181,6 +183,7 @@ function modeGame(frameTime) {
 	for (let i=0; i<cloudPositions.length; i++) {
 		let pos = cloudPositions[i];
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
+		pos.x += cloudSpeeds[i];
 	}
 	map.draw();
 
