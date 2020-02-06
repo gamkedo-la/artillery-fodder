@@ -51,7 +51,7 @@ var groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,25
 //clouds
 const UI_HEIGHT = 100
 const MAX_CLOUDS = 10;
-const cloudSpeeds = [0.3,0.1,0.4,0.2,0.1];
+const cloudSpeeds = [];
 var cloudPositions = [];
 var cloudImg;
 
@@ -91,7 +91,10 @@ function gameStart() {
 			x: Math.floor(Math.random()*(canvas.width - cloudImg.width/2)),
 			y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
 		};
+		cloudSpeeds[i] = 
+			Math.random() * (0.3 - 0.1) + 0.1;
 	}
+	
 	window.requestAnimationFrame(frameLoop);
 }
 
@@ -185,6 +188,7 @@ function modeGame(frameTime) {
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
 		pos.x += cloudSpeeds[i];
 	}
+
 	map.draw();
 
 	for (var i = 0; i < numberOfPlayers; i++) {
