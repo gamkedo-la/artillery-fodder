@@ -21,14 +21,14 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 7;
+var clockHour = 8;
 var clockTime = 0;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var amPM = "am";
 var dayTime = true;
 var colorOfTextforClock;
-var labelForTime;
+
 
 //Scenes
 const GAME_MODE = 0;
@@ -92,9 +92,9 @@ function gameStart() {
 			y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
 		};
 		cloudSpeeds[i] = 
-			Math.random() * (0.3 - 0.1) + 0.1;
+			Math.random() * (0.2 - 0.05) + 0.05;
 	}
-	
+
 	window.requestAnimationFrame(frameLoop);
 }
 
@@ -219,8 +219,7 @@ function gameClock() {
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
-	colorText(clockHour + ":" + clockMinute + " " + amPM, 700, 30, colorOfTextforClock, "15px Arial");
-	colorText(labelForTime, 700, 50, colorOfTextforClock, "15px Arial");
+	colorText(clockHour + ":" + clockMinute, 700, 30, colorOfTextforClock, "15px Arial");
 
 	if(clockMinuteCountdown >= 60) {
 		for (var i = 0; i < 1; i++) {
@@ -233,32 +232,30 @@ function gameClock() {
 		}
 	} 
 
-	if (clockHourCountdown >= 240) {
+	if (clockHourCountdown >= 240) { 
 		for (var i = 0; i < 1; i++) {
 			clockHour += 1;
 			clockHourCountdown = 0;
 
-			if (clockHour >= 13) {
-				clockHour = 1;	
+			if (clockHour >= 25) {
+				clockHour = 0;	
 			}
 
-			if(clockHour >= 12) {
+			if(clockHour == 7 || clockHour == 19) {
 				dayTime = !dayTime;
 			}
+
+		
 		}
 	}
 
 	if (dayTime == true) {
-		amPM = "am";
-		labelForTime = "Day Time";
 		colorOfTextforClock = 'black';
 		skyColorGradient = 'yellow';
 		skyColor = "white";
 	}
 
 	if (dayTime == false) { 
-		amPM = "pm";
-		labelForTime = "Night Time";
 		colorOfTextforClock = 'white';
 		skyColorGradient = 'black';
 		skyColor = "blue";
