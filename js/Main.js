@@ -303,9 +303,13 @@ function inGameAnnoucements() {
 		}
 
 		if(nextTurnHeadline) {
-			if(timerHeadline >= 120) {
+
+			if(timerHeadline >= 120 && dayTime) {
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
+			} else if (timerHeadline >= 120) {
 				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
 			}
+			
 			if(timerHeadline >= 180) {
 				fadeVariable -= 0.01;
 			}
