@@ -61,7 +61,7 @@ var SpeechRecognition = new SpeechRecognitionEngine();
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-
+	initMouse();
 	imageLoader.loadImages().then(gameStart);
 
 }

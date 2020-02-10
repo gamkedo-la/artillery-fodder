@@ -41,8 +41,8 @@ function distance (a,b) {
 function angleBetween2Points (a, b) {
 	var angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / pi;
 	angle *= -1;
-	if (angle >= 360) {angle -= 360;}
-	if (angle < 0) {angle += 360;}
+	//if (angle >= 360) {angle -= 360;}
+	//if (angle < 0) {angle += 360;}
 	return angle;
 }
 

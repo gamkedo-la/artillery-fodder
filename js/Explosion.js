@@ -37,8 +37,8 @@ function basicExplosionClass() {
 	}
 
 	this.calculateDamage = function calculateDamage(tank) {
-		var dist = distance(tank, this);
-		var angle = angleBetween2Points(this, tank);
+		var dist = distance(this.tank, this);
+		var angle = angleBetween2Points(this, this.tank);
 		if (dist <= this.size) {
 			tank.takeDamage(dist/this.size * this.damage, angle);
 		}
@@ -91,8 +91,8 @@ function multiExplosionClass() {
 	}
 
 	this.calculateDamage = function calculateDamage(tank) {
-		var dist = distance(tank, this);
-		var angle = angleBetween2Points(this, tank);
+		var dist = distance(this.tank, this);
+		var angle = angleBetween2Points(this, this.tank);
 		if (dist <= this.size) {
 			tank.takeDamage(dist/this.size * this.damage, angle);
 		}

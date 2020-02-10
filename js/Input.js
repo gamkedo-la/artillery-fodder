@@ -86,3 +86,22 @@ const Key = {
 		this._released = {};
 	}
 };
+
+function initMouse() {
+  document.addEventListener('mouseup', mouseReleased);
+  canvas.addEventListener('mousemove', calculateMousePos);
+}
+
+var mouseX = 0;
+var mouseY = 0;
+
+function mouseReleased(evt) {
+	console.log("clicked at " + mouseX + " " + mouseY);
+}
+
+function calculateMousePos(evt) {
+  var rect = canvas.getBoundingClientRect(),
+	    root = document.documentElement;
+  mouseX = evt.clientX - rect.left - root.scrollLeft;
+  mouseY = evt.clientY - rect.top - root.scrollTop;
+}
