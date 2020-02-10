@@ -20,6 +20,7 @@ function modeMainMenu(frameTime) {
 
     if (Key.isJustPressed(Key.SPACE) 
         || SpeechRecognition.pendingStartCommand()
+        || mousePressed
         ){
 		mode = GAME_MODE;
 	}

@@ -62,7 +62,7 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 	canvasContext.textAlign = "center";
-	initMouse();
+
 	imageLoader.loadImages().then(gameStart);
 
 }

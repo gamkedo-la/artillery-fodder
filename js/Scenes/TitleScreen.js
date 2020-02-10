@@ -8,6 +8,7 @@ function modeTitle(frameTime) {
 
     if (Key.isJustPressed(Key.SPACE)
         || SpeechRecognition.pendingStartCommand()
+        || mousePressed
     ){
 		mode = MAIN_MENU;
 	}
