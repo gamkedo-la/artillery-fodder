@@ -4,7 +4,6 @@ function tankClass() {
 	this.angle = 90;
 	this.power = 75;
 	this.health = 100;
-	this.color = "White";
 	this.name = "Player";
 	this.weapon = 0;
 
@@ -15,6 +14,10 @@ function tankClass() {
 
 	this.myTurn = false;
 	this.active = true;
+
+	this.tankSkinIndex = 0;
+	this.color = "White";
+	this.imageLookupOffset = 0;
 
 	this.update = function update(frameTime) {
 

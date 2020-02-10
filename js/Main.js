@@ -10,7 +10,7 @@ var playerTurn = 0;
 var incrementTurn = false;
 var fadeVariable = 1.0;
 var destroyedHeadline = false;
-var nextTurnHeadline = false;
+var nextTurnHeadline = true;
 var timerHeadline = 0;
 
 var deltaTime = 0;
@@ -81,6 +81,8 @@ function gameStart() {
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
 		arrayOfPlayers[i].color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		arrayOfPlayers[i].tankSkinIndex = 0;
+		arrayOfPlayers[i].imageLookupOffset = i;
 
 	}
 
@@ -300,7 +302,7 @@ function inGameAnnoucements() {
 
 		if(destroyedHeadline) {
 			if(timerHeadline >= 60) {
-				colorText("Tank Destroyed!", canvas.width/2 - 200, 250, 'white', "50px Arial");
+				colorText("Tank Destroyed!", canvas.width/2, 250, 'white', "50px Arial");
 				
 				}
 			if(timerHeadline >= 120) {
@@ -311,9 +313,9 @@ function inGameAnnoucements() {
 		if(nextTurnHeadline) {
 
 			if(timerHeadline >= 120 && dayTime) {
-				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
 			} else if (timerHeadline >= 120) {
-				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
 			}
 			
 			if(timerHeadline >= 180) {
