@@ -89,7 +89,7 @@ function gameStart() {
 	for (let i=0; i<MAX_CLOUDS; i++) {
 		cloudPositions[i] = {
 			x: Math.floor(Math.random()*(canvas.width - cloudImg.width/2)),
-			y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
+			y: Math.floor(Math.random()*(325 - cloudImg.height))
 		};
 		cloudSpeeds[i] = Math.random() * (0.2 - 0.05) + 0.05;
 	}
@@ -188,10 +188,9 @@ function modeGame(frameTime) {
 		pos.x += cloudSpeeds[i];
 
 		if(pos.x >= canvas.width + 10) {
-			console.log ("new clouds");
 			cloudPositions[i] = {
 				x: 0 - cloudImg.width,
-				y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
+				y: Math.floor(Math.random()*(325 - cloudImg.height))
 			}
 		}
 	}
