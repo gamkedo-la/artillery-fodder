@@ -91,8 +91,7 @@ function gameStart() {
 			x: Math.floor(Math.random()*(canvas.width - cloudImg.width/2)),
 			y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
 		};
-		cloudSpeeds[i] = 
-			Math.random() * (0.2 - 0.05) + 0.05;
+		cloudSpeeds[i] = Math.random() * (0.2 - 0.05) + 0.05;
 	}
 
 	window.requestAnimationFrame(frameLoop);
@@ -182,11 +181,19 @@ function modeGame(frameTime) {
 	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
 	colorText(arrayOfPlayers[playerTurn].weapon, 400, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial")
 
-
+//cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
 		let pos = cloudPositions[i];
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
 		pos.x += cloudSpeeds[i];
+
+		if(pos.x >= canvas.width + 10) {
+			console.log ("new clouds");
+			cloudPositions[i] = {
+				x: 0 - cloudImg.width,
+				y: Math.floor(Math.random()*(canvas.height/2 - cloudImg.height))
+			}
+		}
 	}
 
 	map.draw();
@@ -244,8 +251,6 @@ function gameClock() {
 			if(clockHour == 7 || clockHour == 19) {
 				dayTime = !dayTime;
 			}
-
-		
 		}
 	}
 
