@@ -96,6 +96,15 @@ var mouseX = 0;
 var mouseY = 0;
 
 function mouseReleased(evt) {
+	var newExplosion = new basicExplosionClass();
+	newExplosion.x = mouseX;
+	newExplosion.y = mouseY;
+	newExplosion.size = 50;
+	newExplosion.damage = 90;
+	newExplosion.tank = arrayOfPlayers[playerTurn];
+	newExplosion.color = "White";
+	newExplosion.active = true;
+	arrayOfExplosions.push(newExplosion);
 	console.log("clicked at " + mouseX + " " + mouseY);
 }
 
