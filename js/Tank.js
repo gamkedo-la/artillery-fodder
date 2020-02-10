@@ -59,47 +59,8 @@ function tankClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
-                if (Key.isJustPressed(Key.SPACE) || 
-                    SpeechRecognition.pendingFireCommand()
-                    ){
-					var newProjectile;
-					switch (this.weapon) {
-						case 0:
-							newProjectile = new basicShotClass();
-							break;
-						case 1:
-							newProjectile = new threeShotClass();
-							break;
-						case 2:
-							newProjectile = new sniperShotClass();
-							break;
-						case 3:
-							newProjectile = new empty();
-							var radians = degreesToRadians(this.angle);
-							xVel += Math.cos(radians) * this.power*10;
-							yVel += -Math.sin(radians) * this.power*10;
-							break;
-						case 4:
-							newProjectile = new teleportShot();
-							break;
-						case 5:
-							newProjectile = new basicShotClass();
-							newProjectile.size = 50;
-							break;
-						case 6:
-							newProjectile = new rollShotClass();
-							break;
-						case 7:
-							newProjectile = new crazyBombShotClass();
-							break;
-					}
-					newProjectile.x = this.x;
-					newProjectile.y = this.y - 10;
-					newProjectile.tank = this;
-					newProjectile.launch(this.angle, this.power*2.65);
-					arrayOfProjectiles.push(newProjectile);
-
-					this.myTurn = false;
+                if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
+					this.fire();
 				}
 				if (Key.isDown(Key.LEFT)){
 					this.angle += 45 * frameTime;
@@ -172,8 +133,8 @@ function tankClass() {
 		this.health -= amount;
 
 		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * amount * 20;
-		yVel = -Math.sin(radians) * amount * 20;
+		xVel = Math.cos(radians) * amount;
+		yVel = -Math.sin(radians) * amount;
 
 		if (this.health <= 0) {
 			this.destroy();
@@ -188,6 +149,47 @@ function tankClass() {
 			destroyedHeadline = true;
 
 		}
+	}
+
+	this.fire = function fire() {
+		var newProjectile;
+		switch (this.weapon) {
+			case 0:
+				newProjectile = new basicShotClass();
+				break;
+			case 1:
+				newProjectile = new threeShotClass();
+				break;
+			case 2:
+				newProjectile = new sniperShotClass();
+				break;
+			case 3:
+				newProjectile = new empty();
+				var radians = degreesToRadians(this.angle);
+				xVel += Math.cos(radians) * this.power/2;
+				yVel += -Math.sin(radians) * this.power/2;
+				break;
+			case 4:
+				newProjectile = new teleportShot();
+				break;
+			case 5:
+				newProjectile = new basicShotClass();
+				newProjectile.size = 50;
+				break;
+			case 6:
+				newProjectile = new rollShotClass();
+				break;
+			case 7:
+				newProjectile = new crazyBombShotClass();
+				break;
+		}
+		newProjectile.x = this.x;
+		newProjectile.y = this.y - 10;
+		newProjectile.tank = this;
+		newProjectile.launch(this.angle, this.power*2.65);
+		arrayOfProjectiles.push(newProjectile);
+
+		this.myTurn = false;
 	}
 
 }
