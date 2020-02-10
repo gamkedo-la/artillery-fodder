@@ -79,6 +79,7 @@ function tankClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
+				//Input
                 if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
 					if(this.weaponInventory[this.weapon] != 0) {
 						this.fire();
@@ -103,6 +104,7 @@ function tankClass() {
 					this.weapon++;
 				}
 
+				//Range checks
 				if (this.angle >= 360) {
 					this.angle -= 360;
 				} else if (this.angle <= 0) {
@@ -132,8 +134,11 @@ function tankClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+		//Draw body
 		colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
 		colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
+
+		//Draw Cannon
 		var cannonX, cannonY, radians;
 		radians = degreesToRadians(this.angle);
 		cannonX = Math.cos(radians) * 10;
@@ -154,6 +159,7 @@ function tankClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 
+		//Kick
 		var radians = degreesToRadians(angle);
 		xVel = Math.cos(radians) * amount;
 		yVel = -Math.sin(radians) * amount;
@@ -176,32 +182,32 @@ function tankClass() {
 	this.fire = function fire() {
 		var newProjectile;
 		switch (this.weapon) {
-			case 0:
+			case 0://Basic Shot
 				newProjectile = new basicShotClass();
 				break;
-			case 1:
+			case 1://Three Shot
 				newProjectile = new threeShotClass();
 				break;
-			case 2:
+			case 2://Sniper Shot
 				newProjectile = new sniperShotClass();
 				break;
-			case 3:
+			case 3://Hop
 				newProjectile = new empty();
 				var radians = degreesToRadians(this.angle);
 				xVel += Math.cos(radians) * this.power/2;
 				yVel += -Math.sin(radians) * this.power/2;
 				break;
-			case 4:
+			case 4://Teleport Shot
 				newProjectile = new teleportShot();
 				break;
-			case 5:
+			case 5://Big Shot
 				newProjectile = new basicShotClass();
 				newProjectile.size = 50;
 				break;
-			case 6:
+			case 6://Roller
 				newProjectile = new rollShotClass();
 				break;
-			case 7:
+			case 7://Crazy Bomb
 				newProjectile = new crazyBombShotClass();
 				break;
 		}
