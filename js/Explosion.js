@@ -39,7 +39,6 @@ function basicExplosionClass() {
 	this.calculateDamage = function calculateDamage(targetTank) {
 		var dist = distance(targetTank, this);
 		var angle = angleBetween2Points(this, targetTank);
-		console.log(dist, this.size)
 		if (dist <= this.size) {
 			targetTank.takeDamage(dist/this.size * this.damage, angle);
 		}

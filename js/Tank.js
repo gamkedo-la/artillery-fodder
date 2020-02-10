@@ -18,6 +18,7 @@ function tankClass() {
 
 	this.update = function update(frameTime) {
 
+		//Keep tank in canvas
 		if (Math.floor(this.y) >= mapHeight) {
 			this.y = mapHeight;
 		}
@@ -30,12 +31,14 @@ function tankClass() {
 			xVel = 0;
 		}
 
-		yVel += 90 * frameTime;
+		//Applies velocity
+		//yVel += 90 * frameTime;
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
 
-		if (xVel < 0.1) {xVel = 0;}
-		if (yVel < 0.1) {yVel = 0;}
+		//Dampens to zero
+		if (Math.abs(xVel) < 0.1) {xVel = 0;}
+		if (Math.abs(yVel) < 0.1) {yVel = 0;}
 
 		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
 		if (this.y < mapHeight) {
