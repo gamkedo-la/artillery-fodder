@@ -1,8 +1,10 @@
 window.addEventListener('keyup',    function (event) { Key.onKeyup(event); event.preventDefault() }, false);
 window.addEventListener('keydown',  function (event) { Key.onKeydown(event); event.preventDefault() }, false);
 
-document.addEventListener('mouseup', mouseReleased);
-document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
+function mouseInit() {
+	document.addEventListener('mouseup', mouseReleased);
+	document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
+}
 
 var mouseX = 0;
 var mouseY = 0;

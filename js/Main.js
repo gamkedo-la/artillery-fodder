@@ -62,6 +62,7 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 	canvasContext.textAlign = "center";
+	mouseInit()
 
 	imageLoader.loadImages().then(gameStart);
 
@@ -183,7 +184,8 @@ function modeGame(frameTime) {
 
 	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
 	
-	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial");
+	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
+		canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial");
 
 //cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {

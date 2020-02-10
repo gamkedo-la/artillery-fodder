@@ -1,3 +1,4 @@
+const WEAPON_LIST_MAX = 7
 var projectileNameList = ["Basic Shot",
 						  "Three Shot",
 						  "Sniper Shot",
@@ -79,7 +80,9 @@ function tankClass() {
 		if (this.myTurn) {
 			if (this.active) {
                 if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
-					this.fire();
+					if(this.weaponInventory[this.weapon] != 0) {
+						this.fire();
+					}
 				}
 				if (Key.isDown(Key.LEFT)){
 					this.angle += 45 * frameTime;
@@ -112,10 +115,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 7) {
+				if (this.weapon > WEAPON_LIST_MAX) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 7;
+					this.weapon = WEAPON_LIST_MAX;
 				}
 			} else {
 				incrementTurn = true;
@@ -202,6 +205,9 @@ function tankClass() {
 				newProjectile = new crazyBombShotClass();
 				break;
 		}
+
+		this.weaponInventory[this.weapon] -= 1;
+
 		newProjectile.x = this.x;
 		newProjectile.y = this.y - 10;
 		newProjectile.tank = this;
