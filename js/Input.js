@@ -27,7 +27,7 @@ const Key = {
 	NINE: 57,
 	a: 65,
 	b: 66,
-	CREDITS: 67,
+	c: 67,
 	d: 68,
 	e: 69,
 	f: 70,
