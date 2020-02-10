@@ -61,6 +61,7 @@ var SpeechRecognition = new SpeechRecognitionEngine();
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
+	canvasContext.textAlign = "center";
 	initMouse();
 	imageLoader.loadImages().then(gameStart);
 
@@ -175,11 +176,12 @@ function modeGame(frameTime) {
 		" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
 		" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
 		" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
-		250, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
+		canvas.width/2, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
 
 
 	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
-	colorText(arrayOfPlayers[playerTurn].weapon, 400, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial")
+	
+	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial")
 
 //cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {

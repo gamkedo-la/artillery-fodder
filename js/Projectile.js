@@ -1,3 +1,12 @@
+var projectileNameList = ["Basic Shot",
+							"Three Shot",
+							"Sniper SHot",
+							"Hop",
+							"Teleport Shot",
+							"Big Shot",
+							"Roller",
+							"Crazy Bomb"]
+
 function empty() {
 	this.x = 0;
 	this.y = 0;
