@@ -164,26 +164,23 @@ function update(frameTime) {
 
 function modeGame(frameTime) {
 
-	// colorRect(0, 0, canvas.width, canvas.height, skyColor);	
+	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-	
-
+	//Draw UI section
 	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
-	
+	//Values
 	colorRect(100, canvas.height - UI_HEIGHT + 20, canvas.width - 200, 20, "White");
 	colorText(arrayOfPlayers[playerTurn].name + " " + 
 		" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
 		" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
 		" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
 		canvas.width/2, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
-
-
+	//Weapon
 	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
-	
 	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
 		canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial");
 
@@ -203,14 +200,17 @@ function modeGame(frameTime) {
 
 	map.draw();
 
+	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].update(frameTime);
 		arrayOfPlayers[i].draw(frameTime);
 	}
+	//Update and draw shots
 	for (var i = 0; i < arrayOfProjectiles.length; i++) {
 		arrayOfProjectiles[i].update(frameTime);
 		arrayOfProjectiles[i].draw(frameTime);
 	}
+	//Update and draw explosions
 	for (var i = 0; i < arrayOfExplosions.length; i++) {
 		arrayOfExplosions[i].update(frameTime);
 		arrayOfExplosions[i].draw(frameTime);
