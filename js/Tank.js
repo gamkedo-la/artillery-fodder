@@ -1,3 +1,12 @@
+var projectileNameList = ["Basic Shot",
+						  "Three Shot",
+						  "Sniper Shot",
+						  "Hop",
+						  "Teleport Shot",
+						  "Big Shot",
+						  "Roller",
+						  "Crazy Bomb"]
+
 function tankClass() {
 	this.x = 400;
 	this.y = 300;
@@ -5,7 +14,6 @@ function tankClass() {
 	this.power = 75;
 	this.health = 100;
 	this.name = "Player";
-	this.weapon = 0;
 
 	var w = 20;
 	var h = 10;
@@ -18,6 +26,16 @@ function tankClass() {
 	this.tankSkinIndex = 0;
 	this.color = "White";
 	this.imageLookupOffset = 0;
+
+	this.weapon = 0;
+	this.weaponInventory = [-1,//Basic Shot
+							-1,//Three Shot
+							1,//Sniper Shot
+							2,//Hop
+							2,//Teleport Shot
+							3,//Big Shot
+							3,//Roller
+							1]//Crazy Bomb
 
 	this.update = function update(frameTime) {
 
@@ -43,6 +61,7 @@ function tankClass() {
 		if (Math.abs(xVel) < 0.1) {xVel = 0;}
 		if (Math.abs(yVel) < 0.1) {yVel = 0;}
 
+		//Collision with ground
 		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
 		if (this.y < mapHeight) {
 			yVel += 90 * frameTime;
