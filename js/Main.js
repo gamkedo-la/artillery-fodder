@@ -27,6 +27,7 @@ var clockMinuteCountdown = 0;
 var dayTime = true;
 var colorOfTextforClock;
 
+//sky 
 //variables for morning sky colors
 var skyColorGradient01 = 255;
 var skyColorGradient02 = 255;
@@ -35,6 +36,10 @@ var skyColorGradient03 = 0;
 var skyColor01 = 255;
 var skyColor02 = 255;
 var skyColor03 = 255;
+
+//sky flickering
+var skyFlickersTimer = 0;
+var skyFlickersNow = false;
 
 var skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
 var skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
@@ -282,9 +287,6 @@ function gameClock() {
 	}
 
 }// end of gameClock()
-
-var skyFlickersTimer = 0;
-var skyFlickersNow = false;
 
 function skyFlickers() {
 	if(skyFlickersNow) {

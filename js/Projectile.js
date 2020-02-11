@@ -416,8 +416,8 @@ function meteorClashClass() {
 
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
-	this.damage = 20;
+	this.size = 30;
+	this.damage = 30;
 	this.tank;
 
 	var xVel = 0;
@@ -474,7 +474,7 @@ function meteorClashClass() {
 		newExplosion.y = this.y;
 		newExplosion.size = this.size;
 		newExplosion.damage = this.damage;
-		newExplosion.color = "White";
+		newExplosion.color = "Black";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		arrayOfExplosions.push(newExplosion);
