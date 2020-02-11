@@ -478,6 +478,8 @@ function meteorClashClass() {
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		arrayOfExplosions.push(newExplosion);
+
+		skyFlickersNow = true;
 	}
 }
 

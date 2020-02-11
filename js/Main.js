@@ -241,6 +241,7 @@ function modeGame(frameTime) {
 	inGameAnnoucements();
 	gameClock();
 	dayNight();
+	skyFlickers();
 
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
@@ -281,6 +282,24 @@ function gameClock() {
 	}
 
 }// end of gameClock()
+
+var skyFlickersTimer = 0;
+var skyFlickersNow = false;
+
+function skyFlickers() {
+	if(skyFlickersNow) {
+		skyFlickersTimer++;
+
+		if(skyFlickersTimer <= 30) {
+			skyColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+			skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		}
+		if (skyFlickersTimer >= 30) {
+			skyFlickersTimer = 0;
+			skyFlickersNow = false;
+		}
+	}
+}
 
 
 function dayNight() {
