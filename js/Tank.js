@@ -1,12 +1,20 @@
+const WEAPON_LIST_MAX = 7
+var projectileNameList = ["Basic Shot",
+						  "Three Shot",
+						  "Sniper Shot",
+						  "Hop",
+						  "Teleport Shot",
+						  "Big Shot",
+						  "Roller",
+						  "Crazy Bomb"]
+
 function tankClass() {
 	this.x = 400;
 	this.y = 300;
 	this.angle = 90;
 	this.power = 75;
 	this.health = 100;
-	this.color = "White";
 	this.name = "Player";
-	this.weapon = 0;
 
 	var w = 20;
 	var h = 10;
@@ -16,8 +24,23 @@ function tankClass() {
 	this.myTurn = false;
 	this.active = true;
 
+	this.tankSkinIndex = 0;
+	this.color = "White";
+	this.imageLookupOffset = 0;
+
+	this.weapon = 0;
+	this.weaponInventory = [-1,//Basic Shot
+							-1,//Three Shot
+							1,//Sniper Shot
+							2,//Hop
+							2,//Teleport Shot
+							3,//Big Shot
+							3,//Roller
+							1]//Crazy Bomb
+
 	this.update = function update(frameTime) {
 
+		//Keep tank in canvas
 		if (Math.floor(this.y) >= mapHeight) {
 			this.y = mapHeight;
 		}
@@ -30,13 +53,16 @@ function tankClass() {
 			xVel = 0;
 		}
 
-		yVel += 90 * frameTime;
+		//Applies velocity
+		//yVel += 90 * frameTime;
 		this.x += xVel * frameTime;
 		this.y += yVel * frameTime;
 
-		if (xVel < 0.1) {xVel = 0;}
-		if (yVel < 0.1) {yVel = 0;}
+		//Dampens to zero
+		if (Math.abs(xVel) < 0.1) {xVel = 0;}
+		if (Math.abs(yVel) < 0.1) {yVel = 0;}
 
+		//Collision with ground
 		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
 		if (this.y < mapHeight) {
 			yVel += 90 * frameTime;
@@ -53,47 +79,11 @@ function tankClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
-                if (Key.isJustPressed(Key.SPACE) || 
-                    SpeechRecognition.pendingFireCommand()
-                    ){
-					var newProjectile;
-					switch (this.weapon) {
-						case 0:
-							newProjectile = new basicShotClass();
-							break;
-						case 1:
-							newProjectile = new threeShotClass();
-							break;
-						case 2:
-							newProjectile = new sniperShotClass();
-							break;
-						case 3:
-							newProjectile = new empty();
-							var radians = degreesToRadians(this.angle);
-							xVel += Math.cos(radians) * this.power*10;
-							yVel += -Math.sin(radians) * this.power*10;
-							break;
-						case 4:
-							newProjectile = new teleportShot();
-							break;
-						case 5:
-							newProjectile = new basicShotClass();
-							newProjectile.size = 50;
-							break;
-						case 6:
-							newProjectile = new rollShotClass();
-							break;
-						case 7:
-							newProjectile = new crazyBombShotClass();
-							break;
+				//Input
+                if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
+					if(this.weaponInventory[this.weapon] != 0) {
+						this.fire();
 					}
-					newProjectile.x = this.x;
-					newProjectile.y = this.y - 10;
-					newProjectile.tank = this;
-					newProjectile.launch(this.angle, this.power*2.65);
-					arrayOfProjectiles.push(newProjectile);
-
-					this.myTurn = false;
 				}
 				if (Key.isDown(Key.LEFT)){
 					this.angle += 45 * frameTime;
@@ -114,6 +104,7 @@ function tankClass() {
 					this.weapon++;
 				}
 
+				//Range checks
 				if (this.angle >= 360) {
 					this.angle -= 360;
 				} else if (this.angle <= 0) {
@@ -126,10 +117,10 @@ function tankClass() {
 					this.power = 1;
 				}
 
-				if (this.weapon > 7) {
+				if (this.weapon > WEAPON_LIST_MAX) {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
-					this.weapon = 7;
+					this.weapon = WEAPON_LIST_MAX;
 				}
 			} else {
 				incrementTurn = true;
@@ -143,8 +134,11 @@ function tankClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+		//Draw body
 		colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
 		colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
+
+		//Draw Cannon
 		var cannonX, cannonY, radians;
 		radians = degreesToRadians(this.angle);
 		cannonX = Math.cos(radians) * 10;
@@ -165,9 +159,10 @@ function tankClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 
+		//Kick
 		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * amount * 20;
-		yVel = -Math.sin(radians) * amount * 20;
+		xVel = Math.cos(radians) * amount;
+		yVel = -Math.sin(radians) * amount;
 
 		if (this.health <= 0) {
 			this.destroy();
@@ -182,6 +177,50 @@ function tankClass() {
 			destroyedHeadline = true;
 
 		}
+	}
+
+	this.fire = function fire() {
+		var newProjectile;
+		switch (this.weapon) {
+			case 0://Basic Shot
+				newProjectile = new basicShotClass();
+				break;
+			case 1://Three Shot
+				newProjectile = new threeShotClass();
+				break;
+			case 2://Sniper Shot
+				newProjectile = new sniperShotClass();
+				break;
+			case 3://Hop
+				newProjectile = new empty();
+				var radians = degreesToRadians(this.angle);
+				xVel += Math.cos(radians) * this.power/2;
+				yVel += -Math.sin(radians) * this.power/2;
+				break;
+			case 4://Teleport Shot
+				newProjectile = new teleportShot();
+				break;
+			case 5://Big Shot
+				newProjectile = new basicShotClass();
+				newProjectile.size = 50;
+				break;
+			case 6://Roller
+				newProjectile = new rollShotClass();
+				break;
+			case 7://Crazy Bomb
+				newProjectile = new crazyBombShotClass();
+				break;
+		}
+
+		this.weaponInventory[this.weapon] -= 1;
+
+		newProjectile.x = this.x;
+		newProjectile.y = this.y - 10;
+		newProjectile.tank = this;
+		newProjectile.launch(this.angle, this.power*2.65);
+		arrayOfProjectiles.push(newProjectile);
+
+		this.myTurn = false;
 	}
 
 }

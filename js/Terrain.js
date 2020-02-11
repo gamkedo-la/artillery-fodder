@@ -37,8 +37,7 @@ function terrain() {
 				i = 0;
 				reduction = -Math.abs(i) + radius;
 			} else if (i >= heightMap.length) {
-				i = heightMap.length-1;
-				reduction = 0;
+				break;
 			}else if (heightMap[i] >= localY + reduction) {
 				reduction *= 2;
 			} else if (heightMap[i] > localY - reduction) {

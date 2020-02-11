@@ -36,11 +36,11 @@ function basicExplosionClass() {
 		colorCircle(this.x, this.y, this.size, this.color);
 	}
 
-	this.calculateDamage = function calculateDamage(tank) {
-		var dist = distance(this.tank, this);
-		var angle = angleBetween2Points(this, this.tank);
+	this.calculateDamage = function calculateDamage(targetTank) {
+		var dist = distance(targetTank, this);
+		var angle = angleBetween2Points(this, targetTank);
 		if (dist <= this.size) {
-			tank.takeDamage(dist/this.size * this.damage, angle);
+			targetTank.takeDamage(dist/this.size * this.damage, angle);
 		}
 	}
 }
@@ -90,11 +90,11 @@ function multiExplosionClass() {
 		colorCircle(this.x, this.y, this.size, this.color);
 	}
 
-	this.calculateDamage = function calculateDamage(tank) {
-		var dist = distance(this.tank, this);
-		var angle = angleBetween2Points(this, this.tank);
+	this.calculateDamage = function calculateDamage(targetTank) {
+		var dist = distance(targetTank, this);
+		var angle = angleBetween2Points(this, targetTank);
 		if (dist <= this.size) {
-			tank.takeDamage(dist/this.size * this.damage, angle);
+			targetTank.takeDamage(dist/this.size * this.damage, angle);
 		}
 	}
 

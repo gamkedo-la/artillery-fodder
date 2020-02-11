@@ -1,6 +1,27 @@
 window.addEventListener('keyup',    function (event) { Key.onKeyup(event); event.preventDefault() }, false);
 window.addEventListener('keydown',  function (event) { Key.onKeydown(event); event.preventDefault() }, false);
 
+function mouseInit() {
+	document.addEventListener('mouseup', mouseReleased);
+	document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
+}
+
+var mouseX = 0;
+var mouseY = 0;
+var mousePressed = false;
+
+function mouseReleased(evt) {
+	mousePressed = true;
+}
+
+function calculateMousePos(evt) {
+	var rect = canvas.getBoundingClientRect(),
+	root = document.documentElement;
+	mouseX = evt.clientX - rect.left - root.scrollLeft;
+	mouseY = evt.clientY - rect.top - root.scrollTop;
+}
+
+
 const Key = {
 
 	_down: {},
@@ -27,7 +48,7 @@ const Key = {
 	NINE: 57,
 	a: 65,
 	b: 66,
-	CREDITS: 67,
+	c: 67,
 	d: 68,
 	e: 69,
 	f: 70,
@@ -84,24 +105,9 @@ const Key = {
 	update() {
 		this._pressed = {};
 		this._released = {};
+		mousePressed = false;
 	}
 };
 
-function initMouse() {
-  document.addEventListener('mouseup', mouseReleased);
-  canvas.addEventListener('mousemove', calculateMousePos);
-}
 
-var mouseX = 0;
-var mouseY = 0;
 
-function mouseReleased(evt) {
-	console.log("clicked at " + mouseX + " " + mouseY);
-}
-
-function calculateMousePos(evt) {
-  var rect = canvas.getBoundingClientRect(),
-	    root = document.documentElement;
-  mouseX = evt.clientX - rect.left - root.scrollLeft;
-  mouseY = evt.clientY - rect.top - root.scrollTop;
-}

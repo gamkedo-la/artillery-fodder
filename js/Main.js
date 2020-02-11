@@ -10,7 +10,7 @@ var playerTurn = 0;
 var incrementTurn = false;
 var fadeVariable = 1.0;
 var destroyedHeadline = false;
-var nextTurnHeadline = false;
+var nextTurnHeadline = true;
 var timerHeadline = 0;
 
 var deltaTime = 0;
@@ -61,7 +61,9 @@ var SpeechRecognition = new SpeechRecognitionEngine();
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-	initMouse();
+	canvasContext.textAlign = "center";
+	mouseInit()
+
 	imageLoader.loadImages().then(gameStart);
 
 }
@@ -80,6 +82,8 @@ function gameStart() {
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
 		arrayOfPlayers[i].color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		arrayOfPlayers[i].tankSkinIndex = 0;
+		arrayOfPlayers[i].imageLookupOffset = i;
 
 	}
 
@@ -160,26 +164,33 @@ function update(frameTime) {
 
 function modeGame(frameTime) {
 
-	// colorRect(0, 0, canvas.width, canvas.height, skyColor);	
+	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-	
-
+	//Draw UI section
 	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
-	
-	colorRect(100, canvas.height - UI_HEIGHT + 20, canvas.width - 200, 20, "White");
-	colorText(arrayOfPlayers[playerTurn].name + " " + 
-		" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
-		" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
-		" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
-		250, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
-
-
-	colorRect(100, canvas.height - UI_HEIGHT + 60, canvas.width - 200, 20, "White");
-	colorText(arrayOfPlayers[playerTurn].weapon, 400, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial")
+	colorRect(canvas.width*1/4 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
+	colorRect(canvas.width*2/4 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
+	colorRect(canvas.width*3/4 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
+	colorRect(canvas.width*3/4 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
+	colorRect(canvas.width*1/3 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
+	colorRect(canvas.width*2/3 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
+	colorText("Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3), canvas.width*1/4, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
+	colorText("Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3), canvas.width*2/4, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
+	colorText("Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3), canvas.width*3/4, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
+	colorText(arrayOfPlayers[playerTurn].name, canvas.width*1/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
+	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], canvas.width*2/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
+	//colorText(
+	//	arrayOfPlayers[playerTurn].name + 
+	//	" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
+	//	" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
+	//	" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
+	//	canvas.width/2, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
+	//colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
+	//	canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial");
 
 //cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
@@ -197,14 +208,17 @@ function modeGame(frameTime) {
 
 	map.draw();
 
+	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].update(frameTime);
 		arrayOfPlayers[i].draw(frameTime);
 	}
+	//Update and draw shots
 	for (var i = 0; i < arrayOfProjectiles.length; i++) {
 		arrayOfProjectiles[i].update(frameTime);
 		arrayOfProjectiles[i].draw(frameTime);
 	}
+	//Update and draw explosions
 	for (var i = 0; i < arrayOfExplosions.length; i++) {
 		arrayOfExplosions[i].update(frameTime);
 		arrayOfExplosions[i].draw(frameTime);
@@ -366,7 +380,7 @@ function inGameAnnoucements() {
 
 		if(destroyedHeadline) {
 			if(timerHeadline >= 60) {
-				colorText("Tank Destroyed!", canvas.width/2 - 200, 250, 'white', "50px Arial");
+				colorText("Tank Destroyed!", canvas.width/2, 250, 'white', "50px Arial");
 				
 				}
 			if(timerHeadline >= 120) {
@@ -377,9 +391,9 @@ function inGameAnnoucements() {
 		if(nextTurnHeadline) {
 
 			if(timerHeadline >= 120 && dayTime) {
-				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
 			} else if (timerHeadline >= 120) {
-				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2 - 200, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
+				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
 			}
 			
 			if(timerHeadline >= 180) {
