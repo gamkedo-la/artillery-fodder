@@ -21,11 +21,9 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 8;
-var clockTime = 0;
+var clockHour = 9;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
-var amPM = "am";
 var dayTime = true;
 var colorOfTextforClock;
 
@@ -43,8 +41,10 @@ const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 var mode = TITLE_SCREEN;
 
-var skyColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-var skyColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+
+
+//var skyColorGradient = "yellow";
+//var skyColor = "white";
 var groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 var groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 
@@ -214,6 +214,7 @@ function modeGame(frameTime) {
 	nextTurn();
 	inGameAnnoucements();
 	gameClock();
+	dayNight();
 
 	if (Key.isJustPressed(Key.m)){
 		mode = MAIN_MENU;
@@ -247,24 +248,91 @@ function gameClock() {
 				clockHour = 0;	
 			}
 
-			if(clockHour == 7 || clockHour == 19) {
+			if(clockHour == 10 || clockHour == 12) {
 				dayTime = !dayTime;
+				console.log("time changed!");
+				console.log(dayTime);
 			}
 		}
 	}
 
-	if (dayTime == true) {
-		colorOfTextforClock = 'black';
-		skyColorGradient = 'yellow';
-		skyColor = "white";
+}// end of gameClock()
+
+//variables for morning sky colors
+var skyColorGradient01 = 255;
+var skyColorGradient02 = 255;
+var skyColorGradient03 = 0;
+
+var skyColor01 = 255;
+var skyColor02 = 255;
+var skyColor03 = 255;
+
+var skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
+var skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
+
+function dayNight() {
+
+	//night sky transition
+	if (dayTime == false) { 
+
+		colorOfTextforClock = 'white';
+
+		//black = 0,0,0
+		if(skyColor01 >= 1) { // turning down to 0
+			skyColor01 --;
+		}
+		if(skyColor02 >= 1) { // turning down to 0
+			skyColor02 --;
+		}
+		if(skyColor03 >= 1) { // turning down to 0
+			skyColor03 --;
+		}
+
+		//blue = 0, 0, 204
+		if(skyColorGradient01 >= 1) { // turning down to 0
+			skyColorGradient01 --;
+		}
+		if(skyColorGradient02 >= 1) { // turning down to 0
+			skyColorGradient02 --;
+		}
+		if(skyColorGradient03 <= 204) { // turning up to 205
+			skyColorGradient03 ++;
+		}
+
 	}
 
-	if (dayTime == false) { 
-		colorOfTextforClock = 'white';
-		skyColorGradient = 'black';
-		skyColor = "blue";
+	//morning sky transition
+	if (dayTime == true) {
+		console.log (skyColor01);
+
+		colorOfTextforClock = 'black';
+
+		//white = 255, 255, 255
+		if(skyColor01 <= 254) { // turning up to 255
+			skyColor01++;
+		}
+		if(skyColor02 <= 254) { // turning up to 255
+			skyColor02++;
+		}
+		if(skyColor03 <= 254) { // turning up to 255
+			skyColor03++;
+		}
+
+		//yellow = 255, 255, 0
+		if(skyColorGradient01 <= 254) { // turning up to 255
+			skyColorGradient01++;
+		}
+		if(skyColorGradient02 <= 254) { // turning up to 255
+			skyColorGradient02++;
+		}
+		if(skyColorGradient03 >= 1) { // turning down to 0
+			skyColorGradient03--;
+		}
 	}
-}// end of gameClock()
+
+	skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
+	skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
+}
 
 
 function nextTurn() {
