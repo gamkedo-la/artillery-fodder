@@ -27,6 +27,18 @@ var clockMinuteCountdown = 0;
 var dayTime = true;
 var colorOfTextforClock;
 
+//variables for morning sky colors
+var skyColorGradient01 = 255;
+var skyColorGradient02 = 255;
+var skyColorGradient03 = 0;
+
+var skyColor01 = 255;
+var skyColor02 = 255;
+var skyColor03 = 255;
+
+var skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
+var skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
+
 
 //Scenes
 const GAME_MODE = 0;
@@ -262,27 +274,14 @@ function gameClock() {
 				clockHour = 0;	
 			}
 
-			if(clockHour == 10 || clockHour == 12) {
+			if(clockHour == 7 || clockHour == 19) {
 				dayTime = !dayTime;
-				console.log("time changed!");
-				console.log(dayTime);
 			}
 		}
 	}
 
 }// end of gameClock()
 
-//variables for morning sky colors
-var skyColorGradient01 = 255;
-var skyColorGradient02 = 255;
-var skyColorGradient03 = 0;
-
-var skyColor01 = 255;
-var skyColor02 = 255;
-var skyColor03 = 255;
-
-var skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
-var skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
 
 function dayNight() {
 
@@ -317,7 +316,6 @@ function dayNight() {
 
 	//morning sky transition
 	if (dayTime == true) {
-		console.log (skyColor01);
 
 		colorOfTextforClock = 'black';
 
