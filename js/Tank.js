@@ -27,8 +27,9 @@ function tankClass() {
 	this.active = true;
 
 	this.tankSkinIndex = 0;
-	this.color = "White";
+	this.color = 0;
 	this.imageLookupOffset = 0;
+	var preFilterColor = "Red"
 
 	this.weapon = 0;
 	this.weaponInventory = [-1,//Basic Shot
@@ -146,6 +147,8 @@ function tankClass() {
 		// colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
 		// colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
 
+		canvasContext.filter = 'hue-rotate('+this.color+'deg)';
+
 		canvasContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
 			this.tankSkinIndex * 20, 0, 
 			20, 10, 
@@ -159,7 +162,9 @@ function tankClass() {
 		cannonX = Math.cos(radians) * 10;
 		cannonY = -Math.sin(radians) * 10;
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
-		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, this.color);
+		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, preFilterColor);
+
+		canvasContext.filter = 'none';
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -186,7 +191,7 @@ function tankClass() {
 
 	this.destroy = function destroy() {
 		if (this.active) {
-			this.color = "Black"
+			preFilterColor = "Black"
 			this.active = false;
 			console.log("Destroy Player " + (playerTurn+2));
 			destroyedHeadline = true;

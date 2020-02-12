@@ -97,7 +97,7 @@ function gameStart() {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
-		arrayOfPlayers[i].color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		arrayOfPlayers[i].color = rndFloat(360);
 		arrayOfPlayers[i].tankSkinIndex = rndInt(0, 3);
 		arrayOfPlayers[i].imageLookupOffset = i;
 
