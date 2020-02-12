@@ -1,4 +1,4 @@
-const WEAPON_LIST_MAX = 8
+const WEAPON_LIST_MAX = 9
 var projectileNameList = ["Basic Shot",
 						  "Three Shot",
 						  "Sniper Shot",
@@ -7,7 +7,8 @@ var projectileNameList = ["Basic Shot",
 						  "Big Shot",
 						  "Roller",
 						  "Crazy Bomb",
-						  "Meteor Clash"]
+						  "Meteor Clash",
+						  "Rain Shot"]
 
 function tankClass() {
 	this.x = 400;
@@ -38,7 +39,8 @@ function tankClass() {
 							3,//Big Shot
 							3,//Roller
 							1,//Crazy Bomb
-							2] //Meteor Clash
+							2, //Meteor Clash
+							1] // Rain Shot
 
 	this.update = function update(frameTime) {
 
@@ -214,6 +216,9 @@ function tankClass() {
 				break;
 			case 8://Meteor Clash
 				newProjectile = new meteorClashClass();
+				break;
+			case 9://Rain Shot
+				newProjectile = new rainShot();
 				break;
 		}
 

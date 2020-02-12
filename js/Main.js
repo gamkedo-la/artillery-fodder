@@ -258,7 +258,7 @@ function gameClock() {
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
-	colorText(clockHour + ":" + clockMinute, 700, 30, colorOfTextforClock, "15px Arial");
+	colorText(clockHour + ":" + pad(clockMinute, 2), 700, 30, colorOfTextforClock, "15px Arial");
 
 	if(clockMinuteCountdown >= 60) {
 		for (var i = 0; i < 1; i++) {
