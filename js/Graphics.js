@@ -45,7 +45,7 @@ function buildTankSkinsSheet() {
 			tankSkinContext.filter = 'brightness(0)';
 		} else {
 			tankSkinContext.filter = 'hue-rotate('+arrayOfPlayers[i].color+'deg)';
-			var barrel = hsvToRgb(arrayOfPlayers[i].color/360, 1, 1);
+			var barrel = hslToRgb(arrayOfPlayers[i].color/360, 1, 0.5);
 			arrayOfPlayers[i].barrelColor = fullColorHex(barrel[0], barrel[1], barrel[2]);
 			
 		}
