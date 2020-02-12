@@ -58,16 +58,11 @@ function tankClass() {
 			xVel = 0;
 		}
 
-		//Applies velocity
-		//yVel += 90 * frameTime;
-		this.x += xVel * frameTime;
-		this.y += yVel * frameTime;
-
 		//Dampens to zero
 		if (Math.abs(xVel) < 0.1) {xVel = 0;}
 		if (Math.abs(yVel) < 0.1) {yVel = 0;}
 
-		//Collision with ground
+		//Physics vs ground
 		var mapHeight = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
 		if (this.y < mapHeight) {
 			yVel += 90 * frameTime;
@@ -207,8 +202,9 @@ function tankClass() {
 			case 3://Hop
 				newProjectile = new empty();
 				var radians = degreesToRadians(this.angle);
-				xVel += Math.cos(radians) * this.power/2;
-				yVel += -Math.sin(radians) * this.power/2;
+				xVel += Math.cos(radians) * this.power;
+				yVel += -Math.sin(radians) * this.power;
+				this.y -= 1;
 				break;
 			case 4://Teleport Shot
 				newProjectile = new teleportShot();

@@ -87,7 +87,7 @@ window.onload = function() {
 
 function gameStart() {
 
-	//SpeechRecognition.init(); // ask permission for mic input of game actions
+	SpeechRecognition.init(); // ask permission for mic input of game actions
 
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
