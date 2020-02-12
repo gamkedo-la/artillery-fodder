@@ -29,7 +29,7 @@ function tankClass() {
 	this.tankSkinIndex = 0;
 	this.color = 0;
 	this.imageLookupOffset = 0;
-	var preFilterColor = "Red"
+	this.barrelColor = fullColorHex(255, 0, 0);
 
 	this.weapon = 0;
 	this.weaponInventory = [-1,//Basic Shot
@@ -155,10 +155,10 @@ function tankClass() {
 		radians = degreesToRadians(this.angle);
 		cannonX = Math.cos(radians) * 10;
 		cannonY = -Math.sin(radians) * 10;
-		canvasContext.filter = 'hue-rotate('+this.color+'deg)';
+		//canvasContext.filter = 'hue-rotate('+this.color+'deg)';
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
-		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, preFilterColor);
-		canvasContext.filter = 'none';
+		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, this.barrelColor);
+		//canvasContext.filter = 'none';
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -185,7 +185,7 @@ function tankClass() {
 
 	this.destroy = function destroy() {
 		if (this.active) {
-			preFilterColor = "Black"
+			this.barrelColor = "Black"
 			this.active = false;
 			buildTankSkinsSheet();
 			console.log("Destroy Player " + (playerTurn+2));
