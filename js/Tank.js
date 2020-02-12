@@ -41,7 +41,6 @@ function tankClass() {
 							1,//Crazy Bomb
 							2, //Meteor Clash
 							1] // Rain Shot
-							2] //Meteor Clash
 	var weaponIndextIncreesing = true;
 
 	this.update = function update(frameTime) {
