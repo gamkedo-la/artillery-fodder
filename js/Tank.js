@@ -41,6 +41,8 @@ function tankClass() {
 							1,//Crazy Bomb
 							2, //Meteor Clash
 							1] // Rain Shot
+							2] //Meteor Clash
+	var weaponIndextIncreesing = true;
 
 	this.update = function update(frameTime) {
 
@@ -103,9 +105,11 @@ function tankClass() {
 				}
 				if (Key.isJustPressed(Key.COMMA)){
 					this.weapon--;
+					weaponIndextIncreesing = false;
 				}
 				if (Key.isJustPressed(Key.PERIOD)){
 					this.weapon++;
+					weaponIndextIncreesing = true;
 				}
 
 				//Range checks
@@ -119,6 +123,12 @@ function tankClass() {
 					this.power = 100;
 				} else if (this.power < 1) {
 					this.power = 1;
+				}
+
+				if (this.weaponInventory[this.weapon] == 0 && weaponIndextIncreesing == true) {
+					this.weapon++;
+				} else if (this.weaponInventory[this.weapon] == 0) {
+					this.weapon--;
 				}
 
 				if (this.weapon > WEAPON_LIST_MAX) {

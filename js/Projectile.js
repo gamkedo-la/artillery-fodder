@@ -226,6 +226,24 @@ function teleportShot() {
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
 
+			for (var i = 0; i < numberOfPlayers; i++) {
+				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
+					if (this.tank != arrayOfPlayers[i]) {
+						var xNew = arrayOfPlayers[i].x;
+						var yNew = arrayOfPlayers[i].y;
+
+						arrayOfPlayers[i].x = this.tank.x;
+						arrayOfPlayers[i].y = this.tank.y;
+
+						this.active = false;
+						incrementTurn = true;
+
+						this.tank.x = xNew;
+						this.tank.y = yNew;
+					}
+				}
+			}
+
 			if (this.y >= canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
 				this.hit();
 			} else if (this.y >= canvas.height - UI_HEIGHT) {

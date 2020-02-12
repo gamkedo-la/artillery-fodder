@@ -199,15 +199,12 @@ function modeGame(frameTime) {
 	colorText("Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3), canvas.width*2/4, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
 	colorText("Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3), canvas.width*3/4, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
 	colorText(arrayOfPlayers[playerTurn].name, canvas.width*1/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
-	colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], canvas.width*2/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
-	//colorText(
-	//	arrayOfPlayers[playerTurn].name + 
-	//	" Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3) + 
-	//	" Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3) + 
-	//	" Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3),
-	//	canvas.width/2, canvas.height - UI_HEIGHT + 35, "Black", "15px Arial")
-	//colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
-	//	canvas.width/2, canvas.height - UI_HEIGHT + 75, "Black", "15px Arial");
+	if (arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon] > 0) {
+		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
+			canvas.width*2/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
+	} else {
+		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width*2/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
+	}
 
 //cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
