@@ -144,29 +144,20 @@ function tankClass() {
 
 	this.draw = function draw(frameTime) {
 		//Draw body
-		// colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
-		// colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
-
-		canvasContext.filter = 'hue-rotate('+this.color+'deg)';
-		if (!this.active) {
-			canvasContext.filter = 'brightness(0)';
-		}
-
-		canvasContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
-			this.tankSkinIndex * 20, 0, 
+		canvasContext.drawImage(tankSkinCanvas, 
+			this.imageLookupOffset * 20, 0, 
 			20, 10, 
 			this.x-w/2, this.y-h,  
 			w, h);
-
 
 		//Draw Cannon
 		var cannonX, cannonY, radians;
 		radians = degreesToRadians(this.angle);
 		cannonX = Math.cos(radians) * 10;
 		cannonY = -Math.sin(radians) * 10;
+		canvasContext.filter = 'hue-rotate('+this.color+'deg)';
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
 		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, preFilterColor);
-
 		canvasContext.filter = 'none';
 	}
 
@@ -196,6 +187,7 @@ function tankClass() {
 		if (this.active) {
 			preFilterColor = "Black"
 			this.active = false;
+			buildTankSkinsSheet();
 			console.log("Destroy Player " + (playerTurn+2));
 			destroyedHeadline = true;
 

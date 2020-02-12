@@ -34,6 +34,29 @@ const imageLoader = new (function() {
 	};
 })();
 
+var tankSkinCanvas = document.createElement("canvas");
+var tankSkinContext = tankSkinCanvas.getContext("2d");
+function buildTankSkinsSheet() {
+	tankSkinCanvas.height = 10;
+	tankSkinCanvas.width = numberOfPlayers * 20;
+
+	for (var i = 0; i < numberOfPlayers; i++) {
+		if (!arrayOfPlayers[i].active) {
+			tankSkinContext.filter = 'brightness(0)';
+		} else {
+			tankSkinContext.filter = 'hue-rotate('+arrayOfPlayers[i].color+'deg)';
+		}
+		tankSkinContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
+			arrayOfPlayers[i].tankSkinIndex * 20, 0, 
+			20, 10, 
+			i * 20, 0,  
+			20, 10);
+	}
+}
+
+
+
+
 function colorRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor) {
 	canvasContext.fillStyle = fillColor;
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);

@@ -104,6 +104,7 @@ function gameStart() {
 	}
 
 	arrayOfPlayers[0].myTurn = true;
+	buildTankSkinsSheet();
 
 	cloudImg = imageLoader.getImage("cloud1");
 	for (let i=0; i<MAX_CLOUDS; i++) {
@@ -220,6 +221,7 @@ function modeGame(frameTime) {
 		}
 	}
 
+	//Draw ground
 	map.draw();
 
 	//Update and draw tanks
@@ -237,6 +239,8 @@ function modeGame(frameTime) {
 		arrayOfExplosions[i].update(frameTime);
 		arrayOfExplosions[i].draw(frameTime);
 	}
+
+	canvasContext.drawImage(tankSkinCanvas, 0, 0);
 
 	cleanLists();
 	nextTurn();
