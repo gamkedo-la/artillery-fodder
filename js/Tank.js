@@ -29,7 +29,6 @@ function tankClass() {
 	this.tankSkinIndex = 0;
 	this.color = 0;
 	this.imageLookupOffset = 0;
-	this.barrelColor = fullColorHex(255, 0, 0);
 
 	this.weapon = 0;
 	this.weaponInventory = [-1,//Basic Shot
@@ -155,10 +154,18 @@ function tankClass() {
 		radians = degreesToRadians(this.angle);
 		cannonX = Math.cos(radians) * 10;
 		cannonY = -Math.sin(radians) * 10;
-		//canvasContext.filter = 'hue-rotate('+this.color+'deg)';
-		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
-		colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, this.barrelColor);
-		//canvasContext.filter = 'none';
+		canvasContext.save(); // allows us to undo translate movement and rotate spin
+		canvasContext.translate(this.x,this.y-h); // sets the point where our graphic will go
+		canvasContext.rotate(-radians); // sets the rotation
+		canvasContext.drawImage(tankSkinCanvas, 
+			this.imageLookupOffset * 20, 10, 
+			20, 10, 
+			-w/2, -h/2,  
+			w, h);
+		//canvasContext.drawImage(graphic,-graphic.width/2,-graphic.height/2); // center, draw
+		canvasContext.restore();
+		// colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 5, "Black");
+		// colorLine(this.x, this.y - h, this.x + cannonX, this.y + cannonY - 10, 3, "Red");
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -185,7 +192,6 @@ function tankClass() {
 
 	this.destroy = function destroy() {
 		if (this.active) {
-			this.barrelColor = "Black"
 			this.active = false;
 			buildTankSkinsSheet();
 			console.log("Destroy Player " + (playerTurn+2));
