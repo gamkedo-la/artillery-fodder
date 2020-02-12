@@ -148,6 +148,9 @@ function tankClass() {
 		// colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
 
 		canvasContext.filter = 'hue-rotate('+this.color+'deg)';
+		if (!this.active) {
+			canvasContext.filter = 'grayscale(100%)';
+		}
 
 		canvasContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
 			this.tankSkinIndex * 20, 0, 
