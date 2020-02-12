@@ -143,8 +143,15 @@ function tankClass() {
 
 	this.draw = function draw(frameTime) {
 		//Draw body
-		colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
-		colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
+		// colorRect(this.x-w/2, this.y-h, w, h+2, "Black");
+		// colorRect(this.x-w/2+1, this.y-h+1, w-2, h, this.color);
+
+		canvasContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
+			this.tankSkinIndex * 20, 0, 
+			20, 10, 
+			this.x-w/2, this.y-h,  
+			w, h);
+
 
 		//Draw Cannon
 		var cannonX, cannonY, radians;

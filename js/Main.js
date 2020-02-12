@@ -79,14 +79,13 @@ window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
 	canvasContext.textAlign = "center";
-	mouseInit()
+	mouseInit();
 
 	imageLoader.loadImages().then(gameStart);
 
 }
 
 function gameStart() {
-
 	SpeechRecognition.init(); // ask permission for mic input of game actions
 
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
@@ -99,7 +98,7 @@ function gameStart() {
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
 		arrayOfPlayers[i].color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-		arrayOfPlayers[i].tankSkinIndex = 0;
+		arrayOfPlayers[i].tankSkinIndex = rndInt(0, 3);
 		arrayOfPlayers[i].imageLookupOffset = i;
 
 	}
@@ -206,7 +205,8 @@ function modeGame(frameTime) {
 		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width*2/3, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	}
 
-//cloud movement & cycling
+	
+	//cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
 		let pos = cloudPositions[i];
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
