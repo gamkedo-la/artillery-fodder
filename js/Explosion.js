@@ -71,6 +71,7 @@ function multiExplosionClass() {
 					}
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
+				soundExplosion.play();
 				damageDone = true;
 			}
 			if (this.countDown <= 0.4 && !createdChild && this.numberOfIterations > 0) {
