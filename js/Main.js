@@ -240,8 +240,6 @@ function modeGame(frameTime) {
 		arrayOfExplosions[i].draw(frameTime);
 	}
 
-	canvasContext.drawImage(tankSkinCanvas, 0, 0);
-
 	cleanLists();
 	nextTurn();
 	inGameAnnoucements();
