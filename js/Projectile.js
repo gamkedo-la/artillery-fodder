@@ -430,7 +430,7 @@ function crazyBombShotClass() {
 	}
 }
 
-var afterImage = false;
+
 function meteorClashClass() {
 
 	this.x = 0;
@@ -442,22 +442,47 @@ function meteorClashClass() {
 	var xVel = 0;
 	var yVel = 0;
 
+	var afterImageX;
+	var afterImageY;
+	
+	var sonicboom = false;
+	var sonicboomRadius = 2;
+	var sonicboomFade = 1.0;
+
 	this.active = false;
 	this.primary = true;
 
+	console.log (sonicboom);
+
 	this.update = function update(frameTime) {
 		if (this.active) {
+
+
 			yVel += 90 * frameTime;
 
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
 
-			if(yVel >= -1) {
-				this.y +=5;
-				afterImage = true;
+			if (sonicboom == false && yVel >= 0) {
+			    afterImageX = this.x;
+			    afterImageY = this.y;
+			    sonicboom = true;
 			}
-			if(afterImage) {
-				colorCircle(xVel, yVel, 2, "Black"); // need to figure out how to capture specific values at specifc timeframe
+
+			if(yVel >= -1) {
+				this.y +=8;
+			}
+
+			if (sonicboom) {
+				sonicboomRadius += 3;
+				sonicboomFade -= 0.05;
+			}
+
+			
+
+			if(sonicboom) {	
+				colorCircle(afterImageX, afterImageY , sonicboomRadius, `rgba(0, 0, 0, ${sonicboomFade})`);
+				colorCircle(afterImageX, afterImageY , sonicboomRadius - 3, `rgba(255, 255, 255, ${sonicboomFade})`);
 			}
 
 			for (var i = 0; i < numberOfPlayers; i++) {
@@ -479,6 +504,7 @@ function meteorClashClass() {
 		}
 	}
 
+
 	this.draw = function draw(frameTime) {
 		colorCircle(this.x, this.y, 2, "Black");
 	}
@@ -492,7 +518,6 @@ function meteorClashClass() {
 
 	this.hit = function hit() {
 		yVel = 0;
-		afterImage = false;
 					
 		this.active = false;
 		if (this.primary) {incrementTurn = true;}
@@ -510,77 +535,6 @@ function meteorClashClass() {
 		skyFlickersNow = true;
 	}
 }
-
-/*
-function rainShot() {
-	this.x = 0;
-	this.y = 0;
-	this.size = 20;
-	this.damage = 20;
-	this.tank;
-
-	var xVel = 0;
-	var yVel = 0;
-
-	this.active = false;
-	this.primary = true;
-
-	this.update = function update(frameTime) {
-		if (this.active) {
-			yVel += 90 * frameTime;
-
-			this.x += xVel * frameTime;
-			this.y += yVel * frameTime;
-
-			for (var i = 0; i < numberOfPlayers; i++) {
-				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
-					if (this.tank != arrayOfPlayers[i]) {
-						this.hit();
-					}
-				}
-			}
-
-			if (this.y >= canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
-				this.hit();
-			} else if (this.y >= canvas.height - UI_HEIGHT) {
-				this.hit();
-			} else if (this.x < 0 || this.x > canvas.width) {
-				this.active = false;
-				if (this.primary) {incrementTurn = true;}
-			}
-		}
-	}
-
-	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black");
-	}
-
-	this.launch = function launch(angle, power) {
-		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * power;
-		yVel = -Math.sin(radians) * power;
-		this.active = true;
-	}
-
-	this.hit = function hit() {
-		yVel = 0;
-					
-		this.active = false;
-		if (this.primary) {incrementTurn = true;}
-
-		var newExplosion = new basicExplosionClass();
-		newExplosion.x = this.x;
-		newExplosion.y = this.y;
-		newExplosion.size = this.size;
-		newExplosion.damage = this.damage;
-		newExplosion.color = "White";
-		newExplosion.tank = this.tank;
-		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
-	}
-}
-
-*/
 
 function rainShot(){
 	this.x = 0;
