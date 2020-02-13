@@ -1,7 +1,7 @@
 var canvas, canvasContext, debugText;
 var framesPerSecond = 30;
 
-var numberOfPlayers = 4;
+var numberOfPlayers = 3;
 var arrayOfPlayers = [];
 var arrayOfProjectiles = [];
 var arrayOfExplosions = [];

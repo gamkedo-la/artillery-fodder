@@ -23,6 +23,7 @@ function modeMainMenu(frameTime) {
         || mousePressed
         ){
 		mode = GAME_MODE;
+		startMatch();
 	}
 	if (Key.isJustPressed(Key.r)){
 		mode = CREDITS_SCREEN;
@@ -35,6 +36,7 @@ function modeMainMenu(frameTime) {
 	}
 	if (Key.isJustPressed(Key.p)){
 		mode = PLAYER_SCREEN;
+		populatePlayerScreen();
 	}
 	if (Key.isJustPressed(Key.o)){
 		mode = OPTIONS_SCREEN;
