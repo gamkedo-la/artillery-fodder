@@ -185,6 +185,8 @@ function tankClass() {
 		xVel = Math.cos(radians) * amount;
 		yVel = -Math.sin(radians) * amount;
 
+		soundHit.play();
+
 		if (this.health <= 0) {
 			this.destroy();
 		}
@@ -247,6 +249,8 @@ function tankClass() {
 		newProjectile.tank = this;
 		newProjectile.launch(this.angle, this.power*2.65);
 		arrayOfProjectiles.push(newProjectile);
+
+		soundFire.play();
 
 		this.myTurn = false;
 	}
