@@ -39,7 +39,14 @@ function playerBlock(tankClass) {
 	var imageLookupOffset = this.tank.imageLookupOffset;
 
 	this.update = function update() {
-		return;
+		if (isMouseInArea(this.x - w/2 + 25, this.y +25, 25, 50) && mousePressed) {
+			this.tank.tankSkinIndex -= 1;
+			buildTankSkinsSheet();
+		}
+		if (isMouseInArea(this.x - w/2 + 50, this.y +25, 25, 50) && mousePressed) {
+			this.tank.tankSkinIndex += 1;
+			buildTankSkinsSheet();
+		}
 	}
 
 	this.draw = function draw() {
