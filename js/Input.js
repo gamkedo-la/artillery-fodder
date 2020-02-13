@@ -21,6 +21,17 @@ function calculateMousePos(evt) {
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 }
 
+function isMouseInArea(x, y, width, height) {
+	if (mouseX >= x &&
+		mouseX <= x + width &&
+		mouseY >= y &&
+		mouseY <= y + height) {
+			return true;
+	} else {
+		return false;
+	}
+}
+
 
 const Key = {
 
