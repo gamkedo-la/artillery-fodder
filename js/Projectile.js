@@ -457,7 +457,6 @@ function meteorClashClass() {
 	this.update = function update(frameTime) {
 		if (this.active) {
 
-
 			yVel += 90 * frameTime;
 
 			this.x += xVel * frameTime;
@@ -472,18 +471,8 @@ function meteorClashClass() {
 			if(yVel >= -1) {
 				this.y +=8;
 			}
-
-			if (sonicboom) {
-				sonicboomRadius += 3;
-				sonicboomFade -= 0.05;
-			}
-
 			
-
-			if(sonicboom) {	
-				colorCircle(afterImageX, afterImageY , sonicboomRadius, `rgba(0, 0, 0, ${sonicboomFade})`);
-				colorCircle(afterImageX, afterImageY , sonicboomRadius - 3, `rgba(255, 255, 255, ${sonicboomFade})`);
-			}
+			sonicboomExplosion();
 
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
@@ -501,6 +490,18 @@ function meteorClashClass() {
 				this.active = false;
 				if (this.primary) {incrementTurn = true;}
 			}
+		}
+	}
+
+	function sonicboomExplosion () {
+		console.log(sonicboom);
+		if(sonicboom) {	
+			sonicboomRadius += 2;
+			sonicboomFade -= 0.04;
+
+			colorEmptyCircle(afterImageX, afterImageY, sonicboomRadius, `rgba(0, 0, 0, ${sonicboomFade})`);
+
+
 		}
 	}
 
