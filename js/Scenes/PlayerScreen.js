@@ -64,13 +64,13 @@ function playerBlock(tankClass) {
 		canvasContext.drawImage(tankSkinCanvas, 
 			imageLookupOffset * 30, 0, 
 			30, 20, 
-			this.x - w/2 + 35, this.y + 40,  
-			30, 20);
+			this.x - w/2 + 25, this.y + 40,  
+			50, 34);
 		canvasContext.drawImage(tankSkinCanvas, 
 			imageLookupOffset * 30, 20, 
 			30, 20, 
-			this.x - w/2 + 35, this.y + 35,  
-			30, 20);
+			this.x - w/2 + 25, this.y + 31,  
+			50, 34);
 
 		colorRect(this.x, this.y + 25, 75, 20, "White");
 		colorText(this.tank.name, this.x + 37, this.y + 40, "Black", font = "15px Arial");
