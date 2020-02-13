@@ -1,6 +1,16 @@
+var soundFire = new soundRandomClass(["./audio/sfx/rocket-launch-01.mp3",
+									  "./audio/sfx/rocket-launch-02.mp3",
+									  "./audio/sfx/rocket-launch-03.mp3",
+									  "./audio/sfx/rocket-launch-04.mp3"]);
 
+var soundExplosion = new soundRandomClass(["./audio/sfx/explosion-01.mp3",
+										   "./audio/sfx/explosion-02.mp3",
+										   "./audio/sfx/explosion-03.mp3",
+										   "./audio/sfx/explosion-04.mp3",
+										   "./audio/sfx/explosion-05.mp3"]);
 
-var soundTest = new SoundOverlapsClass("./audio/threeSecondsOfSilence.mp3");
+var soundHit = new soundOverlapsClass("./audio/sfx/basic-hit-01.mp3");
+
 
 var backgroundMusic = new backgroundMusicClass();
 
@@ -107,7 +117,7 @@ function soundRandomClass(arrayOfFilenames) {
 	}
 
 	this.play = function() {
-		soundIndex = Math.rndInt(0, sounds.length - 1);
+		soundIndex = rndInt(0, sounds.length - 1);
 		if(!sounds[soundIndex].paused) {
 			soundIndex++;
 			if (soundIndex >= sounds.length) {
