@@ -1,9 +1,9 @@
 var arrayOfPlayerBlocks = [];
+var playerScreenWave = 90;
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
 	
-
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i].update();
 		arrayOfPlayerBlocks[i].draw();
@@ -13,6 +13,8 @@ function modePlayer(frameTime) {
 	colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
 	colorText("PLAYER SCREEN", canvas.width/2, 100, "White", "50px Arial");
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
+
+	playerScreenWave += frameTime * 45;
 
 	if (Key.isJustPressed(Key.SPACE)){
 		mode = MAIN_MENU;
@@ -66,11 +68,22 @@ function playerBlock(tankClass) {
 			30, 20, 
 			this.x - w/2 + 25, this.y + 40,  
 			50, 34);
+		// canvasContext.drawImage(tankSkinCanvas, 
+		// 	imageLookupOffset * 30, 20, 
+		// 	30, 20, 
+		// 	this.x - w/2 + 25, this.y + 31,  
+		// 	50, 34);
+		var radians;
+		radians = degreesToRadians(playerScreenWave);
+		canvasContext.save();
+		canvasContext.translate(this.x - 50, this.y + 50);
+		canvasContext.rotate(-radians);
 		canvasContext.drawImage(tankSkinCanvas, 
 			imageLookupOffset * 30, 20, 
 			30, 20, 
-			this.x - w/2 + 25, this.y + 31,  
+			-25, -17, 
 			50, 34);
+		canvasContext.restore();
 
 		colorRect(this.x, this.y + 25, 75, 20, "White");
 		colorText(this.tank.name, this.x + 37, this.y + 40, "Black", font = "15px Arial");
