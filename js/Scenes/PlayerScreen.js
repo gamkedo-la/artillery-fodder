@@ -46,5 +46,20 @@ function playerBlock(tankClass) {
 		colorRect(this.x - w/2, this.y, w, h, "Grey");
 		colorRect(this.x - w/2 + 25, this.y +25, 50, 50, "White");
 
+		//Draw tank
+		canvasContext.drawImage(tankSkinCanvas, 
+			imageLookupOffset * 20, 0, 
+			20, 10, 
+			this.x - w/2 + 40, this.y +45,  
+			20, 10);
+		canvasContext.drawImage(tankSkinCanvas, 
+			imageLookupOffset * 20, 10, 
+			20, 10, 
+			this.x - w/2 + 40, this.y +40,  
+			20, 10);
+
+		colorRect(this.x, this.y + 25, 75, 20, "White");
+		colorText(this.tank.name, this.x + 37, this.y + 40, "Black", font = "15px Arial");
+
 	}
 }

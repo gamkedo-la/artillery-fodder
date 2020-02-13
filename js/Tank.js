@@ -150,10 +150,8 @@ function tankPlayerClass() {
 			w, h);
 
 		//Draw Cannon
-		var cannonX, cannonY, radians;
+		var radians;
 		radians = degreesToRadians(this.angle);
-		cannonX = Math.cos(radians) * 10;
-		cannonY = -Math.sin(radians) * 10;
 		canvasContext.save();
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
@@ -340,10 +338,8 @@ function tankDummyClass() {
 			w, h);
 
 		//Draw Cannon
-		var cannonX, cannonY, radians;
+		var radians;
 		radians = degreesToRadians(this.angle);
-		cannonX = Math.cos(radians) * 10;
-		cannonY = -Math.sin(radians) * 10;
 		canvasContext.save();
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
