@@ -37,8 +37,8 @@ const imageLoader = new (function() {
 var tankSkinCanvas = document.createElement("canvas");
 var tankSkinContext = tankSkinCanvas.getContext("2d");
 function buildTankSkinsSheet() {
-	tankSkinCanvas.height = 20;
-	tankSkinCanvas.width = numberOfPlayers * 20;
+	tankSkinCanvas.width = numberOfPlayers * 30;
+	tankSkinCanvas.height = 400;
 
 	for (var i = 0; i < numberOfPlayers; i++) {
 		if (!arrayOfPlayers[i].active) {
@@ -47,10 +47,10 @@ function buildTankSkinsSheet() {
 			tankSkinContext.filter = 'hue-rotate('+arrayOfPlayers[i].color+'deg)';
 		}
 		tankSkinContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
-			arrayOfPlayers[i].tankSkinIndex * 20, 0, 
-			20, 20, 
-			i * 20, 0,  
-			20, 20);
+			arrayOfPlayers[i].tankSkinIndex * 30, 0, 
+			30, 40, 
+			i * 30, 0,  
+			30, 40);
 	}
 }
 

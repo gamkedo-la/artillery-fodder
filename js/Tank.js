@@ -144,10 +144,10 @@ function tankPlayerClass() {
 	this.draw = function draw(frameTime) {
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
-			this.imageLookupOffset * 20, 0, 
-			20, 10, 
-			this.x-w/2, this.y-h,  
-			w, h);
+			this.imageLookupOffset * 30, 0, 
+			30, 20, 
+			this.x-w/2 - 5, this.y-h - 5, 
+			w+10, h+10);
 
 		//Draw Cannon
 		var radians;
@@ -156,10 +156,10 @@ function tankPlayerClass() {
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
 		canvasContext.drawImage(tankSkinCanvas, 
-			this.imageLookupOffset * 20, 10, 
-			20, 10, 
-			-w/2, -h/2,  
-			w, h);
+			this.imageLookupOffset * 30, 20, 
+			30, 20, 
+			-w/2 - 5, -h/2 - 5, 
+			w+10, h+10);
 		canvasContext.restore();
 	}
 
