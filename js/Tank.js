@@ -97,11 +97,11 @@ function tankClass() {
 				if (Key.isDown(Key.DOWN)){
 					this.power -= 20 * frameTime;
 				}
-				if (Key.isJustPressed(Key.COMMA)){
+				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand()){
 					this.weapon--;
 					weaponIndextIncreesing = false;
 				}
-				if (Key.isJustPressed(Key.PERIOD)){
+				if (Key.isJustPressed(Key.PERIOD) || SpeechRecognition.pendingNextCommand()){
 					this.weapon++;
 					weaponIndextIncreesing = true;
 				}

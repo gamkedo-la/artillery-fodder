@@ -11,6 +11,8 @@ function SpeechRecognitionEngine() {
         '(please) help (me)': speechCommandHelp,
         'pause': speechCommandPause,
         'start (game)': speechCommandStart,
+        'spacebar': speechCommandStart, // is this a bad idea? or good?
+        'space bar': speechCommandStart,
         'play (game)': speechCommandStart,
         'begin (game)': speechCommandStart,
 
@@ -54,11 +56,63 @@ function SpeechRecognitionEngine() {
         'set (the) power (to) :num': speechCommandPower,
         'power :num': speechCommandPower,
         ':num power': speechCommandPower,
+
+        // weapon changing commands
+        'next (weapon)': speechCommandNext,
+        'previous (weapon)': speechCommandPrev,
+        'weapon plus :num': speechCommandNext,
+        'weapon minus :num': speechCommandNext,
+        'comma': speechCommandPrev, // lol why not!
+        'period': speechCommandNext,
+        'change': speechCommandNext,
+        'switch' : speechCommandNext,
+        'weapon': speechCommandNext, // fixme? ok?
+        'weapon :num': speechCommandWeapon,
+        'select :num': speechCommandWeapon
+
+        // TODO: hardcoded specific weapons eg:
+        //'rain shot': speechCommandRainShot
+
     };
 
     var pendingStart = false;
     var pendingFire = false;
+    var pendingNext = false;
+    var pendingPrev = false;
+    var pendingWeaponChange = false; // FIXME: unimplemented
+    var pendingWeaponNumber = 0;
     
+    this.pendingWeaponChange = function() {
+        if (pendingWeaponChange) {
+            // reset now that we've told the game about it
+            pendingWeaponChange = false; 
+            // FIXME
+            return pendingWeaponNumber;
+        } else {
+            return false;
+        }        
+    }
+
+    this.pendingNextCommand = function() {
+        if (pendingNext) {
+            // reset now that we've told the game about it
+            pendingNext = false; 
+            return true;
+        } else {
+            return false;
+        }        
+    }
+    
+    this.pendingPrevCommand = function() {
+        if (pendingPrev) {
+            // reset now that we've told the game about it
+            pendingPrev = false; 
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
     this.pendingFireCommand = function() {
         if (pendingFire) {
             // reset now that we've told the game about it
@@ -136,6 +190,30 @@ function SpeechRecognitionEngine() {
             case 'ten' : txt = 10;
         }
         return parseInt(txt);
+    }
+
+    function speechCommandNext() {
+        debugSpeech("Speech recognition command: NEXT!");
+        pendingNext = true;
+    }
+
+    function speechCommandPrev() {
+        debugSpeech("Speech recognition command: PREV!");
+        pendingPrev = true;
+    }
+
+    function speechCommandWeapon(num) {
+        debugSpeech("Speech recognition command: WEAPON: " + num);
+        num = txt2num(num); // force integer just in case
+        // ignore unknown numbers - just leave the angle alone
+        if (isNaN(num)) {
+            debugSpeech("Speech could not understand the weapon specified, ignoring command.");
+            return;
+        }
+        pendingWeaponChange = true;
+        pendingWeaponNumber = num;
+        // FIXME: unimplemented, so let's advance the wepon just to do something
+        pendingNext = true;
     }
 
     function speechCommandAim(angle) {
