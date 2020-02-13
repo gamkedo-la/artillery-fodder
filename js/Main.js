@@ -91,7 +91,7 @@ function gameStart() {
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
 	for (var i = 0; i < numberOfPlayers; i++) {
-		arrayOfPlayers[i] = new tankClass();
+		arrayOfPlayers[i] = new tankPlayerClass();
 
 		arrayOfPlayers[i].name = "Player " + pad(i+1, 2);
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
