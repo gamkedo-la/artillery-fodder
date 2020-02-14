@@ -157,7 +157,7 @@ function playerBlock(tankClass) {
 			if (playerType < 0) {
 				playerType = playerTypeIndex.length-1;
 			}
-			//this.setNewPlayerType();
+			this.setNewPlayerType();
 		}
 
 		if (isMouseInArea(this.x + 37, this.y + 65, 36, 20) && mousePressed) {
@@ -165,10 +165,8 @@ function playerBlock(tankClass) {
 			if (playerType >= playerTypeIndex.length) {
 				playerType = 0;
 			}
-			//this.setNewPlayerType();
+			this.setNewPlayerType();
 		}
-
-
 	}
 
 	this.draw = function draw() {
@@ -204,28 +202,20 @@ function playerBlock(tankClass) {
 	}
 
 	this.setNewPlayerType = function() {
-		var newName = this.tank.name;
-		var newColor = this.tank.color;
-		var newTankSkinIndex = this.tank.tankSkinIndex;
-		var newImageLookupOffset = this.tank.imageLookupOffset;
-
 		var newTank = new tankPlayerClass();
-			switch (playerType) {
-				case 0:
-					newTank = new tankPlayerClass();
-					break;
-				case 1:
-					newTank = new tankDummyClass();
-					break;
-			}
+		switch (playerType) {
+			case 0:
+				arrayOfPlayers[imageLookupOffset] = new tankPlayerClass();
+				break;
+			case 1:
+				arrayOfPlayers[imageLookupOffset] = new tankDummyClass();
+				break;
+		}
 
-		newTank.name = newName;
-		newTank.color = newColor;
-		newTank.tankSkinIndex = newTankSkinIndex;
-		newTank = newImageLookupOffset;
-
-		this.tank = newTank;
-		arrayOfPlayers[imageLookupOffset] = newTank;
-
+		arrayOfPlayers[imageLookupOffset].name = name;
+		arrayOfPlayers[imageLookupOffset].color = color;
+		arrayOfPlayers[imageLookupOffset].tankSkinIndex = tankSkinIndex;
+		arrayOfPlayers[imageLookupOffset].imageLookupOffset = imageLookupOffset;
+		this.tank = arrayOfPlayers[imageLookupOffset];
 	}
 }

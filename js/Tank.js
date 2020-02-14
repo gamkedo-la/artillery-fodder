@@ -275,7 +275,7 @@ function tankDummyClass() {
 	this.weapon = 0;
 	this.weaponInventory = weaponInventoryMaster;
 
-	var countDown = 1;
+	var countDown = 2;
 
 	this.update = function update(frameTime) {
 
@@ -314,7 +314,7 @@ function tankDummyClass() {
 		if (this.myTurn) {
 			if (this.active) {
 				if (countDown <= 0) {
-					countDown = 1;
+					countDown = 2;
 					this.fire();
 				} else {
 					countDown -= frameTime;
