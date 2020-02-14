@@ -9,7 +9,7 @@ function modePlayer(frameTime) {
 		arrayOfPlayerBlocks[i].update();
 		arrayOfPlayerBlocks[i].draw();
 	}
-	
+
 	playerScreenWave += frameTime * 45;
 
 	//Titles
@@ -30,6 +30,19 @@ function modePlayer(frameTime) {
 		20, 0,
 		20, 20,
 		canvas.width - 70, 120,
+		20, 20);
+	//Page buttons
+	colorRect(canvas.width - 70, canvas.height - 75, 60, 20, "White");
+	colorText(page, canvas.width - 40,canvas.height - 60, "Black", font = "15px Arial")
+	canvasContext.drawImage(buttonImg,
+		0, 0,
+		20, 20,
+		canvas.width - 30, canvas.height - 75,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		20, 0,
+		20, 20,
+		canvas.width - 70, canvas.height - 75,
 		20, 20);
 
 
@@ -62,6 +75,17 @@ function modePlayer(frameTime) {
 		}
 	}
 
+	//Subtract page
+	if (isMouseInArea(canvas.width - 70, canvas.height - 75, 20, 20) && mousePressed) {
+		page--;
+		changePage();
+	}
+	//Add page
+	if (isMouseInArea(canvas.width - 30, canvas.height - 75, 20, 20) && mousePressed) {
+		page++;
+		changePage();
+	}
+
 	if (Key.isJustPressed(Key.SPACE)){
 		mode = MAIN_MENU;
 	}
@@ -81,6 +105,9 @@ function populatePlayerScreen() {
 }
 
 function changePage() {
+	if (page < 0) {
+		page = 0;
+	}
 	var yOffset = 1;
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125*3;
