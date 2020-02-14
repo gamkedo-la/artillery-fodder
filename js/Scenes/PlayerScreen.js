@@ -1,5 +1,6 @@
 var arrayOfPlayerBlocks = [];
 var playerScreenWave = 90;
+var page = 0;
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
@@ -8,11 +9,16 @@ function modePlayer(frameTime) {
 		arrayOfPlayerBlocks[i].update();
 		arrayOfPlayerBlocks[i].draw();
 	}
+	
+	playerScreenWave += frameTime * 45;
 
+	//Titles
 	colorRect(0, 0, canvas.width, 150, "orange");
 	colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
 	colorText("PLAYER SCREEN", canvas.width/2, 100, "White", "50px Arial");
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
+	
+	//Player numbers buttons
 	colorRect(canvas.width - 70, 120, 60, 20, "White");
 	colorText(numberOfPlayers, canvas.width - 40,135, "Black", font = "15px Arial")
 	canvasContext.drawImage(buttonImg,
@@ -26,8 +32,8 @@ function modePlayer(frameTime) {
 		canvas.width - 70, 120,
 		20, 20);
 
-	playerScreenWave += frameTime * 45;
 
+	//Subtract players
 	if (isMouseInArea(canvas.width - 70, 120, 20, 20) && mousePressed) {
 		numberOfPlayers -= 1;
 		if (numberOfPlayers <= 0) {
@@ -35,6 +41,7 @@ function modePlayer(frameTime) {
 		}
 	}
 
+	//Add players
 	if (isMouseInArea(canvas.width - 30, 120, 20, 20) && mousePressed) {
 		numberOfPlayers += 1;
 
@@ -66,7 +73,17 @@ function populatePlayerScreen() {
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i] =  new playerBlock(arrayOfPlayers[i]);
 		arrayOfPlayerBlocks[i].x = 150 + 250*(i%3);
-		arrayOfPlayerBlocks[i].y = 25 + yOffset*125;
+		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125;
+		if (i%3 == 2) {
+			yOffset += 1;
+		}
+	}
+}
+
+function changePage() {
+	var yOffset = 1;
+	for (var i = 0; i < numberOfPlayers; i++) {
+		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125*3;
 		if (i%3 == 2) {
 			yOffset += 1;
 		}
