@@ -261,6 +261,7 @@ function startMatch() {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1));
+		arrayOfPlayers[i].weaponInventory = weaponInventoryMaster;
 	}
 
 	arrayOfPlayers[0].myTurn = true;

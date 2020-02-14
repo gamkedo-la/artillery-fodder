@@ -3,7 +3,8 @@ var playerScreenWave = 90;
 var page = 0;
 
 var playerTypeIndex = ["Human",
-					   "Dummy"]
+					   "Dummy",
+					   "Brainless"]
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
@@ -209,6 +210,9 @@ function playerBlock(tankClass) {
 				break;
 			case 1:
 				arrayOfPlayers[imageLookupOffset] = new tankDummyClass();
+				break;
+			case 2:
+				arrayOfPlayers[imageLookupOffset] = new tankBrainlessClass();
 				break;
 		}
 
