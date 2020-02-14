@@ -11,5 +11,6 @@ function modeTitle(frameTime) {
         || mousePressed
     ){
 		mode = MAIN_MENU;
+		backgroundMusic.loopSong("./audio/music/gameplayMusicV1.mp3");
 	}
 }

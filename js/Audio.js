@@ -11,12 +11,11 @@ var soundExplosion = new soundRandomClass(["./audio/sfx/explosion-01.mp3",
 
 var soundHit = new soundOverlapsClass("./audio/sfx/basic-hit-01.mp3");
 
+var gameMusic = ["./audio/music/gameplayMusicV1.mp3"]
 
 var backgroundMusic = new backgroundMusicClass();
+backgroundMusic.loadTracks(gameMusic);
 
-var musicTest1 = "./audio/Tester.mp3";
-var musicTest2 = "./audio/Teste2.mp3";
-var musicTestSilence = "./audio/threeSecondsOfSilence.mp3";
 
 var musicVolume = localStorage.getItem("musicVolume");
 var effectsVolume = localStorage.getItem("effectsVolume");
@@ -35,9 +34,12 @@ function backgroundMusicClass() {
 
 	var musicSound = null;
 	var fadeTrack = null;
+
+	var timeLeft = 120;
+
+	var arrayOfMusic;
 	
 	this.loopSong = function(filenameWithPath) {
-
 		if (musicSound != null) {
 			fadeTrack = musicSound;
 			musicSound = null;
@@ -45,6 +47,11 @@ function backgroundMusicClass() {
 		musicSound = new Audio(filenameWithPath);
 		musicSound.loop = true;
 		this.setVolume(musicVolume);
+		timeLeft = 120;
+	}
+
+	this.loadTracks = function(arrayOfMusicFilenames) {
+		arrayOfMusic = arrayOfMusicFilenames;
 	}
 
 	this.pauseSound = function() {
@@ -86,6 +93,14 @@ function backgroundMusicClass() {
 				fadeTrack = null;
 			}
 		}
+
+		if (timeLeft <= 0) {
+			if (arrayOfMusic != null && musicSound != null && !musicSound.paused) {
+				this.loopSong(rndOneFrom(arrayOfMusic));
+			}
+		}
+
+		timeLeft -= frameTime;
 	}
 }
 
