@@ -225,5 +225,7 @@ function playerBlock(tankClass) {
 		newTank = newImageLookupOffset;
 
 		this.tank = newTank;
+		arrayOfPlayers[imageLookupOffset] = newTank;
+
 	}
 }
