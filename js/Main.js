@@ -72,6 +72,8 @@ const cloudSpeeds = [];
 var cloudPositions = [];
 var cloudImg;
 
+var buttonImg;
+
 var map = new terrain();
 var SpeechRecognition = new SpeechRecognitionEngine();
 
@@ -114,6 +116,8 @@ function gameStart() {
 		};
 		cloudSpeeds[i] = Math.random() * (0.2 - 0.05) + 0.05;
 	}
+
+	buttonImg = imageLoader.getImage("buttons");
 
 	window.requestAnimationFrame(frameLoop);
 }

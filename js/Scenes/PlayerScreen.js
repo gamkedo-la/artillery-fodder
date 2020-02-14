@@ -13,8 +13,47 @@ function modePlayer(frameTime) {
 	colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
 	colorText("PLAYER SCREEN", canvas.width/2, 100, "White", "50px Arial");
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
+	colorRect(canvas.width - 70, 120, 60, 20, "White");
+	colorText(numberOfPlayers, canvas.width - 40,135, "Black", font = "15px Arial")
+	canvasContext.drawImage(buttonImg,
+		0, 0,
+		20, 20,
+		canvas.width - 30, 120,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		20, 0,
+		20, 20,
+		canvas.width - 70, 120,
+		20, 20);
 
 	playerScreenWave += frameTime * 45;
+
+	if (isMouseInArea(canvas.width - 70, 120, 20, 20) && mousePressed) {
+		numberOfPlayers -= 1;
+		if (numberOfPlayers <= 0) {
+			numberOfPlayers = 1;
+		}
+	}
+
+	if (isMouseInArea(canvas.width - 30, 120, 20, 20) && mousePressed) {
+		numberOfPlayers += 1;
+
+		if (arrayOfPlayers[numberOfPlayers-1] == null) {
+			var newTank = new tankPlayerClass();
+
+			newTank.name = "Player " + pad(i+1, 2);
+			newTank.x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
+			newTank.y = canvas.height - UI_HEIGHT - map.getHeightAtX(newTank.x);
+			newTank.angle = lerp(45, 135, i/(numberOfPlayers-1)); 
+			newTank.color = rndFloat(359);
+			newTank.tankSkinIndex = rndInt(0, 3);
+			newTank.imageLookupOffset = numberOfPlayers - 1;
+
+			arrayOfPlayers.push(newTank);
+			populatePlayerScreen()
+			buildTankSkinsSheet();
+		}
+	}
 
 	if (Key.isJustPressed(Key.SPACE)){
 		mode = MAIN_MENU;
