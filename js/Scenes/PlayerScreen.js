@@ -209,7 +209,7 @@ function playerBlock(tankClass) {
 		var newTankSkinIndex = this.tank.tankSkinIndex;
 		var newImageLookupOffset = this.tank.imageLookupOffset;
 
-		var newTank;
+		var newTank = new tankPlayerClass();
 			switch (playerType) {
 				case 0:
 					newTank = new tankPlayerClass();
