@@ -2,6 +2,9 @@ var arrayOfPlayerBlocks = [];
 var playerScreenWave = 90;
 var page = 0;
 
+var playerTypeIndex = ["Human",
+					   "Dummy"]
+
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
 	
@@ -70,7 +73,7 @@ function modePlayer(frameTime) {
 			newTank.imageLookupOffset = numberOfPlayers - 1;
 
 			arrayOfPlayers.push(newTank);
-			populatePlayerScreen()
+			populatePlayerScreen();
 			buildTankSkinsSheet();
 		}
 	}
@@ -129,16 +132,43 @@ function playerBlock(tankClass) {
 	var color = this.tank.color;
 	var tankSkinIndex = this.tank.tankSkinIndex;
 	var imageLookupOffset = this.tank.imageLookupOffset;
+	var playerType = 0;
 
 	this.update = function update() {
+
 		if (isMouseInArea(this.x - w/2 + 25, this.y +25, 25, 50) && mousePressed) {
 			this.tank.tankSkinIndex -= 1;
 			buildTankSkinsSheet();
 		}
+
 		if (isMouseInArea(this.x - w/2 + 50, this.y +25, 25, 50) && mousePressed) {
 			this.tank.tankSkinIndex += 1;
 			buildTankSkinsSheet();
 		}
+
+		if (isMouseInArea(this.x, this.y + 40, 75, 20) && mousePressed) {
+			color = (mouseX - this.x) * 4.8;
+			this.tank.color = color;
+			buildTankSkinsSheet();
+		}
+
+		if (isMouseInArea(this.x, this.y + 65, 36, 20) && mousePressed) {
+			playerType--;
+			if (playerType < 0) {
+				playerType = playerTypeIndex.length-1;
+			}
+			//this.setNewPlayerType();
+		}
+
+		if (isMouseInArea(this.x + 37, this.y + 65, 36, 20) && mousePressed) {
+			playerType++;
+			if (playerType >= playerTypeIndex.length) {
+				playerType = 0;
+			}
+			//this.setNewPlayerType();
+		}
+
+
 	}
 
 	this.draw = function draw() {
@@ -151,11 +181,6 @@ function playerBlock(tankClass) {
 			30, 20, 
 			this.x - w/2 + 25, this.y + 40,  
 			50, 34);
-		// canvasContext.drawImage(tankSkinCanvas, 
-		// 	imageLookupOffset * 30, 20, 
-		// 	30, 20, 
-		// 	this.x - w/2 + 25, this.y + 31,  
-		// 	50, 34);
 		var radians;
 		radians = degreesToRadians(playerScreenWave);
 		canvasContext.save();
@@ -168,8 +193,37 @@ function playerBlock(tankClass) {
 			50, 34);
 		canvasContext.restore();
 
-		colorRect(this.x, this.y + 25, 75, 20, "White");
-		colorText(this.tank.name, this.x + 37, this.y + 40, "Black", font = "15px Arial");
+		colorRect(this.x, this.y + 15, 75, 20, "White");
+		colorText(this.tank.name, this.x + 37, this.y + 30, "Black", font = "15px Arial");
 
+		colorRect(this.x, this.y + 40, 75, 20, "White");
+		colorText("Color", this.x + 37, this.y + 55, "Black", font = "15px Arial");
+
+		colorRect(this.x, this.y + 65, 75, 20, "White");
+		colorText(playerTypeIndex[playerType], this.x + 37, this.y + 80, "Black", font = "15px Arial");
+	}
+
+	this.setNewPlayerType = function() {
+		var newName = this.tank.name;
+		var newColor = this.tank.color;
+		var newTankSkinIndex = this.tank.tankSkinIndex;
+		var newImageLookupOffset = this.tank.imageLookupOffset;
+
+		var newTank;
+			switch (playerType) {
+				case 0:
+					newTank = new tankPlayerClass();
+					break;
+				case 1:
+					newTank = new tankDummyClass();
+					break;
+			}
+
+		newTank.name = newName;
+		newTank.color = newColor;
+		newTank.tankSkinIndex = newTankSkinIndex;
+		newTank = newImageLookupOffset;
+
+		this.tank = newTank;
 	}
 }
