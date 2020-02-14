@@ -51,7 +51,7 @@ function modePlayer(frameTime) {
 
 
 	//Subtract players
-	if (isMouseInArea(canvas.width - 70, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 70, 120, 30, 20) && mousePressed) {
 		numberOfPlayers -= 1;
 		if (numberOfPlayers <= 0) {
 			numberOfPlayers = 1;
@@ -59,7 +59,7 @@ function modePlayer(frameTime) {
 	}
 
 	//Add players
-	if (isMouseInArea(canvas.width - 30, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 40, 120, 30, 20) && mousePressed) {
 		numberOfPlayers += 1;
 
 		if (arrayOfPlayers[numberOfPlayers-1] == null) {
@@ -80,12 +80,12 @@ function modePlayer(frameTime) {
 	}
 
 	//Subtract page
-	if (isMouseInArea(canvas.width - 70, canvas.height - 75, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 70, canvas.height - 75, 30, 20) && mousePressed) {
 		page--;
 		changePage();
 	}
 	//Add page
-	if (isMouseInArea(canvas.width - 30, canvas.height - 75, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 40, canvas.height - 75, 30, 20) && mousePressed) {
 		page++;
 		changePage();
 	}

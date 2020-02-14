@@ -62,7 +62,15 @@ function weaponBlock(id) {
 	var quantity = weaponInventoryMaster[id];
 
 	this.update = function() {
-		return;
+		if (isMouseInArea(this.x - w/2, this.y + 10, 70, 20) && mousePressed) {
+			weaponInventoryMaster[index]--;
+			if (weaponInventoryMaster[index] < -1) {
+				weaponInventoryMaster[index] = -1
+			}
+		}
+		if (isMouseInArea(this.x, this.y + 10, 70, 20) && mousePressed) {
+			weaponInventoryMaster[index]++;
+		}
 	}
 
 	this.draw = function() {
