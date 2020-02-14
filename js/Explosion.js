@@ -47,7 +47,6 @@ function basicExplosionClass() {
 }
 
 function multiExplosionClass() {
-	console.log("duu")
 	this.x = 0;
 	this.y = 0;
 	this.size = 20;

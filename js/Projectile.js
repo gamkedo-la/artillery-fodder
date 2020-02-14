@@ -170,7 +170,7 @@ function sniperShotClass() {
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
 					if (this.tank != arrayOfPlayers[i]) {
-						var angle = angleBetween2Points(this, this.tanktank);
+						var angle = angleBetween2Points(this, this.tank);
 						arrayOfPlayers[i].takeDamage(this.damage, angle);
 						this.hit();
 					}
