@@ -1,25 +1,3 @@
-const WEAPON_LIST_MAX = 9
-var projectileNameList = ["Basic Shot",
-						  "Three Shot",
-						  "Sniper Shot",
-						  "Hop",
-						  "Teleport Shot",
-						  "Big Shot",
-						  "Roller",
-						  "Crazy Bomb",
-						  "Meteor Clash",
-						  "Rain Shot"];
-var weaponInventoryMaster = [-1,//Basic Shot
-							 -1,//Three Shot
-							 1,//Sniper Shot
-							 2,//Hop
-							 2,//Teleport Shot
-							 3,//Big Shot
-							 3,//Roller
-							 1,//Crazy Bomb
-							 2, //Meteor Clash
-							 1] // Rain Shot
-
 function tankPlayerClass() {
 	this.x = 400;
 	this.y = 300;
@@ -389,6 +367,7 @@ function tankDummyClass() {
 		incrementTurn = true;
 	}
 }
+
 function tankBrainlessClass() {
 	this.x = 400;
 	this.y = 300;

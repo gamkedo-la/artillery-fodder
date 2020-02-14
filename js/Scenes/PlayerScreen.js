@@ -193,13 +193,13 @@ function playerBlock(tankClass) {
 		canvasContext.restore();
 
 		colorRect(this.x, this.y + 15, 75, 20, "White");
-		colorText(this.tank.name, this.x + 37, this.y + 30, "Black", font = "15px Arial");
+		colorText(this.tank.name, this.x + 37, this.y + 30, "Black", "15px Arial");
 
 		colorRect(this.x, this.y + 40, 75, 20, "White");
-		colorText("Color", this.x + 37, this.y + 55, "Black", font = "15px Arial");
+		colorText("Color", this.x + 37, this.y + 55, "Black", "15px Arial");
 
 		colorRect(this.x, this.y + 65, 75, 20, "White");
-		colorText(playerTypeIndex[playerType], this.x + 37, this.y + 80, "Black", font = "15px Arial");
+		colorText(playerTypeIndex[playerType], this.x + 37, this.y + 80, "Black", "15px Arial");
 	}
 
 	this.setNewPlayerType = function() {
