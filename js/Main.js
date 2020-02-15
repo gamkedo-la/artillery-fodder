@@ -226,7 +226,10 @@ function modeGame(frameTime) {
 	}
 
 	//Draw ground
-	map.draw();
+    map.draw();
+    
+    // Draw grass/pebbles/cracks/etc
+    decorations.draw();
 
 	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {

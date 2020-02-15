@@ -178,7 +178,9 @@ function hslToRgb(h, s, l) {
 }
 
 // "Mulberry32" pseudo random number generator (same result every time)
-var pseudoRandom = new mulberry32(12345678); // here's one! make others!
+// example:
+// var pseudoRandom = new mulberry32(12345678); // seed it
+// var x = pseudoRandom(); // same as Math.random but the same each time 
 // see https://stackoverflow.com/questions/521295/
 function mulberry32(a) {
     return function() {

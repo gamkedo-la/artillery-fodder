@@ -2,7 +2,8 @@ const imageLoader = new (function() {
 	const IMAGE_DEFS = [
 		{id: "cloud1", src: "./images/cloud1.png"},
 		{id: "tankSpriteSheet", src: "./images/tankSkins.png"},
-		{id: "buttons", src: "./images/buttons.png"},
+        {id: "buttons", src: "./images/buttons.png"},
+        {id: "decorations", src: "./images/decorations.png"},
 	];
 	const images = {};
 

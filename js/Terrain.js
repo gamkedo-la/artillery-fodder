@@ -1,8 +1,13 @@
 function terrain() {
-	var heightMap = new Array();
+    
+    var heightMap = new Array();
 	var maxHeight;
 
-	this.init = function(width, height) {
+    // a public reference so we can access map.heightMap from outside this class
+    // used by Decorations.js to determine ground height
+    this.heightMap = heightMap; 
+
+    this.init = function(width, height) {
 		maxHeight = height;
 
 		var oldRand = rndInt(-50, 100);
@@ -54,12 +59,19 @@ function terrain() {
 	}
 
 	this.draw = function() {
-		for (var i = 0; i < heightMap.length; i++) {
-			// colorLine(i, canvas.height - UI_HEIGHT, i, canvas.height - 100 - heightMap[i], 1, groundColor);
-			var gradient = canvasContext.createLinearGradient(0,canvas.height - 100 - heightMap[i],0,canvas.height - UI_HEIGHT);
+
+        for (var x = 0; x < heightMap.length; x++) {
+            
+            // distance from bottom of screen
+            let groundY = canvas.height - 100 - heightMap[x];
+            
+            // draw the terrain gradient
+            // colorLine(i, canvas.height - UI_HEIGHT, i, groundY, 1, groundColor);
+			var gradient = canvasContext.createLinearGradient(0,groundY,0,canvas.height - UI_HEIGHT);
 			gradient.addColorStop(0, groundColor);
 			gradient.addColorStop(1, groundColorGradient);
-			colorRect(i, canvas.height - 100 - heightMap[i], 1, heightMap[i], gradient);
+            colorRect(x, groundY, 1, heightMap[x], gradient);
+            
 		}
 	}
 }
