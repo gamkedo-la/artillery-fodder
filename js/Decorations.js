@@ -3,10 +3,10 @@
 var decorations = new function() {
 
     const TERRAIN_DECORATIONS_ENABLED = true; // non-interactive grass, rocks, etc
-    const DECO_CHANCE = 0.05;
+    const DECO_CHANCE = 0.25;
     const DECO_W = 16; // of each sprite in the spritesheet
     const DECO_H = 16;
-    const DECO_COUNT = 12; // should be 16 but the last 8 look bad: fixme
+    const DECO_COUNT = 16;
     var randomSeedThisGame = performance.now();
 
     this.draw = function() {
