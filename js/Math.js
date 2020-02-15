@@ -176,3 +176,15 @@ function hslToRgb(h, s, l) {
 
   return [ r * 255, g * 255, b * 255 ];
 }
+
+// "Mulberry32" pseudo random number generator (same result every time)
+var pseudoRandom = new mulberry32(12345678); // here's one! make others!
+// see https://stackoverflow.com/questions/521295/
+function mulberry32(a) {
+    return function() {
+      var t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
