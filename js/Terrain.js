@@ -11,14 +11,26 @@ function terrain() {
 		maxHeight = height;
 
 		var oldRand = rndInt(-50, 100);
-		var newRand = rndInt(-50, 100);
+        var newRand = rndInt(-50, 100);
+        
+        // second octave for smaller hills inside the major ones above
+        var oldRand2 = rndInt(-10, 20);
+		var newRand2 = rndInt(-10, 20);
+
 		for (var i = 0; i < width; i++) {
 			if (i%50 == 0) {
 				oldRand = newRand;
 				newRand = rndInt(-50, 100);
 			}
 			
-			var value = 100 + lerp(oldRand, newRand, i%50/50);
+            var value = 100 + lerp(oldRand, newRand, i%50/50);
+            
+            // second octave perturb
+            if (i%15 == 0) {
+				oldRand2 = newRand2;
+                newRand2 = rndInt(-10, 20);
+			}
+            value += lerp(oldRand2, newRand2, i%15/15);
 
 			heightMap[i] = value;
 
