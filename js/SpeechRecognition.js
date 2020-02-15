@@ -34,6 +34,8 @@ function SpeechRecognitionEngine() {
         '(angle) (aim) subtract :num (degrees)': speechCommandAimSubtract,
         '(turn) (rotate) left :num (degrees)': speechCommandAimSubtract,
         '(turn) (rotate) counterclockwise :num (degrees)': speechCommandAimSubtract,
+        'right': speechCommandAimAdd,
+        'left': speechCommandAimSubtract,
 
         // relative adjustments to power
         'power plus :num': speechCommandPowerAdd,
@@ -44,6 +46,8 @@ function SpeechRecognitionEngine() {
         'minus :num (to) power': speechCommandPowerSubtract,
         'subtract :num (to) power': speechCommandPowerSubtract,
         'decrease power (by) :num': speechCommandPowerSubtract,
+        'up': speechCommandPowerAdd,
+        'down': speechCommandPowerSubtract,
 
         // synonyms for setting the aim angle
         'set (the) aim (to) :num (degrees)': speechCommandAim,
@@ -72,6 +76,7 @@ function SpeechRecognitionEngine() {
 
         // TODO: hardcoded specific weapons eg:
         //'rain shot': speechCommandRainShot
+        // FIXME: iterate through projectileNameList[] global array
 
     };
 
@@ -242,8 +247,8 @@ function SpeechRecognitionEngine() {
         angle = txt2num(angle); // force integer just in case
         // ignore unknown numbers - just leave the angle alone
         if (isNaN(angle)) {
-            debugSpeech("Speech could not understand the aim angle specified, ignoring command.");
-            return;
+            debugSpeech("Speech could not understand the aim angle specified: assuming +5");
+            angle = 5;
         }
         // tell the tank to ADD this new value
         arrayOfPlayers[playerTurn].angle += angle;
@@ -255,8 +260,8 @@ function SpeechRecognitionEngine() {
         angle = txt2num(angle); // force integer just in case
         // ignore unknown numbers - just leave the angle alone
         if (isNaN(angle)) {
-            debugSpeech("Speech could not understand the aim angle specified, ignoring command.");
-            return;
+            debugSpeech("Speech could not understand the aim angle specified: assuming -5");
+            angle = 5;
         }
         // tell the tank to SUBTRACT this new value
         arrayOfPlayers[playerTurn].angle -= angle;
@@ -285,8 +290,8 @@ function SpeechRecognitionEngine() {
         power = txt2num(power); // force integer just in case
         // ignore unknown numbers - just leave the angle alone
         if (isNaN(power)) {
-            debugSpeech("Speech could not understand the power specified, ignoring command.");
-            return;
+            debugSpeech("Speech could not understand the power specified, assuming +1");
+            power = 1;
         }
         // tell the tank to ADD this new value
         arrayOfPlayers[playerTurn].power += power;
@@ -299,8 +304,8 @@ function SpeechRecognitionEngine() {
         power = txt2num(power); // force integer just in case
         // ignore unknown numbers - just leave the angle alone
         if (isNaN(power)) {
-            debugSpeech("Speech could not understand the power specified, ignoring command.");
-            return;
+            debugSpeech("Speech could not understand the power specified, assuming -1");
+            power = 1;
         }
         // tell the tank to SUBTRACT this new value
         arrayOfPlayers[playerTurn].power -= power;
