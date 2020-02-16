@@ -128,7 +128,7 @@ function frameLoop() {
 
 	deltaTime = deltaTime + Math.min(1, (now-lastFrameTime) / 1000);
 
-	while (deltaTime > frameStepSize) {
+	if (deltaTime > frameStepSize) {
 		deltaTime = deltaTime - frameStepSize;
 		update(frameStepSize);
 	}
