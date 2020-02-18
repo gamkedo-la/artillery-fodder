@@ -19,7 +19,7 @@ var weaponInventoryMaster = [-1,//Basic Shot
 							 3,//Roller
 							 1,//Crazy Bomb
 							 2, //Meteor Clash
-							 1] // Rain Shot
+							 5] // Rain Shot
 
 function modeInventory(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "purple");

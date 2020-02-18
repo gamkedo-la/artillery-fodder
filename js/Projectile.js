@@ -452,8 +452,6 @@ function meteorClashClass() {
 	this.active = false;
 	this.primary = true;
 
-	console.log (sonicboom);
-
 	this.update = function update(frameTime) {
 		if (this.active) {
 
@@ -494,14 +492,12 @@ function meteorClashClass() {
 	}
 
 	function sonicboomExplosion () {
-		console.log(sonicboom);
 		if(sonicboom) {	
+
 			sonicboomRadius += 2;
 			sonicboomFade -= 0.04;
 
 			colorEmptyCircle(afterImageX, afterImageY, sonicboomRadius, `rgba(0, 0, 0, ${sonicboomFade})`);
-
-
 		}
 	}
 
@@ -540,8 +536,8 @@ function meteorClashClass() {
 function rainShot(){
 	this.x = 0;
 	this.y = 0;
-	this.size = 10;
-	this.damage = 10;
+	this.size = 5;
+	this.damage = 1;
 	this.tank;
 
 	this.active = false;
@@ -557,31 +553,17 @@ function rainShot(){
 	}
 
 	this.launch = function launch(angle, power) {
-		var newProjectileC = new basicShotClass();
-		newProjectileC.x = this.x;
-		newProjectileC.y = this.y;
-		newProjectileC.size = this.size;
-		newProjectileC.tank = this.tank;
-		newProjectileC.launch(angle, power);
-		arrayOfProjectiles.push(newProjectileC);
 
-		var newProjectileL = new basicShotClass();
-		newProjectileL.x = this.x;
-		newProjectileL.y = this.y;
-		newProjectileL.size = this.size;
-		newProjectileL.tank = this.tank;
-		newProjectileL.primary = false;
-		newProjectileL.launch(angle+5, power);
-		arrayOfProjectiles.push(newProjectileL);
-
-		var newProjectileR = new basicShotClass();
-		newProjectileR.x = this.x;
-		newProjectileR.y = this.y;
-		newProjectileR.size = this.size;
-		newProjectileR.tank = this.tank;
-		newProjectileR.primary = false;
-		newProjectileR.launch(angle-5, power);
-		arrayOfProjectiles.push(newProjectileR);
+		for (i = 0; i < 100; i++) {
+			var newProjectileC = new basicShotClass();
+			newProjectileC.x = this.x;
+			newProjectileC.y = this.y;
+			newProjectileC.size = this.size;
+			newProjectileC.tank = this.tank;
+			newProjectileC.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ), power);
+			arrayOfProjectiles.push(newProjectileC);
+		}
+		
 	}
 }
 
