@@ -70,7 +70,7 @@ function modePlayer(frameTime) {
 			newTank.y = canvas.height - UI_HEIGHT - map.getHeightAtX(newTank.x);
 			newTank.angle = lerp(45, 135, i/(numberOfPlayers-1)); 
 			newTank.color = rndFloat(359);
-			newTank.tankSkinIndex = rndInt(0, 3);
+			newTank.tankSkinIndex = rndInt(0, 6);
 			newTank.imageLookupOffset = numberOfPlayers - 1;
 
 			arrayOfPlayers.push(newTank);

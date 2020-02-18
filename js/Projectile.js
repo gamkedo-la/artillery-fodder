@@ -71,7 +71,7 @@ function basicShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black");
+		colorCircle(this.x, this.y, 2, "Gray");
 	}
 
 	this.launch = function launch(angle, power) {
