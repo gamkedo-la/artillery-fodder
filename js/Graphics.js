@@ -4,6 +4,7 @@ const imageLoader = new (function() {
 		{id: "tankSpriteSheet", src: "./images/tankSkins.png"},
         {id: "buttons", src: "./images/buttons.png"},
         {id: "decorations", src: "./images/decorations.png"},
+        {id: "titleScreenCover", src: "./images/TitleScreen.png"},
 	];
 	const images = {};
 
