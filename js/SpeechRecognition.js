@@ -349,4 +349,23 @@ function SpeechRecognitionEngine() {
             debugSpeech("Speech recognition is NOT enabled. Check your browser permissions!");
         }
     }
+
+    this.stop = function() {
+        debugSpeech("Speech recognition STOPPING.");
+        annyang.abort(); // this stops the mic from being used
+    }
+
+    this.start = function() {
+        debugSpeech("Speech recognition RESTARTING.");
+        annyang.resume(); // resumed and turns mic back on
+        // FIXME: can we get init or permission errors here?
+        // probably: if the user just changed browser settings or unplugged hw?
+    }
+
+    this.setEnabled = function(yes) {
+        if (yes)
+            this.start();
+        else
+            this.stop();
+    }
 };
