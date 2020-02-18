@@ -84,7 +84,6 @@ window.onload = function() {
 	mouseInit();
 
 	imageLoader.loadImages().then(gameStart);
-
 }
 
 function gameStart() {
@@ -260,12 +259,15 @@ function modeGame(frameTime) {
 }
 
 function startMatch() {
+	map.init(canvas.width, canvas.height-UI_HEIGHT);
+
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1));
 		arrayOfPlayers[i].health = 100;
 		arrayOfPlayers[i].weaponInventory = weaponInventoryMaster;
+		arrayOfPlayers[i].myTurn = false;
 	}
 
 	arrayOfPlayers[0].myTurn = true;
@@ -304,7 +306,6 @@ function gameClock() {
 			}
 		}
 	}
-
 }// end of gameClock()
 
 function skyFlickers() {
@@ -321,7 +322,6 @@ function skyFlickers() {
 		}
 	}
 }
-
 
 function dayNight() {
 
@@ -386,7 +386,6 @@ function dayNight() {
 	skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
 }
 
-
 function nextTurn() {
 	if (incrementTurn) {
 		nextTurnHeadline = true;
@@ -410,7 +409,6 @@ function nextTurn() {
 		}
 	}
 }
-
 
 function inGameAnnoucements() {
 	if(destroyedHeadline || nextTurnHeadline) {
@@ -446,8 +444,7 @@ function inGameAnnoucements() {
 			timerHeadline = 0;
 		}
 	}
-}	
-
+}
 
 function cleanLists() {
 	for (var i = 0; i < arrayOfProjectiles.length; i++) {

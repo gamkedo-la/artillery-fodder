@@ -7,5 +7,6 @@ function modeWinScreen(frameTime) {
 
 	if (Key.isJustPressed(Key.SPACE)){
 		mode = MAIN_MENU;
+		startMatch();
 	}
 }

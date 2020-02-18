@@ -430,7 +430,6 @@ function crazyBombShotClass() {
 	}
 }
 
-
 function meteorClashClass() {
 
 	this.x = 0;
@@ -554,15 +553,24 @@ function rainShot(){
 
 	this.launch = function launch(angle, power) {
 
-		for (i = 0; i < 100; i++) {
-			var newProjectileC = new basicShotClass();
-			newProjectileC.x = this.x;
-			newProjectileC.y = this.y;
-			newProjectileC.size = this.size;
-			newProjectileC.tank = this.tank;
-			newProjectileC.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ), power);
-			arrayOfProjectiles.push(newProjectileC);
+		for (var i = 0; i < 100; i++) {
+			var newProjectile = new basicShotClass();
+			newProjectile.x = this.x;
+			newProjectile.y = this.y;
+			newProjectile.size = this.size;
+			newProjectile.tank = this.tank;
+			newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
+			newProjectile.primary = false;
+			arrayOfProjectiles.push(newProjectile);
 		}
+		var newProjectile = new basicShotClass();
+		newProjectile.x = this.x;
+		newProjectile.y = this.y;
+		newProjectile.size = this.size;
+		newProjectile.tank = this.tank;
+		newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
+		newProjectile.primary = true;
+		arrayOfProjectiles.push(newProjectile);
 		
 	}
 }
