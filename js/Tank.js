@@ -61,7 +61,7 @@ function tankPlayerClass() {
 
 				let splodes = 2;
 				while(--splodes){
-					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
 				}
 
 				//Input
@@ -159,6 +159,11 @@ function tankPlayerClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 
+		let splodes = Math.round(amount);
+		while(--splodes){
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+		}
+
 		//Kick
 		var radians = degreesToRadians(angle);
 		xVel = Math.cos(radians) * amount;
@@ -177,6 +182,11 @@ function tankPlayerClass() {
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
 			destroyedHeadline = true;
+			
+			let splodes = 10;
+			while(--splodes){
+				particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,0), 2, 2, 60, 0 )
+			}
 
 		}
 	}
@@ -299,7 +309,7 @@ function tankDummyClass() {
 
 				let splodes = 2;
 				while(--splodes){
-					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
 				}
 
 				if (countDown <= 0) {
@@ -352,6 +362,11 @@ function tankDummyClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 
+		let splodes = Math.round(amount);
+		while(--splodes){
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+		}
+
 		//Kick
 		var radians = degreesToRadians(angle);
 		xVel = Math.cos(radians) * amount;
@@ -370,6 +385,11 @@ function tankDummyClass() {
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
 			destroyedHeadline = true;
+
+			let splodes = 10;
+			while(--splodes){
+				particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,0), 2, 2, 60, 0 )
+			}
 
 		}
 	}
@@ -445,9 +465,9 @@ function tankBrainlessClass() {
 
 				let splodes = 2;
 				while(--splodes){
-					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
 				}
-				
+
 				//Input
 				if (countDown <= 0) {
 					countDown = 0.5;
@@ -527,6 +547,11 @@ function tankBrainlessClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 
+		let splodes = Math.round(amount);
+		while(--splodes){
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+		}
+
 		//Kick
 		var radians = degreesToRadians(angle);
 		xVel = Math.cos(radians) * amount;
@@ -545,6 +570,11 @@ function tankBrainlessClass() {
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
 			destroyedHeadline = true;
+
+			let splodes = 10;
+			while(--splodes){
+				particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,0), 2, 2, 60, 0 )
+			}
 
 		}
 	}

@@ -22,6 +22,7 @@ function basicExplosionClass() {
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
 				soundExplosion.play();
+
 				if (this.particles) {
 					let splodes = 100;
 					while(--splodes){
@@ -79,6 +80,12 @@ function multiExplosionClass() {
 					}
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
+
+				let splodes = 10;
+				while(--splodes){
+					particles.spawn(this.x, this.y, rndFloat(-10,10), rndFloat(-60,-100), 10, 10, 100, 0 )
+				}
+		
 				soundExplosion.play();
 				damageDone = true;
 			}
@@ -97,12 +104,7 @@ function multiExplosionClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, this.size, this.color);
-		let splodes = 10;
-		while(--splodes){
-			particles.spawn(this.x, this.y, rndFloat(-10,10), rndFloat(-60,-100), 10, 10, 100, 0 )
-		}
-		
+		colorCircle(this.x, this.y, this.size, this.color);		
 	}
 
 	this.calculateDamage = function calculateDamage(targetTank) {
