@@ -161,7 +161,7 @@ function tankPlayerClass() {
 
 		let splodes = Math.round(amount);
 		while(--splodes){
-			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, rndFloat(50,70), 0 )
 		}
 
 		//Kick
@@ -364,7 +364,7 @@ function tankDummyClass() {
 
 		let splodes = Math.round(amount);
 		while(--splodes){
-			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, rndFloat(50,70), 0 )
 		}
 
 		//Kick
@@ -549,7 +549,7 @@ function tankBrainlessClass() {
 
 		let splodes = Math.round(amount);
 		while(--splodes){
-			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, 60, 0 )
+			particles.spawn(this.x, this.y - 10, rndFloat(-20,20), rndFloat(-40,0), 1, 2, rndFloat(50,70), 0 )
 		}
 
 		//Kick
