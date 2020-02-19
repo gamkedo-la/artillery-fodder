@@ -145,6 +145,14 @@ function tankPlayerClass() {
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);
 		canvasContext.restore();
+
+		if (this.myTurn && this.active) {
+			canvasContext.save();
+			canvasContext.translate(this.x,this.y-h);
+			canvasContext.rotate(-radians);
+			canvasContext.drawImage(imageLoader.getImage("crosshair"), 40, -10);
+			canvasContext.restore();
+		}
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {

@@ -5,6 +5,7 @@ const imageLoader = new (function() {
         {id: "buttons", src: "./images/buttons.png"},
         {id: "decorations", src: "./images/decorations.png"},
         {id: "titleScreenCover", src: "./images/TitleScreen.png"},
+        {id: "crosshair", src: "./images/crosshair.png"},
 	];
 	const images = {};
 
