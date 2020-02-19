@@ -273,7 +273,6 @@ function modeGame(frameTime) {
 	
 
 	cleanLists();
-	nextTurn();
 	inGameAnnoucements();
 	gameClock();
 	dayNight();
@@ -416,30 +415,6 @@ function dayNight() {
 	skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
 }
 
-function nextTurn() {
-	if (incrementTurn) {
-		nextTurnHeadline = true;
-		arrayOfPlayers[playerTurn].myTurn = false;
-
-		playerTurn++;
-		if (playerTurn >= numberOfPlayers) {
-			playerTurn = 0;
-		}
-
-		arrayOfPlayers[playerTurn].myTurn = true;
-
-		incrementTurn = false;
-
-		var remaningPlayers = numberOfPlayers;
-		for (var i = 0; i < numberOfPlayers; i++) {
-			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
-		}
-		if (remaningPlayers <= 1) {
-			mode = WIN_SCREEN;
-		}
-	}
-}
-
 function inGameAnnoucements() {
 	if(destroyedHeadline || nextTurnHeadline) {
 		timerHeadline ++;
@@ -476,6 +451,31 @@ function inGameAnnoucements() {
 	}
 }
 
+function nextTurn() {
+	if (incrementTurn) {
+		nextTurnHeadline = true;
+		arrayOfPlayers[playerTurn].myTurn = false;
+
+		playerTurn++;
+		if (playerTurn >= numberOfPlayers) {
+			playerTurn = 0;
+		}
+
+		arrayOfPlayers[playerTurn].myTurn = true;
+
+		incrementTurn = false;
+
+		var remaningPlayers = numberOfPlayers;
+		for (var i = 0; i < numberOfPlayers; i++) {
+			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
+		}
+		if (remaningPlayers <= 1) {
+			mode = WIN_SCREEN;
+		}
+	}
+}
+
+
 function cleanLists() {
 	for (var i = 0; i < arrayOfProjectiles.length; i++) {
 		if (!arrayOfProjectiles[i].active) {
@@ -488,5 +488,9 @@ function cleanLists() {
 			arrayOfExplosions.splice(i, 1);
 			i--;
 		}
+	}
+
+	if (incrementTurn && arrayOfExplosions.length <= 0 && arrayOfProjectiles.length <= 0) {
+		nextTurn();
 	}
 }

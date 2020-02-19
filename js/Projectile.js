@@ -42,7 +42,6 @@ function basicShotClass() {
 	var yVel = 0;
 
 	this.active = false;
-	this.primary = true;
 	this.tail = true;
 
 	this.update = function update(frameTime) {
@@ -73,7 +72,7 @@ function basicShotClass() {
 				this.hit();
 			} else if (this.x < 0 || this.x > canvas.width) {
 				this.active = false;
-				if (this.primary) {incrementTurn = true;}
+				incrementTurn = true;
 			}
 		}
 	}
@@ -93,7 +92,6 @@ function basicShotClass() {
 		yVel = 0;
 					
 		this.active = false;
-		if (this.primary) {incrementTurn = true;}
 
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
@@ -105,6 +103,8 @@ function basicShotClass() {
 		newExplosion.active = true;
 		newExplosion.particles = this.tail;
 		arrayOfExplosions.push(newExplosion);
+
+		incrementTurn = true;
 	}
 }
 
@@ -141,7 +141,6 @@ function threeShotClass() {
 		newProjectileL.y = this.y;
 		newProjectileL.size = this.size;
 		newProjectileL.tank = this.tank;
-		newProjectileL.primary = false;
 		newProjectileL.launch(angle+5, power);
 		arrayOfProjectiles.push(newProjectileL);
 
@@ -150,7 +149,6 @@ function threeShotClass() {
 		newProjectileR.y = this.y;
 		newProjectileR.size = this.size;
 		newProjectileR.tank = this.tank;
-		newProjectileR.primary = false;
 		newProjectileR.launch(angle-5, power);
 		arrayOfProjectiles.push(newProjectileR);
 	}
@@ -167,7 +165,6 @@ function sniperShotClass() {
 	var yVel = 0;
 
 	this.active = false;
-	this.primary = true;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
@@ -358,7 +355,6 @@ function rollShotClass() {
 		yVel = 0;
 					
 		this.active = false;
-		incrementTurn = true;
 
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
@@ -369,6 +365,8 @@ function rollShotClass() {
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		arrayOfExplosions.push(newExplosion);
+
+		incrementTurn = true;
 	}
 }
 
@@ -425,7 +423,6 @@ function crazyBombShotClass() {
 		yVel = 0;
 					
 		this.active = false;
-		incrementTurn = true
 
 		var newExplosion = new multiExplosionClass();
 		newExplosion.x = this.x;
@@ -436,6 +433,8 @@ function crazyBombShotClass() {
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		arrayOfExplosions.push(newExplosion);
+
+		incrementTurn = true;
 	}
 }
 
@@ -458,7 +457,6 @@ function meteorClashClass() {
 	var sonicboomFade = 1.0;
 
 	this.active = false;
-	this.primary = true;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
@@ -494,7 +492,7 @@ function meteorClashClass() {
 				this.hit();
 			} else if (this.x < 0 || this.x > canvas.width) {
 				this.active = false;
-				if (this.primary) {incrementTurn = true;}
+				incrementTurn = true;
 			}
 		}
 	}
@@ -525,7 +523,6 @@ function meteorClashClass() {
 		yVel = 0;
 					
 		this.active = false;
-		if (this.primary) {incrementTurn = true;}
 
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
@@ -538,6 +535,7 @@ function meteorClashClass() {
 		arrayOfExplosions.push(newExplosion);
 
 		skyFlickersNow = true;
+		incrementTurn = true;
 	}
 }
 
@@ -569,19 +567,9 @@ function rainShot(){
 			newProjectile.size = this.size;
 			newProjectile.tank = this.tank;
 			newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
-			newProjectile.primary = false;
 			newProjectile.tail = false;
 			arrayOfProjectiles.push(newProjectile);
 		}
-		var newProjectile = new basicShotClass();
-		newProjectile.x = this.x;
-		newProjectile.y = this.y;
-		newProjectile.size = this.size;
-		newProjectile.tank = this.tank;
-		newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
-		newProjectile.primary = true;
-		newProjectile.tail = false;
-		arrayOfProjectiles.push(newProjectile);
 		
 	}
 }
