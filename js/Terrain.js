@@ -42,7 +42,8 @@ function terrain() {
 	}
 
 	this.createImpactAtXandY = function(x, y, size) {
-		var radius = size;
+		console.log("Damage " + size)
+		var radius = Math.round(size);
 
 		var localY = Math.abs(y - canvas.height + UI_HEIGHT);
 		var localX = Math.round(x);

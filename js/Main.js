@@ -84,10 +84,10 @@ window.onload = function() {
 	canvasContext.textAlign = "center";
 	mouseInit();
 
-	imageLoader.loadImages().then(gameStart);
+	imageLoader.loadImages().then(applicationStart);
 }
 
-function gameStart() {
+function applicationStart() {
 	SpeechRecognition.init(); // ask permission for mic input of game actions
 
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
@@ -309,7 +309,7 @@ function gameClock() {
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
-	colorText(clockHour + ":" + pad(clockMinute, 2), 700, 30, colorOfTextforClock, "15px Arial");
+	colorText(pad(clockHour, 2) + ":" + pad(clockMinute, 2), 700, 30, colorOfTextforClock, "15px Arial");
 
 	if(clockMinuteCountdown >= 60) {
 		for (var i = 0; i < 1; i++) {
