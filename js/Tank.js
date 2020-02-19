@@ -150,7 +150,7 @@ function tankPlayerClass() {
 			canvasContext.save();
 			canvasContext.translate(this.x,this.y-h);
 			canvasContext.rotate(-radians);
-			canvasContext.drawImage(imageLoader.getImage("crosshair"), 40, -10);
+			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*50, -10);
 			canvasContext.restore();
 		}
 	}
