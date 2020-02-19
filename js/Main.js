@@ -279,7 +279,7 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
-	if (Key.isJustPressed(Key.m)){
+	if (Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;
 	}
 }
