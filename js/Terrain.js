@@ -71,7 +71,7 @@ function terrain() {
 	}
 
 	this.draw = function() {
-
+		canvasContext.save();
         for (var x = 0; x < heightMap.length; x++) {
             
             // distance from bottom of screen
@@ -85,5 +85,6 @@ function terrain() {
             colorRect(x, groundY, 1, heightMap[x], gradient);
             
 		}
+		canvasContext.restore();
 	}
 }

@@ -50,6 +50,10 @@ function basicShotClass() {
 
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
+			let splodes = 2;
+				while(--splodes){
+					particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 1, 1, 40, 0 )
+				}
 
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {

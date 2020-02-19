@@ -5,6 +5,7 @@ var numberOfPlayers = 4;
 var arrayOfPlayers = [];
 var arrayOfProjectiles = [];
 var arrayOfExplosions = [];
+var particles = new ParticlePool(3000);
 
 var playerTurn = 0;
 var incrementTurn = false;
@@ -179,16 +180,32 @@ function update(frameTime) {
 	}
 
 	backgroundMusic.updateMusic(frameTime);
+	
 	Key.update();
 }
 
 function modeGame(frameTime) {
+
+	let snow = 30;
+	while(--snow){
+		particles.spawn(
+			rndFloat(0, canvas.width),
+			rndFloat(0, canvas.height),
+			rndFloat(-40,40),
+			rndFloat(10,40),
+			1,
+			1,
+			40,
+			0)
+	}
 
 	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
+
 
 	//Draw UI section
 	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
@@ -224,9 +241,15 @@ function modeGame(frameTime) {
 		}
 	}
 
+
+
 	//Draw ground
-    map.draw();
-    
+	map.draw();
+
+	//draw snow particles (you can delete this, just showin off);
+	particles.update(frameTime);
+	particles.draw();
+	
     // Draw grass/pebbles/cracks/etc
     decorations.draw();
 
@@ -245,6 +268,9 @@ function modeGame(frameTime) {
 		arrayOfExplosions[i].update(frameTime);
 		arrayOfExplosions[i].draw(frameTime);
 	}
+
+	//particles
+	
 
 	cleanLists();
 	nextTurn();

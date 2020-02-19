@@ -21,6 +21,11 @@ function basicExplosionClass() {
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
 				soundExplosion.play();
+				let splodes = 100;
+				while(--splodes){
+					particles.spawn(this.x, this.y, rndFloat(-120,120), rndFloat(-100,-300), 10, 10, 40, 1 )
+				}
+
 				damageDone = true;
 			}
 			if (this.countDown >= 0) {
@@ -35,6 +40,7 @@ function basicExplosionClass() {
 
 	this.draw = function draw(frameTime) {
 		colorCircle(this.x, this.y, this.size, this.color);
+		
 	}
 
 	this.calculateDamage = function calculateDamage(targetTank) {
@@ -89,6 +95,11 @@ function multiExplosionClass() {
 
 	this.draw = function draw(frameTime) {
 		colorCircle(this.x, this.y, this.size, this.color);
+		let splodes = 10;
+		while(--splodes){
+			particles.spawn(this.x, this.y, rndFloat(-10,10), rndFloat(-60,-100), 10, 10, 100, 0 )
+		}
+		
 	}
 
 	this.calculateDamage = function calculateDamage(targetTank) {
