@@ -68,6 +68,16 @@ ParticlePool.prototype.draw = function draw(){
                             this.pool[i]/3
                             );
                         break;
+
+                    case 2: //they shrink as they die.
+                        canvasContext.fillStyle = "white"
+                        canvasContext.fillRect(
+                            this.pool[i+1],
+                            this.pool[i+2],
+                            this.pool[i+5],
+                            this.pool[i+6]
+                            );
+                        break;
                     
                     default: //plain box render
                         canvasContext.fillStyle = "gray"

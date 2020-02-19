@@ -58,6 +58,12 @@ function tankPlayerClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
+
+				let splodes = 2;
+				while(--splodes){
+					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+				}
+
 				//Input
                 if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
 					if(this.weaponInventory[this.weapon] != 0) {
@@ -290,6 +296,12 @@ function tankDummyClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
+
+				let splodes = 2;
+				while(--splodes){
+					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+				}
+
 				if (countDown <= 0) {
 					countDown = 0.5;
 					this.fire();
@@ -430,6 +442,12 @@ function tankBrainlessClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
+
+				let splodes = 2;
+				while(--splodes){
+					particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
+				}
+				
 				//Input
 				if (countDown <= 0) {
 					countDown = 0.5;

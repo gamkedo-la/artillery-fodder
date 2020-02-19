@@ -54,7 +54,7 @@ function basicShotClass() {
 			if (this.tail) {
 				let splodes = 2;
 				while(--splodes){
-					particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 1, 1, 40, 0 )
+					particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 2, 2, 40, 0 )
 				}
 			}
 
