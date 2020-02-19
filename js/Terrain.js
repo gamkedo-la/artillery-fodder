@@ -2,39 +2,16 @@ function terrain() {
     
     var heightMap = new Array();
 	var maxHeight;
+	var mapWidth;
 
     // a public reference so we can access map.heightMap from outside this class
     // used by Decorations.js to determine ground height
     this.heightMap = heightMap; 
 
     this.init = function(width, height) {
-		maxHeight = height;
-
-		var oldRand = rndInt(-50, 100);
-        var newRand = rndInt(-50, 100);
-        
-        // second octave for smaller hills inside the major ones above
-        var oldRand2 = rndInt(-10, 20);
-		var newRand2 = rndInt(-10, 20);
-
-		for (var i = 0; i < width; i++) {
-			if (i%50 == 0) {
-				oldRand = newRand;
-				newRand = rndInt(-50, 100);
-			}
-			
-            var value = 100 + lerp(oldRand, newRand, i%50/50);
-            
-            // second octave perturb
-            if (i%15 == 0) {
-				oldRand2 = newRand2;
-                newRand2 = rndInt(-10, 20);
-			}
-            value += lerp(oldRand2, newRand2, i%15/15);
-
-			heightMap[i] = value;
-
-		}
+    	maxHeight = height;
+    	mapWidth = width;
+		this.generateTerrain(0);
 	}
 
 	this.getHeightAtX = function(x) {
@@ -91,5 +68,225 @@ function terrain() {
             
 		}
 		canvasContext.restore();
+	}
+
+	this.generateTerrain = function(type = 0) {
+		switch (type) {
+			case 0://Standard
+				var oldRand = rndInt(-50, 100);
+		        var newRand = rndInt(-50, 100);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(-50, 100);
+					}
+					
+		            var value = 100 + lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 1://Towers
+		        var rand = rndInt(50, 250);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						rand = rndInt(50, 250);
+					}
+					
+		            var value = rand;
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 2://Uphill
+				var oldRand = rndInt(-50, 50);
+		        var newRand = rndInt(-50, 50);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(-50, 50);
+					}
+					
+		            var value = 100 + lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+		            value += i/4;
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 3://Downhill
+				var oldRand = rndInt(-50, 50);
+		        var newRand = rndInt(-50, 50);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(-50, 50);
+					}
+					
+		            var value = 100 + lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+		            value += maxHeight/4;
+		            value -= i/4;
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 4://Hill
+				var oldRand = rndInt(15, 100);
+		        var newRand = rndInt(0, 100);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(0, 100);
+					}
+					
+		            var value = lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+		            if (i <= mapWidth/2) {
+			            value += lerp(0, 250, i*2/mapWidth);
+			        } else {
+			        	value += maxHeight/2;
+			        	value -= lerp(0, 250, (i-mapWidth/2)*2/mapWidth);
+			        }
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 5://Valley
+				var oldRand = rndInt(15, 100);
+		        var newRand = rndInt(0, 100);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(0, 100);
+					}
+					
+		            var value = lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+		            if (i <= mapWidth/2) {
+			        	value += maxHeight/2;
+			            value -= lerp(0, 250, i*2/mapWidth);
+			        } else {
+			        	value += lerp(0, 250, (i-mapWidth/2)*2/mapWidth);
+			        }
+
+					heightMap[i] = value;
+
+				}
+				break;
+			case 6://Mound
+				var oldRand = rndInt(15, 100);
+		        var newRand = rndInt(0, 100);
+		        
+		        // second octave for smaller hills inside the major ones above
+		        var oldRand2 = rndInt(-10, 20);
+				var newRand2 = rndInt(-10, 20);
+
+				for (var i = 0; i < mapWidth; i++) {
+					if (i%50 == 0) {
+						oldRand = newRand;
+						newRand = rndInt(0, 100);
+					}
+					
+		            var value = lerp(oldRand, newRand, i%50/50);
+		            
+		            // second octave perturb
+		            if (i%15 == 0) {
+						oldRand2 = newRand2;
+		                newRand2 = rndInt(-10, 20);
+					}
+		            value += lerp(oldRand2, newRand2, i%15/15);
+
+		            if (i <= mapWidth/3) {
+			            value += lerp(0, 250, i*3/mapWidth);
+			        } else if (i <= mapWidth*2/3) {
+			        	value += maxHeight/2;
+			        } else {
+			        	value += maxHeight/2;
+			        	value -= lerp(0, 250, (i-mapWidth*2/3)*3/mapWidth);
+			        }
+
+					heightMap[i] = value;
+
+				}
+				break;
+		}
 	}
 }
