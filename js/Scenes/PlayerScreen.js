@@ -103,7 +103,7 @@ function populatePlayerScreen() {
 			arrayOfPlayerBlocks[i] =  new playerBlock(arrayOfPlayers[i]);
 		}
 		arrayOfPlayerBlocks[i].x = 150 + 250*(i%3);
-		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125;
+		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125*3;
 		if (i%3 == 2) {
 			yOffset += 1;
 		}
