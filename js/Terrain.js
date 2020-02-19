@@ -47,25 +47,25 @@ function terrain() {
 		var localY = Math.abs(y - canvas.height + UI_HEIGHT);
 		var localX = Math.round(x);
 
-		console.log("X: " + localX + " Y: " + Math.round(localY));
-
 		for (var i = -radius + localX; i <= radius + localX; i++) {
 			var reduction = -Math.abs(i-localX) + radius;
 
 			if (i < 0) {
 				i = 0;
-				reduction = -Math.abs(i) + radius;
+				reduction = -Math.abs(i-localX) + radius;
 			} else if (i >= heightMap.length) {
 				break;
-			}//else if (heightMap[i] >= localY + reduction) {
-			//	reduction *= 2;
-			//} //else if (heightMap[i] > localY - reduction) {
-			//	reduction += 0;
-			//} else if (heightMap[i] <= localY - reduction) {
-			//	reduction = 0;
-			//}
+			}
 
-			console.log("Height: " + Math.round(heightMap[i]) + " Reduction: " + reduction);
+			if (heightMap[i] <= localY - reduction) {
+				reduction = 0;
+			} else if (heightMap[i] <= localY) {
+				reduction -= localY - heightMap[i];
+			} else if (heightMap[i] >= localY + reduction) {
+				reduction *= 2;
+			}else if (heightMap[i] >= localY) {
+				reduction += heightMap[i] - localY;
+			}
 
 			heightMap[i] -= reduction;
 			if (heightMap[i] < 0) {
