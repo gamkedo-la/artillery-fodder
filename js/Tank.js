@@ -252,7 +252,7 @@ function tankDummyClass() {
 	this.weapon = 0;
 	this.weaponInventory = weaponInventoryMaster;
 
-	var countDown = 2;
+	var countDown = 0.5;
 
 	this.update = function update(frameTime) {
 
@@ -291,7 +291,7 @@ function tankDummyClass() {
 		if (this.myTurn) {
 			if (this.active) {
 				if (countDown <= 0) {
-					countDown = 2;
+					countDown = 0.5;
 					this.fire();
 				} else {
 					countDown -= frameTime;
@@ -392,6 +392,8 @@ function tankBrainlessClass() {
 	this.weaponInventory = weaponInventoryMaster;
 	var weaponIndextIncreesing = true;
 
+	var countDown = 0.5;
+
 	this.update = function update(frameTime) {
 
 		//Keep tank in canvas
@@ -429,8 +431,13 @@ function tankBrainlessClass() {
 		if (this.myTurn) {
 			if (this.active) {
 				//Input
-                if(this.weaponInventory[this.weapon] != 0) {
-					this.fire();
+				if (countDown <= 0) {
+					countDown = 0.5;
+					if(this.weaponInventory[this.weapon] != 0) {
+						this.fire();
+					}
+				} else {
+					countDown -= frameTime;
 				}
 				
 
