@@ -19,7 +19,7 @@ function tankPlayerClass() {
 	this.imageLookupOffset = 0;
 
 	this.weapon = 0;
-	this.weaponInventory = weaponInventoryMaster;
+	this.weaponInventory = [];
 	var weaponIndextIncreesing = true;
 
 	this.update = function update(frameTime) {

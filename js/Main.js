@@ -285,15 +285,19 @@ function modeGame(frameTime) {
 }
 
 function startMatch() {
+	console.log("Start Match")
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
 		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1));
+		arrayOfPlayers[i].power = 75;
 		arrayOfPlayers[i].health = 100;
-		arrayOfPlayers[i].weaponInventory = weaponInventoryMaster;
+		arrayOfPlayers[i].weapon = 0;
+		arrayOfPlayers[i].weaponInventory = weaponInventoryMaster.slice();
 		arrayOfPlayers[i].myTurn = false;
+		arrayOfPlayers[i].active = true;
 	}
 
 	arrayOfPlayers[0].myTurn = true;

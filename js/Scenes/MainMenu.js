@@ -23,6 +23,7 @@ function modeMainMenu(frameTime) {
         || mousePressed
         ){
 		mode = GAME_MODE;
+		startMatch();
 	}
 	if (Key.isJustPressed(Key.r)){
 		mode = CREDITS_SCREEN;
