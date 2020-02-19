@@ -129,6 +129,7 @@ function soundRandomClass(arrayOfFilenames) {
 
 	for (var i = 0; i < arrayOfFilenames.length; i++) {
 		sounds[i] = new Audio(arrayOfFilenames[i]);
+		sounds[i+arrayOfFilenames.length] = new Audio(arrayOfFilenames[i]);
 	}
 
 	this.play = function() {
