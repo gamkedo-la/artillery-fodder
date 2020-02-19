@@ -99,7 +99,9 @@ function populatePlayerScreen() {
 	var numberAcross = 3;
 	var yOffset = 1;
 	for (var i = 0; i < numberOfPlayers; i++) {
-		arrayOfPlayerBlocks[i] =  new playerBlock(arrayOfPlayers[i]);
+		if (arrayOfPlayerBlocks[i] == null) {
+			arrayOfPlayerBlocks[i] =  new playerBlock(arrayOfPlayers[i]);
+		}
 		arrayOfPlayerBlocks[i].x = 150 + 250*(i%3);
 		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125;
 		if (i%3 == 2) {
