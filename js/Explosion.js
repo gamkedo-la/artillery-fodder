@@ -10,6 +10,7 @@ function basicExplosionClass() {
 
 	this.active = false;
 	this.countDown = 0.5;
+	this.particles = true;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
@@ -21,9 +22,11 @@ function basicExplosionClass() {
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
 				soundExplosion.play();
-				let splodes = 100;
-				while(--splodes){
-					particles.spawn(this.x, this.y, rndFloat(-120,120), rndFloat(-100,-300), 10, 10, 40, 1 )
+				if (this.particles) {
+					let splodes = 100;
+					while(--splodes){
+						particles.spawn(this.x, this.y, rndFloat(-120,120), rndFloat(-100,-300), 10, 10, 40, 1 )
+					}
 				}
 
 				damageDone = true;

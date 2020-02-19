@@ -43,6 +43,7 @@ function basicShotClass() {
 
 	this.active = false;
 	this.primary = true;
+	this.tail = true;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
@@ -50,10 +51,13 @@ function basicShotClass() {
 
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
-			let splodes = 2;
+
+			if (this.tail) {
+				let splodes = 2;
 				while(--splodes){
 					particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 1, 1, 40, 0 )
 				}
+			}
 
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
@@ -99,6 +103,7 @@ function basicShotClass() {
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
+		newExplosion.particles = this.tail;
 		arrayOfExplosions.push(newExplosion);
 	}
 }
@@ -565,6 +570,7 @@ function rainShot(){
 			newProjectile.tank = this.tank;
 			newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
 			newProjectile.primary = false;
+			newProjectile.tail = false;
 			arrayOfProjectiles.push(newProjectile);
 		}
 		var newProjectile = new basicShotClass();
@@ -574,6 +580,7 @@ function rainShot(){
 		newProjectile.tank = this.tank;
 		newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
 		newProjectile.primary = true;
+		newProjectile.tail = false;
 		arrayOfProjectiles.push(newProjectile);
 		
 	}
