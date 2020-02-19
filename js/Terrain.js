@@ -6,7 +6,8 @@ function terrain() {
 
     // a public reference so we can access map.heightMap from outside this class
     // used by Decorations.js to determine ground height
-    this.heightMap = heightMap; 
+    this.heightMap = heightMap;
+    this.type = 0; 
 
     this.init = function(width, height) {
     	maxHeight = height;
@@ -70,8 +71,8 @@ function terrain() {
 		canvasContext.restore();
 	}
 
-	this.generateTerrain = function(type = 0) {
-		switch (type) {
+	this.generateTerrain = function() {
+		switch (this.type) {
 			case 0://Standard
 				var oldRand = rndInt(-50, 100);
 		        var newRand = rndInt(-50, 100);
