@@ -56,6 +56,7 @@ function modePlayer(frameTime) {
 		if (numberOfPlayers <= 0) {
 			numberOfPlayers = 1;
 		}
+		changePage()
 	}
 
 	//Add players
@@ -113,6 +114,8 @@ function populatePlayerScreen() {
 function changePage() {
 	if (page < 0) {
 		page = 0;
+	} else if (page > Math.floor((numberOfPlayers-1)/9)) {
+		page = Math.floor((numberOfPlayers-1)/9);
 	}
 	var yOffset = 1;
 	for (var i = 0; i < numberOfPlayers; i++) {
