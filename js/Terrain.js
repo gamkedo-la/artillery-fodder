@@ -47,6 +47,8 @@ function terrain() {
 		var localY = Math.abs(y - canvas.height + UI_HEIGHT);
 		var localX = Math.round(x);
 
+		console.log("X: " + localX + " Y: " + Math.round(localY));
+
 		for (var i = -radius + localX; i <= radius + localX; i++) {
 			var reduction = -Math.abs(i-localX) + radius;
 
@@ -55,18 +57,21 @@ function terrain() {
 				reduction = -Math.abs(i) + radius;
 			} else if (i >= heightMap.length) {
 				break;
-			}else if (heightMap[i] >= localY + reduction) {
-				reduction *= 2;
-			} else if (heightMap[i] > localY - reduction) {
-				reduction += 0;
-			} else if (heightMap[i] <= localY - reduction) {
-				reduction = 0;
-			}
+			}//else if (heightMap[i] >= localY + reduction) {
+			//	reduction *= 2;
+			//} //else if (heightMap[i] > localY - reduction) {
+			//	reduction += 0;
+			//} else if (heightMap[i] <= localY - reduction) {
+			//	reduction = 0;
+			//}
+
+			console.log("Height: " + Math.round(heightMap[i]) + " Reduction: " + reduction);
 
 			heightMap[i] -= reduction;
 			if (heightMap[i] < 0) {
 				heightMap[i] = 0;
 			}
+
 		}
 	}
 
