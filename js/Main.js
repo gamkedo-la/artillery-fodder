@@ -22,7 +22,7 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 9;
+var clockHour = 18;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var dayTime = true;
@@ -44,6 +44,9 @@ var skyFlickersNow = false;
 
 var skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
 var skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
+
+//weather
+var weather;
 
 
 //Scenes
@@ -186,19 +189,6 @@ function update(frameTime) {
 
 function modeGame(frameTime) {
 
-	let snow = 30;
-	while(--snow){
-		particles.spawn(
-			rndFloat(0, canvas.width),
-			rndFloat(0, canvas.height),
-			rndFloat(-40,40),
-			rndFloat(10,40),
-			1,
-			1,
-			40,
-			0)
-	}
-
 	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
@@ -332,6 +322,7 @@ function gameClock() {
 
 			if(clockHour == 7 || clockHour == 19) {
 				dayTime = !dayTime;
+				weather = Math.floor(rndFloat(0,3));
 			}
 		}
 	}
@@ -351,6 +342,40 @@ function skyFlickers() {
 		}
 	}
 }
+
+function handlingWeather() {
+
+	 if(weather == 1) { //rain
+	 	let rain = 30;
+			while(--rain){
+			particles.spawn(
+			rndFloat(0, canvas.width), //spawning point for x
+			rndFloat(0, canvas.height), // spawning point for y
+			0, // how much it sways as its falling 
+			rndFloat(200,400), // dropping speed
+			1,
+			rndFloat(2,4),
+			40,
+			0)
+		}
+	 }
+
+	 if(weather == 2) { //snow or ashfall
+		let snow = 30;
+		while(--snow){
+			particles.spawn(
+			rndFloat(0, canvas.width), //spawning point for x
+			rndFloat(0, canvas.height), // spawning point for y
+			rndFloat(-40,40), // how much it sways as its falling 
+			rndFloat(10,40), // dropping speed
+			1,
+			1,
+			40,
+			0)
+		}
+	 }
+
+} // end of handlingWeather
 
 function dayNight() {
 
@@ -413,6 +438,8 @@ function dayNight() {
 
 	skyColor = fullColorHex(skyColor01, skyColor02, skyColor03);
 	skyColorGradient = fullColorHex(skyColorGradient01, skyColorGradient02, skyColorGradient03);
+
+	handlingWeather();
 }
 
 function inGameAnnoucements() {
@@ -494,3 +521,10 @@ function cleanLists() {
 		nextTurn();
 	}
 }
+
+
+
+
+
+
+
