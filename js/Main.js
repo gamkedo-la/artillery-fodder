@@ -122,6 +122,7 @@ function applicationStart() {
 		cloudSpeeds[i] = Math.random() * (0.2 - 0.05) + 0.05;
 	}
 
+
 	buttonImg = imageLoader.getImage("buttons");
 
 	window.requestAnimationFrame(frameLoop);
@@ -308,12 +309,31 @@ function handlingWeather() {
 
 } // end of handlingWeather
 
+function nightSky() {
+	if(dayTime == false) {
+		let stars = 5;
+		while(--stars){
+			particles.spawn(
+			rndFloat(0, canvas.width), //spawning point for x
+			rndFloat(0, canvas.height), // spawning point for y
+			0, // how much it sways as its falling 
+			0, // dropping speed
+			1,
+			1,
+			40,
+			0)
+		}
+	}
+	
+}
+
 function dayNight() {
 
 	//night sky transition
 	if (dayTime == false) { 
 
 		colorOfTextforClock = 'white';
+		
 
 		//black = 0,0,0
 		if(skyColor01 >= 1) { // turning down to 0

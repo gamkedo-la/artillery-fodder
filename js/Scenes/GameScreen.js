@@ -9,6 +9,7 @@ function modeGame(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
 
+	nightSky();
 	
 	//cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
@@ -23,8 +24,6 @@ function modeGame(frameTime) {
 			}
 		}
 	}
-
-
 
 	//Draw ground
 	map.draw();
