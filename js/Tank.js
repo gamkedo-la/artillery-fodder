@@ -138,7 +138,7 @@ function tankPlayerClass() {
 			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
 			canvasContext.restore();
 		}
-		
+
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
 			this.imageLookupOffset * 30, 0, 
@@ -177,8 +177,8 @@ function tankPlayerClass() {
 
 		//Kick
 		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * amount;
-		yVel = -Math.sin(radians) * amount;
+		xVel = Math.cos(radians) * amount * 3;
+		yVel = -Math.sin(radians) * amount * 2;
 
 		soundHit.play();
 
