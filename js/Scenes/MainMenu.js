@@ -4,19 +4,26 @@ function modeMainMenu(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "LightGrey");	
 	colorText("MAIN MENU", canvas.width/2, 100, "White", "50px Arial");
 
-	colorText("Press [Space Bar] to START GAME", canvas.width/2, canvas.height/2, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 - 20, 400, 27, "Blue")
+	colorText("Press [Space Bar] to START GAME", canvas.width/2, canvas.height/2, "White", "20px Arial");
 
-	colorText("Press [P] for PLAYER SCREEN", canvas.width/2, canvas.height/2 + 30, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 10, 400, 27, "Blue")
+	colorText("[P]LAYER SCREEN", canvas.width/2, canvas.height/2 + 30, "White", "20px Arial");
 
-	colorText("Press [I] for WEAPON INVENTORY", canvas.width/2, canvas.height/2 + 60, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 40, 400, 27, "Blue")
+	colorText("WEAPON [I]NVENTORY", canvas.width/2, canvas.height/2 + 60, "White", "20px Arial");
 	
-	colorText("Press [T] for TERRAIN SCREEN", canvas.width/2, canvas.height/2 + 90, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 70, 400, 27, "Blue")
+	colorText("[T]ERRAIN SCREEN", canvas.width/2, canvas.height/2 + 90, "White", "20px Arial");
 
-	colorText("Press [C] for CONTROLS", canvas.width/2, canvas.height/2 + 120, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 100, 400, 27, "Blue")
+	colorText("[C]ONTROLS", canvas.width/2, canvas.height/2 + 120, "White", "20px Arial");
 
-	colorText("Press [O] for OPTIONS", canvas.width/2, canvas.height/2 + 150, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 130, 400, 27, "Blue")
+	colorText("[O]PTIONS", canvas.width/2, canvas.height/2 + 150, "White", "20px Arial");
 
-	colorText("Press [R] for CREDITS", canvas.width/2, canvas.height/2 + 180, "Black", "20px Arial");
+	colorRect(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27, "Blue")
+	colorText("C[R]EDITS", canvas.width/2, canvas.height/2 + 180, "White", "20px Arial");
 
     if (Key.isJustPressed(Key.SPACE) 
         || SpeechRecognition.pendingStartCommand()
