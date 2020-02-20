@@ -121,6 +121,8 @@ function tankPlayerClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+		var radians;
+		radians = degreesToRadians(this.angle);
 
 		if (this.myTurn && this.active) {
 			canvasContext.save();
@@ -145,8 +147,6 @@ function tankPlayerClass() {
 			w+10, h+10);
 
 		//Draw Cannon
-		var radians;
-		radians = degreesToRadians(this.angle);
 		canvasContext.save();
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
