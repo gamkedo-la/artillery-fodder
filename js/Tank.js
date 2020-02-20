@@ -178,7 +178,7 @@ function tankPlayerClass() {
 		//Kick
 		var radians = degreesToRadians(angle);
 		xVel = Math.cos(radians) * amount * 3;
-		yVel = -Math.sin(radians) * amount * 2;
+		yVel = -Math.sin(radians) * amount * 3;
 
 		soundHit.play();
 
@@ -317,12 +317,6 @@ function tankDummyClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
-
-				let splodes = 2;
-				while(--splodes){
-					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
-				}
-
 				if (countDown <= 0) {
 					countDown = 0.5;
 					this.fire();
@@ -380,8 +374,8 @@ function tankDummyClass() {
 
 		//Kick
 		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * amount;
-		yVel = -Math.sin(radians) * amount;
+		xVel = Math.cos(radians) * amount * 3;
+		yVel = -Math.sin(radians) * amount * 3;
 
 		soundHit.play();
 
@@ -474,11 +468,6 @@ function tankBrainlessClass() {
 		if (this.myTurn) {
 			if (this.active) {
 
-				let splodes = 2;
-				while(--splodes){
-					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
-				}
-
 				//Input
 				if (countDown <= 0) {
 					countDown = 0.5;
@@ -565,8 +554,8 @@ function tankBrainlessClass() {
 
 		//Kick
 		var radians = degreesToRadians(angle);
-		xVel = Math.cos(radians) * amount;
-		yVel = -Math.sin(radians) * amount;
+		xVel = Math.cos(radians) * amount * 3;
+		yVel = -Math.sin(radians) * amount * 3;
 
 		soundHit.play();
 

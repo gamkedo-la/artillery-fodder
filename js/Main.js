@@ -187,7 +187,7 @@ function update(frameTime) {
 		turnVolumeUp();
 	}
 
-	
+
 	playerScreenWave += frameTime * 45;
 
 	backgroundMusic.updateMusic(frameTime);
@@ -303,6 +303,9 @@ function startMatch() {
 		arrayOfPlayers[i].myTurn = false;
 		arrayOfPlayers[i].active = true;
 	}
+	incrementTurn = false;
+	arrayOfProjectiles = [];
+	arrayOfExplosions = [];
 
 	arrayOfPlayers[0].myTurn = true;
 	buildTankSkinsSheet();
