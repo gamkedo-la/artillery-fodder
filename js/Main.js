@@ -60,6 +60,7 @@ const PLAYER_SCREEN = 6;
 const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
+const PAUSE_SCREEN = 10;
 var mode = TITLE_SCREEN;
 
 
@@ -173,6 +174,9 @@ function update(frameTime) {
 		case WIN_SCREEN:
 			modeWinScreen(frameTime);
 			break;
+		case PAUSE_SCREEN:
+			modePause(frameTime);
+			break;
 	}
 
 	if (Key.isJustPressed(Key.BRACKET_LEFT)){
@@ -270,6 +274,11 @@ function modeGame(frameTime) {
 
 	if (Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;
+		map.init(canvas.width, canvas.height-UI_HEIGHT);
+	}
+	
+	if (Key.isJustPressed(Key.p)){
+		mode = PAUSE_SCREEN;
 	}
 }
 
