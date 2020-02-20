@@ -25,9 +25,39 @@ function modeMainMenu(frameTime) {
 	colorRect(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27, "Blue")
 	colorText("C[R]EDITS", canvas.width/2, canvas.height/2 + 180, "White", "20px Arial");
 
+	if (isMouseInArea(0, 0, canvas.width, canvas.height/2 + 7) && mousePressed) {
+		mode = GAME_MODE;
+		startMatch();
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 10, 400, 27) && mousePressed) {
+		mode = PLAYER_SCREEN;
+		populatePlayerScreen();
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 40, 400, 27) && mousePressed) {
+		mode = INVENTORY_SCREEN;
+		populateInventoryScreen();
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 70, 400, 27) && mousePressed) {
+		mode = TERRAIN_SCREEN;
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 100, 400, 27) && mousePressed) {
+		mode = CONTROLS_SCREEN;
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 130, 400, 27) && mousePressed) {
+		mode = OPTIONS_SCREEN;
+	}
+	
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27) && mousePressed) {
+		mode = CREDITS_SCREEN;
+	}
+
     if (Key.isJustPressed(Key.SPACE) 
         || SpeechRecognition.pendingStartCommand()
-        || mousePressed
         ){
 		mode = GAME_MODE;
 		startMatch();
