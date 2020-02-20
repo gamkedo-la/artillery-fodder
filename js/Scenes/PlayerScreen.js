@@ -36,12 +36,12 @@ function modePlayer(frameTime) {
 	colorRect(canvas.width - 70, canvas.height - 75, 60, 20, "White");
 	colorText(page, canvas.width - 40,canvas.height - 60, "Black", font = "15px Arial")
 	canvasContext.drawImage(buttonImg,
-		0, 0,
+		60, 0,
 		20, 20,
 		canvas.width - 30, canvas.height - 75,
 		20, 20);
 	canvasContext.drawImage(buttonImg,
-		20, 0,
+		40, 0,
 		20, 20,
 		canvas.width - 70, canvas.height - 75,
 		20, 20);
