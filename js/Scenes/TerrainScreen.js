@@ -49,7 +49,9 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (Key.isJustPressed(Key.SPACE) || Key.isJustPressed(Key.q)){
+	if (Key.isJustPressed(Key.SPACE) 
+		|| Key.isJustPressed(Key.q)
+		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
 		mode = MAIN_MENU;
 	}
 }
