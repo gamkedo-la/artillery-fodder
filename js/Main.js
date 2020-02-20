@@ -310,6 +310,13 @@ function handlingWeather() {
 } // end of handlingWeather
 
 function nightSky() {
+
+	var starlife = rndFloat(500,900);
+
+	if(clockHour >= 4 && clockHour <= 6) {
+		starlife = 0;
+
+	}
 	if(dayTime == false) {
 		let stars = 2;
 		while(--stars){
@@ -320,7 +327,7 @@ function nightSky() {
 			0, // dropping speed
 			1,
 			1,
-			rndFloat(500,900),
+			starlife,
 			0)
 		}
 	}
