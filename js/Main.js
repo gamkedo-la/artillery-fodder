@@ -249,7 +249,11 @@ function gameClock() {
 
 			if(clockHour == 7 || clockHour == 19) {
 				dayTime = !dayTime;
-				weather = Math.floor(rndFloat(0,3));
+				if (rndOneIn(4)) {
+					weather = Math.floor(rndFloat(0,3));
+				} else {
+					weather = 0;
+				}
 			}
 		}
 	}
