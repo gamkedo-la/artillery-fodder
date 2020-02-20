@@ -59,11 +59,6 @@ function tankPlayerClass() {
 		if (this.myTurn) {
 			if (this.active) {
 
-				let splodes = 2;
-				while(--splodes){
-					particles.spawn(this.x, this.y - 5, rndFloat(-40,40), rndFloat(-40,40), 2, 2, 40, 2 )
-				}
-
 				//Input
                 if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
 					if(this.weaponInventory[this.weapon] != 0) {
@@ -152,6 +147,8 @@ function tankPlayerClass() {
 			canvasContext.rotate(-radians);
 			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*50, -10);
 			canvasContext.restore();
+
+			canvasContext.drawImage(imageLoader.getImage("selector"), this.x - 12.5, this.y - 17.5);
 		}
 	}
 
