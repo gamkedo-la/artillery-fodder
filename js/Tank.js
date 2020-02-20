@@ -334,6 +334,17 @@ function tankDummyClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+		var radians;
+		radians = degreesToRadians(this.angle);
+
+		if (this.myTurn && this.active) {
+			canvasContext.save();
+			canvasContext.translate(this.x,this.y-5);
+			canvasContext.rotate(degreesToRadians(playerScreenWave));
+			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
+			canvasContext.restore();
+		}
+
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
 			this.imageLookupOffset * 30, 0, 
@@ -342,8 +353,6 @@ function tankDummyClass() {
 			w+10, h+10);
 
 		//Draw Cannon
-		var radians;
-		radians = degreesToRadians(this.angle);
 		canvasContext.save();
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
@@ -514,6 +523,17 @@ function tankBrainlessClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+		var radians;
+		radians = degreesToRadians(this.angle);
+
+		if (this.myTurn && this.active) {
+			canvasContext.save();
+			canvasContext.translate(this.x,this.y-5);
+			canvasContext.rotate(degreesToRadians(playerScreenWave));
+			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
+			canvasContext.restore();
+		}
+		
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
 			this.imageLookupOffset * 30, 0, 
@@ -522,8 +542,6 @@ function tankBrainlessClass() {
 			w+10, h+10);
 
 		//Draw Cannon
-		var radians;
-		radians = degreesToRadians(this.angle);
 		canvasContext.save();
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
