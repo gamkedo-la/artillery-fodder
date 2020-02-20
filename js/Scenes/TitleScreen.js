@@ -10,7 +10,7 @@ function modeTitle(frameTime) {
 
     if (Key.isJustPressed(Key.SPACE)
         || SpeechRecognition.pendingStartCommand()
-        || mousePressed
+        || mouseJustPressed
     ){
 		mode = MAIN_MENU;
 		backgroundMusic.loopSong("./audio/music/gameplayMusicV1.mp3");

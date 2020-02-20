@@ -14,12 +14,11 @@ var mouseJustPressed = false;
 
 function mouseDown(evt) {
 	mousePressed = true;
-	console.log("Mouse down")
+	mouseJustPressed = true;
 }
 
 function mouseUp(evt) {
 	mousePressed = false;
-	console.log("Mouse up")
 }
 
 function calculateMousePos(evt) {

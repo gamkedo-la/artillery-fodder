@@ -34,7 +34,7 @@ function modeInventory(frameTime) {
 
 	if (Key.isJustPressed(Key.SPACE) 
 		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
+		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mouseJustPressed)){
 		mode = MAIN_MENU;
 	}
 }
@@ -64,13 +64,13 @@ function weaponBlock(id) {
 	var quantity = weaponInventoryMaster[id];
 
 	this.update = function() {
-		if (isMouseInArea(this.x - w/2, this.y + 10, 70, 20) && mousePressed) {
+		if (isMouseInArea(this.x - w/2, this.y + 10, 70, 20) && mouseJustPressed) {
 			weaponInventoryMaster[index]--;
 			if (weaponInventoryMaster[index] < -1) {
 				weaponInventoryMaster[index] = -1
 			}
 		}
-		if (isMouseInArea(this.x, this.y + 10, 70, 20) && mousePressed) {
+		if (isMouseInArea(this.x, this.y + 10, 70, 20) && mouseJustPressed) {
 			weaponInventoryMaster[index]++;
 		}
 	}

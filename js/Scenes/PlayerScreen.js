@@ -48,7 +48,7 @@ function modePlayer(frameTime) {
 
 
 	//Subtract players
-	if (isMouseInArea(canvas.width - 70, 120, 30, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 70, 120, 30, 20) && mouseJustPressed) {
 		numberOfPlayers -= 1;
 		if (numberOfPlayers <= 0) {
 			numberOfPlayers = 1;
@@ -57,7 +57,7 @@ function modePlayer(frameTime) {
 	}
 
 	//Add players
-	if (isMouseInArea(canvas.width - 40, 120, 30, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 40, 120, 30, 20) && mouseJustPressed) {
 		numberOfPlayers += 1;
 
 		if (arrayOfPlayers[numberOfPlayers-1] == null) {
@@ -78,19 +78,19 @@ function modePlayer(frameTime) {
 	}
 
 	//Subtract page
-	if (isMouseInArea(canvas.width - 70, canvas.height - 75, 30, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 70, canvas.height - 75, 30, 20) && mouseJustPressed) {
 		page--;
 		changePage();
 	}
 	//Add page
-	if (isMouseInArea(canvas.width - 40, canvas.height - 75, 30, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width - 40, canvas.height - 75, 30, 20) && mouseJustPressed) {
 		page++;
 		changePage();
 	}
 
 	if (Key.isJustPressed(Key.SPACE) 
 		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
+		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mouseJustPressed)){
 		mode = MAIN_MENU;
 	}
 }
@@ -141,23 +141,23 @@ function playerBlock(tankClass) {
 
 	this.update = function update() {
 
-		if (isMouseInArea(this.x - w/2 + 25, this.y +25, 25, 50) && mousePressed) {
+		if (isMouseInArea(this.x - w/2 + 25, this.y +25, 25, 50) && mouseJustPressed) {
 			this.tank.tankSkinIndex -= 1;
 			buildTankSkinsSheet();
 		}
 
-		if (isMouseInArea(this.x - w/2 + 50, this.y +25, 25, 50) && mousePressed) {
+		if (isMouseInArea(this.x - w/2 + 50, this.y +25, 25, 50) && mouseJustPressed) {
 			this.tank.tankSkinIndex += 1;
 			buildTankSkinsSheet();
 		}
 
-		if (isMouseInArea(this.x, this.y + 40, 75, 20) && mousePressed) {
+		if (isMouseInArea(this.x, this.y + 40, 75, 20) && mouseJustPressed) {
 			color = (mouseX - this.x) * 4.8;
 			this.tank.color = color;
 			buildTankSkinsSheet();
 		}
 
-		if (isMouseInArea(this.x, this.y + 65, 36, 20) && mousePressed) {
+		if (isMouseInArea(this.x, this.y + 65, 36, 20) && mouseJustPressed) {
 			playerType--;
 			if (playerType < 0) {
 				playerType = playerTypeIndex.length-1;
@@ -165,7 +165,7 @@ function playerBlock(tankClass) {
 			this.setNewPlayerType();
 		}
 
-		if (isMouseInArea(this.x + 37, this.y + 65, 36, 20) && mousePressed) {
+		if (isMouseInArea(this.x + 37, this.y + 65, 36, 20) && mouseJustPressed) {
 			playerType++;
 			if (playerType >= playerTypeIndex.length) {
 				playerType = 0;
