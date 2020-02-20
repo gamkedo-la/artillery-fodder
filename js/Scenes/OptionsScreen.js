@@ -24,7 +24,7 @@ function modeOptions(frameTime) {
 
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height/2 + 200, "white", "20px Arial");
 
-	if (Key.isJustPressed(Key.SPACE)){
+	if (Key.isJustPressed(Key.SPACE) || Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;
 	}
 }
