@@ -32,7 +32,7 @@ function modeInventory(frameTime) {
 	colorText("INVENTORY SCREEN", canvas.width/2, 100, "White", "50px Arial");
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
 
-	if (Key.isJustPressed(Key.SPACE)){
+	if (Key.isJustPressed(Key.SPACE) || Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;
 	}
 }

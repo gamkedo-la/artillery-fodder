@@ -88,7 +88,7 @@ function modePlayer(frameTime) {
 		changePage();
 	}
 
-	if (Key.isJustPressed(Key.SPACE)){
+	if (Key.isJustPressed(Key.SPACE) || Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;
 	}
 }
