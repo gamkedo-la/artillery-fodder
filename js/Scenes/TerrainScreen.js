@@ -16,6 +16,35 @@ function modeTerrain(frameTime) {
 
 	map.draw();
 
+	colorRect(canvas.width/2 - 75, 120, 150, 20, "White");
+	colorText(terrainTypeIndex[map.type], canvas.width/2,135, "Black", font = "15px Arial")
+	canvasContext.drawImage(buttonImg,
+		40, 0,
+		20, 20,
+		canvas.width/2 - 75, 120,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		60, 0,
+		20, 20,
+		canvas.width/2 + 55, 120,
+		20, 20);
+
+	if (isMouseInArea(canvas.width/2 - 75, 120, 75, 20) && mousePressed) {
+		map.type -= 1;
+		if (map.type < 0) {
+			map.type = terrainTypeIndex.length-1;
+		}
+		map.generateTerrain();
+	}
+
+	if (isMouseInArea(canvas.width/2, 120, 75, 20) && mousePressed) {
+		map.type += 1;
+		if (map.type >= terrainTypeIndex.length) {
+			map.type = 0;
+		}
+		map.generateTerrain();
+	}
+
 	if (Key.isJustPressed(Key.SPACE)){
 		mode = MAIN_MENU;
 	}

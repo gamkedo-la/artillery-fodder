@@ -253,7 +253,7 @@ function terrain() {
 				}
 				break;
 			case 6://Mound
-				var oldRand = rndInt(15, 100);
+				var oldRand = rndInt(0, 100);
 		        var newRand = rndInt(0, 100);
 		        
 		        // second octave for smaller hills inside the major ones above

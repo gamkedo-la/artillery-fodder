@@ -274,8 +274,7 @@ function modeGame(frameTime) {
 }
 
 function startMatch() {
-	console.log("Start Match")
-	map.init(canvas.width, canvas.height-UI_HEIGHT);
+	console.log("Start Match");
 
 	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
