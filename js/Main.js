@@ -311,7 +311,7 @@ function handlingWeather() {
 
 function nightSky() {
 	if(dayTime == false) {
-		let stars = 5;
+		let stars = 2;
 		while(--stars){
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
@@ -320,7 +320,7 @@ function nightSky() {
 			0, // dropping speed
 			1,
 			1,
-			40,
+			rndFloat(500,900),
 			0)
 		}
 	}

@@ -8,7 +8,7 @@ function modeGame(frameTime) {
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-
+	//stars 
 	nightSky();
 	
 	//cloud movement & cycling
