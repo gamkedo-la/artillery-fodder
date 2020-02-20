@@ -121,6 +121,22 @@ function tankPlayerClass() {
 	}
 
 	this.draw = function draw(frameTime) {
+
+		if (this.myTurn && this.active) {
+			canvasContext.save();
+			canvasContext.translate(this.x,this.y-h);
+			canvasContext.rotate(-radians);
+			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*50, -10);
+			canvasContext.restore();
+
+
+			canvasContext.save();
+			canvasContext.translate(this.x,this.y-5);
+			canvasContext.rotate(degreesToRadians(playerScreenWave));
+			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
+			canvasContext.restore();
+		}
+		
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
 			this.imageLookupOffset * 30, 0, 
@@ -140,16 +156,6 @@ function tankPlayerClass() {
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);
 		canvasContext.restore();
-
-		if (this.myTurn && this.active) {
-			canvasContext.save();
-			canvasContext.translate(this.x,this.y-h);
-			canvasContext.rotate(-radians);
-			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*50, -10);
-			canvasContext.restore();
-
-			canvasContext.drawImage(imageLoader.getImage("selector"), this.x - 12.5, this.y - 17.5);
-		}
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {

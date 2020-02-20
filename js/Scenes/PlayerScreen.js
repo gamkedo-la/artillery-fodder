@@ -1,5 +1,4 @@
 var arrayOfPlayerBlocks = [];
-var playerScreenWave = 90;
 var page = 0;
 
 var playerTypeIndex = ["Human",
@@ -13,8 +12,6 @@ function modePlayer(frameTime) {
 		arrayOfPlayerBlocks[i].update();
 		arrayOfPlayerBlocks[i].draw();
 	}
-
-	playerScreenWave += frameTime * 45;
 
 	//Titles
 	colorRect(0, 0, canvas.width, 150, "orange");

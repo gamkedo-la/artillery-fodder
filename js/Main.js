@@ -13,6 +13,7 @@ var fadeVariable = 1.0;
 var destroyedHeadline = false;
 var nextTurnHeadline = true;
 var timerHeadline = 0;
+var playerScreenWave = 0;
 
 var deltaTime = 0;
 var lastFrameTime = window.performance.now();
@@ -185,6 +186,9 @@ function update(frameTime) {
 	if (Key.isJustPressed(Key.BRACKET_RIGHT)){
 		turnVolumeUp();
 	}
+
+	
+	playerScreenWave += frameTime * 45;
 
 	backgroundMusic.updateMusic(frameTime);
 	
