@@ -20,7 +20,7 @@ function tankPlayerClass() {
 
 	this.weapon = 0;
 	this.weaponInventory = [];
-	var weaponIndextIncreesing = true;
+	this.weaponIndextIncreesing = true;
 
 	this.update = function update(frameTime) {
 
@@ -79,11 +79,11 @@ function tankPlayerClass() {
 				}
 				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand()){
 					this.weapon--;
-					weaponIndextIncreesing = false;
+					this.weaponIndextIncreesing = false;
 				}
 				if (Key.isJustPressed(Key.PERIOD) || SpeechRecognition.pendingNextCommand()){
 					this.weapon++;
-					weaponIndextIncreesing = true;
+					this.weaponIndextIncreesing = true;
 				}
 
 				//Range checks
@@ -99,7 +99,7 @@ function tankPlayerClass() {
 					this.power = 1;
 				}
 
-				if (this.weaponInventory[this.weapon] == 0 && weaponIndextIncreesing == true) {
+				if (this.weaponInventory[this.weapon] == 0 && this.weaponIndextIncreesing == true) {
 					this.weapon++;
 				} else if (this.weaponInventory[this.weapon] == 0) {
 					this.weapon--;
@@ -203,6 +203,9 @@ function tankPlayerClass() {
 	}
 
 	this.fire = function fire() {
+		if(this.weaponInventory[this.weapon] == 0) {
+			return;
+		}
 		var newProjectile;
 		switch (this.weapon) {
 			case 0://Basic Shot
