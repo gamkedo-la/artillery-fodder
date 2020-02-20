@@ -277,8 +277,8 @@ function skyFlickers() {
 
 function handlingWeather() {
 
-	 if(weather == 1) { //rain
-	 	let rain = 30;
+	if(weather == 1) { //rain
+		let rain = 30;
 			while(--rain){
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
@@ -290,9 +290,9 @@ function handlingWeather() {
 			40,
 			0)
 		}
-	 }
+	}
 
-	 if(weather == 2) { //snow or ashfall
+	if(weather == 2) { //snow or ashfall
 		let snow = 30;
 		while(--snow){
 			particles.spawn(
@@ -305,8 +305,7 @@ function handlingWeather() {
 			40,
 			0)
 		}
-	 }
-
+	}
 } // end of handlingWeather
 
 function nightSky() {

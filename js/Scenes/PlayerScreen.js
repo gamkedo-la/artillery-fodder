@@ -50,8 +50,8 @@ function modePlayer(frameTime) {
 	//Subtract players
 	if (isMouseInArea(canvas.width - 70, 120, 30, 20) && mouseJustPressed) {
 		numberOfPlayers -= 1;
-		if (numberOfPlayers <= 0) {
-			numberOfPlayers = 1;
+		if (numberOfPlayers <= 1) {
+			numberOfPlayers = 2;
 		}
 		changePage()
 	}

@@ -72,6 +72,39 @@ function modeGame(frameTime) {
 	} else {
 		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width*3/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	}
+
+	canvasContext.drawImage(buttonImg,
+		120, 0,
+		20, 20,
+		canvas.width*1/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		140, 0,
+		20, 20,
+		canvas.width*1/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+
+	canvasContext.drawImage(buttonImg,
+		20, 0,
+		20, 20,
+		canvas.width*2/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		0, 0,
+		20, 20,
+		canvas.width*2/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+
+	canvasContext.drawImage(buttonImg,
+		40, 0,
+		20, 20,
+		canvas.width*3/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		60, 0,
+		20, 20,
+		canvas.width*3/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
 	
 
 	cleanLists();
