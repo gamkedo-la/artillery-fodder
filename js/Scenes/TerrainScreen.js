@@ -29,7 +29,7 @@ function modeTerrain(frameTime) {
 		canvas.width/2 + 55, 120,
 		20, 20);
 
-	if (isMouseInArea(canvas.width/2 - 75, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 75, 120, 20, 20) && mouseJustPressed) {
 		map.type -= 1;
 		if (map.type < 0) {
 			map.type = terrainTypeIndex.length-1;
@@ -37,7 +37,7 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (isMouseInArea(canvas.width/2 + 55, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 + 55, 120, 20, 20) && mouseJustPressed) {
 		map.type += 1;
 		if (map.type >= terrainTypeIndex.length) {
 			map.type = 0;
@@ -45,13 +45,13 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (isMouseInArea(canvas.width/2 - 55, 120, 110, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 55, 120, 110, 20) && mouseJustPressed) {
 		map.generateTerrain();
 	}
 
 	if (Key.isJustPressed(Key.SPACE) 
 		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
+		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mouseJustPressed)){
 		mode = MAIN_MENU;
 	}
 }

@@ -26,7 +26,7 @@ function modeOptions(frameTime) {
 
 	if (Key.isJustPressed(Key.SPACE) 
 		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
+		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mouseJustPressed)){
 		mode = MAIN_MENU;
 	}
 }

@@ -25,34 +25,34 @@ function modeMainMenu(frameTime) {
 	colorRect(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27, "Blue")
 	colorText("C[R]EDITS", canvas.width/2, canvas.height/2 + 180, "White", "20px Arial");
 
-	if (isMouseInArea(0, 0, canvas.width, canvas.height/2 + 7) && mousePressed) {
+	if (isMouseInArea(0, 0, canvas.width, canvas.height/2 + 7) && mouseJustPressed) {
 		mode = GAME_MODE;
 		startMatch();
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 10, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 10, 400, 27) && mouseJustPressed) {
 		mode = PLAYER_SCREEN;
 		populatePlayerScreen();
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 40, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 40, 400, 27) && mouseJustPressed) {
 		mode = INVENTORY_SCREEN;
 		populateInventoryScreen();
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 70, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 70, 400, 27) && mouseJustPressed) {
 		mode = TERRAIN_SCREEN;
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 100, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 100, 400, 27) && mouseJustPressed) {
 		mode = CONTROLS_SCREEN;
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 130, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 130, 400, 27) && mouseJustPressed) {
 		mode = OPTIONS_SCREEN;
 	}
 	
-	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 200, canvas.height/2 + 160, 400, 27) && mouseJustPressed) {
 		mode = CREDITS_SCREEN;
 	}
 
