@@ -23,7 +23,7 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 12;
+var clockHour = 18;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var dayTime = true;
@@ -316,25 +316,68 @@ function handlingWeather() {
 
 function nightSky() {
 
-	var starlife = rndFloat(500,900);
+	var starlife;
+	
+	if(clockHour == 19) { // slowly fading in stars when night hits
+		starSpawning = Math.random();
 
-	if(clockHour == 6 & clockMinute == 15) {
-		starlife = 0;
+		if(starSpawning <= .8){
+			starlife = 0;
+		}
+
+		if (starSpawning >= .81){
+			starlife = rndFloat(700,900);
+		}
 	}
 
-	if(dayTime == false) {
-		let stars = 2;
-		while(--stars){
-			particles.spawn(
-			rndFloat(0, canvas.width), //spawning point for x
-			rndFloat(0, canvas.height), // spawning point for y
-			0, // how much it sways as its falling 
-			0, // dropping speed
-			1,
-			1,
-			starlife,
-			0)
+	if(clockHour == 20) {
+		starlife = rndFloat(300,900);
+	}
+
+	if(clockHour >= 21) {
+		starlife = 900;
+	}
+
+	if(clockHour <= 5) {
+		starlife = 900;
+	}
+
+	if(clockHour == 6) { // fading out stars before morning hits
+		if (clockMinute >= 15){
+			starlife = 0;
+		} else { 
+			starlife = 900;
 		}
+	}
+	console.log(starlife);
+	
+
+	/*
+	if (clockHour == 19 && clockMinute >= 30) { // rises the numbers of starts in sky
+		starSpawning = Math.random();
+
+		if(starSpawning <= .49){
+			starlife = 0;
+		}
+
+		if (starSpawning >= .5){
+			starlife = rndFloat(500,900);
+		}
+	}
+	*/
+
+	
+	let stars = 2;
+	while(--stars){
+		particles.spawn(
+		rndFloat(0, canvas.width), //spawning point for x
+		rndFloat(0, canvas.height), // spawning point for y
+		0, // how much it sways as its falling 
+		0, // dropping speed
+		1,
+		1,
+		starlife,
+		0)
 	}
 	
 }
@@ -368,6 +411,8 @@ function dayNight() {
 		if(skyColorGradient03 <= 204) { // turning up to 205
 			skyColorGradient03 ++;
 		}
+
+		nightSky();
 
 	}
 
