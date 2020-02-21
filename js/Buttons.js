@@ -11,7 +11,7 @@
 
 class buttonFactory
 {
-	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0)
+	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
 	{
 		console.log("ButtonCreated")
 		this.x=_x;
@@ -31,6 +31,7 @@ class buttonFactory
 		this.startSize=0
 		this.sprite_animateTarget=this.x-this.spriteOffset
 		this.size_animateTarget=this.x
+		this.textColor=_textColor
 	}
 
 	process()
@@ -73,7 +74,7 @@ class buttonFactory
 	
 	 draw()
 	{
-		var color="Black"
+		var color=this.textColor
 		var fontSize=20
 		if(this.hover)
 		{
@@ -90,7 +91,7 @@ class buttonFactory
 				canvasContext.drawImage(this.sprite,this.startPos, this.y,this.spriteSizeX,this.spriteSizeY);
 				
 			}
-			color="White"
+			color="white"
 			fontSize=18
 			
 	
@@ -222,7 +223,7 @@ class buttonsInit
 										 canvas.height-100,
 										 this._buttonLength,
 										 this._buttonSize,
-										 "Red",
+										 "YellowGreen",
 										 "Main Menu",
 									     MAIN_MENU,
 									     Key.SPACE,
@@ -230,6 +231,7 @@ class buttonsInit
 										 90,
 										 32,
 										 90,
+										 "SlateGrey"
 										 )
 	
 	this.quitButton = new buttonFactory(canvas.width-this._buttonLength,
@@ -242,8 +244,8 @@ class buttonsInit
 									     Key.q,
 										 )
 	
-	this.pauseButton = new buttonFactory(canvas.width-this._buttonLength,
-									 canvas.height-50,
+	this.pauseButton = new buttonFactory(0,
+									 canvas.height-100,
 									 this._buttonLength,
 									 this._buttonSize,
 									 "Red",
@@ -263,7 +265,8 @@ class buttonsInit
 									"space_key",
 									 90,
 									 32,
-									 90
+									 90,
+									 "Green"
 									 )
 	
 	
