@@ -28,7 +28,7 @@ ParticlePool.prototype.colors = [
 "rgba(255,255,255,1)",           //white 0
 "rgba(255,255,0,1)",             //yellow 1
 ]
-ParticlePool.prototype.spawn = function(x, y , vx, vy, width=1, height=1, life = 40, type=0){
+ParticlePool.prototype.spawn = function(x, y , vx, vy, width=1, height=1, life = 40, type=0,){
     for(let l = 0; l < 15; l++){
         for(let i = 0; i <= this.pool.length; i+=this.tuple){
             if(this.pool[i] <= l){

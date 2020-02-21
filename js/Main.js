@@ -23,7 +23,7 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 18;
+var clockHour = 12;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var dayTime = true;
@@ -234,7 +234,7 @@ function gameClock() {
 
 	colorText(pad(clockHour, 2) + ":" + pad(clockMinute, 2), 700, 30, colorOfTextforClock, "15px Arial");
 
-	if(clockMinuteCountdown >= 60) {
+	if(clockMinuteCountdown >= 240) {
 		for (var i = 0; i < 1; i++) {
 			clockMinute += 15;
 			clockMinuteCountdown = 0;
@@ -245,7 +245,7 @@ function gameClock() {
 		}
 	} 
 
-	if (clockHourCountdown >= 240) { 
+	if (clockHourCountdown >= 960) { 
 		for (var i = 0; i < 1; i++) {
 			clockHour += 1;
 			clockHourCountdown = 0;
@@ -318,10 +318,10 @@ function nightSky() {
 
 	var starlife = rndFloat(500,900);
 
-	if(clockHour >= 4 && clockHour <= 6) {
+	if(clockHour == 6 & clockMinute == 15) {
 		starlife = 0;
-
 	}
+
 	if(dayTime == false) {
 		let stars = 2;
 		while(--stars){

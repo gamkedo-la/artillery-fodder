@@ -8,7 +8,7 @@ function modeGame(frameTime) {
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-	//stars
+	//draw stars
 	nightSky();
 
 	//cloud movement & cycling
@@ -17,10 +17,12 @@ function modeGame(frameTime) {
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
 		pos.x += cloudSpeeds[i];
 
-		if(pos.x >= canvas.width + 10) {
-			cloudPositions[i] = {
-				x: 0 - cloudImg.width,
-				y: Math.floor(Math.random()*(325 - cloudImg.height))
+		if(dayTime == true && clockHour <= 16) {
+			if(pos.x >= canvas.width + 10) {
+				cloudPositions[i] = {
+					x: 0 - cloudImg.width,
+					y: Math.floor(Math.random()*(325 - cloudImg.height))
+				}
 			}
 		}
 	}
@@ -31,7 +33,7 @@ function modeGame(frameTime) {
 	//draw snow particles (you can delete this, just showin off);
 	particles.update(frameTime);
 	particles.draw();
-
+	
     // Draw grass/pebbles/cracks/etc
     decorations.draw();
 
