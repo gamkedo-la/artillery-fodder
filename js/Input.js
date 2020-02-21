@@ -9,12 +9,14 @@ function mouseInit() {
 var mouseX = 0;
 var mouseY = 0;
 var mousePressed = false;
+var focus=false;
 
 function mouseReleased(evt) {
 	mousePressed = true;
 }
 
 function calculateMousePos(evt) {
+	focus=true
 	var rect = canvas.getBoundingClientRect(),
 	root = document.documentElement;
 	mouseX = evt.clientX - rect.left - root.scrollLeft;
@@ -25,8 +27,10 @@ function isMouseInArea(x, y, width, height) {
 	if (mouseX >= x &&
 		mouseX <= x + width &&
 		mouseY >= y &&
-		mouseY <= y + height) {
-			return true;
+		mouseY <= y + height &&
+		focus) 
+	{
+		return true;
 	} else {
 		return false;
 	}

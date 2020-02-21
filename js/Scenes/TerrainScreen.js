@@ -9,7 +9,7 @@ var terrainTypeIndex = ["Standard",
 function modeTerrain(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "black");
 	colorText("TERRAIN SCREEN", canvas.width/2, 100, "White", "50px Arial");
-	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
+	
 
 	groundColor = "white";
 	groundColorGradient = "black";
@@ -49,9 +49,5 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (Key.isJustPressed(Key.SPACE) 
-		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
-		mode = MAIN_MENU;
-	}
+	btnManager.mainMenuButton.draw()
 }

@@ -7,6 +7,13 @@ const imageLoader = new (function() {
         {id: "titleScreenCover", src: "./images/TitleScreen.png"},
         {id: "crosshair", src: "./images/crosshair.png"},
         {id: "selector", src: "./images/TankSelector.png"},
+		{id: "space_key", src: "./images/keysPNG/Space_key.png"},
+		{id: "p_key", src: "./images/keysPNG/P_key.png"},
+		{id: "i_key", src: "./images/keysPNG/I_key.png"},
+		{id: "t_key", src: "./images/keysPNG/T_key.png"},
+		{id: "c_key", src: "./images/keysPNG/C_key.png"},
+		{id: "o_key", src: "./images/keysPNG/O_key.png"},
+		{id: "r_key", src: "./images/keysPNG/r_key.png"}
 	];
 	const images = {};
 
@@ -31,7 +38,13 @@ const imageLoader = new (function() {
 	};
 
 	this.getImage = function(id) {
-		return images[id];
+		if (images[id]!=0)
+		{
+			return images[id];
+		}else
+		{
+			return false
+		}
 	};
 
 	this.getAllImages = function() {

@@ -17,7 +17,7 @@ function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, 150, "orange");
 	colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
 	colorText("PLAYER SCREEN", canvas.width/2, 100, "White", "50px Arial");
-	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
+	
 	
 	//Player numbers buttons
 	colorRect(canvas.width - 70, 120, 60, 20, "White");
@@ -88,11 +88,7 @@ function modePlayer(frameTime) {
 		changePage();
 	}
 
-	if (Key.isJustPressed(Key.SPACE) 
-		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
-		mode = MAIN_MENU;
-	}
+	btnManager.mainMenuButton.draw()
 }
 
 function populatePlayerScreen() {

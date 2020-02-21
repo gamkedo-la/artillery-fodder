@@ -1,7 +1,7 @@
 
 
 function modeGame(frameTime) {
-
+	
 	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
@@ -81,12 +81,7 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
-	if (Key.isJustPressed(Key.q)){
-		mode = MAIN_MENU;
-		map.init(canvas.width, canvas.height-UI_HEIGHT);
-	}
-	
-	if (Key.isJustPressed(Key.p)){
-		mode = PAUSE_SCREEN;
-	}
+    btnManager.quitButton.draw()
+	btnManager.pauseButton.draw()
+
 }

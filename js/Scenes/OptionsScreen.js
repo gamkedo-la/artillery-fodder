@@ -7,7 +7,6 @@ function modeOptions(frameTime) {
 
 	//screen background
 	colorRect(0, 0, canvas.width, canvas.height, "red");
-	colorText("OPTIONS SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
 	if (isMouseInArea(canvas.width/2 - 100, canvas.height/2 - 20, 270, 40) && mousePressed) {
         speechRecognitionEnabled = !speechRecognitionEnabled;
@@ -22,11 +21,5 @@ function modeOptions(frameTime) {
 	colorRect(canvas.width/2 + 110, canvas.height/2 - 20, 50, 40, "white");
 	colorText(speechRecognitionEnabled?"yes":"no", canvas.width/2 + 135, canvas.height/2 + 10 , "black", "20px Arial");
 
-	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height - 50, "white", "20px Arial");
-
-	if (Key.isJustPressed(Key.SPACE) 
-		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mousePressed)){
-		mode = MAIN_MENU;
-	}
+	btnManager.mainMenuButton.draw()
 }

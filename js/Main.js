@@ -62,9 +62,10 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
-var mode = TITLE_SCREEN;
+var mode = MAIN_MENU;
 
-
+//Buttons : A button Manager to help to instance created buttons
+var btnManager=0;
 
 //var skyColorGradient = "yellow";
 //var skyColor = "white";
@@ -125,6 +126,9 @@ function applicationStart() {
 	buttonImg = imageLoader.getImage("buttons");
 
 	window.requestAnimationFrame(frameLoop);
+	
+	btnManager=new buttonsInit()
+	
 }
 
 function frameLoop() {
@@ -191,6 +195,8 @@ function update(frameTime) {
 	playerScreenWave += frameTime * 45;
 
 	backgroundMusic.updateMusic(frameTime);
+	
+	btnManager.update(frameTime);
 	
 	Key.update();
 }
