@@ -115,7 +115,46 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
-  btnManager.quitButton.draw()
+	btnManager.quitButton.draw()
 	btnManager.pauseButton.draw()
+
+	if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+		arrayOfPlayers[playerTurn].angle += 45 * frameTime;
+	}
+
+	if (isMouseInArea(canvas.width*1/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+		arrayOfPlayers[playerTurn].angle -= 45 * frameTime;
+	}
+
+	if (isMouseInArea(canvas.width*2/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+		arrayOfPlayers[playerTurn].power -= 20 * frameTime;
+	}
+
+	if (isMouseInArea(canvas.width*2/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+		arrayOfPlayers[playerTurn].power += 20 * frameTime;
+	}
+
+	if (isMouseInArea(canvas.width*3/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mouseJustPressed) {
+		arrayOfPlayers[playerTurn].weapon -= 1;
+		arrayOfPlayers[playerTurn].weaponIndextIncreesing = false;
+	}
+
+	if (isMouseInArea(canvas.width*3/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mouseJustPressed) {
+		arrayOfPlayers[playerTurn].weapon += 1;
+		arrayOfPlayers[playerTurn].weaponIndextIncreesing = true;
+	}
+
+	if (isMouseInArea(0, 0, canvas.width, canvas.height - UI_HEIGHT) && mouseJustPressed) {
+		arrayOfPlayers[playerTurn].fire();
+	}
+
+	if (Key.isJustPressed(Key.q)){
+		mode = MAIN_MENU;
+		map.init(canvas.width, canvas.height-UI_HEIGHT);
+	}
+	
+	if (Key.isJustPressed(Key.p)){
+		mode = PAUSE_SCREEN;
+	}
 
 }
