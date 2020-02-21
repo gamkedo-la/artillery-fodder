@@ -40,8 +40,9 @@ class buttonFactory
 	
 		var norestart=false
 		// checks for mouse hotspot and key input
-		if (isMouseInArea(this.x, this.y, this.sizeX,this.sizeY) && mousePressed || Key.isJustPressed(this.key) ) 
+		if (isMouseInArea(this.x, this.y, this.sizeX,this.sizeY) && mouseJustPressed || Key.isJustPressed(this.key) ) 
 		{
+			console.log(mousePressed)
 			mode=this.mode
 			if (mode==PAUSE_SCREEN) {norestart=true}
 			switch(this.mode)
@@ -83,7 +84,7 @@ class buttonFactory
 				//Note: lerping animation parma1:finalTarget, param2:starting position
 				this.startPos=lerp(this.sprite_animateTarget,this.startPos,0.9)
 				this.mode==GAME_MODE || this.mode==MAIN_MENU ? this.startSize=lerp(95,this.startSize,0.9) : this.startSize=lerp(50,this.startSize,0.9)
-				colorRect(this.x-this.startSize, this.y, this.startSize, this.sizeY, "Black")
+				//colorRect(this.x-this.startSize, this.y, this.startSize, this.sizeY, "Black")
 				canvasContext.drawImage(this.sprite,this.startPos, this.y,this.spriteSizeX,this.spriteSizeY);
 				
 			}
@@ -257,6 +258,10 @@ class buttonsInit
 									 "unPause",
 									 GAME_MODE,
 									 Key.SPACE,
+									"space_key",
+									 90,
+									 32,
+									 90
 									 )
 	
 	
@@ -289,6 +294,9 @@ class buttonsInit
 				this.unPauseButton.process()
 				break;
 			
+			case INVENTORY_SCREEN:
+				this.mainMenuButton.process()
+				break;
 			
 			default:
 				this.mainMenuButton.process()

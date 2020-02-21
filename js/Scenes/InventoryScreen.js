@@ -31,11 +31,6 @@ function modeInventory(frameTime) {
 
 	btnManager.mainMenuButton.draw()
 
-	if (Key.isJustPressed(Key.SPACE) 
-		|| Key.isJustPressed(Key.q)
-		|| (isMouseInArea(0, canvas.height - 50, canvas.width, 50) && mouseJustPressed)){
-		mode = MAIN_MENU;
-	}
 }
 
 function populateInventoryScreen() {

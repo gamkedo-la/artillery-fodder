@@ -62,7 +62,7 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
-var mode = TITLE_SCREEN;
+var mode = MAIN_MENU;
 
 //Buttons : A button Manager to help to instance created buttons
 var btnManager=0;
@@ -197,7 +197,7 @@ function update(frameTime) {
 
 	backgroundMusic.updateMusic(frameTime);
 	
-	btnManager.update(frameTime);
+	btnManager.update();
 	
 	Key.update();
 }
