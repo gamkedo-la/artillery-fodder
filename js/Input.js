@@ -2,17 +2,26 @@ window.addEventListener('keyup',    function (event) { Key.onKeyup(event); event
 window.addEventListener('keydown',  function (event) { Key.onKeydown(event); event.preventDefault() }, false);
 
 function mouseInit() {
-	document.addEventListener('mouseup', mouseReleased);
+	document.addEventListener('mousedown', mouseDown);
+	document.addEventListener('mouseup', mouseUp);
 	document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
 }
 
 var mouseX = 0;
 var mouseY = 0;
 var mousePressed = false;
+
 var focus=false;
 
-function mouseReleased(evt) {
+var mouseJustPressed = false;
+
+function mouseDown(evt) {
 	mousePressed = true;
+	mouseJustPressed = true;
+}
+
+function mouseUp(evt) {
+	mousePressed = false;
 }
 
 function calculateMousePos(evt) {
@@ -28,7 +37,7 @@ function isMouseInArea(x, y, width, height) {
 		mouseX <= x + width &&
 		mouseY >= y &&
 		mouseY <= y + height &&
-		focus) 
+		focus)
 	{
 		return true;
 	} else {
@@ -120,9 +129,6 @@ const Key = {
 	update() {
 		this._pressed = {};
 		this._released = {};
-		mousePressed = false;
+		mouseJustPressed = false;
 	}
 };
-
-
-

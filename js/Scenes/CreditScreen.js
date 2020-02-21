@@ -11,4 +11,5 @@ function modeCredits(frameTime) {
 	//colorText("Credit Start", canvas.width/2, creditPosY, "white", "20px Arial");
 
 	btnManager.mainMenuButton.draw()
+
 }

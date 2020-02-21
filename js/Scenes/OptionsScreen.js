@@ -1,7 +1,7 @@
 //Credit Screen
 
 // todo: load from localstorage at startup, and save when changed
-var speechRecognitionEnabled = true; 
+var speechRecognitionEnabled = true;
 
 function modeOptions(frameTime) {
 
@@ -22,4 +22,5 @@ function modeOptions(frameTime) {
 	colorText(speechRecognitionEnabled?"yes":"no", canvas.width/2 + 135, canvas.height/2 + 10 , "black", "20px Arial");
 
 	btnManager.mainMenuButton.draw()
+
 }

@@ -39,7 +39,7 @@ ParticlePool.prototype.spawn = function(x, y , vx, vy, width=1, height=1, life =
                 this.pool[i+4] = vy;
                 this.pool[i+5] = width;
                 this.pool[i+6] = height;
-                this.pool[i+7] = 0 //color;
+                this.pool[i+7] = 0; //color;
                 this.pool[i+8] = type;
                 this.pool[i+9] = 0; //prevX
                 this.pool[i+10] = 0; //prevY

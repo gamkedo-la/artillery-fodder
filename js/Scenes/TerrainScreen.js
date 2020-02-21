@@ -9,7 +9,7 @@ var terrainTypeIndex = ["Standard",
 function modeTerrain(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "black");
 	colorText("TERRAIN SCREEN", canvas.width/2, 100, "White", "50px Arial");
-	
+
 
 	groundColor = "white";
 	groundColorGradient = "black";
@@ -29,7 +29,7 @@ function modeTerrain(frameTime) {
 		canvas.width/2 + 55, 120,
 		20, 20);
 
-	if (isMouseInArea(canvas.width/2 - 75, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 75, 120, 20, 20) && mouseJustPressed) {
 		map.type -= 1;
 		if (map.type < 0) {
 			map.type = terrainTypeIndex.length-1;
@@ -37,7 +37,7 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (isMouseInArea(canvas.width/2 + 55, 120, 20, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 + 55, 120, 20, 20) && mouseJustPressed) {
 		map.type += 1;
 		if (map.type >= terrainTypeIndex.length) {
 			map.type = 0;
@@ -45,9 +45,10 @@ function modeTerrain(frameTime) {
 		map.generateTerrain();
 	}
 
-	if (isMouseInArea(canvas.width/2 - 55, 120, 110, 20) && mousePressed) {
+	if (isMouseInArea(canvas.width/2 - 55, 120, 110, 20) && mouseJustPressed) {
 		map.generateTerrain();
 	}
 
 	btnManager.mainMenuButton.draw()
+
 }

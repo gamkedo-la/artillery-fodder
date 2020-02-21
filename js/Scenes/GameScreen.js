@@ -1,15 +1,16 @@
 
 
 function modeGame(frameTime) {
-	
+
 	//Draw Sky
 	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height - UI_HEIGHT);
 	gradient.addColorStop(0, skyColor);
 	gradient.addColorStop(1, skyColorGradient);
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
+	//stars
+	nightSky();
 
-	
 	//cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
 		let pos = cloudPositions[i];
@@ -24,15 +25,13 @@ function modeGame(frameTime) {
 		}
 	}
 
-
-
 	//Draw ground
 	map.draw();
 
 	//draw snow particles (you can delete this, just showin off);
 	particles.update(frameTime);
 	particles.draw();
-	
+
     // Draw grass/pebbles/cracks/etc
     decorations.draw();
 
@@ -68,12 +67,45 @@ function modeGame(frameTime) {
 	colorText("Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3), canvas.width*1/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	colorText("Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3), canvas.width*2/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	if (arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon] > 0) {
-		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon], 
+		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon] + " x" + arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon],
 			canvas.width*3/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	} else {
 		colorText(projectileNameList[arrayOfPlayers[playerTurn].weapon], canvas.width*3/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	}
-	
+
+	canvasContext.drawImage(buttonImg,
+		120, 0,
+		20, 20,
+		canvas.width*1/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		140, 0,
+		20, 20,
+		canvas.width*1/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+
+	canvasContext.drawImage(buttonImg,
+		20, 0,
+		20, 20,
+		canvas.width*2/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		0, 0,
+		20, 20,
+		canvas.width*2/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+
+	canvasContext.drawImage(buttonImg,
+		40, 0,
+		20, 20,
+		canvas.width*3/4 - 70, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+	canvasContext.drawImage(buttonImg,
+		60, 0,
+		20, 20,
+		canvas.width*3/4 + 50, canvas.height - UI_HEIGHT + 60,
+		20, 20);
+
 
 	cleanLists();
 	inGameAnnoucements();
@@ -81,7 +113,7 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
-    btnManager.quitButton.draw()
+  btnManager.quitButton.draw()
 	btnManager.pauseButton.draw()
 
 }
