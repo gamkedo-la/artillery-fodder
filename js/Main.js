@@ -5,7 +5,7 @@ var numberOfPlayers = 4;
 var arrayOfPlayers = [];
 var arrayOfProjectiles = [];
 var arrayOfExplosions = [];
-var particles = new ParticlePool(3000);
+var particles = new ParticlePool(5000);
 
 var playerTurn = 0;
 var incrementTurn = false;
