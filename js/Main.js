@@ -62,7 +62,7 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
-var mode = MAIN_MENU;
+var mode = TITLE_SCREEN;
 
 //Buttons : A button Manager to help to instance created buttons
 var btnManager=0;
