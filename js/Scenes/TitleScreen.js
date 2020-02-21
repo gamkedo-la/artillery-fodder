@@ -1,11 +1,15 @@
 //Title Screen
 var titleScreenImg;
+var logo;
+var animate=0;
 
 function modeTitle(frameTime) {
-	console.log(mode)
+
 	titleScreenImg = imageLoader.getImage("titleScreenCover");
-    canvasContext.drawImage(titleScreenImg,800,600);
-	//colorText("Speech Recognition?", canvas.width/2 , canvas.height/2 + 10 , "black", "20px Arial");
+	logo=imageLoader.getImage("logo");
+    canvasContext.drawImage(titleScreenImg,0,0);
+	animate=lerp(100,animate,0.95)
+	canvasContext.drawImage(logo,canvas.width/2-(389/2),animate,389,149);
 	btnManager.mainMenuButton.draw()
 
 }
