@@ -202,10 +202,49 @@ function tankPlayerClass() {
 		}
 	}
 
+    this.muzzleFlash = function() {
+        //console.log('muzzy!');
+        var radians = degreesToRadians(this.angle);
+        var x = this.x - 5; // to center the sprites
+        var y = this.y - 10 - 5; // gun is offset from sprite
+        var xVel = Math.cos(radians); // % of speed
+        var yVel = -Math.sin(radians);
+        
+        // big flash - looks bad
+        //particles.spawn(
+        //    x, y-10, // pos
+        //    0,0, // vel
+        //    20,20, // w, h
+        //    50, // lifespan in ms
+        //    2 ); // type
+        
+        // orange sparks flying in the shoot direction
+        for (var num=0; num<20; num++) {
+            particles.spawn(
+                x+xVel*rndFloat(1,30), y+yVel*rndFloat(1,30), // pos w offset
+                xVel*100+rndFloat(-50,50), yVel*100+rndFloat(-50,50), // vel with randomness
+                rndFloat(5,10), rndFloat(5,10), // w, h
+                rndFloat(10,35), // lifespan in ms
+                1 ); // type
+        }
+
+        // slower moving smoke puffs
+        for (var num=0; num<20; num++) {
+            particles.spawn(
+                x+xVel*rndFloat(1,20), y+yVel-rndFloat(1,20), // pos w offset
+                xVel*10+rndFloat(-15,15), yVel*10+rndFloat(-15,15), // vel with randomness
+                rndFloat(10,20), rndFloat(10,20), // w, h
+                rndFloat(10,25), // lifespan in ms
+                2 ); // type
+        }        
+    }
+
 	this.fire = function fire() {
-		if(this.weaponInventory[this.weapon] == 0) {
+
+        if(this.weaponInventory[this.weapon] == 0) {
 			return;
 		}
+
 		var newProjectile;
 		switch (this.weapon) {
 			case 0://Basic Shot
@@ -254,6 +293,7 @@ function tankPlayerClass() {
 		arrayOfProjectiles.push(newProjectile);
 
 		soundFire.play();
+        this.muzzleFlash();
 
 		this.myTurn = false;
 	}
