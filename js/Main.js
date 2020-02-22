@@ -24,7 +24,7 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 18;
+var clockHour = 9;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var dayTime = true;
@@ -435,6 +435,7 @@ function dayNight() {
 }
 
 function inGameAnnoucements() {
+
 	if(destroyedHeadline || nextTurnHeadline) {
 		timerHeadline ++;
 

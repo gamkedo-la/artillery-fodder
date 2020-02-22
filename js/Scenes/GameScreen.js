@@ -9,7 +9,6 @@ function modeGame(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
 	//draw stars
-	
 	particlesStars.update(frameTime);
 	particlesStars.draw();
 

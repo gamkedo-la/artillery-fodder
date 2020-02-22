@@ -1,3 +1,5 @@
+var damageAmount;
+
 function tankPlayerClass() {
 	this.x = 400;
 	this.y = 300;
@@ -156,6 +158,10 @@ function tankPlayerClass() {
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);
 		canvasContext.restore();
+
+		if(damageAmount > 0) {
+			colorText(Math.floor(damageAmount), this.x + 20, this.y - 20, 'black', "20px Arial");
+		}
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -169,6 +175,7 @@ function tankPlayerClass() {
 
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
+		damageAmount = amount;
 
 		let splodes = Math.round(amount);
 		while(--splodes){
@@ -181,6 +188,9 @@ function tankPlayerClass() {
 		yVel = -Math.sin(radians) * amount * 3;
 
 		soundHit.play();
+
+		console.log(amount);
+
 
 		if (this.health <= 0) {
 			this.destroy();
