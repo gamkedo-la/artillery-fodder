@@ -6,6 +6,7 @@ var arrayOfPlayers = [];
 var arrayOfProjectiles = [];
 var arrayOfExplosions = [];
 var particles = new ParticlePool(5000);
+var particlesStars = new ParticlePool(5000);
 
 var playerTurn = 0;
 var incrementTurn = false;
@@ -315,10 +316,10 @@ function handlingWeather() {
 } // end of handlingWeather
 
 function nightSky() {
-
 	var starlife;
-	
-	if(clockHour == 19) { // slowly fading in stars when night hits
+
+	if(dayTime == false){
+			if(clockHour == 19) { // slowly fading in stars when night hits
 		starSpawning = Math.random();
 
 		if(starSpawning <= .8){
@@ -330,54 +331,38 @@ function nightSky() {
 		}
 	}
 
-	if(clockHour == 20) {
-		starlife = rndFloat(300,900);
-	}
+		if(clockHour == 20) {
+			starlife = rndFloat(300,900);
+		}
 
-	if(clockHour >= 21) {
-		starlife = 900;
-	}
-
-	if(clockHour <= 5) {
-		starlife = 900;
-	}
-
-	if(clockHour == 6) { // fading out stars before morning hits
-		if (clockMinute >= 15){
-			starlife = 0;
-		} else { 
+		if(clockHour >= 21) {
 			starlife = 900;
 		}
-	}
-	//console.log(starlife);
-	
 
-	/*
-	if (clockHour == 19 && clockMinute >= 30) { // rises the numbers of starts in sky
-		starSpawning = Math.random();
-
-		if(starSpawning <= .49){
-			starlife = 0;
+		if(clockHour <= 5) {
+			starlife = 900;
 		}
 
-		if (starSpawning >= .5){
-			starlife = rndFloat(500,900);
+		if(clockHour == 6) { // fading out stars before morning hits
+			if (clockMinute >= 15){
+				starlife = 0;
+			} else { 
+				starlife = 900;
+			}
 		}
-	}
-	*/
-
-	
-	let stars = 2;
-	while(--stars){
-		particles.spawn(
-		rndFloat(0, canvas.width), //spawning point for x
-		rndFloat(0, canvas.height), // spawning point for y
-		0, // how much it sways as its falling 
-		0, // dropping speed
-		1,
-		1,
-		starlife,
-		0)
+		
+		let stars = 2;
+		while(--stars){
+			particlesStars.spawn(
+			rndFloat(0, canvas.width), //spawning point for x
+			rndFloat(0, canvas.height), // spawning point for y
+			0, // how much it sways as its falling 
+			0, // dropping speed
+			1,
+			1,
+			starlife,
+			0)
+		}
 	}
 	
 }
@@ -413,7 +398,6 @@ function dayNight() {
 		}
 
 		nightSky();
-
 	}
 
 	//morning sky transition

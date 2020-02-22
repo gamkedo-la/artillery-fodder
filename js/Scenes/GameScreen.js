@@ -9,7 +9,9 @@ function modeGame(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
 	//draw stars
-	//nightSky();
+	
+	particlesStars.update(frameTime);
+	particlesStars.draw();
 
 	//cloud movement & cycling
 	for (let i=0; i<cloudPositions.length; i++) {
