@@ -44,14 +44,9 @@ function modeGame(frameTime) {
 		arrayOfPlayers[i].draw(frameTime);
 	}
 	//Update and draw shots
-	for (var i = 0; i < arrayOfProjectiles.length; i++) {
-		arrayOfProjectiles[i].update(frameTime);
-		arrayOfProjectiles[i].draw(frameTime);
-	}
-	//Update and draw explosions
-	for (var i = 0; i < arrayOfExplosions.length; i++) {
-		arrayOfExplosions[i].update(frameTime);
-		arrayOfExplosions[i].draw(frameTime);
+	for (var i = 0; i < arrayOfTemporaryObjects.length; i++) {
+		arrayOfTemporaryObjects[i].update(frameTime);
+		arrayOfTemporaryObjects[i].draw(frameTime);
 	}
 
 	//particles

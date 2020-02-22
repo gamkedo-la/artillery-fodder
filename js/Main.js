@@ -3,8 +3,7 @@ var framesPerSecond = 30;
 
 var numberOfPlayers = 4;
 var arrayOfPlayers = [];
-var arrayOfProjectiles = [];
-var arrayOfExplosions = [];
+var arrayOfTemporaryObjects = [];
 var particles = new ParticlePool(5000);
 var particlesStars = new ParticlePool(5000);
 
@@ -221,8 +220,7 @@ function startMatch() {
 		arrayOfPlayers[i].active = true;
 	}
 	incrementTurn = false;
-	arrayOfProjectiles = [];
-	arrayOfExplosions = [];
+	arrayOfTemporaryObjects = [];
 
 	arrayOfPlayers[0].myTurn = true;
 	buildTankSkinsSheet();
@@ -497,20 +495,14 @@ function nextTurn() {
 
 
 function cleanLists() {
-	for (var i = 0; i < arrayOfProjectiles.length; i++) {
-		if (!arrayOfProjectiles[i].active) {
-			arrayOfProjectiles.splice(i, 1);
-			i--;
-		}
-	}
-	for (var i = 0; i < arrayOfExplosions.length; i++) {
-		if (!arrayOfExplosions[i].active) {
-			arrayOfExplosions.splice(i, 1);
+	for (var i = 0; i < arrayOfTemporaryObjects.length; i++) {
+		if (!arrayOfTemporaryObjects[i].active) {
+			arrayOfTemporaryObjects.splice(i, 1);
 			i--;
 		}
 	}
 
-	if (incrementTurn && arrayOfExplosions.length <= 0 && arrayOfProjectiles.length <= 0) {
+	if (incrementTurn && arrayOfTemporaryObjects.length <= 0) {
 		nextTurn();
 	}
 }

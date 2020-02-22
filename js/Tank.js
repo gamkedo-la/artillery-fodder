@@ -303,7 +303,7 @@ function tankPlayerClass() {
 		newProjectile.y = this.y - 10;
 		newProjectile.tank = this;
 		newProjectile.launch(this.angle, this.power*2.65);
-		arrayOfProjectiles.push(newProjectile);
+		arrayOfTemporaryObjects.push(newProjectile);
 
 		soundFire.play();
         this.muzzleFlash();
@@ -702,7 +702,7 @@ function tankBrainlessClass() {
 		newProjectile.y = this.y - 10;
 		newProjectile.tank = this;
 		newProjectile.launch(this.angle, this.power*2.65);
-		arrayOfProjectiles.push(newProjectile);
+		arrayOfTemporaryObjects.push(newProjectile);
 
 		soundFire.play();
 

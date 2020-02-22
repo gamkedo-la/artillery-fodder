@@ -125,6 +125,6 @@ function multiExplosionClass() {
 		newExplosion.tank = this.tank;
 		newExplosion.numberOfIterations = this.numberOfIterations - 1;
 		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 	}
 }

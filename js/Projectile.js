@@ -102,7 +102,7 @@ function basicShotClass() {
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		newExplosion.particles = this.tail;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 
 		incrementTurn = true;
 	}
@@ -134,7 +134,7 @@ function threeShotClass() {
 		newProjectileC.size = this.size;
 		newProjectileC.tank = this.tank;
 		newProjectileC.launch(angle, power);
-		arrayOfProjectiles.push(newProjectileC);
+		arrayOfTemporaryObjects.push(newProjectileC);
 
 		var newProjectileL = new basicShotClass();
 		newProjectileL.x = this.x;
@@ -142,7 +142,7 @@ function threeShotClass() {
 		newProjectileL.size = this.size;
 		newProjectileL.tank = this.tank;
 		newProjectileL.launch(angle+5, power);
-		arrayOfProjectiles.push(newProjectileL);
+		arrayOfTemporaryObjects.push(newProjectileL);
 
 		var newProjectileR = new basicShotClass();
 		newProjectileR.x = this.x;
@@ -150,7 +150,7 @@ function threeShotClass() {
 		newProjectileR.size = this.size;
 		newProjectileR.tank = this.tank;
 		newProjectileR.launch(angle-5, power);
-		arrayOfProjectiles.push(newProjectileR);
+		arrayOfTemporaryObjects.push(newProjectileR);
 	}
 }
 
@@ -364,7 +364,7 @@ function rollShotClass() {
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 
 		incrementTurn = true;
 	}
@@ -432,7 +432,7 @@ function crazyBombShotClass() {
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 
 		incrementTurn = true;
 	}
@@ -532,7 +532,7 @@ function meteorClashClass() {
 		newExplosion.color = "Black";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 
 		skyFlickersNow = true;
 		incrementTurn = true;
@@ -568,7 +568,7 @@ function rainShot(){
 			newProjectile.tank = this.tank;
 			newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
 			newProjectile.tail = false;
-			arrayOfProjectiles.push(newProjectile);
+			arrayOfTemporaryObjects.push(newProjectile);
 		}
 		
 	}
@@ -669,7 +669,7 @@ function groundShotClass() {
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
-		arrayOfExplosions.push(newExplosion);
+		arrayOfTemporaryObjects.push(newExplosion);
 
 		incrementTurn = true;
 	}
