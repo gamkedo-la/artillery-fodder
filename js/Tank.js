@@ -282,6 +282,9 @@ function tankPlayerClass() {
 			case 9://Rain Shot
 				newProjectile = new rainShot();
 				break;
+			case 10://Ground Shot
+				newProjectile = new groundShotClass();
+				break;
 		}
 
 		this.weaponInventory[this.weapon] -= 1;
@@ -677,6 +680,9 @@ function tankBrainlessClass() {
 				break;
 			case 9://Rain Shot
 				newProjectile = new rainShot();
+				break;
+			case 10://Ground Shot
+				newProjectile = new groundShotClass();
 				break;
 		}
 

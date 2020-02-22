@@ -1,4 +1,4 @@
-const WEAPON_LIST_MAX = 9
+const WEAPON_LIST_MAX = 10
 var arrayOfWeaponBlocks = [];
 var projectileNameList = ["Basic Shot",
 						  "Three Shot",
@@ -9,7 +9,8 @@ var projectileNameList = ["Basic Shot",
 						  "Roller",
 						  "Crazy Bomb",
 						  "Meteor Clash",
-						  "Rain Shot"];
+						  "Rain Shot",
+						  "Ground Shot"];
 var weaponInventoryMaster = [-1,//Basic Shot
 							 -1,//Three Shot
 							 1,//Sniper Shot
@@ -19,7 +20,8 @@ var weaponInventoryMaster = [-1,//Basic Shot
 							 3,//Roller
 							 1,//Crazy Bomb
 							 2, //Meteor Clash
-							 5] // Rain Shot
+							 5,
+							 3] // Rain Shot
 
 function modeInventory(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "purple");

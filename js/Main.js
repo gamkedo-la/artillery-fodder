@@ -349,7 +349,7 @@ function nightSky() {
 			starlife = 900;
 		}
 	}
-	console.log(starlife);
+	//console.log(starlife);
 	
 
 	/*
