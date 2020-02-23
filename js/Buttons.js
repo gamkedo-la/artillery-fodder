@@ -260,7 +260,7 @@ class buttonsInit
 									 this._buttonSize,
 									 "Red",
 									 "unPause",
-									 GAME_MODE,
+									 GO_TO_PREV_MODE,
 									 Key.SPACE,
 									"space_key",
 									 90,

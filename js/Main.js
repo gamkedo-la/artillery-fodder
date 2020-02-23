@@ -62,7 +62,9 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
+const GO_TO_PREV_MODE = 99;
 var mode = TITLE_SCREEN;
+var prevMode = mode;
 
 //Buttons : A button Manager to help to instance created buttons
 var btnManager=0;
@@ -89,6 +91,13 @@ window.onload = function() {
 	canvasContext = canvas.getContext('2d');
 	canvasContext.textAlign = "center";
 	mouseInit();
+
+	window.addEventListener('blur', function () {
+		if (mode === GAME_MODE) {
+			prevMode = mode;
+			mode = PAUSE_SCREEN;
+		}
+	});
 
 	imageLoader.loadImages().then(applicationStart);
 }
@@ -183,6 +192,9 @@ function update(frameTime) {
 		case PAUSE_SCREEN:
 			modePause(frameTime);
 			break;
+		case GO_TO_PREV_MODE:
+			modePrevMode(prevMode);
+			break;
 	}
 
 	if (Key.isJustPressed(Key.BRACKET_LEFT)){
@@ -200,6 +212,10 @@ function update(frameTime) {
 	btnManager.update();
 	
 	Key.update();
+}
+
+function modePrevMode(prevMode) {
+	mode = prevMode;
 }
 
 function startMatch() {
@@ -433,7 +449,6 @@ function dayNight() {
 }
 
 function inGameAnnoucements() {
-
 	if(destroyedHeadline || nextTurnHeadline) {
 		timerHeadline ++;
 
