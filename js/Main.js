@@ -82,6 +82,7 @@ var cloudPositions = [];
 var cloudImg;
 
 var buttonImg;
+var gameScreenOverlayImg;
 
 var map = new terrain();
 var SpeechRecognition = new SpeechRecognitionEngine();
@@ -134,6 +135,7 @@ function applicationStart() {
 
 
 	buttonImg = imageLoader.getImage("buttons");
+	gameScreenOverlayImg = imageLoader.getImage("gamescreen-overlay");
 
 	window.requestAnimationFrame(frameLoop);
 	

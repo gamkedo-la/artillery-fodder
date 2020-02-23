@@ -114,6 +114,8 @@ function modeGame(frameTime) {
 	btnManager.quitButton.draw()
 	btnManager.pauseButton.draw()
 
+	canvasContext.drawImage(gameScreenOverlayImg, 0, 0);
+
 	if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
 		arrayOfPlayers[playerTurn].angle += 45 * frameTime;
 	}
