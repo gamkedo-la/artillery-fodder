@@ -29,6 +29,10 @@ var clockMinuteCountdown = 0;
 var dayTime = true;
 var colorOfTextforClock;
 
+//damage amount indicator 
+var damageAmountIndicatorTimer = 0;
+var damageAmountFloat = 20;
+
 //sky 
 //variables for morning sky colors
 var skyColorGradient01 = 255;
@@ -482,6 +486,21 @@ function inGameAnnoucements() {
 			nextTurnHeadline = false;
 			fadeVariable = 1.0;
 			timerHeadline = 0;
+		}
+	}
+
+	if(damageAmountIndicator) {
+
+		damageAmountIndicatorTimer ++;
+
+		if(damageAmount > 0 && damageAmountIndicatorTimer <= 60)  {
+				colorText(Math.floor(damageAmount), damageAmountPosX + 20, damageAmountPosY - damageAmountFloat, 'red', "20px Arial");
+		}
+
+		damageAmountFloat += 1;
+
+		if(damageAmountIndicatorTimer >= 120) {
+			damageAmountIndicator = false;
 		}
 	}
 }

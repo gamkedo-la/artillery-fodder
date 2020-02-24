@@ -1,4 +1,7 @@
 var damageAmount;
+var damageAmountPosX;
+var damageAmountPosY;
+var damageAmountIndicator = false;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -159,9 +162,12 @@ function tankPlayerClass() {
 			w+10, h+10);
 		canvasContext.restore();
 
+		/*
 		if(damageAmount > 0) {
-			colorText(Math.floor(damageAmount), this.x + 20, this.y - 20, 'black', "20px Arial");
+				colorText(Math.floor(damageAmount), damageAmountPosX + 20, damageAmountPosY - 20, 'black', "20px Arial");
 		}
+		*/
+
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -191,6 +197,11 @@ function tankPlayerClass() {
 
 		console.log(amount);
 
+		if(damageAmount > 0) {
+			damageAmountIndicator = true;
+			damageAmountPosX = this.x;
+			damageAmountPosY = this.y;
+		}
 
 		if (this.health <= 0) {
 			this.destroy();
