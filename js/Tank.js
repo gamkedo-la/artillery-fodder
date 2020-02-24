@@ -258,7 +258,7 @@ function tankPlayerClass() {
 
 	this.fire = function fire() {
 
-        if(this.weaponInventory[this.weapon] == 0) {
+        if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
 
@@ -661,6 +661,11 @@ function tankBrainlessClass() {
 	}
 
 	this.fire = function fire() {
+
+        if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
+			return;
+		}
+		
 		var newProjectile;
 		switch (this.weapon) {
 			case 0://Basic Shot
