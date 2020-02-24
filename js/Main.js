@@ -32,6 +32,7 @@ var colorOfTextforClock;
 //damage amount indicator 
 var damageAmountIndicatorTimer = 0;
 var damageAmountFloat = 20;
+var damageAmountShake = 20;
 
 //sky 
 //variables for morning sky colors
@@ -493,14 +494,18 @@ function inGameAnnoucements() {
 
 		damageAmountIndicatorTimer ++;
 
-		if(damageAmount > 0 && damageAmountIndicatorTimer <= 60)  {
-				colorText(Math.floor(damageAmount), damageAmountPosX + 20, damageAmountPosY - damageAmountFloat, 'red', "20px Arial");
+		if(damageAmount > 0 && damageAmountIndicatorTimer <= 40 )  {
+				colorText(Math.floor(damageAmount), damageAmountPosX + damageAmountShake, damageAmountPosY - damageAmountFloat, 'red', "20px Arial");
 		}
 
-		damageAmountFloat += 1;
+		damageAmountFloat += 0.5;
+		damageAmountShake = rndFloat(5,8);
 
-		if(damageAmountIndicatorTimer >= 120) {
+		if(damageAmountIndicatorTimer >= 40) {
 			damageAmountIndicator = false;
+			damageAmountIndicatorTimer = 0;
+			damageAmountFloat = 20;
+			damageAmountShake = 20;
 		}
 	}
 }
