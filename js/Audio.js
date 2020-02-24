@@ -11,21 +11,21 @@ var soundExplosion = new soundRandomClass(["./audio/sfx/explosion-01.mp3",
 
 var soundHit = new soundOverlapsClass("./audio/sfx/basic-hit-01.mp3");
 
+var soundt01 = new soundLoopsClass("./audio/t01.mp3");
+var soundt02 = new soundLoopsClass("./audio/t02.mp3");
+var soundt03 = new soundLoopsClass("./audio/t03.mp3");
+var soundt04 = new soundLoopsClass("./audio/t04.mp3");
+var soundt05 = new soundLoopsClass("./audio/t05.mp3");
+var soundt06 = new soundLoopsClass("./audio/t06.mp3");
+
 var gameMusic = ["./audio/music/gameplayMusicV1.mp3"]
 
 var backgroundMusic = new backgroundMusicClass();
 backgroundMusic.loadTracks(gameMusic);
 
+var musicVolume = 0.7;
+var effectsVolume = 0.7;
 
-var musicVolume = localStorage.getItem("musicVolume");
-var effectsVolume = localStorage.getItem("effectsVolume");
-
-if(musicVolume === null){
-	musicVolume = 0.7;
-}
-if(effectsVolume === null){
-	effectsVolume = 0.7;
-}
 
 var isMuted = false;
 const VOLUME_INCREMENT = 0.05;
@@ -101,6 +101,23 @@ function backgroundMusicClass() {
 		}
 
 		timeLeft -= frameTime;
+	}
+}
+
+function soundLoopsClass(filenameWithPath) {
+
+	var fullFilename = filenameWithPath;
+	var sound = new Audio(fullFilename);
+	sound.loop = true;
+
+	this.play = function() {
+		sound.currentTime = 0;
+		sound.volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
+		sound.play();
+	}
+
+	this.stop = function() {
+		sound.pause();
 	}
 }
 
