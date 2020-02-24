@@ -160,7 +160,13 @@ function tankPlayerClass() {
 			30, 20, 
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);
-		canvasContext.restore();
+        canvasContext.restore();
+        
+        // possibly draw the health bar
+        if (this.isPointColliding(mouseX,mouseY)) {
+            // console.log('the mouse is hovering me!');
+            // drawHealthbar(this.x,this.y,this.health);
+        }
 
 	}
 
