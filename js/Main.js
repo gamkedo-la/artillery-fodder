@@ -455,6 +455,15 @@ function dayNight() {
 	handlingWeather();
 }
 
+	
+	function checkingTankHealth() {
+
+	if(isMouseInArea(damageAmountPosX, damageAmountPosY, 30, 30)) {
+		console.log("tank health");
+	}
+				
+}
+
 function inGameAnnoucements() {
 	if(destroyedHeadline || nextTurnHeadline) {
 		timerHeadline ++;

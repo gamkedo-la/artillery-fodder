@@ -4,6 +4,7 @@ window.addEventListener('keydown',  function (event) { Key.onKeydown(event); eve
 function mouseInit() {
 	document.addEventListener('mousedown', mouseDown);
 	document.addEventListener('mouseup', mouseUp);
+	document.addEventListener('mousemove', checkingTankHealth);
 	document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
 }
 

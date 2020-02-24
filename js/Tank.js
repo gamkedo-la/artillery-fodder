@@ -162,12 +162,6 @@ function tankPlayerClass() {
 			w+10, h+10);
 		canvasContext.restore();
 
-		/*
-		if(damageAmount > 0) {
-				colorText(Math.floor(damageAmount), damageAmountPosX + 20, damageAmountPosY - 20, 'black', "20px Arial");
-		}
-		*/
-
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -222,6 +216,8 @@ function tankPlayerClass() {
 
 		}
 	}
+
+
 
     this.muzzleFlash = function() {
         //console.log('muzzy!');
