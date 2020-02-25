@@ -170,7 +170,18 @@ function tankPlayerClass() {
 	}
 
 	function drawHealthbar(x, y, tankHealth) {
-		colorText(tankHealth, x , y - 30, 'black', font = "20px Arial");
+        
+        var barx = x-26;
+        var bary = y-46;
+        var barw = 52;
+        var barh = 20;
+        canvasContext.fillStyle = "rgba(128,0,0,1)";
+        canvasContext.fillRect(barx,bary,barw,barh);
+        canvasContext.fillStyle = "rgba(255,0,0,1)";
+        canvasContext.fillRect(barx,bary,barw*(tankHealth/100),barh);
+
+        colorText(tankHealth + "HP", x , y - 30, 'white', font = "16px Arial");
+        
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
