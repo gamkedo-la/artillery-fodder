@@ -25,7 +25,10 @@ function tankPlayerClass() {
 
 	this.weapon = 0;
 	this.weaponInventory = [];
-	this.weaponIndextIncreesing = true;
+    this.weaponIndextIncreesing = true;
+    
+    const showHealthBarAfterDamageFramecount = 200;
+    this.recentDamageDisplayFrames = 0; // show health bar for a while after getting hit
 
 	this.update = function update(frameTime) {
 
@@ -163,7 +166,9 @@ function tankPlayerClass() {
         canvasContext.restore();
         
         // Draw the health bar
-        if (this.isPointColliding(mouseX,mouseY)) {
+        if (this.isPointColliding(mouseX,mouseY) ||
+            (this.recentDamageDisplayFrames-- > 0) // count down
+            ) {
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 
@@ -196,6 +201,9 @@ function tankPlayerClass() {
 	this.takeDamage = function takeDamage(amount, angle = 270) {
 		this.health -= amount;
 		damageAmount = amount;
+
+        // display a health bar for a few seconds
+        this.recentDamageDisplayFrames = showHealthBarAfterDamageFramecount;
 
 		let splodes = Math.round(amount);
 		while(--splodes){
