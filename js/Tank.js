@@ -164,7 +164,6 @@ function tankPlayerClass() {
         
         // Draw the health bar
         if (this.isPointColliding(mouseX,mouseY)) {
-            console.log('the mouse is hovering me!');
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 
@@ -311,6 +310,9 @@ function tankPlayerClass() {
 				break;
 			case 10://Ground Shot
 				newProjectile = new groundShotClass();
+				break;
+			case 11://Grenade
+				newProjectile = new grenadeShot();
 				break;
 		}
 
