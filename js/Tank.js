@@ -9,7 +9,9 @@ function tankPlayerClass() {
 	this.angle = 90;
 	this.power = 75;
 	this.health = 100;
-	this.name = "Player";
+    this.name = "Player";
+    
+    this.usesAI = false; // FIXME: set this in the player select screen
 
 	var w = 20;
 	var h = 10;
@@ -29,6 +31,50 @@ function tankPlayerClass() {
     
     const showHealthBarAfterDamageFramecount = 200;
     this.recentDamageDisplayFrames = 0; // show health bar for a while after getting hit
+
+    // this is the number of frames the AI has decided to press each button
+    var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:1 };
+
+    this.aiThink = function() { // run every frame that is myturn
+        console.log(this.name + " AI thinking...");
+        
+        // desires slowly subside
+        if (ai.left) ai.left--;
+        if (ai.right) ai.right--;
+        if (ai.next) ai.next--;
+        if (ai.prev) ai.prev--;
+        if (ai.up) ai.up--;
+        if (ai.down) ai.down--;
+
+        // if we fired last time, reset
+        if (ai.fire) {
+            console.log("ai fired last frame - time for a new plan!");
+            // choose a new action for a few frames
+            var rand = rndInt(1,100);
+            if (rand<30) ai.left = rndInt(10,60);
+            else if (rand<60) ai.right = rndInt(10,60);
+            else if (rand<70) ai.next = rndInt(1,5);
+            else if (rand<80) ai.prev = rndInt(1,5);
+            else if (rand<90) ai.up = rndInt(1,5);
+            else ai.down = rndInt(1,5);
+        }
+
+        console.log('ai state:'+' L'+ai.left+' R'+ai.right+' N'+ai.next+' P'+ai.prev+' U'+ai.up+' D'+ai.down);
+        
+        // how busy are we
+        var pending = (ai.left>0)||(ai.right>0)||(ai.next>0)||(ai.prev>0)||(ai.up>0)||(ai.down>0);
+        
+        // when nothing is left to do, FIRE!
+        if (!pending) {
+            console.log("ai is idle: time to fire!");
+            ai.fire=1;
+        } else {
+            console.log("ai is busy doing stuff");
+            ai.fire=0;
+        }
+
+
+    }
 
 	this.update = function update(frameTime) {
 
@@ -67,29 +113,31 @@ function tankPlayerClass() {
 		if (this.myTurn) {
 			if (this.active) {
 
+                if (this.usesAI) this.aiThink();
+
 				//Input
-                if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand()){
+                if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand() || ai.fire){
 					if(this.weaponInventory[this.weapon] != 0) {
 						this.fire();
 					}
 				}
-				if (Key.isDown(Key.LEFT)){
+				if (Key.isDown(Key.LEFT) || ai.left){
 					this.angle += 45 * frameTime;
 				}
-				if (Key.isDown(Key.RIGHT)){
+				if (Key.isDown(Key.RIGHT) || ai.right){
 					this.angle -= 45 * frameTime;
 				}
-				if (Key.isDown(Key.UP)){
+				if (Key.isDown(Key.UP) || ai.up){
 					this.power += 20 * frameTime;
 				}
-				if (Key.isDown(Key.DOWN)){
+				if (Key.isDown(Key.DOWN) || ai.down){
 					this.power -= 20 * frameTime;
 				}
-				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand()){
+				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand() || ai.prev){
 					this.weapon--;
 					this.weaponIndextIncreesing = false;
 				}
-				if (Key.isJustPressed(Key.PERIOD) || SpeechRecognition.pendingNextCommand()){
+				if (Key.isJustPressed(Key.PERIOD) || SpeechRecognition.pendingNextCommand() || ai.next){
 					this.weapon++;
 					this.weaponIndextIncreesing = true;
 				}
