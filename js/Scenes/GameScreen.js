@@ -155,4 +155,41 @@ function modeGame(frameTime) {
 		mode = PAUSE_SCREEN;
 	}
 
+	//hooks for sound
+	if (Key.isJustPressed(Key.COMMA) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt01.play();
+	} else if (Key.isJustReleased(Key.COMMA) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt01.stop();
+	}
+
+	if (Key.isJustPressed(Key.DOWN) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt02.play();
+	} else if (Key.isJustReleased(Key.DOWN) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt02.stop();
+	}
+
+	if (Key.isJustPressed(Key.LEFT) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt03.play();
+	} else if (Key.isJustReleased(Key.LEFT) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt03.stop();
+	}
+
+	if (Key.isJustPressed(Key.RIGHT) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt04.play();
+	} else if (Key.isJustReleased(Key.RIGHT) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt04.stop();
+	}
+
+	if (Key.isJustPressed(Key.UP) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt05.play();
+	} else if (Key.isJustReleased(Key.UP) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt05.stop();
+	}
+
+	if (Key.isJustPressed(Key.PERIOD) && arrayOfPlayers[playerTurn].myTurn) {
+		soundt06.play();
+	} else if (Key.isJustReleased(Key.PERIOD) || !arrayOfPlayers[playerTurn].myTurn) {
+		soundt06.stop();
+	}
+
 }

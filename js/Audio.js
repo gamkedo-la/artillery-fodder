@@ -1,3 +1,5 @@
+
+//define sounds
 var soundFire = new soundRandomClass(["./audio/sfx/rocket-launch-01.mp3",
 									  "./audio/sfx/rocket-launch-02.mp3",
 									  "./audio/sfx/rocket-launch-03.mp3",
@@ -23,10 +25,9 @@ var gameMusic = ["./audio/music/gameplayMusicV1.mp3"]
 var backgroundMusic = new backgroundMusicClass();
 backgroundMusic.loadTracks(gameMusic);
 
+//sound classes
 var musicVolume = 0.7;
 var effectsVolume = 0.7;
-
-
 var isMuted = false;
 const VOLUME_INCREMENT = 0.05;
 
@@ -111,9 +112,11 @@ function soundLoopsClass(filenameWithPath) {
 	sound.loop = true;
 
 	this.play = function() {
-		sound.currentTime = 0;
-		sound.volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
-		sound.play();
+		if (sound.paused) {
+			sound.currentTime = 0;
+			sound.volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
+			sound.play();
+		}
 	}
 
 	this.stop = function() {
@@ -164,6 +167,7 @@ function soundRandomClass(arrayOfFilenames) {
 	}
 }
 
+//sound functions
 function getRandomVolume(){
 	var min = 0.9;
 	var max = 1;
@@ -198,9 +202,11 @@ function setMusicVolume(amount) {
 function turnVolumeUp() {
 	setMusicVolume(musicVolume + VOLUME_INCREMENT);
 	setEffectsVolume(effectsVolume + VOLUME_INCREMENT);
+	console.log("Turn up volume");
 }
 
 function turnVolumeDown() {
 	setMusicVolume(musicVolume - VOLUME_INCREMENT);
 	setEffectsVolume(effectsVolume - VOLUME_INCREMENT);
+	console.log("Turn down volume");
 }
