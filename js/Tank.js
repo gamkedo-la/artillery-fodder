@@ -162,12 +162,16 @@ function tankPlayerClass() {
 			w+10, h+10);
         canvasContext.restore();
         
-        // possibly draw the health bar
+        // Draw the health bar
         if (this.isPointColliding(mouseX,mouseY)) {
-            // console.log('the mouse is hovering me!');
-            // drawHealthbar(this.x,this.y,this.health);
+            console.log('the mouse is hovering me!');
+            drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 
+	}
+
+	function drawHealthbar(x, y, tankHealth) {
+		colorText(tankHealth, x , y - 30, 'black', font = "20px Arial");
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
