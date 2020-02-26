@@ -684,6 +684,7 @@ function grenadeShot() {
 
 	var xVel = 0;
 	var yVel = 0;
+	var bounceNumber = 0;
 
 	this.active = false;
 	this.tail = true;
@@ -695,13 +696,6 @@ function grenadeShot() {
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
 
-			if (this.tail) {
-				let splodes = 2;
-				while(--splodes){
-					particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 2, 2, 40, 0 )
-				}
-			}
-
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
 					if (this.tank != arrayOfPlayers[i]) {
@@ -710,10 +704,10 @@ function grenadeShot() {
 				}
 			}
 
-			if (this.y >= canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
-				this.hit();
-			} else if (this.y >= canvas.height - UI_HEIGHT) {
-				this.hit();
+			if (this.y - 2 >= canvas.height - UI_HEIGHT - map.getHeightAtX(this.x)) {
+				this.bounce();
+			} else if (this.y - 2 >= canvas.height - UI_HEIGHT) {
+				this.bounce();
 			} else if (this.x < 0 || this.x > canvas.width) {
 				this.active = false;
 				incrementTurn = true;
@@ -723,6 +717,7 @@ function grenadeShot() {
 
 	this.draw = function draw(frameTime) {
 		colorCircle(this.x, this.y, 2, "Gray");
+		//console.log(Math.floor(yVel));
 	}
 
 	this.launch = function launch(angle, power) {
@@ -732,11 +727,22 @@ function grenadeShot() {
 		this.active = true;
 	}
 
-	this.hit = function hit() {
-		yVel = 0;
-					
-		this.active = false;
+	this.bounce = function bounce() {
+		console.log("bounce");
+		bounceNumber++;
+		
+		yVel *= -0.5;
+		xVel *= -0.5;
 
+		
+		if (bounceNumber >= 8) {
+			this.hit();
+		}
+	}
+
+	this.hit = function hit() {
+		this.active = false;
+		
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
@@ -747,25 +753,12 @@ function grenadeShot() {
 		newExplosion.active = true;
 		newExplosion.particles = this.tail;
 		arrayOfTemporaryObjects.push(newExplosion);
-
+		bounceNumber = 0;
+	
+			
 		incrementTurn = true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
