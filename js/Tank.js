@@ -555,8 +555,7 @@ function tankDummyClass() {
         
         // check to see if the game is over
         if (numberOfTanksAlive()<=1) {
-            alert("GAME OVER! ONLY ONE TANK LEFT!\nTODO: SHOW WIN/LOSE SCREEN HERE");
-            // FIXME TODO - show the win/lose screen
+            console.log("GAME OVER! ONLY ONE TANK LEFT!");
         }
 	}
 
