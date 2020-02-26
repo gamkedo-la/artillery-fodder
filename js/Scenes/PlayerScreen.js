@@ -203,8 +203,10 @@ function playerBlock(tankClass) {
 	}
 
 	this.setNewPlayerType = function() {
-		var newTank = new tankPlayerClass();
-		switch (playerType) {
+        
+        /* 
+        //old version with three classes
+        switch (playerType) {
 			case 0:
 				arrayOfPlayers[imageLookupOffset] = new tankPlayerClass();
 				break;
@@ -214,12 +216,27 @@ function playerBlock(tankClass) {
 			case 2:
 				arrayOfPlayers[imageLookupOffset] = new tankBrainlessClass();
 				break;
-		}
-
+        }
 		arrayOfPlayers[imageLookupOffset].name = name;
 		arrayOfPlayers[imageLookupOffset].color = color;
 		arrayOfPlayers[imageLookupOffset].tankSkinIndex = tankSkinIndex;
 		arrayOfPlayers[imageLookupOffset].imageLookupOffset = imageLookupOffset;
 		this.tank = arrayOfPlayers[imageLookupOffset];
+        */
+
+        // new version - all tanks are tankPlayerClass, with AI flag set
+        var newTank = new tankPlayerClass();
+        newTank.name = name;
+        if (playerType>0) {
+            newTank.usesAI = true;
+            newTank.name = "AI " + name;
+        }
+		newTank.color = color;
+		newTank.tankSkinIndex = tankSkinIndex;
+		newTank.imageLookupOffset = imageLookupOffset;
+        
+        arrayOfPlayers[imageLookupOffset] = newTank;
+        this.tank = newTank;
+
 	}
 }

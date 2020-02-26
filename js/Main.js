@@ -455,6 +455,16 @@ function dayNight() {
 	handlingWeather();
 }
 
+// used to detect if we need to trigger game over in tank.destroy()
+function numberOfTanksAlive() {
+    var count = 0;
+    for (i=0; i<arrayOfPlayers.length; i++) {
+        if (arrayOfPlayers[i].active) count++;
+    }
+    console.log("Number of tanks left: " + count);
+    return count;
+}
+
 function inGameAnnoucements() {
 	if(destroyedHeadline || nextTurnHeadline) {
 		timerHeadline ++;

@@ -33,11 +33,15 @@ function tankPlayerClass() {
     this.recentDamageDisplayFrames = 0; // show health bar for a while after getting hit
 
     // this is the number of frames the AI has decided to press each button
-    var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:1 };
+    var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:0,init:0 };
 
     this.aiThink = function() { // run every frame that is myturn
         console.log(this.name + " AI thinking...");
         
+        // the first time around, create a new brain
+        // these numbers say: how many frames should I push this button?
+        if (!ai.init) ai = { left:0,right:0,next:0,prev:0,up:0,down:0,init:1,fire:1 };
+
         // desires slowly subside
         if (ai.left) ai.left--;
         if (ai.right) ai.right--;
@@ -547,7 +551,13 @@ function tankDummyClass() {
 				particles.spawn(this.x, this.y - 10, rndFloat(-40,40), rndFloat(-40,0), 2, 2, 60, 0 )
 			}
 
-		}
+        }
+        
+        // check to see if the game is over
+        if (numberOfTanksAlive()<=1) {
+            alert("GAME OVER! ONLY ONE TANK LEFT!\nTODO: SHOW WIN/LOSE SCREEN HERE");
+            // FIXME TODO - show the win/lose screen
+        }
 	}
 
 	this.fire = function fire() {
