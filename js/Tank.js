@@ -55,12 +55,12 @@ function tankPlayerClass() {
             console.log("ai fired last frame - time for a new plan!");
             // choose a new action for a few frames
             var rand = rndInt(1,100);
-            if (rand<30) ai.left = rndInt(10,60);
-            else if (rand<60) ai.right = rndInt(10,60);
+            if (rand<30) ai.left = rndInt(20,90);
+            else if (rand<60) ai.right = rndInt(20,90);
             else if (rand<70) ai.next = rndInt(1,5);
             else if (rand<80) ai.prev = rndInt(1,5);
-            else if (rand<90) ai.up = rndInt(1,5);
-            else ai.down = rndInt(1,5);
+            else if (rand<90) ai.up = rndInt(2,10);
+            else ai.down = rndInt(2,10);
         }
 
         console.log('ai state:'+' L'+ai.left+' R'+ai.right+' N'+ai.next+' P'+ai.prev+' U'+ai.up+' D'+ai.down);
@@ -126,16 +126,16 @@ function tankPlayerClass() {
 					}
 				}
 				if (Key.isDown(Key.LEFT) || ai.left){
-					this.angle += 45 * frameTime;
+					this.angle += 30 * frameTime;
 				}
 				if (Key.isDown(Key.RIGHT) || ai.right){
-					this.angle -= 45 * frameTime;
+					this.angle -= 30 * frameTime;
 				}
 				if (Key.isDown(Key.UP) || ai.up){
-					this.power += 20 * frameTime;
+					this.power += 10 * frameTime;
 				}
 				if (Key.isDown(Key.DOWN) || ai.down){
-					this.power -= 20 * frameTime;
+					this.power -= 10 * frameTime;
 				}
 				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand() || ai.prev){
 					this.weapon--;
@@ -218,9 +218,7 @@ function tankPlayerClass() {
         canvasContext.restore();
         
         // Draw the health bar
-        if (this.isPointColliding(mouseX,mouseY) ||
-            (this.recentDamageDisplayFrames-- > 0) // count down
-            ) {
+        if (this.isPointColliding(mouseX,mouseY)) {
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 

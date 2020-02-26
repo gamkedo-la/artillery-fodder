@@ -4,8 +4,8 @@ var framesPerSecond = 30;
 var numberOfPlayers = 4;
 var arrayOfPlayers = [];
 var arrayOfTemporaryObjects = [];
-var particles = new ParticlePool(5000);
-var particlesStars = new ParticlePool(5000);
+var particles = new ParticlePool(2000);
+var particlesStars = new ParticlePool(1000);
 
 var playerTurn = 0;
 var incrementTurn = false;
@@ -243,6 +243,7 @@ function startMatch() {
 		arrayOfPlayers[i].active = true;
 	}
 	incrementTurn = false;
+	playerTurn = 0;
 	arrayOfTemporaryObjects = [];
 
 	arrayOfPlayers[0].myTurn = true;
@@ -306,7 +307,7 @@ function skyFlickers() {
 function handlingWeather() {
 
 	if(weather == 1) { //rain
-		let rain = 30;
+		let rain = 15;
 			while(--rain){
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
@@ -321,7 +322,7 @@ function handlingWeather() {
 	}
 
 	if(weather == 2) { //snow or ashfall
-		let snow = 30;
+		let snow = 15;
 		while(--snow){
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x

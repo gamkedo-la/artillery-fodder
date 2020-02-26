@@ -24,9 +24,9 @@ function basicExplosionClass() {
 				soundExplosion.play();
 
 				if (this.particles) {
-					let splodes = 100;
+					let splodes = 50;
 					while(--splodes){
-						particles.spawn(this.x, this.y, rndFloat(-120,120), rndFloat(-100,-300), 10, 10, 40, 1 )
+						particles.spawn(this.x, this.y, rndFloat(-7,7)*this.size, rndFloat(-1,-10)*this.size, 10, 10, rndFloat(20, 30), 1 )
 					}
 				}
 
