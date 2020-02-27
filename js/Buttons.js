@@ -281,11 +281,7 @@ class buttonsInit
 									 32,
 									 90,
 									 "Green"
-									 )
-
-	
-	
-	
+									 )	
 	}
 	
 	//This function is called in main.js update function
@@ -316,6 +312,10 @@ class buttonsInit
 				break;
 			
 			case INVENTORY_SCREEN:
+				this.mainMenuButton.process()
+				break;
+
+			case CAMPAIGN_SCREEN:
 				this.mainMenuButton.process()
 				break;
 			
