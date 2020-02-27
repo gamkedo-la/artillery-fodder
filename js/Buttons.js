@@ -118,10 +118,11 @@ class buttonsInit
 		this._buttonSize=32
 		this._padding=5
 		this._buttonLength=180
+		this._firstButtonPosY = 200
 		
 		
 	 this.gameButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
-										 canvas.height/2,
+										 this._firstButtonPosY,
 										 this._buttonLength,
 										 this._buttonSize,
 										 "Red",
@@ -133,9 +134,22 @@ class buttonsInit
 										 32,
 										 90,
 										 )
+	this.campaignButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
+													 this._buttonLength,
+													 this._buttonSize,
+													 "Chocolate",
+													 "Campaign",
+													 CAMPAIGN_SCREEN,
+													 Key.r,
+													 "r_key",
+													 32,
+													 32,
+													 40,
+													 )
 									   
 	this.playerSelectionButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 1,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Green",
@@ -149,7 +163,7 @@ class buttonsInit
 													 )
 	 
 	this.weaponInventoryButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 2,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 3,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Blue",
@@ -163,7 +177,7 @@ class buttonsInit
 													 )
 													
 	this.terrainScreenButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 3,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 4,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "DarkSlateBlue",
@@ -177,7 +191,7 @@ class buttonsInit
 													 )
 	
 	this.controlsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 4,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 5,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Violet",
@@ -191,7 +205,7 @@ class buttonsInit
 													 )
 	
 	this.optionsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 5,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 6,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Brown",
@@ -205,7 +219,7 @@ class buttonsInit
 													 )
 	
 	this.creditsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (canvas.height/2)+ (this._buttonSize + this._padding) * 6,
+													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 7,
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Chocolate",
@@ -268,6 +282,7 @@ class buttonsInit
 									 90,
 									 "Green"
 									 )
+
 	
 	
 	
@@ -293,6 +308,7 @@ class buttonsInit
 				this.controlsButton.process()
 				this.optionsButton.process()
 				this.creditsButton.process()
+				this.campaignButton.process()
 				break;
 				
 			case PAUSE_SCREEN:

@@ -22,6 +22,7 @@ function modeMainMenu(frameTime) {
 	btnManager.controlsButton.draw()
 	btnManager.optionsButton.draw()
 	btnManager.creditsButton.draw()
+	btnManager.campaignButton.draw()
 
 
 

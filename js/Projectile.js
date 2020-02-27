@@ -734,6 +734,7 @@ function grenadeShot() {
 		yVel *= -0.5;
 		xVel *= -0.5;
 
+		console.log(yVel);
 		
 		if (bounceNumber >= 8) {
 			this.hit();

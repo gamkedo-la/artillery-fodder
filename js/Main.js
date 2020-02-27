@@ -67,6 +67,7 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
+const CAMPAIGN_SCREEN = 11;
 const GO_TO_PREV_MODE = 99;
 var mode = TITLE_SCREEN;
 var prevMode = mode;
@@ -198,6 +199,9 @@ function update(frameTime) {
 			break;
 		case PAUSE_SCREEN:
 			modePause(frameTime);
+			break;
+		case CAMPAIGN_SCREEN:
+			modeCampaign(frameTime);
 			break;
 		case GO_TO_PREV_MODE:
 			modePrevMode(prevMode);
