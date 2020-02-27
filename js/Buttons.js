@@ -9,6 +9,8 @@
 	Functionality
 */
 
+var norestart=false
+
 class buttonFactory
 {
 	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sethover=true,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
@@ -32,7 +34,6 @@ class buttonFactory
 		this.sprite_animateTarget=this.x-this.spriteOffset
 		this.size_animateTarget=this.x
 		this.textColor=_textColor
-		this.norestart=false
 	}
 
 	process()
@@ -51,7 +52,7 @@ class buttonFactory
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					if(!this.norestart){startMatch()}
+					if(!norestart){startMatch()}
 					break;
 				
 				case PLAYER_SCREEN:
@@ -64,10 +65,11 @@ class buttonFactory
 					
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
+					norestart=false
 					break;
 				
 				case PAUSE_SCREEN:
-					this.norestart=true
+					norestart=true
 					
 				default:
 					break;
