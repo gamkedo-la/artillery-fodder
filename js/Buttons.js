@@ -327,7 +327,7 @@ class buttonsInit
 									 "Red",
 									 "Chapter 2",
 								     CAMPAIGN_SCREEN, // loophole placeholder destination
-								     Key.ONE,
+								     Key.TWO,
 									 true,
 									 //"space_key",
 									 90,
@@ -341,7 +341,7 @@ class buttonsInit
 									 "Red",
 									 "Chapter 3",
 								     CAMPAIGN_SCREEN, // loophole placeholder destination
-								     Key.ONE,
+								     Key.THREE,
 									 true,
 									 //"space_key",
 									 90,

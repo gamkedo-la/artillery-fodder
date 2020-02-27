@@ -1,12 +1,6 @@
 // Main Menu
 
-
-
-
 function modeMainMenu(frameTime) {
-
-
-
 
     Space_key=imageLoader.getImage("space_key")
 
