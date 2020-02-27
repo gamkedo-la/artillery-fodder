@@ -168,6 +168,7 @@ function frameLoop() {
 function update(frameTime) {	
 	switch (mode) {
 		case GAME_MODE:
+			prevMode=MAIN_MENU
 			modeGame(frameTime);
 			break;
 		case TITLE_SCREEN:
@@ -230,11 +231,13 @@ function modePrevMode(prevMode) {
 }
 
 function startMatch() {
-	console.log("Start Match");
-
-	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-
+	console.log(prevMode)
+	if (prevMode != PAUSE_SCREEN)
+	{
+		groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	}
+	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);

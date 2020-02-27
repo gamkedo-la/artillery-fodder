@@ -597,7 +597,7 @@ function groundShotClass() {
 				this.x += xVel * frameTime;
 				this.y += yVel * frameTime;
 			} else {
-				yVel -= 90 * frameTime;
+				yVel -= 180 * frameTime;
 
 				this.x += xVel * frameTime;
 				this.y += yVel * frameTime;
