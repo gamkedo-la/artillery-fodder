@@ -38,6 +38,11 @@ function modeGame(frameTime) {
     // Draw grass/pebbles/cracks/etc
     decorations.draw();
 
+	canvasContext.drawImage(gameScreenOverlayImg, 0, 0);
+
+	btnManager.quitButton.draw()
+	btnManager.pauseButton.draw()
+
 	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].update(frameTime);
@@ -53,7 +58,6 @@ function modeGame(frameTime) {
 
 
 	//Draw UI section
-	colorRect(0, canvas.height - UI_HEIGHT, canvas.width, canvas.height, "Grey");
 	colorRect(canvas.width*1/3 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
 	colorRect(canvas.width*2/3 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
 	colorRect(canvas.width*1/4 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
@@ -111,10 +115,6 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
-	canvasContext.drawImage(gameScreenOverlayImg, 0, 0);
-
-	btnManager.quitButton.draw()
-	btnManager.pauseButton.draw()
 
 	if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
 		arrayOfPlayers[playerTurn].angle += 45 * frameTime;
