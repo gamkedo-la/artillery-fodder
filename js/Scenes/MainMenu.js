@@ -16,13 +16,14 @@ function modeMainMenu(frameTime) {
 
 
 	btnManager.gameButton.draw()
+	btnManager.campaignButton.draw()
 	btnManager.playerSelectionButton.draw()
 	btnManager.weaponInventoryButton.draw()
 	btnManager.terrainScreenButton.draw()
 	btnManager.controlsButton.draw()
 	btnManager.optionsButton.draw()
 	btnManager.creditsButton.draw()
-	btnManager.campaignButton.draw()
+
 
 
 
