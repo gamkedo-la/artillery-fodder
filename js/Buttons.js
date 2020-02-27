@@ -11,7 +11,7 @@
 
 class buttonFactory
 {
-	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
+	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sethover=true,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
 	{
 		this.x=_x;
 		this.y=_y;
@@ -25,30 +25,33 @@ class buttonFactory
 		this.spriteSizeX=_spriteSizeX;
 		this.spriteSizeY=_spriteSizeY;
 		this.spriteOffset=_offset;
-		this.hover=false;
+		this.sethover=_sethover;
+		this.hover=_sethover;
 		this.startPos=this.x+500
 		this.startSize=0
 		this.sprite_animateTarget=this.x-this.spriteOffset
 		this.size_animateTarget=this.x
 		this.textColor=_textColor
+		this.norestart=false
 	}
 
 	process()
 	{
 		//check for hover over
-		this.hover=isMouseInArea(this.x, this.y, this.sizeX,this.sizeY)? true : false
-	
-		var norestart=false
+		if(this.sethover)
+		{
+			this.hover=isMouseInArea(this.x, this.y, this.sizeX,this.sizeY)? true : false
+		}
+		
 		// checks for mouse hotspot and key input
 		if (isMouseInArea(this.x, this.y, this.sizeX,this.sizeY) && mouseJustPressed || Key.isJustPressed(this.key) ) 
 		{
-			console.log(mousePressed)
+			
 			mode=this.mode
-			if (mode==PAUSE_SCREEN) {norestart=true}
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					if(!norestart){startMatch()}
+					if(!this.norestart){startMatch()}
 					break;
 				
 				case PLAYER_SCREEN:
@@ -63,6 +66,9 @@ class buttonFactory
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
 					break;
 				
+				case PAUSE_SCREEN:
+					this.norestart=true
+					
 				default:
 					break;
 		
@@ -127,6 +133,7 @@ class buttonsInit
 										 "Start Game",
 									     GAME_MODE,
 									     Key.SPACE,
+										 true,
 										 "space_key",
 										 90,
 										 32,
@@ -141,6 +148,7 @@ class buttonsInit
 													 "Player Selection",
 													 PLAYER_SCREEN,
 													 Key.p, 
+													 true,
 													 "p_key",
 													 32,
 													 32,
@@ -155,6 +163,7 @@ class buttonsInit
 													 "Weapons Inventory",
 													 INVENTORY_SCREEN,
 													 Key.i,
+													 true,
 													 "i_key",
 													 32,
 													 32,
@@ -169,6 +178,7 @@ class buttonsInit
 													 "Terrain Screen",
 													 TERRAIN_SCREEN,
 													 Key.t,
+													 true,
 													 "t_key",
 													 32,
 													 32,
@@ -183,6 +193,7 @@ class buttonsInit
 													 "Controls",
 													 CONTROLS_SCREEN,
 													 Key.c,
+													 true,
 													 "c_key",
 													 32,
 													 32,
@@ -197,6 +208,7 @@ class buttonsInit
 													 "Options",
 													 OPTIONS_SCREEN,
 													 Key.o,
+													 true,
 													 "o_key",
 													 32,
 													 32,
@@ -211,6 +223,7 @@ class buttonsInit
 													 "Credits",
 													 CREDITS_SCREEN,
 													 Key.r,
+													 true,
 													 "r_key",
 													 32,
 													 32,
@@ -226,6 +239,7 @@ class buttonsInit
 										 "Main Menu",
 									     MAIN_MENU,
 									     Key.SPACE,
+										 true,
 										 "space_key",
 										 90,
 										 32,
@@ -234,23 +248,25 @@ class buttonsInit
 										 )
 	
 	this.quitButton = new buttonFactory(canvas.width-this._buttonLength,
-										 canvas.height-100,
+										 canvas.height-80,
 										 this._buttonLength,
 										 this._buttonSize,
 										 "Red",
 										 "Quit",
 									     MAIN_MENU,
 									     Key.q,
+										 false
 										 )
 	
 	this.pauseButton = new buttonFactory(0,
-									 canvas.height-100,
+									 canvas.height-80,
 									 this._buttonLength,
 									 this._buttonSize,
 									 "Red",
 									 "Pause",
 									 PAUSE_SCREEN,
 									 Key.p,
+									 false
 									 )
 									 
 	this.unPauseButton = new buttonFactory(canvas.width-this._buttonLength,
@@ -259,8 +275,9 @@ class buttonsInit
 									 this._buttonSize,
 									 "Red",
 									 "unPause",
-									 GO_TO_PREV_MODE,
+									 GAME_MODE,
 									 Key.SPACE,
+									 true,
 									"space_key",
 									 90,
 									 32,
@@ -272,7 +289,7 @@ class buttonsInit
 	
 	}
 	
-	//This function is called in main.js update function
+	//This function is called in main.js update function to draw and process the buttons
 	update(_frametime)
 	{
 		
@@ -302,6 +319,7 @@ class buttonsInit
 				this.mainMenuButton.process()
 				break;
 			
+				
 			default:
 				this.mainMenuButton.process()
 				break;

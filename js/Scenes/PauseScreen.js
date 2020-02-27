@@ -9,7 +9,7 @@ function modePause(frameTime) {
 	colorText("PAUSE SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
 	//colorText("Credit Start", canvas.width/2, creditPosY, "white", "20px Arial");
-
+	
 	btnManager.unPauseButton.draw()
-
+	prevMode=PAUSE_SCREEN
 }
