@@ -2,20 +2,21 @@ window.addEventListener('keyup',    function (event) { Key.onKeyup(event); event
 window.addEventListener('keydown',  function (event) { Key.onKeydown(event); event.preventDefault() }, false);
 
 function mouseInit() {
-	document.addEventListener('mousedown', mouseDown);
-	document.addEventListener('mouseup', mouseUp);
-	document.getElementById('gameCanvas').addEventListener('mousemove', calculateMousePos);
+	document.addEventListener('pointerdown', mouseDown);
+	document.addEventListener('pointerup', mouseUp);
+	document.getElementById('gameCanvas').addEventListener('pointermove', calculateMousePos);
 }
 
 var mouseX = 0;
 var mouseY = 0;
 var mousePressed = false;
+var mouseJustPressed = false;
 
 var focus=false;
 
-var mouseJustPressed = false;
 
 function mouseDown(evt) {
+	calculateMousePos(evt);
 	mousePressed = true;
 	mouseJustPressed = true;
 }
@@ -25,11 +26,11 @@ function mouseUp(evt) {
 }
 
 function calculateMousePos(evt) {
-	focus=true
+	focus = true;
 	var rect = canvas.getBoundingClientRect(),
 	root = document.documentElement;
-	mouseX = evt.clientX - rect.left - root.scrollLeft;
-	mouseY = evt.clientY - rect.top - root.scrollTop;
+	mouseX = evt.clientX// - rect.left - root.scrollLeft;
+	mouseY = evt.clientY// - rect.top - root.scrollTop;
 }
 
 function isMouseInArea(x, y, width, height) {
@@ -123,7 +124,6 @@ const Key = {
 	onKeyup(event) {
 		this._released[event.keyCode] = true;
 		delete this._down[event.keyCode];
-
 	},
 
 	update() {

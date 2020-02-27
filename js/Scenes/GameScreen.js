@@ -108,7 +108,6 @@ function modeGame(frameTime) {
 		canvas.width*3/4 + 50, canvas.height - UI_HEIGHT + 60,
 		20, 20);
 
-
 	cleanLists();
 	inGameAnnoucements();
 	gameClock();
@@ -117,19 +116,19 @@ function modeGame(frameTime) {
 
 
 	if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].angle += 45 * frameTime;
+		arrayOfPlayers[playerTurn].angle += 30 * frameTime;
 	}
 
 	if (isMouseInArea(canvas.width*1/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].angle -= 45 * frameTime;
+		arrayOfPlayers[playerTurn].angle -= 30 * frameTime;
 	}
 
 	if (isMouseInArea(canvas.width*2/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].power -= 20 * frameTime;
+		arrayOfPlayers[playerTurn].power -= 10 * frameTime;
 	}
 
 	if (isMouseInArea(canvas.width*2/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].power += 20 * frameTime;
+		arrayOfPlayers[playerTurn].power += 10 * frameTime;
 	}
 
 	if (isMouseInArea(canvas.width*3/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mouseJustPressed) {

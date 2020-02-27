@@ -13,7 +13,6 @@ class buttonFactory
 {
 	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
 	{
-		console.log("ButtonCreated")
 		this.x=_x;
 		this.y=_y;
 		this.sizeX=_sizeX;
