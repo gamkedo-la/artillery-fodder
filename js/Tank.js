@@ -225,7 +225,10 @@ function tankPlayerClass() {
 	}
 
 	function drawHealthbar(x, y, tankHealth) {
-        
+        if (tankHealth < 0) {
+        	tankHealth = 0;
+        }
+
         var barx = x-26;
         var bary = y-46;
         var barw = 52;
@@ -267,9 +270,7 @@ function tankPlayerClass() {
 
 		soundHit.play();
 
-		console.log(amount);
-
-		if(damageAmount > 0) {
+		if(damageAmount > 0 && this.health > 0) {
 			damageAmountIndicator = true;
 			damageAmountPosX = this.x;
 			damageAmountPosY = this.y;
@@ -382,6 +383,20 @@ function tankPlayerClass() {
 				break;
 			case 11://Grenade
 				newProjectile = new grenadeShot();
+				break;
+			case 12://Self Destruct
+				newProjectile = new empty();
+				var newExplosion = new basicExplosionClass();
+				newExplosion.x = this.x;
+				newExplosion.y = this.y - 5;
+				newExplosion.size = 40;
+				newExplosion.damage = 40;
+				newExplosion.color = "White";
+				newExplosion.tank = this;
+				newExplosion.active = true;
+				arrayOfTemporaryObjects.push(newExplosion);
+				this.health = 0;
+				this.destroy();
 				break;
 		}
 
