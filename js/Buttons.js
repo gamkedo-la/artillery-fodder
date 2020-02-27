@@ -111,6 +111,10 @@ class buttonFactory
 	
 }
 
+//buttons for Campaign Screen
+
+
+
 //This function is called in main.js application start function
 //Create Buttons Here
 class buttonsInit
@@ -145,7 +149,7 @@ class buttonsInit
 													 this._buttonLength,
 													 this._buttonSize,
 													 "Green",
-													 "CAMPAIGN",
+													 "Campaign",
 													 CAMPAIGN_SCREEN,
 													 Key.a, 
 													 true,
@@ -299,6 +303,51 @@ class buttonsInit
 									 90,
 									 "Green"
 									 )	
+
+	//Buttons for Campaign Screen
+
+	 this.chapter01 = new buttonFactory(canvas.width/2-this._buttonLength/2,
+									 this._firstButtonPosY,
+									 this._buttonLength,
+									 this._buttonSize,
+									 "Red",
+									 "Chapter 1",
+								     CAMPAIGN_SCREEN, // loophole placeholder destination
+								     Key.ONE,
+									 true,
+									 //"space_key",
+									 90,
+									 32,
+									 90,
+									 )
+ 	 this.chapter02 = new buttonFactory(canvas.width/2-this._buttonLength/2,
+									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
+									 this._buttonLength,
+									 this._buttonSize,
+									 "Red",
+									 "Chapter 2",
+								     CAMPAIGN_SCREEN, // loophole placeholder destination
+								     Key.ONE,
+									 true,
+									 //"space_key",
+									 90,
+									 32,
+									 90,
+									 )
+ 	this.chapter03 = new buttonFactory(canvas.width/2-this._buttonLength/2,
+									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
+									 this._buttonLength,
+									 this._buttonSize,
+									 "Red",
+									 "Chapter 3",
+								     CAMPAIGN_SCREEN, // loophole placeholder destination
+								     Key.ONE,
+									 true,
+									 //"space_key",
+									 90,
+									 32,
+									 90,
+									 )
 	}
 	
 	//This function is called in main.js update function to draw and process the buttons
@@ -333,6 +382,9 @@ class buttonsInit
 				break;
 
 			case CAMPAIGN_SCREEN:
+				this.chapter01.process()
+				this.chapter02.process()
+				this.chapter03.process()
 				this.mainMenuButton.process()
 				break;
 			

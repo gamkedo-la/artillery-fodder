@@ -7,7 +7,9 @@ function modeCampaign(frameTime) {
 	colorText("CAMPAIGN", canvas.width/2, 100, "White", "50px Arial");
 
 	//campaign buttons
-
+	btnManager.chapter01.draw()
+	btnManager.chapter02.draw()
+	btnManager.chapter03.draw()
 
 	btnManager.mainMenuButton.draw()
 
