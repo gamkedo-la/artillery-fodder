@@ -76,7 +76,7 @@ class buttonFactory
 					break;
 
 				case CAMPAIGN_SCREEN:
-					chapterStart(this.chapter);
+					startChapter(this.chapter);
 					break;
 
 				default:
