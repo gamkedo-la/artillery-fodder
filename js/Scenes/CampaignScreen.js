@@ -25,6 +25,7 @@ function startChapter(chapterNumber) {
 			numberOfPlayers = 2;
 			map.type = 3;
 			map.generateTerrain();
+			weather = 1; 
 
 			startMatch();
 
@@ -38,8 +39,40 @@ function startChapter(chapterNumber) {
 			mode = GAME_MODE;
 			break;
 		case 2:
+			//startMatch() refferenced properties
+			numberOfPlayers = 3;
+			map.type = 5;
+			map.generateTerrain();
+			weather = 2; 
+
+			startMatch();
+
+			//startMatch() set properties
+			arrayOfPlayers[0].usesAI = false;
+			arrayOfPlayers[1].usesAI = true;
+			arrayOfPlayers[0].x = 150;
+			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
+			//angles, health, weapon inventories, etc
+
+			mode = GAME_MODE;
 			break;
 		case 3:
+			//startMatch() refferenced properties
+			numberOfPlayers = 4;
+			map.type = 1;
+			map.generateTerrain();
+			weather = 1; 
+
+			startMatch();
+
+			//startMatch() set properties
+			arrayOfPlayers[0].usesAI = false;
+			arrayOfPlayers[1].usesAI = true;
+			arrayOfPlayers[0].x = 150;
+			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
+			//angles, health, weapon inventories, etc
+
+			mode = GAME_MODE;
 			break;
 
 	}
