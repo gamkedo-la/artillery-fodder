@@ -70,6 +70,7 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
+					backgroundMusic.resumeSound();
 					break;
 
 				case PAUSE_SCREEN:
