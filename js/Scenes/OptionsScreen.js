@@ -1,7 +1,7 @@
 //Credit Screen
 
 // todo: load from localstorage at startup, and save when changed
-var speechRecognitionEnabled = true;
+var speechRecognitionEnabled = false;
 
 function modeOptions(frameTime) {
 
@@ -11,8 +11,11 @@ function modeOptions(frameTime) {
 	if (isMouseInArea(canvas.width/2 - 100, canvas.height/2 - 20, 270, 40) && mousePressed) {
         speechRecognitionEnabled = !speechRecognitionEnabled;
         console.log("Option setting changed: Speech Recognition Enabled set to " + speechRecognitionEnabled);
-        if (SpeechRecognition) // does an initialized object exist?
+        if (SpeechRecognition) { // does an initialized object exist?
             SpeechRecognition.setEnabled(speechRecognitionEnabled); // tell it about the change
+        } else if (speechRecognitionEnabled) {
+        	SpeechRecognition.init(); // ask permission for mic input of game actions
+        }
 	}
 
 	colorRect(canvas.width/2 - 100, canvas.height/2 - 20, 200, 40, "white");
