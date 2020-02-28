@@ -542,22 +542,28 @@ function meteorClashClass() {
 function rainShot() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 15;
+	this.size = 10;
 	this.damage = 1;
 	this.tank;
 
 	var xVel = 0;
 	var yVel = 0;
 
-	this.active = false;
+	const MAX_RAINSHOT = 100;
+	const SHOT_DELTA = 30;
+
+	this.active = true;
 	this.tail = false;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
+
 			yVel += 90 * frameTime;
 
-			this.x += xVel * frameTime;
-			this.y += yVel * frameTime;
+			for (var i = 0; i < MAX_RAINSHOT; i++) {
+				this.x += xVel * frameTime;
+				this.y += yVel * frameTime;
+			}
 
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
@@ -584,13 +590,13 @@ function rainShot() {
 	}
 
 	this.launch = function launch(angle, power) {
-		for (var i = 0; i < 60; i++) {
+		for (var i = 0; i < MAX_RAINSHOT; i++) {
 		var newProjectile = new basicShotClass();
 			newProjectile.x = this.x;
 			newProjectile.y = this.y;
 			newProjectile.size = this.size;
 			newProjectile.tank = this.tank;
-			newProjectile.launch(angle + Math.round( Math.random() * (60 - 1) - 1 ) - 22, power);
+			newProjectile.launch(angle + (Math.random() * (60 - 1) - 1 ) - 22, (power +  Math.random() * (SHOT_DELTA - 1) - 1 ));
 			newProjectile.tail = false;
 			arrayOfTemporaryObjects.push(newProjectile);
 		}
@@ -615,61 +621,6 @@ function rainShot() {
 		incrementTurn = true;
 	}
 }
-
-/*
-function rainShot(){
-	this.x = 0;
-	this.y = 0;
-	this.size = 5;
-	this.damage = 1;
-	this.tank;
-
-	this.active = false;
-
-	this.update = function update(frameTime) {
-		if (this.active) {
-			this.active = false;
-		}
-	}
-
-	this.draw = function draw(frameTime) {
-		return;
-	}
-
-	this.launch = function launch(angle, power) {
-
-		for (var i = 0; i < 100; i++) {
-			var newProjectile = new basicShotClass();
-			newProjectile.x = this.x;
-			newProjectile.y = this.y;
-			newProjectile.size = this.size;
-			newProjectile.tank = this.tank;
-			newProjectile.launch(angle + Math.round( Math.random() * (50 - 1) - 1 ) - 22, power);
-			newProjectile.tail = false;
-			arrayOfTemporaryObjects.push(newProjectile);
-		}
-		
-	}
-
-		this.hit = function hit() {
-		yVel = 0;
-					
-		this.active = false;
-
-		var newExplosion = new basicExplosionClass();
-		newExplosion.x = this.x;
-		newExplosion.y = this.y;
-		newExplosion.size = this.size;
-		newExplosion.damage = this.damage;
-		newExplosion.color = "White";
-		newExplosion.tank = this.tank;
-		newExplosion.active = true;
-		arrayOfTemporaryObjects.push(newExplosion);
-
-		incrementTurn = true;
-	}
-}
-*/
 
 function groundShotClass() {
 	this.x = 0;
@@ -857,9 +808,3 @@ function grenadeShot() {
 		incrementTurn = true;
 	}
 }
-
-
-
-
-
-
