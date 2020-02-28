@@ -8,10 +8,10 @@
 	Text
 	Functionality
 */
-
 class buttonFactory
 {
-	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sethover=true,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
+
+	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sethover=true,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black", _chapter=0)
 	{
 		this.x=_x;
 		this.y=_y;
@@ -33,6 +33,7 @@ class buttonFactory
 		this.size_animateTarget=this.x
 		this.textColor=_textColor
 		this.norestart=false
+		this.chapter = _chapter;
 	}
 
 	process()
@@ -110,10 +111,6 @@ class buttonFactory
 	}
 	
 }
-
-//buttons for Campaign Screen
-
-
 
 //This function is called in main.js application start function
 //Create Buttons Here
@@ -312,13 +309,14 @@ class buttonsInit
 									 this._buttonSize,
 									 "Red",
 									 "Chapter 1",
-								     CAMPAIGN_SCREEN, // loophole placeholder destination
+								     GAME_MODE, // loophole placeholder destination
 								     Key.ONE,
 									 true,
 									 //"space_key",
 									 90,
 									 32,
 									 90,
+									 1
 									 )
  	 this.chapter02 = new buttonFactory(canvas.width/2-this._buttonLength/2,
 									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
@@ -326,13 +324,14 @@ class buttonsInit
 									 this._buttonSize,
 									 "Red",
 									 "Chapter 2",
-								     CAMPAIGN_SCREEN, // loophole placeholder destination
+								     GAME_MODE, // loophole placeholder destination
 								     Key.TWO,
 									 true,
 									 //"space_key",
 									 90,
 									 32,
 									 90,
+									 2
 									 )
  	this.chapter03 = new buttonFactory(canvas.width/2-this._buttonLength/2,
 									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
@@ -360,7 +359,6 @@ class buttonsInit
 				this.quitButton.process()
 				this.pauseButton.process()
 				break;
-				
 				
 			case MAIN_MENU:
 				this.gameButton.process()
