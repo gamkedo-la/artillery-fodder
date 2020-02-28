@@ -110,7 +110,7 @@ window.onload = function() {
 }
 
 function applicationStart() {
-	SpeechRecognition.init(); // ask permission for mic input of game actions
+	//SpeechRecognition.init(); // ask permission for mic input of game actions
 
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
@@ -136,7 +136,7 @@ function applicationStart() {
 			x: Math.floor(Math.random()*(canvas.width - cloudImg.width/2)),
 			y: Math.floor(Math.random()*(325 - cloudImg.height))
 		};
-		cloudSpeeds[i] = Math.random() * (0.2 - 0.05) + 0.05;
+		cloudSpeeds[i] = (Math.random() * (0.2 - 0.05) + 0.05) * 60;
 	}
 
 
@@ -232,11 +232,8 @@ function modePrevMode(prevMode) {
 
 function startMatch() {
 	
-	if (prevMode != PAUSE_SCREEN)
-	{
-		groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-		groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-	}
+	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));

@@ -15,3 +15,10 @@ function modeCampaign(frameTime) {
 
 
 }
+
+function chapterStart(chapterNumber) {
+	switch (chapterNumber) {
+		case 0:
+			break;
+	}
+}

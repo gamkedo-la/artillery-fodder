@@ -16,7 +16,7 @@ function modeGame(frameTime) {
 	for (let i=0; i<cloudPositions.length; i++) {
 		let pos = cloudPositions[i];
 		canvasContext.drawImage(cloudImg, pos.x, pos.y);
-		pos.x += cloudSpeeds[i];
+		pos.x += cloudSpeeds[i] * frameTime;
 
 		if(dayTime == true && clockHour <= 16) {
 			if(pos.x >= canvas.width + 10) {
