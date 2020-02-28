@@ -60,12 +60,14 @@ function modeGame(frameTime) {
 	//Draw UI section
 	colorRect(canvas.width*1/3 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
 	colorRect(canvas.width*2/3 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "White");
+	colorRect(canvas.width*1/2 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "Blue");
 	colorRect(canvas.width*1/4 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
 	colorRect(canvas.width*2/4 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
 	colorRect(canvas.width*3/4 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
 	colorRect(canvas.width*3/4 - 50, canvas.height - UI_HEIGHT + 60, 100, 20, "White");
 	colorText(arrayOfPlayers[playerTurn].name, canvas.width*1/3, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
 	colorText("Health:" + pad(Math.round(arrayOfPlayers[playerTurn].health), 3), canvas.width*2/3, canvas.height - UI_HEIGHT + 35, "Black", font = "15px Arial");
+	colorText("Fire", canvas.width*1/2, canvas.height - UI_HEIGHT + 35, "White", font = "15px Arial");
 	colorText("Angle:"  + pad(Math.round(arrayOfPlayers[playerTurn].angle), 3), canvas.width*1/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	colorText("Power:" + pad(Math.round(arrayOfPlayers[playerTurn].power), 3), canvas.width*2/4, canvas.height - UI_HEIGHT + 75, "Black", font = "15px Arial");
 	if (arrayOfPlayers[playerTurn].weaponInventory[arrayOfPlayers[playerTurn].weapon] > 0) {
@@ -141,7 +143,7 @@ function modeGame(frameTime) {
 		arrayOfPlayers[playerTurn].weaponIndextIncreesing = true;
 	}
 
-	if (isMouseInArea(0, 0, canvas.width, canvas.height - UI_HEIGHT) && mouseJustPressed) {
+	if (isMouseInArea(canvas.width*1/2 - 60, canvas.height - UI_HEIGHT, 140, 40) && mouseJustPressed) {
 		arrayOfPlayers[playerTurn].fire();
 	}
 

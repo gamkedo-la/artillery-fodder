@@ -29,25 +29,19 @@ ParticlePool.prototype.colors = [
 "rgba(255,255,0,1)",             //yellow 1
 ]
 ParticlePool.prototype.spawn = function(x, y , vx, vy, width=1, height=1, life = 40, type=0,){
-    for(let l = 0; l < 15; l++){
-        for(let i = 0; i <= this.pool.length; i+=this.tuple){
-            if(this.pool[i] <= l){
-                this.pool[i] = life;
-                this.pool[i+1] = x;
-                this.pool[i+2] = y;
-                this.pool[i+3] = vx;
-                this.pool[i+4] = vy;
-                this.pool[i+5] = width;
-                this.pool[i+6] = height;
-                this.pool[i+7] = 0; //color;
-                this.pool[i+8] = type;
-                this.pool[i+9] = 0; //prevX
-                this.pool[i+10] = 0; //prevY
-                break;
-            }
-        }  
-    }
+    this.pool[this.i] = life;
+    this.pool[this.i+1] = x;
+    this.pool[this.i+2] = y;
+    this.pool[this.i+3] = vx;
+    this.pool[this.i+4] = vy;
+    this.pool[this.i+5] = width;
+    this.pool[this.i+6] = height;
+    this.pool[this.i+7] = 0; //color;
+    this.pool[this.i+8] = type;
+    this.pool[this.i+9] = 0; //prevX
+    this.pool[this.i+10] = 0; //prevY
     
+    this.i += this.tuple;
     //reset counter 
     if(this.i >= this.size*this.tuple-this.tuple) this.i = 0; 
 }

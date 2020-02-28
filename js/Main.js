@@ -67,6 +67,7 @@ const OPTIONS_SCREEN = 7;
 const INVENTORY_SCREEN = 8;
 const WIN_SCREEN = 9;
 const PAUSE_SCREEN = 10;
+const CAMPAIGN_SCREEN = 11;
 const GO_TO_PREV_MODE = 99;
 var mode = TITLE_SCREEN;
 var prevMode = mode;
@@ -200,6 +201,9 @@ function update(frameTime) {
 		case PAUSE_SCREEN:
 			modePause(frameTime);
 			break;
+		case CAMPAIGN_SCREEN:
+			modeCampaign(frameTime);
+			break;
 		case GO_TO_PREV_MODE:
 			modePrevMode(prevMode);
 			break;
@@ -227,12 +231,9 @@ function modePrevMode(prevMode) {
 }
 
 function startMatch() {
-	console.log(prevMode)
-	if (prevMode != PAUSE_SCREEN)
-	{
-		groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-		groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-	}
+
+	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));

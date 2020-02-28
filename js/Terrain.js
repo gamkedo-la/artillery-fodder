@@ -1,3 +1,4 @@
+typeOfTerrain = terrain.type;
 function terrain() {
     
     var heightMap = new Array();

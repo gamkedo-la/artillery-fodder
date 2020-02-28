@@ -1,12 +1,6 @@
 // Main Menu
 
-
-
-
 function modeMainMenu(frameTime) {
-
-
-
 
     Space_key=imageLoader.getImage("space_key")
 
@@ -16,12 +10,14 @@ function modeMainMenu(frameTime) {
 
 
 	btnManager.gameButton.draw()
+	btnManager.campaignButton.draw()
 	btnManager.playerSelectionButton.draw()
 	btnManager.weaponInventoryButton.draw()
 	btnManager.terrainScreenButton.draw()
 	btnManager.controlsButton.draw()
 	btnManager.optionsButton.draw()
 	btnManager.creditsButton.draw()
+
 
 
 
