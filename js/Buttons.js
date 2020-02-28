@@ -10,6 +10,7 @@
 */
 
 //use to create buttons and will process and draw itself when called.
+var gamePaused = false;
 
 class buttonFactory
 {
@@ -30,12 +31,11 @@ class buttonFactory
 		this.spriteOffset=_offset;
 		this.sethover=_sethover;
 		this.hover=_sethover;
-		this.startPos=this.x+500
-		this.startSize=0
-		this.sprite_animateTarget=this.x-this.spriteOffset
+		this.startPos=this.x+500;
+		this.startSize=0;
+		this.sprite_animateTarget=this.x-this.spriteOffset;
 		this.size_animateTarget=this.x
-		this.textColor=_textColor
-		this.pause=false
+		this.textColor=_textColor;
 		this.chapter = _chapter;
 	}
 
@@ -55,7 +55,8 @@ class buttonFactory
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					startMatch()
+					if (!gamePaused) {startMatch();}
+					gamePaused = false;
 					break;
 
 				case PLAYER_SCREEN:
@@ -68,10 +69,10 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
-					this.pause=false
 					break;
 
 				case PAUSE_SCREEN:
+					gamePaused = true;
 					break;
 
 				default:
