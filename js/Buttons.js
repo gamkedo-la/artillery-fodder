@@ -52,7 +52,7 @@ class buttonFactory
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					if(!this.norestart){startMatch()}
+					if(!norestart){startMatch()}
 					break;
 				
 				case PLAYER_SCREEN:
@@ -65,10 +65,11 @@ class buttonFactory
 					
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
+					norestart=false
 					break;
 				
 				case PAUSE_SCREEN:
-					this.norestart=true
+					norestart=true
 					
 				default:
 					break;
