@@ -10,6 +10,7 @@
 */
 
 //use to create buttons and will process and draw itself when called.
+var gamePaused = false;
 
 class buttonFactory
 {
@@ -30,12 +31,11 @@ class buttonFactory
 		this.spriteOffset=_offset;
 		this.sethover=_sethover;
 		this.hover=_sethover;
-		this.startPos=this.x+500
-		this.startSize=0
-		this.sprite_animateTarget=this.x-this.spriteOffset
+		this.startPos=this.x+500;
+		this.startSize=0;
+		this.sprite_animateTarget=this.x-this.spriteOffset;
 		this.size_animateTarget=this.x
-		this.textColor=_textColor
-		this.pause=false
+		this.textColor=_textColor;
 		this.chapter = _chapter;
 	}
 
@@ -55,7 +55,8 @@ class buttonFactory
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					startMatch()
+					if (!gamePaused) {startMatch();}
+					gamePaused = false;
 					break;
 
 				case PLAYER_SCREEN:
@@ -68,10 +69,14 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
-					this.pause=false
 					break;
 
 				case PAUSE_SCREEN:
+					gamePaused = true;
+					break;
+
+				case CAMPAIGN_SCREEN:
+					startChapter(this.chapter);
 					break;
 
 				default:
@@ -144,211 +149,215 @@ class buttonsInit
 										 90,
 										 )
 	this.campaignButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Green",
-													 "Campaign",
-													 CAMPAIGN_SCREEN,
-													 Key.a,
-													 true,
-													 "a_key",
-													 32,
-													 32,
-													 40,
-													 )
+											 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
+											 this._buttonLength,
+											 this._buttonSize,
+											 "Green",
+											 "Campaign",
+											 CAMPAIGN_SCREEN,
+											 Key.a,
+											 true,
+											 "a_key",
+											 32,
+											 32,
+											 40,
+											 )
 
 	this.playerSelectionButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Green",
-													 "Player Selection",
-													 PLAYER_SCREEN,
-													 Key.p,
-													 true,
-													 "p_key",
-													 32,
-													 32,
-													 40,
-													 )
+													(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
+													this._buttonLength,
+													this._buttonSize,
+													"Green",
+													"Player Selection",
+													PLAYER_SCREEN,
+													Key.p,
+													true,
+													"p_key",
+													32,
+													32,
+													40,
+													)
 
 	this.weaponInventoryButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 3,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Blue",
-													 "Weapons Inventory",
-													 INVENTORY_SCREEN,
-													 Key.i,
-													 true,
-													 "i_key",
-													 32,
-													 32,
-													 40,
-													 )
+													(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 3,
+													this._buttonLength,
+													this._buttonSize,
+													"Blue",
+													"Weapons Inventory",
+													INVENTORY_SCREEN,
+													Key.i,
+													true,
+													"i_key",
+													32,
+													32,
+													40,
+													)
 
-	this.terrainScreenButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 4,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "DarkSlateBlue",
-													 "Terrain Screen",
-													 TERRAIN_SCREEN,
-													 Key.t,
-													 true,
-													 "t_key",
-													 32,
-													 32,
-													 40,
-													 )
+	this.terrainScreenButton = new buttonFactory(   (canvas.width/2)-this._buttonLength/2,
+													(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 4,
+													this._buttonLength,
+													this._buttonSize,
+													"DarkSlateBlue",
+													"Terrain Screen",
+													TERRAIN_SCREEN,
+													Key.t,
+													true,
+													"t_key",
+													32,
+													32,
+													40,
+													)
 
-	this.controlsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 5,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Violet",
-													 "Controls",
-													 CONTROLS_SCREEN,
-													 Key.c,
-													 true,
-													 "c_key",
-													 32,
-													 32,
-													 40,
-													 )
+	this.controlsButton = new buttonFactory((canvas.width/2)-this._buttonLength/2,
+											(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 5,
+											this._buttonLength,
+											this._buttonSize,
+											"Violet",
+											"Controls",
+											CONTROLS_SCREEN,
+											Key.c,
+											true,
+											"c_key",
+											32,
+											32,
+											40,
+											)
 
 	this.optionsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 6,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Brown",
-													 "Options",
-													 OPTIONS_SCREEN,
-													 Key.o,
-													 true,
-													 "o_key",
-													 32,
-													 32,
-													 40,
-													 )
+											(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 6,
+											this._buttonLength,
+											this._buttonSize,
+											"Brown",
+											"Options",
+											OPTIONS_SCREEN,
+											Key.o,
+											true,
+											"o_key",
+											32,
+											32,
+											40,
+											)
 
 	this.creditsButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
-													 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 7,
-													 this._buttonLength,
-													 this._buttonSize,
-													 "Chocolate",
-													 "Credits",
-													 CREDITS_SCREEN,
-													 Key.r,
-													 true,
-													 "r_key",
-													 32,
-													 32,
-													 40,
-													 )
+											(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 7,
+											this._buttonLength,
+											this._buttonSize,
+											"Chocolate",
+											"Credits",
+											CREDITS_SCREEN,
+											Key.r,
+											true,
+											"r_key",
+											32,
+											32,
+											40,
+											)
 
 
 	this.mainMenuButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
-										 canvas.height-100,
-										 this._buttonLength,
-										 this._buttonSize,
-										 "YellowGreen",
-										 "Main Menu",
-									     MAIN_MENU,
-									     Key.SPACE,
-										 true,
-										 "space_key",
-										 90,
-										 32,
-										 90,
-										 "SlateGrey"
-										 )
+											canvas.height-100,
+											this._buttonLength,
+											this._buttonSize,
+											"YellowGreen",
+											"Main Menu",
+										    MAIN_MENU,
+										    Key.SPACE,
+											true,
+											"space_key",
+											90,
+											32,
+											90,
+											"SlateGrey"
+											)
 
 	this.quitButton = new buttonFactory(canvas.width-this._buttonLength,
+										canvas.height-80,
+										this._buttonLength,
+										this._buttonSize,
+										"Red",
+										"Quit",
+									    MAIN_MENU,
+									    Key.q,
+										false
+										)
+
+	this.pauseButton = new buttonFactory(0,
 										 canvas.height-80,
 										 this._buttonLength,
 										 this._buttonSize,
 										 "Red",
-										 "Quit",
-									     MAIN_MENU,
-									     Key.q,
+										 "Pause",
+										 PAUSE_SCREEN,
+										 Key.p,
 										 false
 										 )
 
-	this.pauseButton = new buttonFactory(0,
-									 canvas.height-80,
-									 this._buttonLength,
-									 this._buttonSize,
-									 "Red",
-									 "Pause",
-									 PAUSE_SCREEN,
-									 Key.p,
-									 false
-									 )
-
 	this.unPauseButton = new buttonFactory(canvas.width-this._buttonLength,
-									 canvas.height-50,
-									 this._buttonLength,
-									 this._buttonSize,
-									 "Red",
-									 "unPause",
-									 GAME_MODE,
-									 Key.SPACE,
-									 true,
-									"space_key",
-									 90,
-									 32,
-									 90,
-									 "Green"
-									 )
+										   canvas.height-50,
+										   this._buttonLength,
+										   this._buttonSize,
+										   "Red",
+										   "unPause",
+										   GAME_MODE,
+										   Key.SPACE,
+										   true,
+										   "space_key",
+										   90,
+										   32,
+										   90,
+										   "Green"
+										   )
 
 	//Buttons for Campaign Screen
 
 	 this.chapter01 = new buttonFactory(canvas.width/2-this._buttonLength/2,
-									 this._firstButtonPosY,
-									 this._buttonLength,
-									 this._buttonSize,
-									 "Red",
-									 "Chapter 1",
-								     GAME_MODE, // loophole placeholder destination
-								     Key.ONE,
-									 true,
-									 //"space_key",
-									 90,
-									 32,
-									 90,
-									 1
-									 )
+										this._firstButtonPosY,
+										this._buttonLength,
+										this._buttonSize,
+										"Red",
+										"Chapter 1",
+									    CAMPAIGN_SCREEN, // loophole placeholder destination
+									    Key.ONE,
+										true,
+										"C_key",
+										90,
+										32,
+										90,
+										"Black",
+										1
+										)
  	 this.chapter02 = new buttonFactory(canvas.width/2-this._buttonLength/2,
-									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
-									 this._buttonLength,
-									 this._buttonSize,
-									 "Red",
-									 "Chapter 2",
-								     GAME_MODE, // loophole placeholder destination
-								     Key.TWO,
-									 true,
-									 //"space_key",
-									 90,
-									 32,
-									 90,
-									 2
-									 )
- 	this.chapter03 = new buttonFactory(canvas.width/2-this._buttonLength/2,
-									 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
-									 this._buttonLength,
-									 this._buttonSize,
-									 "Red",
-									 "Chapter 3",
-								     CAMPAIGN_SCREEN, // loophole placeholder destination
-								     Key.THREE,
-									 true,
-									 //"space_key",
-									 90,
-									 32,
-									 90,
-									 )
+										(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
+										this._buttonLength,
+										this._buttonSize,
+										"Red",
+										"Chapter 2",
+									    CAMPAIGN_SCREEN, // loophole placeholder destination
+									    Key.TWO,
+										true,
+										"C_key",
+										90,
+										32,
+										90,
+										"Black",
+										2
+										)
+ 	this.chapter03 = new buttonFactory( canvas.width/2-this._buttonLength/2,
+										(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
+										this._buttonLength,
+										this._buttonSize,
+										"Red",
+										"Chapter 3",
+									    CAMPAIGN_SCREEN, // loophole placeholder destination
+									    Key.THREE,
+										true,
+										"C_key",
+										90,
+										32,
+										90,
+										"Black",
+										3
+										)
 	}
 
 	//This function is called in main.js update function to draw and process the buttons
