@@ -120,7 +120,7 @@ function tankPlayerClass() {
                 if (this.usesAI) this.aiThink();
 
 				//Input
-                if (Key.isJustPressed(Key.SPACE) || SpeechRecognition.pendingFireCommand() || ai.fire){
+                if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire){
 					if(this.weaponInventory[this.weapon] != 0) {
 						this.fire();
 					}
@@ -137,11 +137,11 @@ function tankPlayerClass() {
 				if (Key.isDown(Key.DOWN) || ai.down){
 					this.power -= 10 * frameTime;
 				}
-				if (Key.isJustPressed(Key.COMMA) || SpeechRecognition.pendingPrevCommand() || ai.prev){
+				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) || ai.prev){
 					this.weapon--;
 					this.weaponIndextIncreesing = false;
 				}
-				if (Key.isJustPressed(Key.PERIOD) || SpeechRecognition.pendingNextCommand() || ai.next){
+				if (Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) || ai.next){
 					this.weapon++;
 					this.weaponIndextIncreesing = true;
 				}

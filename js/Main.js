@@ -91,7 +91,7 @@ var buttonImg;
 var gameScreenOverlayImg;
 
 var map = new terrain();
-var SpeechRecognition = new SpeechRecognitionEngine();
+var SpeechRecognition; // NOT initialized until user requests it = new SpeechRecognitionEngine();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
