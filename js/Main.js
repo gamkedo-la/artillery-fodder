@@ -231,9 +231,12 @@ function modePrevMode(prevMode) {
 }
 
 function startMatch() {
-
-	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
-	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	
+	if (prevMode != PAUSE_SCREEN)
+	{
+		groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+		groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	}
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));

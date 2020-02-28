@@ -35,7 +35,7 @@ class buttonFactory
 		this.sprite_animateTarget=this.x-this.spriteOffset
 		this.size_animateTarget=this.x
 		this.textColor=_textColor
-		this.norestart=false
+		this.pause=false
 		this.chapter = _chapter;
 	}
 
@@ -55,7 +55,7 @@ class buttonFactory
 			switch(this.mode)
 			{
 				case GAME_MODE:
-					if(!norestart){startMatch()}
+					startMatch()
 					break;
 
 				case PLAYER_SCREEN:
@@ -68,11 +68,11 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
-					norestart=false
+					this.pause=false
 					break;
 
 				case PAUSE_SCREEN:
-					norestart=true
+					break;
 
 				default:
 					break;
