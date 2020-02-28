@@ -8,7 +8,7 @@
 	Text
 	Functionality
 */
-
+//use to create buttons and will process and draw itself when called.
 class buttonFactory
 {
 	constructor(_x,_y,_sizeX,_sizeY,_color,_text,_mode,_key,_sethover=true,_sprite=0,_spriteSizeX=0,_spriteSizeY=0,_offset=0,_textColor="Black")
@@ -89,10 +89,6 @@ class buttonFactory
 			{
 				//Note: lerping animation parma1:finalTarget, param2:starting position
 				this.startPos=lerp(this.sprite_animateTarget,this.startPos,0.9)
-				
-				//a black background for sprite
-				//this.mode==GAME_MODE || this.mode==MAIN_MENU ? this.startSize=lerp(95,this.startSize,0.9) : this.startSize=lerp(50,this.startSize,0.9)
-				//colorRect(this.x-this.startSize, this.y, this.startSize, this.sizeY, "Black")
 				canvasContext.drawImage(this.sprite,this.startPos, this.y,this.spriteSizeX,this.spriteSizeY);
 				
 			}
@@ -111,6 +107,7 @@ class buttonFactory
 	
 }
 
+
 //This function is called in main.js application start function
 //Create Buttons Here
 class buttonsInit
@@ -125,7 +122,7 @@ class buttonsInit
 		this._buttonLength=180
 		
 		
-	 this.gameButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
+	this.gameButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
 										 canvas.height/2,
 										 this._buttonLength,
 										 this._buttonSize,
