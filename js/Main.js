@@ -91,7 +91,7 @@ var buttonImg;
 var gameScreenOverlayImg;
 
 var map = new terrain();
-var SpeechRecognition = new SpeechRecognitionEngine();
+var SpeechRecognition;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -110,7 +110,6 @@ window.onload = function() {
 }
 
 function applicationStart() {
-	//SpeechRecognition.init(); // ask permission for mic input of game actions
 
 	map.init(canvas.width, canvas.height-UI_HEIGHT);
 
