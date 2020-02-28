@@ -11,7 +11,12 @@ var soundExplosion = new soundRandomClass(["./audio/sfx/explosion-01.mp3",
 										   "./audio/sfx/explosion-04.mp3",
 										   "./audio/sfx/explosion-05.mp3"]);
 
+var soundHop = new soundRandomClass(["./audio/sfx/misc-01.mp3",
+									 "./audio/sfx/misc-02.mp3"]);
+
 var soundHit = new soundOverlapsClass("./audio/sfx/basic-hit-01.mp3");
+
+var soundMenu = new soundOverlapsClass("./audio/sfx/menu-up-02.mp3");
 
 var soundt01 = new soundLoopsClass("./audio/t01.mp3");
 var soundt02 = new soundLoopsClass("./audio/t02.mp3");

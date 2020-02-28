@@ -346,12 +346,18 @@ function tankPlayerClass() {
 		switch (this.weapon) {
 			case 0://Basic Shot
 				newProjectile = new basicShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 1://Three Shot
 				newProjectile = new threeShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 2://Sniper Shot
 				newProjectile = new sniperShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 3://Hop
 				newProjectile = new empty();
@@ -359,31 +365,48 @@ function tankPlayerClass() {
 				xVel += Math.cos(radians) * this.power;
 				yVel += -Math.sin(radians) * this.power;
 				this.y -= 1;
+				soundHop.play()
 				break;
 			case 4://Teleport Shot
 				newProjectile = new teleportShot();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 5://Big Shot
 				newProjectile = new basicShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				newProjectile.size = 50;
 				break;
 			case 6://Roller
 				newProjectile = new rollShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 7://Crazy Bomb
 				newProjectile = new crazyBombShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 8://Meteor Clash
 				newProjectile = new meteorClashClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 9://Rain Shot
 				newProjectile = new rainShot();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 10://Ground Shot
 				newProjectile = new groundShotClass();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 11://Grenade
 				newProjectile = new grenadeShot();
+				soundFire.play();
+        		this.muzzleFlash();
 				break;
 			case 12://Self Destruct
 				newProjectile = new empty();
@@ -409,8 +432,6 @@ function tankPlayerClass() {
 		newProjectile.launch(this.angle, this.power*2.65);
 		arrayOfTemporaryObjects.push(newProjectile);
 
-		soundFire.play();
-        this.muzzleFlash();
 
 		this.myTurn = false;
 	}
