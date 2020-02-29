@@ -25,7 +25,9 @@ function startChapter(chapterNumber) {
 			numberOfPlayers = 2;
 			map.type = 3;
 			map.generateTerrain();
-			weather = 1; 
+			weather = 0; 
+			clockHour = 20;
+			dayTime = false;
 
 			startMatch();
 

@@ -28,6 +28,7 @@ var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
 var dayTime = true;
 var colorOfTextforClock;
+var dayOfTime;
 
 //damage amount indicator 
 var damageAmountIndicatorTimer = 0;
