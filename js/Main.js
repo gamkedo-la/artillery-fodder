@@ -23,12 +23,11 @@ var now;
 
 //clock
 var clockMinute = 0;
-var clockHour = 9;
+var clockHour = 18;
 var clockHourCountdown = 0;
 var clockMinuteCountdown = 0;
-var dayTime = true;
+var dayTime;
 var colorOfTextforClock;
-var dayOfTime;
 
 //damage amount indicator 
 var damageAmountIndicatorTimer = 0;
@@ -92,7 +91,7 @@ var buttonImg;
 var gameScreenOverlayImg;
 
 var map = new terrain();
-var SpeechRecognition; // NOT initialized until user requests it = new SpeechRecognitionEngine();
+var SpeechRecognition = new SpeechRecognitionEngine();
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -282,7 +281,6 @@ function gameClock() {
 			}
 
 			if(clockHour == 7 || clockHour == 19) {
-				dayTime = !dayTime;
 				if (rndOneIn(4)) {
 					weather = Math.floor(rndFloat(0,3));
 				} else {
@@ -394,6 +392,11 @@ function nightSky() {
 }
 
 function dayNight() {
+	if(clockHour >= 7 && clockHour <= 18) {
+		dayTime = true;
+	} else {
+		dayTime = false;
+	}
 
 	//night sky transition
 	if (dayTime == false) { 

@@ -20,14 +20,13 @@ function startChapter(chapterNumber) {
 	switch (chapterNumber) {
 		case 0:
 			break;
-		case 1:
+		case 1: 
 			//startMatch() refferenced properties
-			numberOfPlayers = 2;
-			map.type = 3;
+			numberOfPlayers = 2; // 1 enemy
+			map.type = 0; // standard terrain type
 			map.generateTerrain();
-			weather = 0; 
-			clockHour = 20;
-			dayTime = false;
+			weather = 0; // clear weather
+			clockHour = 10; // mid morning
 
 			startMatch();
 
@@ -42,10 +41,11 @@ function startChapter(chapterNumber) {
 			break;
 		case 2:
 			//startMatch() refferenced properties
-			numberOfPlayers = 3;
-			map.type = 5;
+			numberOfPlayers = 3; // two enemies
+			map.type = 2; // uphill terrain type
 			map.generateTerrain();
-			weather = 2; 
+			weather = 1; // rainy weather
+			clockHour = 15; // mid afternoon
 
 			startMatch();
 
@@ -60,10 +60,11 @@ function startChapter(chapterNumber) {
 			break;
 		case 3:
 			//startMatch() refferenced properties
-			numberOfPlayers = 4;
-			map.type = 1;
+			numberOfPlayers = 4; // 3 enemies
+			map.type = 1; // tower terrain type
 			map.generateTerrain();
-			weather = 1; 
+			weather = 0; // clear weather 
+			clockHour = 20; // night
 
 			startMatch();
 
