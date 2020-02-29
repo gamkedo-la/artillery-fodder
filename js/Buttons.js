@@ -89,7 +89,7 @@ class buttonFactory
 
 	}
 
-	 draw()
+	draw()
 	{
 		var color=this.textColor
 		var fontSize=20
@@ -119,6 +119,67 @@ class buttonFactory
 
 }
 
+class sliderFactory
+{
+	constructor(_x,_y,_sX,_sY,_text,_textColor,_barColor,_rightBtnKey,_leftBtnKey)
+	{
+		this.x=_x
+		this.y=_y
+		this.height=_sX
+		this.length=_sY
+		this.frame=imageLoader.getImage("sliderFrame")
+		this.btnFrame=imageLoader.getImage("buttonFrame")
+		this.rightBtnX=this.x+this.length
+		this.rightBtnY=this.y
+		this.leftBtnX=this.x-this.height
+		this.leftBtnY=this.y
+		this.buttonDimension=this.height
+		
+		//Slider parameters
+		this.sliderValue=0
+		this.sliderText=_text
+		this.sliderTextColor=_textColor
+		this.sliderBarColor=_barColor
+		this.keyRightBtn=_rightBtnKey
+		this.keyLeftBtn=_leftBtnKey
+	}
+	process(_valueToUpdate)
+	{
+		// checks for mouse hotspot and key input (Right btn)
+		if (isMouseInArea(this.rightBtnX, this.rightBtnY, this.buttonDimension,this.buttonDimension) && mouseJustPressed || Key.isJustPressed(this.keyRightBtn) )
+		{
+			turnVolumeUp()
+		}
+
+		// checks for mouse hotspot and key input (Left btn)
+		if (isMouseInArea(this.leftBtnX, this.leftBtnY, this.buttonDimension,this.buttonDimension) && mouseJustPressed || Key.isJustPressed(this.keyLeftBtn))
+		{
+			turnVolumeDown()
+		}	
+		
+		this.sliderValue=_valueToUpdate	
+	}
+	
+	
+	draw(reposition=false,_x,_y)
+	{
+		//Text for slider
+		colorText(this.sliderText, this.x+this.length/2, this.y-10, this.sliderTextColor, "35px Arial");
+		//bg
+		colorRect(this.x+20, this.y+5, this.length-25, this.height-10, "White")
+		//bar
+		colorRect(this.x+20, this.y+5, (this.length-30)*this.sliderValue, this.height-10, this.sliderBarColor)
+		//frame for slider
+		canvasContext.drawImage(this.frame,this.x,this.y,this.length,this.height)
+		//right button
+		canvasContext.drawImage(this.btnFrame,this.rightBtnX,this.rightBtnY,this.buttonDimension,this.buttonDimension)
+		colorText("+", this.x+this.length+this.height/2, this.y+38, "White", "45px Arial");
+		//left button
+		canvasContext.drawImage(this.btnFrame,this.leftBtnX,this.leftBtnY,this.height,this.height)
+		colorText("-", this.x-this.height/2, this.y+36, "White", "50px Arial");
+	}
+}
+
 
 //This function is called in main.js application start function
 //Create Buttons Here
@@ -136,7 +197,7 @@ class buttonsInit
 
 
 
-	 this.gameButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
+	this.gameButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
 										 this._firstButtonPosY,
 										 this._buttonLength,
 										 this._buttonSize,
@@ -150,6 +211,7 @@ class buttonsInit
 										 32,
 										 90,
 										 )
+										 
 	this.campaignButton = new buttonFactory( (canvas.width/2)-this._buttonLength/2,
 											 (this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
 											 this._buttonLength,
@@ -255,7 +317,6 @@ class buttonsInit
 											40,
 											)
 
-
 	this.mainMenuButton = new buttonFactory(canvas.width/2-this._buttonLength/2,
 											canvas.height-100,
 											this._buttonLength,
@@ -344,7 +405,7 @@ class buttonsInit
 										"Black",
 										2
 										)
- 	this.chapter03 = new buttonFactory( canvas.width/2-this._buttonLength/2,
+ 	 this.chapter03 = new buttonFactory( canvas.width/2-this._buttonLength/2,
 										(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
 										this._buttonLength,
 										this._buttonSize,
@@ -360,7 +421,14 @@ class buttonsInit
 										"Black",
 										3
 										)
+	
+	//Slider buttons for volume and effects control.
+
+	this.musicSlider   = new sliderFactory(120,225,45,500,"Music","White","DodgerBlue",Key.BRACKET_RIGHT,Key.BRACKET_LEFT)
+	this.effectsSlider = new sliderFactory(120,325,45,500,"Sound Effects","White","Yellow")
+	
 	}
+
 
 	//This function is called in main.js update function to draw and process the buttons
 	update(_frametime)
@@ -386,6 +454,8 @@ class buttonsInit
 
 			case PAUSE_SCREEN:
 				this.unPauseButton.process()
+				this.musicSlider.process(musicVolume)
+				this.effectsSlider.process(effectsVolume)
 				break;
 
 			case INVENTORY_SCREEN:
@@ -399,7 +469,11 @@ class buttonsInit
 				this.mainMenuButton.process()
 				break;
 
-
+			case OPTIONS_SCREEN:
+				this.mainMenuButton.process()
+				this.musicSlider.process(musicVolume)
+				this.effectsSlider.process(effectsVolume)
+				break;
 			default:
 				this.mainMenuButton.process()
 				break;

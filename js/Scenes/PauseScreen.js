@@ -11,5 +11,7 @@ function modePause(frameTime) {
 	//colorText("Credit Start", canvas.width/2, creditPosY, "white", "20px Arial");
 	
 	btnManager.unPauseButton.draw()
+	btnManager.musicSlider.draw()
+	btnManager.effectsSlider.draw()
 	prevMode=PAUSE_SCREEN
 }

@@ -11,5 +11,4 @@ function modeTitle(frameTime) {
 	animate=lerp(100,animate,0.95)
 	canvasContext.drawImage(logo,canvas.width/2-(389/2),animate,389,149);
 	btnManager.mainMenuButton.draw()
-
 }

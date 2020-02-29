@@ -16,7 +16,10 @@ const imageLoader = new (function() {
 		{id: "o_key", src: "./images/keysPNG/O_key.png"},
 		{id: "r_key", src: "./images/keysPNG/R_key.png"},
 		{id: "a_key", src: "./images/keysPNG/A_key.png"},
-		{id: "gamescreen-overlay", src: "./images/gamescreen-overlay.png"}
+		{id: "gamescreen-overlay", src: "./images/gamescreen-overlay.png"},
+		{id: "sliderFrame", src:"./images/sliderFrame.png"},
+		{id: "buttonFrame", src:"./images/buttonFrame.png"}
+		
 	];
 	const images = {};
 
