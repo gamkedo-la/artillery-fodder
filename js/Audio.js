@@ -1,4 +1,10 @@
 
+var musicVolume = 0.7;
+var effectsVolume = 0.7;
+var isMuted = false;
+const VOLUME_INCREMENT = 0.05;
+
+
 //define sounds
 var soundFire = new soundRandomClass(["./audio/sfx/rocket-launch-01.mp3",
 									  "./audio/sfx/rocket-launch-02.mp3",
@@ -11,7 +17,12 @@ var soundExplosion = new soundRandomClass(["./audio/sfx/explosion-01.mp3",
 										   "./audio/sfx/explosion-04.mp3",
 										   "./audio/sfx/explosion-05.mp3"]);
 
+var soundHop = new soundRandomClass(["./audio/sfx/misc-01.mp3",
+									 "./audio/sfx/misc-02.mp3"]);
+
 var soundHit = new soundOverlapsClass("./audio/sfx/basic-hit-01.mp3");
+
+var soundMenu = new soundOverlapsClass("./audio/sfx/menu-up-02.mp3");
 
 var soundt01 = new soundLoopsClass("./audio/t01.mp3");
 var soundt02 = new soundLoopsClass("./audio/t02.mp3");
@@ -20,25 +31,15 @@ var soundt04 = new soundLoopsClass("./audio/t04.mp3");
 var soundt05 = new soundLoopsClass("./audio/t05.mp3");
 var soundt06 = new soundLoopsClass("./audio/t06.mp3");
 
-var gameMusic = ["./audio/music/gameplayMusicV1.mp3"]
-
 var backgroundMusic = new backgroundMusicClass();
-backgroundMusic.loadTracks(gameMusic);
+backgroundMusic.loopSong("./audio/music/gameplayMusicV1.mp3");
 
 //sound classes
-var musicVolume = 0.7;
-var effectsVolume = 0.7;
-var isMuted = false;
-const VOLUME_INCREMENT = 0.05;
 
 function backgroundMusicClass() {
 
 	var musicSound = null;
 	var fadeTrack = null;
-
-	var timeLeft = 120;
-
-	var arrayOfMusic;
 	
 	this.loopSong = function(filenameWithPath) {
 		if (musicSound != null) {
@@ -48,11 +49,6 @@ function backgroundMusicClass() {
 		musicSound = new Audio(filenameWithPath);
 		musicSound.loop = true;
 		this.setVolume(musicVolume);
-		timeLeft = 120;
-	}
-
-	this.loadTracks = function(arrayOfMusicFilenames) {
-		arrayOfMusic = arrayOfMusicFilenames;
 	}
 
 	this.pauseSound = function() {
@@ -65,10 +61,10 @@ function backgroundMusicClass() {
 		musicSound.play();
 	}
 	
-	this.setVolume = function(volume) {
+	this.setVolume = function(value) {
 		// Multipliction by a boolean serves as 1 for true and 0 for false
 		if (musicSound == null) {return;}
-		musicSound.volume = Math.pow(volume * !isMuted, 2);
+		musicSound.volume = Math.pow(value * !isMuted, 2);
 		
 		if(musicSound.volume == 0) {
 			musicSound.pause();
@@ -89,19 +85,11 @@ function backgroundMusicClass() {
 
 			fadeTrack.volume = newVolume;
 
-			if (fadeTrack.volume <= 0.017) {
+			if (fadeTrack.volume < 0.01667) {
 				fadeTrack.pause();
 				fadeTrack = null;
 			}
 		}
-
-		if (timeLeft <= 0) {
-			if (arrayOfMusic != null && musicSound != null && !musicSound.paused) {
-				this.loopSong(rndOneFrom(arrayOfMusic));
-			}
-		}
-
-		timeLeft -= frameTime;
 	}
 }
 
@@ -169,7 +157,7 @@ function soundRandomClass(arrayOfFilenames) {
 
 //sound functions
 function getRandomVolume(){
-	var min = 0.9;
+	var min = 0.8;
 	var max = 1;
 	var randomVolume = Math.random() * (max - min) + min;
 	return randomVolume.toFixed(2);

@@ -50,6 +50,7 @@ class buttonFactory
 		// checks for mouse hotspot and key input
 		if (isMouseInArea(this.x, this.y, this.sizeX,this.sizeY) && mouseJustPressed || Key.isJustPressed(this.key) )
 		{
+			soundMenu.play();
 
 			mode=this.mode
 			switch(this.mode)
@@ -69,6 +70,7 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
+					backgroundMusic.resumeSound();
 					break;
 
 				case PAUSE_SCREEN:

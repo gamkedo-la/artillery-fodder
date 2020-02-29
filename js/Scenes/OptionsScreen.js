@@ -8,13 +8,14 @@ function modeOptions(frameTime) {
 	//screen background
 	colorRect(0, 0, canvas.width, canvas.height, "red");
 
-	if (isMouseInArea(canvas.width/2 - 100, canvas.height/2 - 20, 270, 40) && mousePressed) {
+    // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
+    if (isMouseInArea(canvas.width/2 - 100, canvas.height/2 - 20, 270, 40) && mouseJustPressed) {
         speechRecognitionEnabled = !speechRecognitionEnabled;
         console.log("Option setting changed: Speech Recognition Enabled set to " + speechRecognitionEnabled);
         if (SpeechRecognition != null) { // does an initialized object exist?
             SpeechRecognition.setEnabled(speechRecognitionEnabled); // tell it about the change
         } else if (speechRecognitionEnabled && SpeechRecognition == null) {
-        	SpeechRecognition = new SpeechRecognitionEngine();
+        	SpeechRecognition = new SpeechRecognitionEngine(); // create a new one now! 
         	SpeechRecognition.init(); // ask permission for mic input of game actions
         }
 	}
