@@ -185,3 +185,45 @@ class sliderFactory
 
 
 
+class toggleFactory
+{
+	constructor(_x,_y,_length,_message,_textColor,_keybind)
+	{
+		this.x=_x,
+		this.y=_y,
+		this.length=_length
+		this.message=_message,
+		this.textColor=_textColor,
+		this.keybind=_keybind
+		this.btnFrame=imageLoader.getImage("buttonFrame")
+		this.value=false;
+	}
+	
+	process()
+	{
+	     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
+		if (isMouseInArea(this.x + this.length+50, this.y, 270, 40) && mouseJustPressed) {
+			this.value = !this.value;	
+		}
+		
+	}
+	
+	draw()
+	{
+		
+		canvasContext.drawImage(this.btnFrame,this.x + this.length+50,this.y,50,50)
+		colorRoundedRect(this.x,this.y,this.length,50,"DeepSkyBlue")
+		
+		//Message
+		colorText(this.message, this.x + this.length/2 , this.y + 30, this.textColor, "25px Arial");
+		//Toggle Text
+		colorText(this.value?"yes":"no",this.x+25 + this.length+50, this.y+30 , this.value?"Yellow":"Red", "20px Arial");
+	}
+	
+	getValue()
+	{
+		return this.value
+	}
+}
+
+

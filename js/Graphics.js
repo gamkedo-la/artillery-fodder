@@ -120,3 +120,11 @@ function colorText(showWords, textX,textY, fillColor, font = "30px Arial") {
 	canvasContext.font = font;
 	canvasContext.fillText(showWords, textX,textY);
 }
+
+function colorRoundedRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor){
+	canvasContext.fillStyle = fillColor;
+	canvasContext.arc(topLeftX, topLeftY+boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
+	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.fill()
+}

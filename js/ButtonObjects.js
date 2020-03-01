@@ -1,6 +1,6 @@
 //This function is called in main.js application start function
 //Create Buttons Here
-class buttonsInit
+class buttonsCreate
 {
 
 	constructor()
@@ -238,11 +238,15 @@ class buttonsInit
 										3
 										)
 	
+	
+	
 	//Slider buttons for volume and effects control.
 
 	this.musicSlider   = new sliderFactory(120,225,45,500,"Music","White","DodgerBlue",Key.BRACKET_RIGHT,Key.BRACKET_LEFT)
 	this.effectsSlider = new sliderFactory(120,325,45,500,"Sound Effects","White","Yellow")
 	
+	//Speech recognition toggle button
+	this.speechToggle = new toggleFactory(250,400,200,"Speech Recognition","Black")
 	}
 
 
@@ -289,6 +293,7 @@ class buttonsInit
 				this.mainMenuButton.process()
 				this.musicSlider.process(musicVolume)
 				this.effectsSlider.process(effectsVolume)
+				this.speechToggle.process()
 				break;
 			default:
 				this.mainMenuButton.process()

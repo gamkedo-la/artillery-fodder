@@ -144,7 +144,7 @@ function applicationStart() {
 
 	window.requestAnimationFrame(frameLoop);
 	
-	btnManager=new buttonsInit()
+	btnManager=new buttonsCreate()
 	
 }
 

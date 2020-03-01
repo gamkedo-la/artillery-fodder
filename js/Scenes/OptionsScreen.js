@@ -7,8 +7,9 @@ function modeOptions(frameTime) {
 
 	//screen background
 	colorRect(0, 0, canvas.width, canvas.height, "Darkred");
-
+	
 /*
+
     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
     if (isMouseInArea(canvas.width/2 - 100, canvas.height/2 - 20, 270, 40) && mouseJustPressed) {
         speechRecognitionEnabled = !speechRecognitionEnabled;
@@ -27,8 +28,17 @@ function modeOptions(frameTime) {
 	colorRect(canvas.width/2 + 110, canvas.height/2 - 20, 50, 40, "white");
 	colorText(speechRecognitionEnabled?"yes":"no", canvas.width/2 + 135, canvas.height/2 + 10 , "black", "20px Arial");
 */
+
+
+
+	//toggle button
+	speechRecognitionEnabled=btnManager.speechToggle.getValue()
+	
+	
+	
+
 	btnManager.mainMenuButton.draw()
 	btnManager.musicSlider.draw()
 	btnManager.effectsSlider.draw()
-
+	btnManager.speechToggle.draw()
 }
