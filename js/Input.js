@@ -163,5 +163,7 @@ const Key = {
 		else if (mouseScrollY < -0.1) {
 			mouseScrollY += 0.1;
 		}
+		mouseMovementX = 0;
+		mouseMovementY = 0;
 	}
 };

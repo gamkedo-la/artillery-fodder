@@ -112,6 +112,7 @@ function tankPlayerClass() {
 
 		//The floor is lava
 		if (this.y >= canvas.height - UI_HEIGHT && this.active) {
+			this.health = 0;
 			this.destroy();
 		}
 
@@ -131,11 +132,11 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < -1 && mousePressed) || ai.left){
-					this.angle += 30 * frameTime * Math.abs(mouseMovementX * 0.5);
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed) || ai.left){
+					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 1 && mousePressed) || ai.right){
-					this.angle -= 30 * frameTime * Math.abs(mouseMovementX * 0.5);
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed) || ai.right){
+					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
 				if (Key.isDown(Key.UP) || mouseScrollY < -2 || ai.up){					
 					this.power += 10 * frameTime;
@@ -227,7 +228,6 @@ function tankPlayerClass() {
         if (this.isPointColliding(mouseX,mouseY)) {
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
-
 	}
 
 	function drawHealthbar(x, y, tankHealth) {
@@ -244,8 +244,7 @@ function tankPlayerClass() {
         canvasContext.fillStyle = "rgba(255,0,0,1)";
         canvasContext.fillRect(barx,bary,barw*(tankHealth/100),barh);
 
-        colorText(tankHealth + "HP", x , y - 30, 'white', font = "16px Arial");
-        
+        colorText(tankHealth + "HP", x , y - 30, 'white', font = "16px Arial");  
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -277,6 +276,11 @@ function tankPlayerClass() {
 
 		soundHit.play();
 
+		if (this.health < 0) {
+			this.health = 0;
+			damageAmount = 0;
+		}
+
 		if(damageAmount > 0 && this.health > 0) {
 			damageAmountIndicator = true;
 			damageAmountPosX = this.x;
@@ -302,8 +306,6 @@ function tankPlayerClass() {
 
 		}
 	}
-
-
 
     this.muzzleFlash = function() {
         //console.log('muzzy!');
