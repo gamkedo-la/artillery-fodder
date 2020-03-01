@@ -136,10 +136,10 @@ function tankPlayerClass() {
 						return;
 					this.angle -= 30 * frameTime * Math.abs(mouseMovementX * 0.5);
 				}
-				if (Key.isDown(Key.UP) || ai.up){
+				if (Key.isDown(Key.UP) || mouseScrollY < -2 || ai.up){					
 					this.power += 10 * frameTime;
 				}
-				if (Key.isDown(Key.DOWN) || ai.down){
+				if (Key.isDown(Key.DOWN) || mouseScrollY > 2 || ai.down){
 					this.power -= 10 * frameTime;
 				}
 				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) || ai.prev){

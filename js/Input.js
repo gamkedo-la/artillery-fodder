@@ -5,6 +5,7 @@ function mouseInit() {
 	document.addEventListener('pointerdown', mouseDown);
 	document.addEventListener('pointerup', mouseUp);
 	document.addEventListener('mousemove', mouseMove);
+	document.addEventListener('wheel', mouseWheel);
 	document.getElementById('gameCanvas').addEventListener('pointermove', calculateMousePos);
 }
 
@@ -12,6 +13,7 @@ var mouseX = 0;
 var mouseY = 0;
 var mouseMovementX = 0;
 var mouseMovementY = 0;
+var mouseScrollY = 0;
 var mousePressed = false;
 var mouseJustPressed = false;
 
@@ -34,6 +36,10 @@ function mouseMove(evt) {
 		mouseMovementX = evt.movementX;
 		mouseMovementY = evt.movementY;
 	}
+}
+
+function mouseWheel(evt) {
+	mouseScrollY = evt.deltaY;	
 }
 
 function calculateMousePos(evt) {
@@ -148,5 +154,12 @@ const Key = {
 		this._pressed = {};
 		this._released = {};
 		mouseJustPressed = false;
+
+		if (mouseScrollY > 0.1) {
+			mouseScrollY -= 0.1;
+		}
+		else if (mouseScrollY < -0.1) {
+			mouseScrollY += 0.1;
+		}
 	}
 };
