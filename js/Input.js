@@ -4,11 +4,14 @@ window.addEventListener('keydown',  function (event) { Key.onKeydown(event); eve
 function mouseInit() {
 	document.addEventListener('pointerdown', mouseDown);
 	document.addEventListener('pointerup', mouseUp);
+	document.addEventListener('mousemove', mouseMove);
 	document.getElementById('gameCanvas').addEventListener('pointermove', calculateMousePos);
 }
 
 var mouseX = 0;
 var mouseY = 0;
+var mouseMovementX = 0;
+var mouseMovementY = 0;
 var mousePressed = false;
 var mouseJustPressed = false;
 
@@ -25,12 +28,25 @@ function mouseUp(evt) {
 	mousePressed = false;
 }
 
+function mouseMove(evt) {
+	if ((mouseX > 0 && mouseX < canvas.width) &&
+		(mouseY > 0 && mouseY < canvas.height)) {	
+		mouseMovementX = evt.movementX;
+		mouseMovementY = evt.movementY;
+	}
+}
+
 function calculateMousePos(evt) {
 	focus = true;
 	var rect = canvas.getBoundingClientRect(),
 	root = document.documentElement;
 	mouseX = evt.clientX// - rect.left - root.scrollLeft;
 	mouseY = evt.clientY// - rect.top - root.scrollTop;
+	if ((mouseX < 0 && mouseX > canvas.width) ||
+		(mouseY < 0 && mouseY > canvas.height)) {	
+		mouseMovementX = 0;
+		mouseMovementY = 0;
+	}
 }
 
 function isMouseInArea(x, y, width, height) {
