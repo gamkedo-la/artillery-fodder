@@ -33,6 +33,7 @@ function modeOptions(frameTime) {
 
 	//toggle button
 	speechRecognitionEnabled=btnManager.speechToggle.getValue()
+	//console.log(speechRecognitionEnabled)
 	
 	
 	

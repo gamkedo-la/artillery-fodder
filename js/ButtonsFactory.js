@@ -202,7 +202,7 @@ class toggleFactory
 	process()
 	{
 	     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
-		if (isMouseInArea(this.x + this.length+50, this.y, 270, 40) && mouseJustPressed) {
+		if (isMouseInArea(this.x + this.length+50, this.y, 50, 50) && mouseJustPressed) {
 			this.value = !this.value;	
 		}
 		
