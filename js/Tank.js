@@ -110,6 +110,11 @@ function tankPlayerClass() {
 			yVel *= -0.5;
 		}
 
+		//The floor is lava
+		if (this.y >= canvas.height - UI_HEIGHT && this.active) {
+			this.destroy();
+		}
+
 		//Dampens to zero
 		if (Math.abs(xVel) < 0.1) {xVel = 0;}
 		if (Math.abs(yVel) < 0.1) {yVel = 0;}
@@ -126,10 +131,10 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < 0 && mousePressed) || ai.left){
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < -1 && mousePressed) || ai.left){
 					this.angle += 30 * frameTime * Math.abs(mouseMovementX * 0.5);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed) || ai.right){
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 1 && mousePressed) || ai.right){
 					this.angle -= 30 * frameTime * Math.abs(mouseMovementX * 0.5);
 				}
 				if (Key.isDown(Key.UP) || mouseScrollY < -2 || ai.up){					
