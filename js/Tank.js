@@ -126,14 +126,10 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || mouseMovementX < -3 || ai.left){
-					if (mouseMovementX != 0 && mouseY > canvas.height - UI_HEIGHT - 50)
-						return;
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < 0 && mousePressed) || ai.left){
 					this.angle += 30 * frameTime * Math.abs(mouseMovementX * 0.5);
 				}
-				if (Key.isDown(Key.RIGHT) || mouseMovementX > 3 || ai.right){
-					if (mouseMovementX != 0 && mouseY > canvas.height - UI_HEIGHT - 50)
-						return;
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed) || ai.right){
 					this.angle -= 30 * frameTime * Math.abs(mouseMovementX * 0.5);
 				}
 				if (Key.isDown(Key.UP) || mouseScrollY < -2 || ai.up){					

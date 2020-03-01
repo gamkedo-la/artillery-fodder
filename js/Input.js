@@ -24,6 +24,8 @@ function mouseDown(evt) {
 	calculateMousePos(evt);
 	mousePressed = true;
 	mouseJustPressed = true;
+	mouseMovementX = 0;
+	mouseMovementY = 0;
 }
 
 function mouseUp(evt) {
