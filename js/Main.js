@@ -209,10 +209,17 @@ function update(frameTime) {
 	}
 
 	if (Key.isJustPressed(Key.BRACKET_LEFT)){
-		turnVolumeDown()
+		turnMusicVolumeDown()
 	}
 	if (Key.isJustPressed(Key.BRACKET_RIGHT)){
-		turnVolumeUp();
+		turnMusicVolumeUp();
+	}
+	
+	if (Key.isJustPressed(Key.MINUS)){
+		turnEffectsVolumeDown()
+	}
+	if (Key.isJustPressed(Key.PLUS)){
+		turnEffectsVolumeUp();
 	}
 
 

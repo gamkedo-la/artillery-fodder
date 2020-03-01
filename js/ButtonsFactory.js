@@ -146,18 +146,18 @@ class sliderFactory
 		this.keyRightBtn=_rightBtnKey
 		this.keyLeftBtn=_leftBtnKey
 	}
-	process(_valueToUpdate)
+	process(_valueToUpdate,_func1,_func2)
 	{
 		// checks for mouse hotspot and key input (Right btn)
 		if (isMouseInArea(this.rightBtnX, this.rightBtnY, this.buttonDimension,this.buttonDimension) && mouseJustPressed || Key.isJustPressed(this.keyRightBtn) )
 		{
-			turnVolumeUp()
+			_func1()
 		}
 
 		// checks for mouse hotspot and key input (Left btn)
 		if (isMouseInArea(this.leftBtnX, this.leftBtnY, this.buttonDimension,this.buttonDimension) && mouseJustPressed || Key.isJustPressed(this.keyLeftBtn))
 		{
-			turnVolumeDown()
+			_func2()
 		}	
 		
 		this.sliderValue=_valueToUpdate	

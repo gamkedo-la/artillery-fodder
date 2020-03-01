@@ -187,14 +187,22 @@ function setMusicVolume(amount) {
 	backgroundMusic.setVolume(musicVolume);
 }
 
-function turnVolumeUp() {
+function turnMusicVolumeUp() {
 	setMusicVolume(musicVolume + VOLUME_INCREMENT);
-	setEffectsVolume(effectsVolume + VOLUME_INCREMENT);
-	console.log("Turn up volume");
+	console.log("Turn up Music");
 }
 
-function turnVolumeDown() {
+function turnMusicVolumeDown() {
 	setMusicVolume(musicVolume - VOLUME_INCREMENT);
+	console.log("Turn down Music");
+}
+
+function turnEffectsVolumeUp() {
+	setEffectsVolume(effectsVolume + VOLUME_INCREMENT);
+	console.log("Turn up Effects");
+}
+
+function turnEffectsVolumeDown() {
 	setEffectsVolume(effectsVolume - VOLUME_INCREMENT);
-	console.log("Turn down volume");
+	console.log("Turn down Effects");
 }

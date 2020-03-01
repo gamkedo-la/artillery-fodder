@@ -101,6 +101,8 @@ const Key = {
 	PERIOD: 190,
 	BRACKET_LEFT: 219,
 	BRACKET_RIGHT: 221,
+	PLUS:187,
+	MINUS:189,
 
 	isDown(keyCode) {
 		return this._down[keyCode];
