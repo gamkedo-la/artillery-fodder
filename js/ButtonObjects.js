@@ -274,8 +274,8 @@ class buttonsCreate
 
 			case PAUSE_SCREEN:
 				this.unPauseButton.process()
-				this.musicSlider.process(musicVolume)
-				this.effectsSlider.process(effectsVolume)
+				this.musicSlider.process(musicVolume,turnMusicVolumeUp,turnMusicVolumeDown)
+				this.effectsSlider.process(effectsVolume,turnEffectsVolumeUp,turnEffectsVolumeDown)
 				break;
 
 			case INVENTORY_SCREEN:
