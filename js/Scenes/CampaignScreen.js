@@ -52,6 +52,7 @@ function startChapter(chapterNumber) {
 			//startMatch() set properties
 			arrayOfPlayers[0].usesAI = false;
 			arrayOfPlayers[1].usesAI = true;
+			arrayOfPlayers[2].usesAI = true;
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
 			//angles, health, weapon inventories, etc
@@ -71,6 +72,8 @@ function startChapter(chapterNumber) {
 			//startMatch() set properties
 			arrayOfPlayers[0].usesAI = false;
 			arrayOfPlayers[1].usesAI = true;
+			arrayOfPlayers[2].usesAI = true;
+			arrayOfPlayers[3].usesAI = true;
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
 			//angles, health, weapon inventories, etc
