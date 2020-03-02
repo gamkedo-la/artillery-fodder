@@ -141,10 +141,10 @@ function tankPlayerClass() {
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
 				if (Key.isDown(Key.UP) || ai.up){					
-					this.power += 10 * frameTime;
+					this.power += 30 * frameTime;
 				}
 				if (Key.isDown(Key.DOWN) || ai.down){
-					this.power -= 10 * frameTime;
+					this.power -= 30 * frameTime;
 				}
 				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) ||  mouseScrollY > 0 || ai.prev){
 					this.weapon--;
@@ -158,13 +158,13 @@ function tankPlayerClass() {
 				}
 				
 				// Mouse Input	
-				
-				document.onkeypress = function(e){
+				document.onkeydown = function(){
 					mouseLastPosX = mouseX;
 					mouseLastPosY = mouseY;
 					}
 				
-				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX && mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
+				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
+					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
 					
 					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
 					
@@ -173,11 +173,9 @@ function tankPlayerClass() {
 					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
 						this.fire();
 					}
+				
 				}
-				else {
-					mouseLastPosX = mouseX;
-					mouseLastPosY = mouseY;
-				}
+
 				//Range checks
 				if (this.angle >= 360) {
 					this.angle -= 360;

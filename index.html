@@ -4,18 +4,19 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <style>
-        body { margin:0; padding:0; overflow:hidden; }
+        body { margin:0; padding:0; overflow:hidden; margin-top:20;}
         #speechRecognitionDisplay { position:absolute; bottom:8px; right:8px; background:rgba(200,160,120,0.25) }
     </style>
 </head>
 <body>
-	<canvas id="gameCanvas" width="800" height="600"></canvas>
-    
-    <p id="instructions">UP and DOWN for power<br>
-	LEFT and RIGHT for angle<br>
-	SPACE to fire and start the game<br>
-	COMMA and PERIOD to change weapons<br>
-    [M] for Main Menu<br>
+	<canvas id="gameCanvas" width="800" height="600"></canvas>    
+    <p id="instructions">
+	<b>Angle:</b> Arrow Left/right or Mouse<br>
+	<b>Power:</b> Arrow up/down or Mouse distance<br>
+	<b>Fire:</b> Space or Mouse click<br>
+	<b>Weapons:</b> Comma/Period or Mouse Wheel<br>
+	<b>Start game:</b> Space<br>
+    <b>Main Menu:</b> M<br>
     [G] for WIN SCREEN while in Main Menu
    	</p>
 	
@@ -47,7 +48,6 @@
 	<script src="js/Scenes/MainMenu.js"></script>
 	<script src="js/Scenes/CampaignScreen.js"></script>
 	<script src="js/Main.js"></script>
-	
 </body>
 </html>  
 

@@ -5,6 +5,7 @@ const imageLoader = new (function() {
         {id: "buttons", src: "./images/buttons.png"},
         {id: "decorations", src: "./images/decorations.png"},
         {id: "titleScreenCover", src: "./images/TitleScreen_nLogo.png"},
+		{id: "winScreenBackground", src: "./images/winscreen.png"},
 		{id: "logo", src: "./images/TitleScreen-Logo.png"},
         {id: "crosshair", src: "./images/crosshair.png"},
         {id: "selector", src: "./images/TankSelector.png"},
