@@ -2,6 +2,8 @@ var damageAmount;
 var damageAmountPosX;
 var damageAmountPosY;
 var damageAmountIndicator = false;
+var mouseLastPosX = 0;
+var mouseLastPosY = 0;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -79,9 +81,9 @@ function tankPlayerClass() {
 
 
     }
-
+	
 	this.update = function update(frameTime) {
-
+		
 		//Keep tank in canvas
 		if (Math.floor(this.y) >= mapHeight) {
 			this.y = mapHeight;
@@ -132,27 +134,50 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed) || ai.left){
+				if (Key.isDown(Key.LEFT) || ai.left) {
 					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed) || ai.right){
+				if (Key.isDown(Key.RIGHT) || ai.right){
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.UP) || mouseScrollY < -2 || ai.up){					
+				if (Key.isDown(Key.UP) || ai.up){					
 					this.power += 10 * frameTime;
 				}
-				if (Key.isDown(Key.DOWN) || mouseScrollY > 2 || ai.down){
+				if (Key.isDown(Key.DOWN) || ai.down){
 					this.power -= 10 * frameTime;
 				}
-				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) || ai.prev){
+				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) ||  mouseScrollY > 0 || ai.prev){
 					this.weapon--;
 					this.weaponIndextIncreesing = false;
+					mouseScrollY = 0; //mouse wheel bug fix
 				}
-				if (Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) || ai.next){
+				if (Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) || mouseScrollY < 0|| ai.next){
 					this.weapon++;
 					this.weaponIndextIncreesing = true;
+					mouseScrollY = 0; //mouse wheel bug fix
 				}
-
+				
+				// Mouse Input	
+				
+				document.onkeypress = function(e){
+					mouseLastPosX = mouseX;
+					mouseLastPosY = mouseY;
+					}
+				
+				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX && mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
+					
+					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
+					
+					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
+					
+					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
+						this.fire();
+					}
+				}
+				else {
+					mouseLastPosX = mouseX;
+					mouseLastPosY = mouseY;
+				}
 				//Range checks
 				if (this.angle >= 360) {
 					this.angle -= 360;
@@ -195,7 +220,7 @@ function tankPlayerClass() {
 			canvasContext.save();
 			canvasContext.translate(this.x,this.y-h);
 			canvasContext.rotate(-radians);
-			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*50, -10);
+			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*70, -10);
 			canvasContext.restore();
 
 
