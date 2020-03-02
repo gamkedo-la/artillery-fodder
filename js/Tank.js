@@ -206,7 +206,7 @@ function tankPlayerClass() {
 		}
 				//cheat code
 		if (Key.isJustPressed(Key.f)){
-			this.health = 0;
+			this.health -= 15;
 		}
 	}
 
@@ -253,7 +253,7 @@ function tankPlayerClass() {
         }
 	}
 
-	function drawHealthbar(x, y, tankHealth) {
+	function drawHealthbar(x, y, tankHealth, color) {
         if (tankHealth < 0) {
         	tankHealth = 0;
         }
@@ -262,12 +262,28 @@ function tankPlayerClass() {
         var bary = y-46;
         var barw = 52;
         var barh = 20;
-        canvasContext.fillStyle = "rgba(128,0,0,1)";
+
+        //healthbar's black border
+        canvasContext.fillStyle = "black";
+        canvasContext.fillRect(barx - 3,bary - 3 ,barw + 6,barh + 6);
+        //healthbar's white inner background
+        canvasContext.fillStyle = "white";
         canvasContext.fillRect(barx,bary,barw,barh);
-        canvasContext.fillStyle = "rgba(255,0,0,1)";
+
+        //changing colors of health indicator
+        if(tankHealth >= 70){
+        	canvasContext.fillStyle = "rgba(0,255,0,1)";
+        }
+        if (tankHealth <= 69){
+        	canvasContext.fillStyle = "rgba(255,153,0,1)";
+        }
+        if (tankHealth <= 30){
+        	canvasContext.fillStyle = "rgba(255,0,0,1)";
+        }
+        //canvasContext.fillStyle = "black";//"rgba(255,0,0,1)";
         canvasContext.fillRect(barx,bary,barw*(tankHealth/100),barh);
 
-        colorText(tankHealth + "HP", x , y - 30, 'white', font = "16px Arial");  
+        colorText(tankHealth + "HP", x , y - 30, 'black', font = "16px Arial");  
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
