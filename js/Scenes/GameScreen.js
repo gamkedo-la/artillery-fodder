@@ -193,4 +193,7 @@ function modeGame(frameTime) {
 		soundt06.stop();
 	}
 
+    // temp: show mini stats window
+    stats.draw();
+
 }

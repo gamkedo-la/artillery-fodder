@@ -165,6 +165,10 @@ function frameLoop() {
 }
 
 function update(frameTime) {	
+
+    stats.frames++;
+    stats.seconds += frameTime;
+
 	switch (mode) {
 		case GAME_MODE:
 			prevMode=MAIN_MENU
