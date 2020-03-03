@@ -296,7 +296,10 @@ function tankPlayerClass() {
 	}
 
 	this.takeDamage = function takeDamage(amount, angle = 270) {
-		if (amount < 0) {amount = 0;}
+        if (amount < 0) {amount = 0;}
+        
+        stats.damage += amount;
+
 		this.health -= amount;
 		damageAmount = amount;
 
@@ -333,6 +336,7 @@ function tankPlayerClass() {
 
 	this.destroy = function destroy() {
 		if (this.active) {
+
 			this.active = false;
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
@@ -389,6 +393,8 @@ function tankPlayerClass() {
         if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
+        
+        stats.shots++;
 
 		var newProjectile;
 		switch (this.weapon) {
@@ -398,7 +404,7 @@ function tankPlayerClass() {
         		this.muzzleFlash();
 				break;
 			case 1://Three Shot
-				newProjectile = new threeShotClass();
+				newProjectile = new multiShotClass();
 				soundFire.play();
         		this.muzzleFlash();
 				break;
@@ -455,8 +461,13 @@ function tankPlayerClass() {
 				newProjectile = new grenadeShot();
 				soundFire.play();
         		this.muzzleFlash();
-				break;
-			case 12://Self Destruct
+         		break;
+			case 12: //Delayed Multi Shot
+			  newProjectile = new delayedMultiShotClass();
+			  soundFire.play();
+			  this.muzzleFlash();
+		      break;
+			case 13://Self Destruct
 				newProjectile = new empty();
 				var newExplosion = new basicExplosionClass();
 				newExplosion.x = this.x;

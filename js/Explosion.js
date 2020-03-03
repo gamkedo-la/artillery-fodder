@@ -21,7 +21,9 @@ function basicExplosionClass() {
 					}
 				}
 				map.createImpactAtXandY(this.x, this.y, this.size);
-				soundExplosion.play();
+                soundExplosion.play();
+
+                stats.explosions++;
 
 				if (this.particles) {
 					let splodes = 50;
@@ -51,13 +53,17 @@ function basicExplosionClass() {
 		var dist = distance(targetTank, this);
 		var angle = angleBetween2Points(this, {x:targetTank.x, y:targetTank.y - 5});
 		if (dist <= this.size) {
-			targetTank.takeDamage((this.size - dist)/this.size * this.damage, angle);
-		}
+            stats.hits++;
+            targetTank.takeDamage((this.size - dist)/this.size * this.damage, angle);
+		} else {
+            //stats.misses++; // this increments for EACH player missed per shot
+        }
 	}
 }
 
 function multiExplosionClass() {
-	this.x = 0;
+    
+    this.x = 0;
 	this.y = 0;
 	this.size = 20;
 	this.damage = 10;
@@ -111,8 +117,11 @@ function multiExplosionClass() {
 		var dist = distance(targetTank, this);
 		var angle = angleBetween2Points(this, {x:targetTank.x, y:targetTank.y - 5});
 		if (dist <= this.size) {
+            stats.hits++;
 			targetTank.takeDamage((this.size - dist)/this.size * this.damage, angle);
-		}
+		} else {
+            //stats.misses++; // called for EACH tank missed
+        }
 	}
 
 	this.createChild = function createChild() {
