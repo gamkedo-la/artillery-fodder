@@ -541,6 +541,9 @@ function inGameAnnoucements() {
 
 function nextTurn() {
 	if (incrementTurn) {
+
+        stats.turns++;
+
 		nextTurnHeadline = true;
 		arrayOfPlayers[playerTurn].myTurn = false;
 

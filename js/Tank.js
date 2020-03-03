@@ -296,7 +296,10 @@ function tankPlayerClass() {
 	}
 
 	this.takeDamage = function takeDamage(amount, angle = 270) {
-		if (amount < 0) {amount = 0;}
+        if (amount < 0) {amount = 0;}
+        
+        stats.damage += amount;
+
 		this.health -= amount;
 		damageAmount = amount;
 
@@ -333,6 +336,7 @@ function tankPlayerClass() {
 
 	this.destroy = function destroy() {
 		if (this.active) {
+
 			this.active = false;
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
@@ -388,6 +392,8 @@ function tankPlayerClass() {
         if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
+        
+        stats.shots++;
 
 		var newProjectile;
 		switch (this.weapon) {

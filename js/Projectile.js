@@ -590,7 +590,7 @@ function rainShot() {
 	}
 
 	this.launch = function launch(angle, power) {
-		for (var i = 0; i < MAX_RAINSHOT; i++) {
+        for (var i = 0; i < MAX_RAINSHOT; i++) {
 		var newProjectile = new basicShotClass();
 			newProjectile.x = this.x;
 			newProjectile.y = this.y;
