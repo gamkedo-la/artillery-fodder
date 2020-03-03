@@ -460,8 +460,13 @@ function tankPlayerClass() {
 				newProjectile = new grenadeShot();
 				soundFire.play();
         		this.muzzleFlash();
-				break;
-			case 12://Self Destruct
+         		break;
+			case 12: //Delayed Multi Shot
+			  newProjectile = new delayedMultiShotClass();
+			  soundFire.play();
+			  this.muzzleFlash();
+		      break;
+			case 13://Self Destruct
 				newProjectile = new empty();
 				var newExplosion = new basicExplosionClass();
 				newExplosion.x = this.x;

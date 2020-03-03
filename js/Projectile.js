@@ -796,3 +796,30 @@ function grenadeShot() {
 		incrementTurn = true;
 	}
 }
+
+delayedMultiShotClass.prototype = new basicShotClass();
+function delayedMultiShotClass() {
+  /* Shoots a single shot that splits into three when it starts falling */
+  this.prevPos = {x: 0, y: 0};
+
+  this.superClassUpdate = this.update;
+  this.update = function (frameTime) {
+	if (this.active) {
+	  this.prevPos.x = this.x;
+	  this.prevPos.y = this.y;
+	  this.superClassUpdate(frameTime);
+	  if (this.y >= this.prevPos.y) {
+		let threeShot = new multiShotClass();
+		threeShot.distanceBetweenShots = 150;
+		threeShot.x = this.x;
+		threeShot.y = this.y;
+		threeShot.size = this.size;
+		threeShot.tank = this.tank;
+		let angle = angleBetween2Points(this.prevPos, this);
+		threeShot.launch(angle*1.3, 20);
+		arrayOfTemporaryObjects.push(threeShot);
+		this.active = false;
+	  }
+	}
+  };
+};

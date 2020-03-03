@@ -1,4 +1,4 @@
-const WEAPON_LIST_MAX = 12
+const WEAPON_LIST_MAX = 13;
 var arrayOfWeaponBlocks = [];
 var projectileNameList = ["Basic Shot",
 						  "Three Shot",
@@ -12,6 +12,7 @@ var projectileNameList = ["Basic Shot",
 						  "Rain Shot",
 						  "Ground Shot",
 						  "Grenade",
+						  "Delayed Three Shot",
 						  "Self Destruct"];
 var weaponInventoryMaster = [-1,//Basic Shot
 							 -1,//Three Shot
@@ -25,6 +26,7 @@ var weaponInventoryMaster = [-1,//Basic Shot
 							 5,// Rain Shot
 							 3,// Ground Shot
 							 3,// Grenade
+							 3,// Delayed Multi Shot
 							 1]//Self Destruct 
 
 function modeInventory(frameTime) {
