@@ -189,8 +189,8 @@ class buttonsCreate
 
 	//Buttons for Campaign Screen
 
-	 this.chapter01 = new buttonFactory(canvas.width/2-this._buttonLength/2,
-										this._firstButtonPosY,
+	 this.chapter01 = new buttonFactory(100,//canvas.width/2-this._buttonLength/2,
+										200,//this._firstButtonPosY,
 										this._buttonLength,
 										this._buttonSize,
 										"Red",
@@ -205,8 +205,8 @@ class buttonsCreate
 										"Black",
 										1
 										)
- 	 this.chapter02 = new buttonFactory(canvas.width/2-this._buttonLength/2,
-										(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
+ 	 this.chapter02 = new buttonFactory(300,//canvas.width/2-this._buttonLength/2,
+										300,//(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 1,
 										this._buttonLength,
 										this._buttonSize,
 										"Red",
@@ -221,8 +221,8 @@ class buttonsCreate
 										"Black",
 										2
 										)
- 	 this.chapter03 = new buttonFactory( canvas.width/2-this._buttonLength/2,
-										(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
+ 	 this.chapter03 = new buttonFactory(500, // canvas.width/2-this._buttonLength/2,
+										400, //(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
 										this._buttonLength,
 										this._buttonSize,
 										"Red",
