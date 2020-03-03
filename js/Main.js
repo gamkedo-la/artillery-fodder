@@ -10,9 +10,12 @@ var particlesStars = new ParticlePool(1000);
 var playerTurn = 0;
 var incrementTurn = false;
 var fadeVariable = 1.0;
+var fadeVariableSecond = 1.0;
 var destroyedHeadline = false;
-var nextTurnHeadline = true;
+var nextTurnHeadline = false;
 var timerHeadline = 0;
+var timerHeadlineDual = 0;
+var timerTankDestroyedIndicator = 0;
 var playerScreenWave = 0;
 
 var deltaTime = 0;
@@ -484,40 +487,71 @@ function numberOfTanksAlive() {
     return count;
 }
 
+
 function inGameAnnoucements() {
-	if(destroyedHeadline || nextTurnHeadline) {
-		timerHeadline ++;
+	if(nextTurnHeadline || destroyedHeadline) {
 
-		if(destroyedHeadline) {
-			if(timerHeadline >= 60) {
-				colorText("Tank Destroyed!", canvas.width/2, 250, 'white', "50px Arial");
-				
-				}
-			if(timerHeadline >= 120) {
-				destroyedHeadline = false;	
-			}
-		}
+		// handling just when "next turn" indicator is necessary.
+		if(nextTurnHeadline && destroyedHeadline == false){
+			timerHeadline ++;
 
-		if(nextTurnHeadline) {
-
-			if(timerHeadline >= 120 && dayTime) {
+			if(timerHeadline >= 30 && dayTime) {
 				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
-			} else if (timerHeadline >= 120) {
+			} else if (timerHeadline >= 30) {
 				colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
 			}
-			
-			if(timerHeadline >= 180) {
+
+			if(timerHeadline >= 120) {
 				fadeVariable -= 0.01;
 			}
 		}
 
-		if(timerHeadline >= 270) {
-			destroyedHeadline = false;
+		//reset of parameters for nextTurnHeadline.
+		if(timerHeadline >= 220) {
 			nextTurnHeadline = false;
-			fadeVariable = 1.0;
 			timerHeadline = 0;
+			fadeVariable = 1.0;
+		}
+
+	//handling when both "next turn" & "tank destroyed" indicator is necessary.
+	if(nextTurnHeadline && destroyedHeadline) {
+		timerHeadlineDual++;
+		timerTankDestroyedIndicator ++;
+
+		//executing "tank destroyed" headline first from frames 30 to 220.
+		if(timerTankDestroyedIndicator >= 30 && dayTime){
+			colorText("TANK DESTROYED!", canvas.width/2, 150, `rgba(0,0,0,${fadeVariable})`, "50px Arial");
+		} else if (timerTankDestroyedIndicator >= 30) {
+			colorText("TANK DESTROYED!", canvas.width/2, 150, `rgba(255,255,255,${fadeVariable})`, "50px Arial");
+		}
+
+		if(timerTankDestroyedIndicator >= 120) {
+				fadeVariable -= 0.01;
+			}
+
+
+		if(timerHeadlineDual >= 230 && dayTime) {
+			colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(0,0,0,${fadeVariableSecond})`, "50px Arial");
+		} else if (timerHeadlineDual >= 230) {
+			colorText(arrayOfPlayers[playerTurn].name + "'s Turn", canvas.width/2, 150, `rgba(255,255,255,${fadeVariableSecond})`, "50px Arial");
+		}
+
+		if(timerHeadlineDual >= 320) {
+				fadeVariableSecond -= 0.01;
+			}
+		}
+
+		//reset of parameters.
+		if(timerHeadlineDual >= 420) {
+			nextTurnHeadline = false;
+			timerHeadlineDual = 0;
+			fadeVariable = 1.0;
+			fadeVariableSecond = 1.0;
+			destroyedHeadline = false;
+			timerTankDestroyedIndicator = 0;
 		}
 	}
+
 
 	if(damageAmountIndicator) {
 
