@@ -403,7 +403,7 @@ function tankPlayerClass() {
         		this.muzzleFlash();
 				break;
 			case 1://Three Shot
-				newProjectile = new threeShotClass();
+				newProjectile = new multiShotClass();
 				soundFire.play();
         		this.muzzleFlash();
 				break;

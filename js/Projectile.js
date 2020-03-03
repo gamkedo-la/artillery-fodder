@@ -108,50 +108,38 @@ function basicShotClass() {
 	}
 }
 
-function threeShotClass() {
-	this.x = 0;
-	this.y = 0;
-	this.size = 10;
-	this.damage = 10;
-	this.tank;
+function multiShotClass() {
+  this.x = 0;
+  this.y = 0;
+  this.size = 10;
+  this.damage = 10;
+  this.tank;
+  this.numberOfShots = 3;
+  this.distanceBetweenShots = 5;
+  this.active = false;
 
-	this.active = false;
-
-	this.update = function update(frameTime) {
-		if (this.active) {
-			this.active = false;
-		}
+  this.update = function update(frameTime) {
+	if (this.active) {
+	  this.active = false;
 	}
+  }
 
-	this.draw = function draw(frameTime) {
-		return;
+  this.draw = function draw(frameTime) {
+	return;
+  }
+
+  this.launch = function launch(angle, power) {
+	for (let i=0; i<this.numberOfShots; i++) {
+	  let projectile = new basicShotClass();
+	  projectile.x = this.x;
+	  projectile.y = this.y;
+	  projectile.size = this.size;
+	  projectile.tank = this.tank;
+	  let offsetAngle = angle - this.distanceBetweenShots*(this.numberOfShots - i);
+	  projectile.launch(offsetAngle, power);
+	  arrayOfTemporaryObjects.push(projectile);
 	}
-
-	this.launch = function launch(angle, power) {
-		var newProjectileC = new basicShotClass();
-		newProjectileC.x = this.x;
-		newProjectileC.y = this.y;
-		newProjectileC.size = this.size;
-		newProjectileC.tank = this.tank;
-		newProjectileC.launch(angle, power);
-		arrayOfTemporaryObjects.push(newProjectileC);
-
-		var newProjectileL = new basicShotClass();
-		newProjectileL.x = this.x;
-		newProjectileL.y = this.y;
-		newProjectileL.size = this.size;
-		newProjectileL.tank = this.tank;
-		newProjectileL.launch(angle+5, power);
-		arrayOfTemporaryObjects.push(newProjectileL);
-
-		var newProjectileR = new basicShotClass();
-		newProjectileR.x = this.x;
-		newProjectileR.y = this.y;
-		newProjectileR.size = this.size;
-		newProjectileR.tank = this.tank;
-		newProjectileR.launch(angle-5, power);
-		arrayOfTemporaryObjects.push(newProjectileR);
-	}
+  }
 }
 
 function sniperShotClass() {
