@@ -19,7 +19,8 @@ const imageLoader = new (function() {
 		{id: "a_key", src: "./images/keysPNG/A_key.png"},
 		{id: "gamescreen-overlay", src: "./images/gamescreen-overlay.png"},
 		{id: "sliderFrame", src:"./images/sliderFrame.png"},
-		{id: "buttonFrame", src:"./images/buttonFrame.png"}
+        {id: "buttonFrame", src:"./images/buttonFrame.png"},
+        {id: "map", src:"./images/map.png"}
 		
 	];
 	const images = {};
