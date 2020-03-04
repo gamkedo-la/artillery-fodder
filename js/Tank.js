@@ -341,7 +341,7 @@ function tankPlayerClass() {
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
 			destroyedHeadline = true;
-			destroyedNameIndicator(this.name);
+			//destroyedNameIndicator(this.name); // FIXME / TODO?
 			
 			let splodes = 10;
 			while(--splodes){
