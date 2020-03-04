@@ -10,6 +10,7 @@ var stats = {
     hits:0,
     frames:0,
     explosions:0,
+
     winScreensInARow:0,
 
     drawWinScreen: function() {
@@ -24,18 +25,20 @@ var stats = {
         var d = 30; // delay frames per line
 
         this.winScreensInARow++;
+        var i = this.winScreensInARow;
 
         // vertical, animated "count-up"
-        if (this.winScreensInARow>d*n) colorText("Endgame Stats:",x,y,c,f,s);
+        if (i>d*n) colorText("Endgame Stats:",x,y,c,f,s);
         y += h; // blank line
-        if (this.winScreensInARow>d*n) colorText(this.turns.toFixed(0)+" turns",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.shots.toFixed(0)+" shots",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.hits.toFixed(0)+" hits",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.misses.toFixed(0)+" misses",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.explosions.toFixed(0)+" explosions",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.damage.toFixed(0)+" damage",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.seconds.toFixed(1)+" seconds",x,y+(h*n++),c,f,s);
-        if (this.winScreensInARow>d*n) colorText(this.frames.toFixed(0)+" frames",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.explosions)+" explosions",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.shots)+" shots",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.hits)+" hits",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.misses)+" misses",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.damage).toFixed(0)+" damage",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.turns)+" turns",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(Math.min(i-d*n,this.seconds).toFixed(1)+" seconds",x,y+(h*n++),c,f,s);
+        if (i>d*n) colorText(this.frames.toFixed(0)+" frames",x,y+(h*n++),c,f,s);
+
     },
 
     draw: function(largemode=false) {
