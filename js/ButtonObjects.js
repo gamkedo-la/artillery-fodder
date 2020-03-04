@@ -247,6 +247,8 @@ class buttonsCreate
 	
 	//Speech recognition toggle button
 	this.speechToggle = new toggleFactory(250,400,200,"Speech Recognition","Black")
+
+	this.mouseControl = new toggleFactory(250,400,200,"Mouse Only Control","Black")
 	}
 
 
@@ -295,6 +297,12 @@ class buttonsCreate
 				this.effectsSlider.process(effectsVolume,turnEffectsVolumeUp,turnEffectsVolumeDown)
 				this.speechToggle.process()
 				break;
+
+			case CONTROLS_SCREEN:
+				this.mainMenuButton.process()
+				this.mouseControl.process()
+				break;
+
 			default:
 				this.mainMenuButton.process()
 				break;

@@ -6,6 +6,7 @@ function modeControls(frameTime) {
 	colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height/2 - 50, "white", "20px Arial", true);
 
 
+	btnManager.mouseControl.draw()
 	btnManager.mainMenuButton.draw()
 
 }
