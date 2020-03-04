@@ -39,9 +39,15 @@ var damageAmountShake = 20;
 
 //sky 
 //variables for morning sky colors
-var skyColorGradient01 = 255;
-var skyColorGradient02 = 255;
-var skyColorGradient03 = 0;
+var skyColorGradient01 = 128;
+var skyColorGradient02 = 128;
+var skyColorGradient03 = 128;
+var skyColorGradientDay01 = 255;
+var skyColorGradientDay02 = 255;
+var skyColorGradientDay03 = 0;
+var skyColorGradientNight01 = 0;
+var skyColorGradientNight02 = 0;
+var skyColorGradientNight03 = 255;
 
 var skyColor01 = 255;
 var skyColor02 = 255;
@@ -247,6 +253,15 @@ function startMatch() {
 	
 	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+	skyColorGradientDay01 = rndInt(0,255);
+	skyColorGradientDay02 = rndInt(0,255);
+	skyColorGradientDay03 = rndInt(0,255);
+	skyColorGradientNight01 = rndInt(0,255);
+	skyColorGradientNight02 = rndInt(0,255);
+	skyColorGradientNight03 = rndInt(0,255);
+	skyColorGradient01 = skyColorGradientDay01;
+	skyColorGradient02 = skyColorGradientDay02;
+	skyColorGradient03 = skyColorGradientDay03;
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
@@ -429,14 +444,19 @@ function dayNight() {
 			skyColor03 --;
 		}
 
-		//blue = 0, 0, 204
-		if(skyColorGradient01 >= 1) { // turning down to 0
+		if(skyColorGradient01 > skyColorGradientNight01) { // turning down to 0
 			skyColorGradient01 --;
+		}else if(skyColorGradient01 < skyColorGradientNight01) { // turning down to 0
+			skyColorGradient01 ++;
 		}
-		if(skyColorGradient02 >= 1) { // turning down to 0
+		if(skyColorGradient02 > skyColorGradientNight02) { // turning down to 0
 			skyColorGradient02 --;
+		}else if(skyColorGradient02 < skyColorGradientNight02) { // turning down to 0
+			skyColorGradient02 ++;
 		}
-		if(skyColorGradient03 <= 204) { // turning up to 205
+		if(skyColorGradient03 > skyColorGradientNight03) { // turning down to 0
+			skyColorGradient03 --;
+		}else if(skyColorGradient03 < skyColorGradientNight03) { // turning down to 0
 			skyColorGradient03 ++;
 		}
 
@@ -459,15 +479,20 @@ function dayNight() {
 			skyColor03++;
 		}
 
-		//yellow = 255, 255, 0
-		if(skyColorGradient01 <= 254) { // turning up to 255
-			skyColorGradient01++;
+		if(skyColorGradient01 > skyColorGradientDay01) { // turning down to 0
+			skyColorGradient01 --;
+		}else if(skyColorGradient01 < skyColorGradientDay01) { // turning down to 0
+			skyColorGradient01 ++;
 		}
-		if(skyColorGradient02 <= 254) { // turning up to 255
-			skyColorGradient02++;
+		if(skyColorGradient02 > skyColorGradientDay02) { // turning down to 0
+			skyColorGradient02 --;
+		}else if(skyColorGradient02 < skyColorGradientDay02) { // turning down to 0
+			skyColorGradient02 ++;
 		}
-		if(skyColorGradient03 >= 1) { // turning down to 0
-			skyColorGradient03--;
+		if(skyColorGradient03 > skyColorGradientDay03) { // turning down to 0
+			skyColorGradient03 --;
+		}else if(skyColorGradient03 < skyColorGradientDay03) { // turning down to 0
+			skyColorGradient03 ++;
 		}
 	}
 

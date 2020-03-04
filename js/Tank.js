@@ -165,15 +165,9 @@ function tankPlayerClass() {
 				
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
-					
 					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
-					
-					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
-					
-					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
-						this.fire();
-					}
 				
+					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
 				}
 
 				//Range checks
@@ -199,6 +193,13 @@ function tankPlayerClass() {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
 					this.weapon = WEAPON_LIST_MAX;
+				}
+
+				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
+					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
+					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
+						this.fire();
+					}
 				}
 			} else {
 				incrementTurn = true;
