@@ -153,10 +153,10 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || ai.left) {
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.mouseControl.getValue()) || ai.left) {
 					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || ai.right){
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.mouseControl.getValue())  || ai.right){
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
 				if (Key.isDown(Key.UP) || ai.up){					
@@ -183,16 +183,11 @@ function tankPlayerClass() {
 					}
 				
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
-					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
-					
+					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
+					&& btnManager.mouseControl.getValue()){
 					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
-					
+
 					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
-					
-					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
-						this.fire();
-					}
-				
 				}
 
 				//Range checks
@@ -218,6 +213,15 @@ function tankPlayerClass() {
 					this.weapon = 0;
 				} else if (this.weapon < 0) {
 					this.weapon = WEAPON_LIST_MAX;
+				}
+
+				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
+					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
+					&& btnManager.mouseControl.getValue()){
+
+					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
+						this.fire();
+					}
 				}
 			} else {
 				incrementTurn = true;
@@ -360,7 +364,7 @@ function tankPlayerClass() {
 			buildTankSkinsSheet();
 			console.log("Destroyed " + this.name);
 			destroyedHeadline = true;
-			destroyedNameIndicator(this.name);
+			//destroyedNameIndicator(this.name); // FIXME / TODO?
 			
 			let splodes = 10;
 			while(--splodes){
