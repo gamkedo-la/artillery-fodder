@@ -31,7 +31,9 @@ var weaponInventoryMaster = [-1,//Basic Shot
 
 function modeInventory(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "purple");
-
+	
+	drawBg(0.5,"BgTileWhite") // draw bg
+	
 	for (var i = 0; i <= WEAPON_LIST_MAX; i++) {
 		arrayOfWeaponBlocks[i].update();
 		arrayOfWeaponBlocks[i].draw();

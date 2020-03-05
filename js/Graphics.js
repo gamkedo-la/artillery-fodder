@@ -20,7 +20,11 @@ const imageLoader = new (function() {
 		{id: "gamescreen-overlay", src: "./images/gamescreen-overlay.png"},
 		{id: "sliderFrame", src:"./images/sliderFrame.png"},
         {id: "buttonFrame", src:"./images/buttonFrame.png"},
-        {id: "map", src:"./images/map.png"}
+        {id: "map", src:"./images/map.png"},
+		{id: "BgTile",src:"./images/af_menu_bg_tile.png"},
+		{id: "BgTileWhite",src:"./images/af_menu_bg_tile_w.png"}
+		
+		
 		
 	];
 	const images = {};
@@ -133,4 +137,27 @@ function colorRoundedRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor){
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
 	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,360)
 	canvasContext.fill()
+}
+
+scrollY=0 //global variable used for scrolling background
+//Takes in a speed and image which is at a size of w:80, h:60
+function drawBg(_scrollSpeed,_img){
+	canvasContext.save()
+	if (scrollY<-660) {scrollY=0} 
+		canvasContext.translate(0,scrollY-=_scrollSpeed);
+		for (j=0;j<11;j++)
+		{
+			for (i=0;i<11;i++)
+			{
+			  canvasContext.drawImage(imageLoader.getImage(_img),0+(i*80),0+(j*60),80,60);
+			}
+		}
+		for (j=0;j<11;j++)
+		{
+			for (i=0;i<11;i++)
+			{
+			  canvasContext.drawImage(imageLoader.getImage(_img),0+(i*80),660+(j*60),80,60);
+			}
+		}
+		canvasContext.restore()
 }

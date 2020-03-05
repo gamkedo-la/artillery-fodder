@@ -146,7 +146,7 @@ class buttonsCreate
 											90,
 											32,
 											90,
-											"SlateGrey"
+											"Black"
 											)
 
 	this.quitButton = new buttonFactory(canvas.width-this._buttonLength,
@@ -184,7 +184,7 @@ class buttonsCreate
 										   90,
 										   32,
 										   90,
-										   "Green"
+										   "Red"
 										   )
 
 	//Buttons for Campaign Screen

@@ -2,12 +2,11 @@
 
 function modeMainMenu(frameTime) {
 
-    Space_key=imageLoader.getImage("space_key")
-
+ 
 	colorRect(0, 0, canvas.width, canvas.height, "LightGrey");
+	drawBg(0.5,"BgTile")
+	colorRect(300, 0, 200, canvas.height, "LightGrey");
 	colorText("MAIN MENU", canvas.width/2, 100, "White", "50px Arial", true);
-
-
 
 	btnManager.gameButton.draw()
 	btnManager.campaignButton.draw()

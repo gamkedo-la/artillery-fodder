@@ -7,15 +7,18 @@ var playerTypeIndex = ["Human",
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
-
+	
+	drawBg(0.5,"BgTile")  // draw BG
+	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i].update();
 		arrayOfPlayerBlocks[i].draw();
 	}
 
 	//Titles
-	colorRect(0, 0, canvas.width, 150, "orange");
-	colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
+	//colorRect(0, 0, canvas.width, 150, "orange");
+	//colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
+	
 	colorText("PLAYER SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
 

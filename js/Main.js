@@ -24,6 +24,7 @@ var elapsed = 0;
 var frameStepSize = 1/60;
 var now;
 
+
 //clock
 var clockMinute = 0;
 var clockHour = 18;

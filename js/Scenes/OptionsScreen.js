@@ -6,8 +6,10 @@ var speechRecognitionEnabled = false;
 function modeOptions(frameTime) {
 
 	//screen background
-	colorRect(0, 0, canvas.width, canvas.height, "Darkred");
 	
+	colorRect(0, 0, canvas.width, canvas.height, "Darkred");
+	drawBg(0.5,"BgTileWhite")
+	colorRect(0, 150, canvas.width,350, "Darkred");
 /*
 
     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
