@@ -515,6 +515,7 @@ function numberOfTanksAlive() {
 
 
 function inGameAnnoucements() {
+
 	if(nextTurnHeadline || destroyedHeadline) {
 
 		// handling just when "next turn" indicator is necessary.

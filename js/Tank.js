@@ -4,6 +4,7 @@ var damageAmountPosY;
 var damageAmountIndicator = false;
 var mouseLastPosX = 0;
 var mouseLastPosY = 0;
+var aiBufferTimer = 0;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -45,25 +46,32 @@ function tankPlayerClass() {
         if (!ai.init) ai = { left:0,right:0,next:0,prev:0,up:0,down:0,init:1,fire:1 };
 
         // desires slowly subside
-        if (ai.left) ai.left--;
+
+        
+    	if (ai.left) ai.left--;
         if (ai.right) ai.right--;
         if (ai.next) ai.next--;
         if (ai.prev) ai.prev--;
         if (ai.up) ai.up--;
         if (ai.down) ai.down--;
+        
+	        
 
         // if we fired last time, reset
-        if (ai.fire) {
-            console.log("ai fired last frame - time for a new plan!");
-            // choose a new action for a few frames
-            var rand = rndInt(1,100);
-            if (rand<30) ai.left = rndInt(20,90);
-            else if (rand<60) ai.right = rndInt(20,90);
-            else if (rand<70) ai.next = rndInt(1,5);
-            else if (rand<80) ai.prev = rndInt(1,5);
-            else if (rand<90) ai.up = rndInt(2,10);
-            else ai.down = rndInt(2,10);
-        }
+      
+	    if (ai.fire) {
+	        console.log("ai fired last frame - time for a new plan!");
+	        // choose a new action for a few frames
+	        var rand = rndInt(1,100);
+	        if (rand<30) ai.left = rndInt(20,90);
+	        else if (rand<60) ai.right = rndInt(20,90);
+	        else if (rand<70) ai.next = rndInt(1,5);
+	        else if (rand<80) ai.prev = rndInt(1,5);
+	        else if (rand<90) ai.up = rndInt(2,10);
+	        else ai.down = rndInt(2,10);
+	    }
+
+
 
         console.log('ai state:'+' L'+ai.left+' R'+ai.right+' N'+ai.next+' P'+ai.prev+' U'+ai.up+' D'+ai.down);
         
@@ -73,7 +81,9 @@ function tankPlayerClass() {
         // when nothing is left to do, FIRE!
         if (!pending) {
             console.log("ai is idle: time to fire!");
-            ai.fire=1;
+           		ai.fire=1;
+           		aiBufferTimer = 0;
+           	
         } else {
             console.log("ai is busy doing stuff");
             ai.fire=0;
@@ -124,8 +134,17 @@ function tankPlayerClass() {
 
 		if (this.myTurn) {
 			if (this.active) {
+				
+                if (this.usesAI) {
+                	aiBufferTimer ++;
+                	console.log(aiBufferTimer);
+                	
+                	if(aiBufferTimer >= 160) {
+                		 this.aiThink();
+                	}
+                    
+                }
 
-                if (this.usesAI) this.aiThink();
 
 				//Input
                 if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire){
@@ -134,10 +153,10 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.mouseControl.getValue()) || ai.left) {
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.mouseHoverClickControl.getValue()) || ai.left) {
 					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.mouseControl.getValue())  || ai.right){
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.mouseHoverClickControl.getValue())  || ai.right){
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
 				if (Key.isDown(Key.UP) || ai.up){					
@@ -165,7 +184,7 @@ function tankPlayerClass() {
 				
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.mouseControl.getValue()){
+					&& btnManager.mouseHoverClickControl.getValue()){
 					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
 
 					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
@@ -198,7 +217,7 @@ function tankPlayerClass() {
 
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.mouseControl.getValue()){
+					&& btnManager.mouseHoverClickControl.getValue()){
 
 					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
 						this.fire();
@@ -393,7 +412,6 @@ function tankPlayerClass() {
     }
 
 	this.fire = function fire() {
-
         if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
@@ -497,5 +515,6 @@ function tankPlayerClass() {
 
 
 		this.myTurn = false;
+
 	}
 }
