@@ -132,11 +132,16 @@ function colorText(showWords, textX,textY, fillColor, font = "30px Arial", shado
 }
 
 function colorRoundedRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor){
+	
+	canvasContext.beginPath()
 	canvasContext.fillStyle = fillColor;
-	canvasContext.arc(topLeftX, topLeftY+boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.arc(topLeftX, topLeftY+boxHeight/2, boxHeight/2, 0,2 * Math.PI)
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
-	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,2 * Math.PI)
+	canvasContext.closePath()
 	canvasContext.fill()
+
+
 }
 
 scrollY=0 //global variable used for scrolling background
