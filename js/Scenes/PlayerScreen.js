@@ -9,6 +9,12 @@ function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
 	
 	drawBg(0.5,"BgTile")  // draw BG
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "black");
+	gradient.addColorStop(0.5, "#00000000");
+	gradient.addColorStop(1, "black");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i].update();

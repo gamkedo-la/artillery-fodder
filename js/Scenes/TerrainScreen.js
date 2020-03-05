@@ -8,8 +8,16 @@ var terrainTypeIndex = ["Standard",
 
 function modeTerrain(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "black");
-	colorText("TERRAIN SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
+	drawBg(0.5,"BgTile")
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "#00000000");
+	gradient.addColorStop(0.9, "#000000FF");
+	gradient.addColorStop(1, "#00000000");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
+	colorText("TERRAIN SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
 	groundColor = "white";
 	groundColorGradient = "black";

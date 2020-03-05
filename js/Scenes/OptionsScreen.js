@@ -9,6 +9,14 @@ function modeOptions(frameTime) {
 	
 	colorRect(0, 0, canvas.width, canvas.height, "Darkred");
 	drawBg(0.5,"BgTileWhite")
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "black");
+	gradient.addColorStop(0.2, "#00000000");
+	gradient.addColorStop(0.9, "#00000000");
+	gradient.addColorStop(1, "black");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
 	colorRect(0, 150, canvas.width,350, "Darkred");
 /*
 
