@@ -5,6 +5,8 @@ var damageAmountIndicator = false;
 var mouseLastPosX = 0;
 var mouseLastPosY = 0;
 var aiBufferTimer = 0;
+var luckyReflexState = 0;
+var luckyReflexCountUp = true;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -153,10 +155,10 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.mouseHoverClickControl.getValue()) || ai.left) {
+				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) || ai.left) {
 					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.mouseHoverClickControl.getValue())  || ai.right){
+				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.controlMouseHoverClick.getValue())  || ai.right){
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
 				if (Key.isDown(Key.UP) || ai.up){					
@@ -176,7 +178,7 @@ function tankPlayerClass() {
 					mouseScrollY = 0; //mouse wheel bug fix
 				}
 				
-				// Mouse Input	
+				// mouse Hover and Click Input	
 				document.onkeydown = function(){
 					mouseLastPosX = mouseX;
 					mouseLastPosY = mouseY;
@@ -184,11 +186,65 @@ function tankPlayerClass() {
 				
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.mouseHoverClickControl.getValue()){
+					&& btnManager.controlMouseHoverClick.getValue()){
 					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
 
 					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
 				}
+				
+				// mouse Lucky reflex Input
+				if (btnManager.controlLuckReflex.getValue()){
+					
+					switch (luckyReflexState) {
+						case 0:
+							this.angle = Math.random() * 360;
+							this.power = 60;
+							luckyReflexState++;
+							break;
+						
+						case 1:
+							this.angle += 60 * frameTime;
+							
+							if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
+								&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
+								|| Key.isJustPressed(Key.SPACE) || ai.fire
+								|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
+									
+								luckyReflexState++;
+							}
+							break;
+							
+						case 2:
+							if (luckyReflexCountUp){
+								this.power += 70 * frameTime;
+							}else{
+								this.power -= 70 * frameTime;
+							}
+							
+							if (this.power <= 1){
+								luckyReflexCountUp = true;
+							}
+							if (this.power >= 100){
+								luckyReflexCountUp = false;
+						}
+						
+							if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
+								&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
+								|| Key.isJustPressed(Key.SPACE) || ai.fire
+								|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
+								while (this.weaponInventory[this.weapon] == 0){								
+									this.weapon++;
+									this.weaponIndextIncreesing = true;
+									}
+								if (this.weaponInventory[this.weapon] != 0){
+									this.fire();
+									luckyReflexState = 0;
+								}
+							}
+							break;
+					}
+				}
+			
 
 				//Range checks
 				if (this.angle >= 360) {
@@ -217,7 +273,7 @@ function tankPlayerClass() {
 
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.mouseHoverClickControl.getValue()){
+					&& btnManager.controlMouseHoverClick.getValue()){
 
 					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
 						this.fire();

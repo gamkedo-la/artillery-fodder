@@ -7,8 +7,8 @@ function modeControls(frameTime) {
 	//colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height/2 - 50, "white", "20px Arial", true);
 
 
-	btnManager.mouseHoverClickControl.draw()
-	btnManager.mouseLuckControl.draw()
+	btnManager.controlMouseHoverClick.draw()
+	btnManager.controlLuckReflex.draw()
 	btnManager.mainMenuButton.draw()
 
 }
