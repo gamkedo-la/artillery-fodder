@@ -1,4 +1,4 @@
-//Credit Screen
+//WIN Screen
 
 function modeWinScreen(frameTime) {
 	canvasContext.drawImage (imageLoader.getImage("winScreenBackground"), 0, 0);
