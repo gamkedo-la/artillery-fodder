@@ -220,6 +220,8 @@ function teleportShot() {
 			this.x += xVel * frameTime;
 			this.y += yVel * frameTime;
 
+			particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-5,5), rndInt(1,3), rndInt(1,3), rndInt(10,20), 0 )
+
 			for (var i = 0; i < numberOfPlayers; i++) {
 				if (arrayOfPlayers[i].isPointColliding(this.x, this.y)) {
 					if (this.tank != arrayOfPlayers[i]) {
@@ -329,7 +331,7 @@ function rollShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black");
+		colorCircle(this.x, this.y, 3, "grey");
 	}
 
 	this.launch = function launch(angle, power) {
@@ -368,10 +370,19 @@ function crazyBombShotClass() {
 	var xVel = 0;
 	var yVel = 0;
 
+	var color;
+
 	this.active = false;
 
 	this.update = function update(frameTime) {
 		if (this.active) {
+
+			color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
+			let splodes = 2;
+			while(--splodes){
+				particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 2, 2, 40, 0 )
+			}
+
 			yVel += 90 * frameTime;
 
 			this.x += xVel * frameTime;
@@ -397,7 +408,7 @@ function crazyBombShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black");
+		colorCircle(this.x, this.y, 2, color);
 	}
 
 	this.launch = function launch(angle, power) {
@@ -417,7 +428,7 @@ function crazyBombShotClass() {
 		newExplosion.y = this.y;
 		newExplosion.size = this.size;
 		newExplosion.damage = this.damage;
-		newExplosion.color = "White";
+		newExplosion.color = color;
 		newExplosion.tank = this.tank;
 		newExplosion.active = true;
 		arrayOfTemporaryObjects.push(newExplosion);
@@ -462,6 +473,11 @@ function meteorClashClass() {
 
 			if(yVel >= -1) {
 				this.y +=8;
+			}
+
+			let splodes = 2;
+			while(--splodes){
+				particles.spawn(this.x, this.y, rndFloat(-5,5), rndFloat(-10,-20), 2, 2, 40, 0 )
 			}
 			
 			sonicboomExplosion();
@@ -682,7 +698,7 @@ function groundShotClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, 2, "Black");
+		colorCircle(this.x, this.y, 2, "Grey");
 	}
 
 	this.launch = function launch(angle, power) {
