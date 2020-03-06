@@ -110,10 +110,10 @@ window.onload = function() {
 	mouseInit();
 
 	window.addEventListener('blur', function () {
-		if (mode === GAME_MODE) {
-			prevMode = mode;
-			mode = PAUSE_SCREEN;
-		}
+		toggleMute();
+	});
+	window.addEventListener('focus', function () {
+		toggleMute();
 	});
 
 	imageLoader.loadImages().then(applicationStart);

@@ -165,7 +165,7 @@ function getRandomVolume(){
 
 function toggleMute() {
 	isMuted = !isMuted;
-	currentBackgroundMusic.setVolume(musicVolume);
+	backgroundMusic.setVolume(musicVolume);
 }
 
 function setEffectsVolume(amount) {
