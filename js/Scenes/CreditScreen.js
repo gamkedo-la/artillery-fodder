@@ -1,10 +1,10 @@
 //Credit Screen
 
-var creditsMaxCharWidthToWrap = 140;
-var creditsScrollRate = 0.5;
+var creditsMaxCharWidthToWrap = 100;
+var creditsScrollRate = 0.48;
 
 var creditNameList = [
-" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",
+" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",
 "Michael \"Misha\" Fewkes: Project lead, core gameplay, initial terrain randomization, tank physics, majority of weapon types (jetpack, big shot, teleport shot, rolling shot, crazy bomb...), tank destruction desaturation, skin sprite sheet support, sound integration and related randomization, early test AI, button graphics, support for variable player count, song randomization, crosshair, terrain variation options, assorted bug fixes"," ",
 "Simon J Hoffiz: Majority of menu code, turns support, game clock, time of day, cloud drift, weapons (meteor clash, rain shot), star particles, damage indicator, grenade weapon physics fixes, assorted UI improvements and related refactoring, "," ",
 "I-wei Chen: Unified button functionality, start screen setup, logo animation, UI layout improvements, pause bug fix, slider widget, toggle button support, volume controls, scrolling menu background effect, graphic bug fixes"," ",
@@ -19,7 +19,8 @@ var creditNameList = [
 "Ryan Malm: Particle effects (initial functionality)"," ",
 "Chris DeLeon: Basic mouse code, compiled credits",
 " ",
-"   Made by members of HomeTeam GameDev (Apollo!), join at HomeTeamGameDev.com to make games with us",
+" ",
+"Made by members of HomeTeam GameDev (Apollo!)"," ","Join at", "HomeTeamGameDev.com", "to make games with us!",
 " ",
 " ",
 ];
@@ -33,9 +34,9 @@ function modeCredits(frameTime) {
 
 	var anyDrew = false;
 	for (count; count < creditNameList.length; count++){
-		var drawAt = posHeight+count*12-creditsScroll;
+		var drawAt = posHeight+count*18-creditsScroll;
 		if(drawAt > 160 && drawAt < 475) {
-			colorText(creditNameList[count], canvas.width/2, drawAt, "white", "10px Arial");
+			colorText(creditNameList[count], canvas.width/2, drawAt, "white", "15px Arial");
 			anyDrew = true;
 		}
 	}
