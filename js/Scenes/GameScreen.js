@@ -110,6 +110,9 @@ function modeGame(frameTime) {
 	btnManager.quitButton.draw()
 	btnManager.pauseButton.draw()
 
+	colorRect(canvas.width*1/2 - 50, canvas.height - UI_HEIGHT + 20, 100, 20, "Blue");
+	colorText("Fire", canvas.width*2/4, canvas.height - UI_HEIGHT + 35, "White", font = "15px Arial");
+
 	cleanLists();
 	inGameAnnoucements();
 	gameClock();
