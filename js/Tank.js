@@ -311,7 +311,7 @@ function tankPlayerClass() {
 
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
-			this.imageLookupOffset * 30, 0, 
+			this.imageLookupOffset * 30, 20, 
 			30, 20, 
 			this.x-w/2 - 5, this.y-h - 5, 
 			w+10, h+10);
@@ -321,7 +321,7 @@ function tankPlayerClass() {
 		canvasContext.translate(this.x,this.y-h);
 		canvasContext.rotate(-radians);
 		canvasContext.drawImage(tankSkinCanvas, 
-			this.imageLookupOffset * 30, 20, 
+			this.imageLookupOffset * 30, 40, 
 			30, 20, 
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);

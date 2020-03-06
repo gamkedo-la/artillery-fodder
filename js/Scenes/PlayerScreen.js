@@ -188,7 +188,7 @@ function playerBlock(tankClass) {
 
 		//Draw tank
 		canvasContext.drawImage(tankSkinCanvas,
-			imageLookupOffset * 30, 0,
+			imageLookupOffset * 30, 20,
 			30, 20,
 			this.x - w/2 + 25, this.y + 40,
 			50, 34);
@@ -198,7 +198,7 @@ function playerBlock(tankClass) {
 		canvasContext.translate(this.x - 50, this.y + 50);
 		canvasContext.rotate(-radians);
 		canvasContext.drawImage(tankSkinCanvas,
-			imageLookupOffset * 30, 20,
+			imageLookupOffset * 30, 40,
 			30, 20,
 			-25, -17,
 			50, 34);

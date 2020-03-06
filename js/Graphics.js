@@ -79,9 +79,9 @@ function buildTankSkinsSheet() {
 		}
 		tankSkinContext.drawImage(imageLoader.getImage("tankSpriteSheet"), 
 			arrayOfPlayers[i].tankSkinIndex * 30, 0, 
-			30, 40, 
+			30, 60, 
 			i * 30, 0,  
-			30, 40);
+			30, 60);
 	}
 }
 

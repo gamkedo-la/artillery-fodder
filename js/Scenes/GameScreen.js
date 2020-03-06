@@ -199,4 +199,6 @@ function modeGame(frameTime) {
     // temp: show mini stats window
     stats.draw();
 
+    canvasContext.drawImage(tankSkinCanvas, 0, 0)
+
 }
