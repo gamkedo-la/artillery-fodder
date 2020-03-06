@@ -5,6 +5,7 @@ var damageAmountIndicator = false;
 var mouseLastPosX = 0;
 var mouseLastPosY = 0;
 var aiBufferTimer = 0;
+var weaponTier = 0;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -275,6 +276,8 @@ function tankPlayerClass() {
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 	}
+
+	
 
 	function drawHealthbar(x, y, tankHealth, color) {
         if (tankHealth < 0) {

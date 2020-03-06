@@ -43,6 +43,13 @@ function modeInventory(frameTime) {
 
 }
 
+function weaponManagement(weaponTier) {
+		if(weaponTier == 1){
+			weaponInventoryMaster = [3,0,0,0,0,0,0,0,0,0,0,0,0];
+			console.log("weaponTier" + weaponTier);
+		}
+	}
+
 function populateInventoryScreen() {
 	var numberAcross = 4;
 	var yOffset = 1;
