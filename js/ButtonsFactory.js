@@ -104,7 +104,7 @@ class buttonFactory
 				canvasContext.drawImage(this.sprite,this.startPos, this.y,this.spriteSizeX,this.spriteSizeY);
 
 			}
-			color="white"
+			color="Black"
 			fontSize=18
 
 
@@ -114,7 +114,15 @@ class buttonFactory
 			this.startPos=this.x+this.sizeX
 			this.startSize=0
 		}
-		colorText(this.text, (this.x+this.sizeX/2) , this.y+fontSize, color, String(fontSize)+"px Arial")
+		if(this.text=="Main Menu") //Note: comparing strings is dangerous
+		{
+			colorRect(this.x, this.y, this.sizeX, this.sizeY, "White")
+			colorText(this.text, (this.x+this.sizeX/2) , this.y+fontSize, color, String(fontSize)+"px Arial")
+		}
+		else
+		{
+			colorText(this.text, (this.x+this.sizeX/2) , this.y+fontSize, color, String(fontSize)+"px Arial")
+		}
 	}
 
 }

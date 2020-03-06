@@ -33,11 +33,20 @@ function modeInventory(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "purple");
 	
 	drawBg(0.5,"BgTileWhite") // draw bg
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "black");
+	gradient.addColorStop(0.5, "#00000000");
+	gradient.addColorStop(1, "black");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
 	
 	for (var i = 0; i <= WEAPON_LIST_MAX; i++) {
 		arrayOfWeaponBlocks[i].update();
 		arrayOfWeaponBlocks[i].draw();
 	}
+
+
+	colorText("WEAPON SCREEN", canvas.width/2, 100, "White", "50px Arial");
 
 	btnManager.mainMenuButton.draw()
 

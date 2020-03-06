@@ -2,7 +2,7 @@
 var musicVolume = 0.7;
 var effectsVolume = 0.7;
 var isMuted = false;
-const VOLUME_INCREMENT = 0.05;
+const VOLUME_INCREMENT = 0.0333;
 
 
 //define sounds

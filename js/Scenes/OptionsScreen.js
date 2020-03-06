@@ -9,7 +9,21 @@ function modeOptions(frameTime) {
 	
 	colorRect(0, 0, canvas.width, canvas.height, "Darkred");
 	drawBg(0.5,"BgTileWhite")
-	colorRect(0, 150, canvas.width,350, "Darkred");
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "black");
+	gradient.addColorStop(0.2, "#00000000");
+	gradient.addColorStop(0.9, "#00000000");
+	gradient.addColorStop(1, "black");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
+	//colorRect(0, 150, canvas.width,350, "Darkred");
+	gradient = canvasContext.createLinearGradient(0,150,0,500);
+	gradient.addColorStop(0,  "#00000000");
+	gradient.addColorStop(0.1,"#8B0000FF");
+	gradient.addColorStop(0.9,"#8B0000FF");
+	gradient.addColorStop(1,  "#00000000");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
 /*
 
     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition

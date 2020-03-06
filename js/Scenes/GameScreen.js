@@ -38,11 +38,6 @@ function modeGame(frameTime) {
     // Draw grass/pebbles/cracks/etc
     decorations.draw();
 
-	canvasContext.drawImage(gameScreenOverlayImg, 0, 0);
-
-	btnManager.quitButton.draw()
-	btnManager.pauseButton.draw()
-
 	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].update(frameTime);
@@ -109,6 +104,11 @@ function modeGame(frameTime) {
 		20, 20,
 		canvas.width*3/4 + 50, canvas.height - UI_HEIGHT + 60,
 		20, 20);
+
+	canvasContext.drawImage(gameScreenOverlayImg, 0, 0);
+
+	btnManager.quitButton.draw()
+	btnManager.pauseButton.draw()
 
 	cleanLists();
 	inGameAnnoucements();

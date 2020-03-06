@@ -130,7 +130,7 @@ function multiExplosionClass() {
 		newExplosion.y = this.y + rndFloat(-this.size, this.size);
 		newExplosion.size = this.size * 9/10;
 		newExplosion.damage = this.damage * 9/10;
-		newExplosion.color = "White";
+		newExplosion.color = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 		newExplosion.tank = this.tank;
 		newExplosion.numberOfIterations = this.numberOfIterations - 1;
 		newExplosion.active = true;

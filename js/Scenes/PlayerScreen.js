@@ -1,14 +1,21 @@
+const MAX_SKIN = 9;
+
 var arrayOfPlayerBlocks = [];
 var page = 0;
 
 var playerTypeIndex = ["Human",
-					   "Dummy",
-					   "Brainless"]
+					   "Computer"]
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
 	
 	drawBg(0.5,"BgTile")  // draw BG
+
+	var gradient = canvasContext.createLinearGradient(0,0,0,canvas.height);
+	gradient.addColorStop(0, "black");
+	gradient.addColorStop(0.5, "#00000000");
+	gradient.addColorStop(1, "black");
+	colorRect(0, 0, canvas.width, canvas.height, gradient);
 	
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayerBlocks[i].update();
@@ -71,7 +78,7 @@ function modePlayer(frameTime) {
 			newTank.y = canvas.height - UI_HEIGHT - map.getHeightAtX(newTank.x);
 			newTank.angle = lerp(45, 135, i/(numberOfPlayers-1));
 			newTank.color = rndFloat(359);
-			newTank.tankSkinIndex = rndInt(0, 9);
+			newTank.tankSkinIndex = rndInt(0, MAX_SKIN);
 			newTank.imageLookupOffset = numberOfPlayers - 1;
 
 			arrayOfPlayers.push(newTank);
@@ -142,11 +149,13 @@ function playerBlock(tankClass) {
 
 		if (isMouseInArea(this.x - w/2 + 25, this.y +25, 25, 50) && mouseJustPressed) {
 			this.tank.tankSkinIndex -= 1;
+			if (this.tank.tankSkinIndex < 0) this.tank.tankSkinIndex = MAX_SKIN;
 			buildTankSkinsSheet();
 		}
 
 		if (isMouseInArea(this.x - w/2 + 50, this.y +25, 25, 50) && mouseJustPressed) {
 			this.tank.tankSkinIndex += 1;
+			if (this.tank.tankSkinIndex > MAX_SKIN) this.tank.tankSkinIndex = 0;
 			buildTankSkinsSheet();
 		}
 
@@ -232,7 +241,6 @@ function playerBlock(tankClass) {
         newTank.name = name;
         if (playerType>0) {
             newTank.usesAI = true;
-            newTank.name = "AI " + name;
         }
 		newTank.color = color;
 		newTank.tankSkinIndex = tankSkinIndex;

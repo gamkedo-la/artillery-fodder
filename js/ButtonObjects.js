@@ -47,7 +47,7 @@ class buttonsCreate
 													(this._firstButtonPosY)+ (this._buttonSize + this._padding) * 2,
 													this._buttonLength,
 													this._buttonSize,
-													"Green",
+													"Orange",
 													"Player Selection",
 													PLAYER_SCREEN,
 													Key.p,
@@ -248,7 +248,8 @@ class buttonsCreate
 	//Speech recognition toggle button
 	this.speechToggle = new toggleFactory(250,400,200,"Speech Recognition","Black")
 
-	this.mouseControl = new toggleFactory(250,400,200,"Mouse Only Control","Black")
+	this.controlMouseHoverClick = new toggleFactory(250,400,200,"Hover and click","Black")
+	this.controlLuckReflex = new toggleFactory(250,300,200,"Lucky reflex","Black")
 	}
 
 
@@ -300,7 +301,8 @@ class buttonsCreate
 
 			case CONTROLS_SCREEN:
 				this.mainMenuButton.process()
-				this.mouseControl.process()
+				this.controlMouseHoverClick.process()
+				this.controlLuckReflex.process()
 				break;
 
 			default:

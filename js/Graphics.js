@@ -132,32 +132,39 @@ function colorText(showWords, textX,textY, fillColor, font = "30px Arial", shado
 }
 
 function colorRoundedRect(topLeftX, topLeftY, boxWidth, boxHeight, fillColor){
+	
+	canvasContext.beginPath()
 	canvasContext.fillStyle = fillColor;
-	canvasContext.arc(topLeftX, topLeftY+boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.arc(topLeftX, topLeftY+boxHeight/2, boxHeight/2, 0,2 * Math.PI)
 	canvasContext.fillRect(topLeftX, topLeftY, boxWidth, boxHeight);
-	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,360)
+	canvasContext.arc(topLeftX+boxWidth, topLeftY+ boxHeight/2, boxHeight/2, 0,2 * Math.PI)
+	canvasContext.closePath()
 	canvasContext.fill()
+
+
 }
 
 scrollY=0 //global variable used for scrolling background
 //Takes in a speed and image which is at a size of w:80, h:60
 function drawBg(_scrollSpeed,_img){
 	canvasContext.save()
-	if (scrollY<-660) {scrollY=0} 
+	if (scrollY<(-660*1.8)) {scrollY=0} 
+		
 		canvasContext.translate(0,scrollY-=_scrollSpeed);
+		canvasContext.scale(1.8,1.8)
 		for (j=0;j<11;j++)
 		{
 			for (i=0;i<11;i++)
 			{
 			  canvasContext.drawImage(imageLoader.getImage(_img),0+(i*80),0+(j*60),80,60);
+			   canvasContext.drawImage(imageLoader.getImage(_img),0+(i*80),660+(j*60),80,60);
 			}
 		}
-		for (j=0;j<11;j++)
-		{
-			for (i=0;i<11;i++)
-			{
-			  canvasContext.drawImage(imageLoader.getImage(_img),0+(i*80),660+(j*60),80,60);
-			}
-		}
+	
 		canvasContext.restore()
+}
+
+function buildBG()
+{
+	
 }
