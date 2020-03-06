@@ -200,7 +200,7 @@ function tankPlayerClass() {
 						case 0:
 							this.angle = Math.random() * 360;
 							this.power = 60;
-							luckyReflexState++;
+							luckyReflexState = rndInt(1,2);
 							break;
 						
 						case 1:
