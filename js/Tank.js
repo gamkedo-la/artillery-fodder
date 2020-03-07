@@ -336,19 +336,17 @@ function tankPlayerClass() {
             drawHealthbar(this.x,this.y, Math.floor(this.health));
         }
 
-        var heightOfSource = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
-        var shotPower = 75 * 2.65;
-		var radians = degreesToRadians(this.angle);
-        var shotVelY = -Math.sin(radians) * shotPower;
-        var gravityAppx = 90;
-        var timeInAir = -shotVelY/(gravityAppx*0.5);
-        var shotVelX = Math.cos(radians) * shotPower;
-        var heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
-        timeInAir = (heightOfDest - heightOfSource)/60 -shotVelY/(gravityAppx*0.5);
-        heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
 
-        if (this.targetTank != null) {
-       		 colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y + 20, 4, "magenta")
+        if (this.targetTank != null && this.myTurn) {
+       		 colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y + 20, 4, "magenta");
+       		 for (var i = 0; i < 100; i++) {
+       		 	this.recalcTargetX();
+       		 	if (this.targetTank.x < targetX) {
+       		 		this.angle += 0.01;
+       		 	} else {
+       		 		this.angle -= 0.01;
+       		 	}
+       		 }
        		 //console.log(this.name)
        	}
        	//colorLine(this.x, this.y, mouseX, mouseY, 4, "magenta")
@@ -360,9 +358,23 @@ function tankPlayerClass() {
 		*/
 
         //this.angle, this.power*2.65
+        colorCircle(targetX, targetY, 5, "LimeGreen")
+	}
+
+	this.recalcTargetX = function() {
+		var heightOfSource = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
+        var shotPower = 75 * 2.65;
+		var radians = degreesToRadians(this.angle);
+        var shotVelY = -Math.sin(radians) * shotPower;
+        var gravityAppx = 90;
+        var timeInAir = -shotVelY/(gravityAppx*0.5);
+        var shotVelX = Math.cos(radians) * shotPower;
+        var heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
+        timeInAir = (heightOfDest - heightOfSource)/60 -shotVelY/(gravityAppx*0.5);
+        heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
+
         targetX = this.x + timeInAir*shotVelX;
         targetY = heightOfDest;
-        colorCircle(targetX, targetY, 5, "LimeGreen")
 	}
 
 	function drawHealthbar(x, y, tankHealth, color) {
@@ -607,3 +619,4 @@ function tankPlayerClass() {
 
 	}
 }
+
