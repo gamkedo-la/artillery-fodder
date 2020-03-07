@@ -47,6 +47,32 @@ function tankPlayerClass() {
 	var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:0,init:0 };
 
 	this.aiThink = function() { // run every frame that is myturn
+		if (this.targetTank != null && !this.targetTank.active) {
+			arrayOfPlayers[i].targetTank = null;
+		}
+		if(this.targetTank == null) {
+			this.recalcTargetX();
+			var closest = -1;
+			var closestDist = 9999.0;
+			for (var i = 0; i < numberOfPlayers; i++) {
+				if(this == arrayOfPlayers[i] || !arrayOfPlayers[i].active) {
+					continue;
+				}
+				var latDist = Math.abs(this.x - arrayOfPlayers[i].x);
+				if (this.aiType == 1) {
+					latDist = Math.abs(targetX - arrayOfPlayers[i].x);
+				}
+				if(latDist < closestDist) {
+					closest = i;
+					closestDist = latDist;
+				}
+			}
+			//console.log(closest)
+			if(closest != -1) {
+				this.targetTank = arrayOfPlayers[closest];
+			}
+		}
+
 		if (this.aiType == 0) {
 			
 			// the first time around, create a new brain
@@ -85,7 +111,7 @@ function tankPlayerClass() {
 			}
 		}
 
-		if (this.aiType == 1) {
+		if (this.aiType >= 1) {
 			if (this.targetTank != null && this.myTurn) {
 				for (var i = 0; i < 100; i++) {
 					this.recalcTargetX();
@@ -98,6 +124,7 @@ function tankPlayerClass() {
 				if (aiBufferTimer > 1.5) {
 					ai.fire=1;
 					aiBufferTimer = 0;
+					console.log(this.name + " is targeting " + this.targetTank.name)
 				} else {
 					ai.fire=0;
 				}
@@ -503,7 +530,7 @@ function tankPlayerClass() {
 			return;
 		}
 
-		if (this.usesAI && this.aiType == 1) {
+		if (this.usesAI) {
 			this.angle += Math.random() * 10 - 5;
 		}
 		

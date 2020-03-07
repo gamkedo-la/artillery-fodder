@@ -5,7 +5,8 @@ var page = 0;
 
 var playerTypeIndex = ["Human",
 					   "Computer 1",
-					   "Computer 2"]
+					   "Computer 2",
+					   "Computer 3"]
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
@@ -236,6 +237,10 @@ function playerBlock(tankClass) {
 			case 2:
 				arrayOfPlayers[imageLookupOffset].usesAI = true;
 				arrayOfPlayers[imageLookupOffset].aiType = 1;
+				break;
+			case 3:
+				arrayOfPlayers[imageLookupOffset].usesAI = true;
+				arrayOfPlayers[imageLookupOffset].aiType = 2;
 				break;
 		}
 	}
