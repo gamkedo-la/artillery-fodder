@@ -48,7 +48,7 @@ function tankPlayerClass() {
 
 	this.aiThink = function() { // run every frame that is myturn
 		if (this.targetTank != null && !this.targetTank.active) {
-			arrayOfPlayers[i].targetTank = null;
+			this.targetTank = null;
 		}
 		if(this.targetTank == null) {
 			this.recalcTargetX();
@@ -113,18 +113,30 @@ function tankPlayerClass() {
 
 		if (this.aiType >= 1) {
 			if (this.targetTank != null && this.myTurn) {
-				for (var i = 0; i < 100; i++) {
+				for (var i = 0; i < 10; i++) {
 					this.recalcTargetX();
 					if (this.targetTank.x < targetX) {
 						this.angle += 0.01;
 					} else {
 						this.angle -= 0.01;
 					}
+					if (this.targetTank.x < this.x) {
+						if (this.targetTank.x > targetX && this.power < 100) {
+							this.power += 0.005;
+						} else {
+							this.power -= 0.005;
+						}
+					} else {
+						if (this.targetTank.x > targetX && this.power < 100) {
+							this.power += 0.005;
+						} else {
+							this.power -= 0.005;
+						}						
+					}
 				}
 				if (aiBufferTimer > 1.5) {
 					ai.fire=1;
 					aiBufferTimer = 0;
-					console.log(this.name + " is targeting " + this.targetTank.name)
 				} else {
 					ai.fire=0;
 				}
@@ -531,7 +543,7 @@ function tankPlayerClass() {
 		}
 
 		if (this.usesAI) {
-			this.angle += Math.random() * 10 - 5;
+			this.angle += Math.random() * 6 - 3;
 		}
 		
 		stats.shots++;
