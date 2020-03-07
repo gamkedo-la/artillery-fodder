@@ -113,11 +113,11 @@ function tankPlayerClass() {
 
 		if (this.aiType >= 1) {
 			if (this.targetTank != null && this.myTurn) {
-				for (var i = 0; i < 10; i++) {
+				for (var i = 0; i < 15; i++) {
 					this.recalcTargetX();
-					if (this.targetTank.x < targetX) {
+					if (this.targetTank.x < targetX && this.angle < 180) {
 						this.angle += 0.01;
-					} else {
+					} else if (this.targetTank.x > targetX && this.angle > 0) {
 						this.angle -= 0.01;
 					}
 					if (this.targetTank.x < this.x) {
