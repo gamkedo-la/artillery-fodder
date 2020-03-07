@@ -53,6 +53,9 @@ var stats = {
         
         this.winScreensInARow = 0; // possibly reset from prev game
 
+        // FIXME this is a lie, but a rough approximation
+        this.misses = Math.max(Math.round(this.explosions - this.hits),0);
+
         // mini stats display
         colorText(
             //"STATS: "
@@ -61,7 +64,8 @@ var stats = {
             + this.hits.toFixed(0)+" hits "
             //+ this.misses.toFixed(0)+" misses " // not tracked correctly
             //calculate misses as (explosions - hits) does this work? FIXME
-            + Math.max(Math.round(this.explosions - this.hits),0)+" misses "
+            //+ Math.max(Math.round(this.explosions - this.hits),0)+" misses "
+            + this.misses.toFixed(0)+" misses "
             + this.explosions.toFixed(0)+" explosions "
             + this.damage.toFixed(0)+" damage "
             //+ this.seconds.toFixed(1)+" seconds "
