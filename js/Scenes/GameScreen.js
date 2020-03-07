@@ -40,14 +40,14 @@ function modeGame(frameTime) {
 
 	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
-		if (arrayOfPlayers[i].targetTank != null && arrayOfPlayers[i].targetTank.active == false) {
+		if (arrayOfPlayers[i].targetTank != null && !arrayOfPlayers[i].targetTank.active) {
 			arrayOfPlayers[i].targetTank = null;
 		}
-		if(arrayOfPlayers[i].targetTank == null) { //later, only do if ai
+		if(arrayOfPlayers[i].targetTank == null) {
 			var closest = -1;
 			var closestDist = 9999.0;
 			for (var ii = 0; ii < numberOfPlayers; ii++) {
-				if(i == ii || arrayOfPlayers[ii].active == false) {
+				if(i == ii || !arrayOfPlayers[ii].active) {
 					continue;
 				}
 				var latDist = Math.abs(arrayOfPlayers[i].x - arrayOfPlayers[ii].x);

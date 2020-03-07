@@ -48,7 +48,6 @@ function tankPlayerClass() {
 
 	this.aiThink = function() { // run every frame that is myturn
 		if (this.aiType == 0) {
-			this.recalcTargetX();
 			
 			// the first time around, create a new brain
 			// these numbers say: how many frames should I push this button?
@@ -88,15 +87,30 @@ function tankPlayerClass() {
 
 		if (this.aiType == 1) {
 			if (this.targetTank != null && this.myTurn) {
-				for (var i = 0; i < 100; i++) {
-					this.recalcTargetX();
-					if (this.targetTank.x < targetX) {
-						this.angle += 0.01;
-					} else {
-						this.angle -= 0.01;
-					}
+				this.recalcTargetX();
+				if (this.angle >= 270) {
+					this.angle = 0;
+				} else if (this.angle > 180) {
+					this.angle = 180;
 				}
-				if (aiBufferTimer > 1.5) {
+				if (this.targetTank.x < targetX) {
+					ai.left = 1;
+					ai.right = 0;
+				} else {
+					ai.left = 0;
+					ai.right = 1;
+				}
+				if (Math.random()  < 0.01) {
+					ai.next = 1;
+					ai.prev = 0;
+				} else if (Math.random()  < 0.01) {
+					ai.next = 0;
+					ai.prev = 1;
+				} else {
+					ai.next = 0;
+					ai.prev = 0;
+				}
+				if (aiBufferTimer > 1) {
 					ai.fire=1;
 					aiBufferTimer = 0;
 				} else {
@@ -160,7 +174,7 @@ function tankPlayerClass() {
 					aiBufferTimer += frameTime;
 					this.aiThink();
 					
-				} else {this.recalcTargetX();}
+				}
 
 
 				//Input
@@ -170,24 +184,24 @@ function tankPlayerClass() {
 					}
 				}
 				
-				if (Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) || ai.left) {
+				if ((Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) && !this.usesAI) || ai.left) {
 					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.controlMouseHoverClick.getValue())  || ai.right){
+				if ((Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) && !this.usesAI)  || ai.right){
 					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 				}
-				if (Key.isDown(Key.UP) || ai.up){					
+				if ((Key.isDown(Key.UP) && !this.usesAI) || ai.up){					
 					this.power += 30 * frameTime;
 				}
-				if (Key.isDown(Key.DOWN) || ai.down){
+				if ((Key.isDown(Key.DOWN) && !this.usesAI) || ai.down){
 					this.power -= 30 * frameTime;
 				}
-				if (Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) ||  mouseScrollY > 0 || ai.prev){
+				if ((Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) && !this.usesAI) ||  mouseScrollY > 0 || ai.prev){
 					this.weapon--;
 					this.weaponIndextIncreesing = false;
 					mouseScrollY = 0; //mouse wheel bug fix
 				}
-				if (Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) || mouseScrollY < 0|| ai.next){
+				if ((Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) && !this.usesAI) || mouseScrollY < 0|| ai.next){
 					this.weapon++;
 					this.weaponIndextIncreesing = true;
 					mouseScrollY = 0; //mouse wheel bug fix
@@ -321,8 +335,8 @@ function tankPlayerClass() {
 			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
 			canvasContext.restore();
 
-			colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
-			colorCircle(targetX, targetY, 5, "LimeGreen")
+			//colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
+			//colorCircle(targetX, targetY, 5, "LimeGreen")
 		}
 
 		//Draw body

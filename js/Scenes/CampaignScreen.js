@@ -32,7 +32,7 @@ function startChapter(chapterNumber) {
 			weather = 0; // clear weather
 			clockHour = 10; // mid morning
 			weaponTier = 1;
-			weaponInventoryMaster = [3,0,0,0,0,0,0,0,0,0,0,0,0]; // weapons available for player use 
+			weaponInventoryMaster = [-1,0,0,0,0,0,0,0,0,0,0,0,0]; // weapons available for player use 
 
 			startMatch();
 
@@ -41,6 +41,7 @@ function startChapter(chapterNumber) {
 			arrayOfPlayers[1].usesAI = true;
 			arrayOfPlayers[1].tankSkinIndex = 14;
 			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[1].aiType = 0;
 			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
@@ -56,7 +57,7 @@ function startChapter(chapterNumber) {
 			weather = 1; // rainy weather
 			clockHour = 15; // mid afternoon
 			weaponTier = 2;
-			weaponInventoryMaster = [2,2,2,0,0,0,0,0,0,0,0,0,0]; // weapons available for player use 
+			weaponInventoryMaster = [-1,2,2,0,0,0,0,0,0,0,0,0,0]; // weapons available for player use 
 
 			startMatch();
 
@@ -68,6 +69,8 @@ function startChapter(chapterNumber) {
 			arrayOfPlayers[2].tankSkinIndex = 15;
 			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
 			arrayOfPlayers[2].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[1].aiType = 0;
+			arrayOfPlayers[2].aiType = 1;
 			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
@@ -83,7 +86,7 @@ function startChapter(chapterNumber) {
 			weather = 0; // clear weather 
 			clockHour = 20; // night
 			weaponTier = 3;
-			weaponInventoryMaster = [5,3,3,3,2,0,0,0,0,0,0,0,0]; // weapons available for player use 
+			weaponInventoryMaster = [-1,3,3,3,2,0,0,0,0,0,0,0,0]; // weapons available for player use 
 
 			startMatch();
 
@@ -98,6 +101,9 @@ function startChapter(chapterNumber) {
 			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
 			arrayOfPlayers[2].targetTank = arrayOfPlayers[0];
 			arrayOfPlayers[3].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[1].aiType = 0;
+			arrayOfPlayers[2].aiType = 1;
+			arrayOfPlayers[3].aiType = 1;
 			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
