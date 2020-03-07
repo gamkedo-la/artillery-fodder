@@ -15,9 +15,10 @@ function tankPlayerClass() {
 	this.angle = 90;
 	this.power = 75;
 	this.health = 100;
-    this.name = "Player";
-    
-    this.usesAI = false; // FIXME: set this in the player select screen
+	this.name = "Player";
+	
+	this.usesAI = false;
+	this.aiType = 0;
 
 	var w = 20;
 	var h = 10;
@@ -25,8 +26,8 @@ function tankPlayerClass() {
 	var yVel = 0;
 
 	this.targetTank = null;
-	var targetX = 500;
-	var targetY = 500;
+	var targetX = 0;
+	var targetY = 0;
 
 	this.myTurn = false;
 	this.active = true;
@@ -37,67 +38,80 @@ function tankPlayerClass() {
 
 	this.weapon = 0;
 	this.weaponInventory = [];
-    this.weaponIndextIncreesing = true;
-    
-    const showHealthBarAfterDamageFramecount = 200;
-    this.recentDamageDisplayFrames = 0; // show health bar for a while after getting hit
+	this.weaponIndextIncreesing = true;
+	
+	const showHealthBarAfterDamageFramecount = 200;
+	this.recentDamageDisplayFrames = 0; // show health bar for a while after getting hit
 
-    // this is the number of frames the AI has decided to press each button
-    var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:0,init:0 };
+	// this is the number of frames the AI has decided to press each button
+	var ai = { left:0,right:0,next:0,prev:0,up:0,down:0,fire:0,init:0 };
 
-    this.aiThink = function() { // run every frame that is myturn
-        console.log(this.name + " AI thinking...");
-        
-        // the first time around, create a new brain
-        // these numbers say: how many frames should I push this button?
-        if (!ai.init) ai = { left:0,right:0,next:0,prev:0,up:0,down:0,init:1,fire:1 };
+	this.aiThink = function() { // run every frame that is myturn
+		if (this.aiType == 0) {
+			this.recalcTargetX();
+			
+			// the first time around, create a new brain
+			// these numbers say: how many frames should I push this button?
+			if (!ai.init) ai = { left:0,right:0,next:0,prev:0,up:0,down:0,init:1,fire:1 };
 
-        // desires slowly subside
+			// desires slowly subside
+			if (ai.left) ai.left--;
+			if (ai.right) ai.right--;
+			if (ai.next) ai.next--;
+			if (ai.prev) ai.prev--;
+			if (ai.up) ai.up--;
+			if (ai.down) ai.down--;
+			
+			// if we fired last time, reset
+			if (ai.fire) {
+				// choose a new action for a few frames
+				var rand = rndInt(1,100);
+				if (rand<30) ai.left = rndInt(20,90);
+				else if (rand<60) ai.right = rndInt(20,90);
+				else if (rand<70) ai.next = rndInt(1,5);
+				else if (rand<80) ai.prev = rndInt(1,5);
+				else if (rand<90) ai.up = rndInt(2,10);
+				else ai.down = rndInt(2,10);
+			}
+			
+			// how busy are we
+			var pending = (ai.left>0)||(ai.right>0)||(ai.next>0)||(ai.prev>0)||(ai.up>0)||(ai.down>0);
+			
+			// when nothing is left to do, FIRE!
+			if (!pending) {
+				ai.fire=1;
+				aiBufferTimer = 0;
+			} else {
+				ai.fire=0;
+			}
+		}
 
-        
-    	if (ai.left) ai.left--;
-        if (ai.right) ai.right--;
-        if (ai.next) ai.next--;
-        if (ai.prev) ai.prev--;
-        if (ai.up) ai.up--;
-        if (ai.down) ai.down--;
-        
-	        
-
-        // if we fired last time, reset
-      
-	    if (ai.fire) {
-	        console.log("ai fired last frame - time for a new plan!");
-	        // choose a new action for a few frames
-	        var rand = rndInt(1,100);
-	        if (rand<30) ai.left = rndInt(20,90);
-	        else if (rand<60) ai.right = rndInt(20,90);
-	        else if (rand<70) ai.next = rndInt(1,5);
-	        else if (rand<80) ai.prev = rndInt(1,5);
-	        else if (rand<90) ai.up = rndInt(2,10);
-	        else ai.down = rndInt(2,10);
-	    }
-
-
-
-        console.log('ai state:'+' L'+ai.left+' R'+ai.right+' N'+ai.next+' P'+ai.prev+' U'+ai.up+' D'+ai.down);
-        
-        // how busy are we
-        var pending = (ai.left>0)||(ai.right>0)||(ai.next>0)||(ai.prev>0)||(ai.up>0)||(ai.down>0);
-        
-        // when nothing is left to do, FIRE!
-        if (!pending) {
-            console.log("ai is idle: time to fire!");
-           		ai.fire=1;
-           		aiBufferTimer = 0;
-           	
-        } else {
-            console.log("ai is busy doing stuff");
-            ai.fire=0;
-        }
-
-
-    }
+		if (this.aiType == 1) {
+			if (this.targetTank != null && this.myTurn) {
+				for (var i = 0; i < 100; i++) {
+					this.recalcTargetX();
+					if (this.targetTank.x < targetX) {
+						this.angle += 0.01;
+					} else {
+						this.angle -= 0.01;
+					}
+				}
+				if (aiBufferTimer > 1.5) {
+					ai.fire=1;
+					aiBufferTimer = 0;
+				} else {
+					ai.fire=0;
+				}
+			}
+			//colorLine(this.x, this.y, mouseX, mouseY, 4, "magenta")
+			/*
+			var radians = degreesToRadians(this.angle);
+			xVel += Math.cos(radians) * this.power;
+			yVel += -Math.sin(radians) * this.power;
+			*/
+			//this.angle, this.power*2.65
+		}
+	}
 	
 	this.update = function update(frameTime) {
 		
@@ -142,19 +156,15 @@ function tankPlayerClass() {
 		if (this.myTurn) {
 			if (this.active) {
 				
-                if (this.usesAI) {
-                	aiBufferTimer ++;
-                	console.log(aiBufferTimer);
-                	
-                	if(aiBufferTimer >= 160) {
-                		 this.aiThink();
-                	}
-                    
-                }
+				if (this.usesAI) {
+					aiBufferTimer += frameTime;
+					this.aiThink();
+					
+				} else {this.recalcTargetX();}
 
 
 				//Input
-                if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire){
+				if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire){
 					if(this.weaponInventory[this.weapon] != 0) {
 						this.fire();
 					}
@@ -305,12 +315,14 @@ function tankPlayerClass() {
 			canvasContext.drawImage(imageLoader.getImage("crosshair"), this.power/100*70, -10);
 			canvasContext.restore();
 
-
 			canvasContext.save();
 			canvasContext.translate(this.x,this.y-5);
 			canvasContext.rotate(degreesToRadians(playerScreenWave));
 			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
 			canvasContext.restore();
+
+			colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
+			colorCircle(targetX, targetY, 5, "LimeGreen")
 		}
 
 		//Draw body
@@ -329,85 +341,61 @@ function tankPlayerClass() {
 			30, 20, 
 			-w/2 - 5, -h/2 - 5, 
 			w+10, h+10);
-        canvasContext.restore();
-        
-        // Draw the health bar
-        if (this.isPointColliding(mouseX,mouseY)) {
-            drawHealthbar(this.x,this.y, Math.floor(this.health));
-        }
-
-
-        if (this.targetTank != null && this.myTurn) {
-       		 colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y + 20, 4, "magenta");
-       		 for (var i = 0; i < 100; i++) {
-       		 	this.recalcTargetX();
-       		 	if (this.targetTank.x < targetX) {
-       		 		this.angle += 0.01;
-       		 	} else {
-       		 		this.angle -= 0.01;
-       		 	}
-       		 }
-       		 //console.log(this.name)
-       	}
-       	//colorLine(this.x, this.y, mouseX, mouseY, 4, "magenta")
-
-        /*
-		var radians = degreesToRadians(this.angle);
-		xVel += Math.cos(radians) * this.power;
-		yVel += -Math.sin(radians) * this.power;
-		*/
-
-        //this.angle, this.power*2.65
-        colorCircle(targetX, targetY, 5, "LimeGreen")
+		canvasContext.restore();
+		
+		// Draw the health bar
+		if (this.isPointColliding(mouseX,mouseY)) {
+			drawHealthbar(this.x,this.y, Math.floor(this.health));
+		}
 	}
 
 	this.recalcTargetX = function() {
 		var heightOfSource = canvas.height - UI_HEIGHT - map.getHeightAtX(this.x);
-        var shotPower = 75 * 2.65;
+		var shotPower = this.power * 2.65;
 		var radians = degreesToRadians(this.angle);
-        var shotVelY = -Math.sin(radians) * shotPower;
-        var gravityAppx = 90;
-        var timeInAir = -shotVelY/(gravityAppx*0.5);
-        var shotVelX = Math.cos(radians) * shotPower;
-        var heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
-        timeInAir = (heightOfDest - heightOfSource)/60 -shotVelY/(gravityAppx*0.5);
-        heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
+		var shotVelY = -Math.sin(radians) * shotPower;
+		var gravityAppx = 90;
+		var timeInAir = -shotVelY/(gravityAppx*0.5);
+		var shotVelX = Math.cos(radians) * shotPower;
+		var heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
+		timeInAir = (heightOfDest - heightOfSource)/60 -shotVelY/(gravityAppx*0.5);
+		heightOfDest =  canvas.height - UI_HEIGHT - map.getHeightAtX(this.x+timeInAir*shotVelX);
 
-        targetX = this.x + timeInAir*shotVelX;
-        targetY = heightOfDest;
+		targetX = this.x + timeInAir*shotVelX;
+		targetY = heightOfDest;
 	}
 
 	function drawHealthbar(x, y, tankHealth, color) {
-        if (tankHealth < 0) {
-        	tankHealth = 0;
-        }
+		if (tankHealth < 0) {
+			tankHealth = 0;
+		}
 
-        var barx = x-26;
-        var bary = y-46;
-        var barw = 52;
-        var barh = 20;
+		var barx = x-26;
+		var bary = y-46;
+		var barw = 52;
+		var barh = 20;
 
-        //healthbar's black border
-        canvasContext.fillStyle = "black";
-        canvasContext.fillRect(barx - 3,bary - 3 ,barw + 6,barh + 6);
-        //healthbar's white inner background
-        canvasContext.fillStyle = "white";
-        canvasContext.fillRect(barx,bary,barw,barh);
+		//healthbar's black border
+		canvasContext.fillStyle = "black";
+		canvasContext.fillRect(barx - 3,bary - 3 ,barw + 6,barh + 6);
+		//healthbar's white inner background
+		canvasContext.fillStyle = "white";
+		canvasContext.fillRect(barx,bary,barw,barh);
 
-        //changing colors of health indicator
-        if(tankHealth >= 70){
-        	canvasContext.fillStyle = "rgba(0,255,0,1)";
-        }
-        if (tankHealth <= 69){
-        	canvasContext.fillStyle = "rgba(255,153,0,1)";
-        }
-        if (tankHealth <= 30){
-        	canvasContext.fillStyle = "rgba(255,0,0,1)";
-        }
-        //canvasContext.fillStyle = "black";//"rgba(255,0,0,1)";
-        canvasContext.fillRect(barx,bary,barw*(tankHealth/100),barh);
+		//changing colors of health indicator
+		if(tankHealth >= 70){
+			canvasContext.fillStyle = "rgba(0,255,0,1)";
+		}
+		if (tankHealth <= 69){
+			canvasContext.fillStyle = "rgba(255,153,0,1)";
+		}
+		if (tankHealth <= 30){
+			canvasContext.fillStyle = "rgba(255,0,0,1)";
+		}
+		//canvasContext.fillStyle = "black";//"rgba(255,0,0,1)";
+		canvasContext.fillRect(barx,bary,barw*(tankHealth/100),barh);
 
-        colorText(tankHealth + "HP", x , y - 30, 'black', font = "16px Arial");  
+		colorText(tankHealth + "HP", x , y - 30, 'black', font = "16px Arial");  
 	}
 
 	this.isPointColliding = function isPointColliding(x, y) {
@@ -420,15 +408,15 @@ function tankPlayerClass() {
 	}
 
 	this.takeDamage = function takeDamage(amount, angle = 270) {
-        if (amount < 0) {amount = 0;}
-        
-        stats.damage += amount;
+		if (amount < 0) {amount = 0;}
+		
+		stats.damage += amount;
 
 		this.health -= amount;
 		damageAmount = amount;
 
-        // display a health bar for a few seconds
-        this.recentDamageDisplayFrames = showHealthBarAfterDamageFramecount;
+		// display a health bar for a few seconds
+		this.recentDamageDisplayFrames = showHealthBarAfterDamageFramecount;
 
 		let splodes = Math.round(amount);
 		while(--splodes >= 0){
@@ -475,66 +463,66 @@ function tankPlayerClass() {
 		}
 	}
 
-    this.muzzleFlash = function() {
-        //console.log('muzzy!');
-        var radians = degreesToRadians(this.angle);
-        var x = this.x - 5; // to center the sprites
-        var y = this.y - 10 - 5; // gun is offset from sprite
-        var xVel = Math.cos(radians); // % of speed
-        var yVel = -Math.sin(radians);
-        
-        // big flash - looks bad
-        //particles.spawn(
-        //    x, y-10, // pos
-        //    0,0, // vel
-        //    20,20, // w, h
-        //    50, // lifespan in ms
-        //    2 ); // type
-        
-        // orange sparks flying in the shoot direction
-        for (var num=0; num<20; num++) {
-            particles.spawn(
-                x+xVel*rndFloat(1,30), y+yVel*rndFloat(1,30), // pos w offset
-                xVel*100+rndFloat(-50,50), yVel*100+rndFloat(-50,50), // vel with randomness
-                rndFloat(5,10), rndFloat(5,10), // w, h
-                rndFloat(10,35), // lifespan in ms
-                1 ); // type
-        }
+	this.muzzleFlash = function() {
+		//console.log('muzzy!');
+		var radians = degreesToRadians(this.angle);
+		var x = this.x - 5; // to center the sprites
+		var y = this.y - 10 - 5; // gun is offset from sprite
+		var xVel = Math.cos(radians); // % of speed
+		var yVel = -Math.sin(radians);
+		
+		// big flash - looks bad
+		//particles.spawn(
+		//    x, y-10, // pos
+		//    0,0, // vel
+		//    20,20, // w, h
+		//    50, // lifespan in ms
+		//    2 ); // type
+		
+		// orange sparks flying in the shoot direction
+		for (var num=0; num<20; num++) {
+			particles.spawn(
+				x+xVel*rndFloat(1,30), y+yVel*rndFloat(1,30), // pos w offset
+				xVel*100+rndFloat(-50,50), yVel*100+rndFloat(-50,50), // vel with randomness
+				rndFloat(5,10), rndFloat(5,10), // w, h
+				rndFloat(10,35), // lifespan in ms
+				1 ); // type
+		}
 
-        // slower moving smoke puffs
-        for (var num=0; num<20; num++) {
-            particles.spawn(
-                x+xVel*rndFloat(1,20), y+yVel-rndFloat(1,20), // pos w offset
-                xVel*10+rndFloat(-15,15), yVel*10+rndFloat(-15,15), // vel with randomness
-                rndFloat(10,20), rndFloat(10,20), // w, h
-                rndFloat(10,25), // lifespan in ms
-                2 ); // type
-        }        
-    }
+		// slower moving smoke puffs
+		for (var num=0; num<20; num++) {
+			particles.spawn(
+				x+xVel*rndFloat(1,20), y+yVel-rndFloat(1,20), // pos w offset
+				xVel*10+rndFloat(-15,15), yVel*10+rndFloat(-15,15), // vel with randomness
+				rndFloat(10,20), rndFloat(10,20), // w, h
+				rndFloat(10,25), // lifespan in ms
+				2 ); // type
+		}        
+	}
 
 	this.fire = function fire() {
-        if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
+		if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
-        
-        stats.shots++;
+		
+		stats.shots++;
 
 		var newProjectile;
 		switch (this.weapon) {
 			case 0://Basic Shot
 				newProjectile = new basicShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 1://Three Shot
 				newProjectile = new multiShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 2://Sniper Shot
 				newProjectile = new sniperShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 3://Hop
 				newProjectile = new empty();
@@ -547,49 +535,49 @@ function tankPlayerClass() {
 			case 4://Teleport Shot
 				newProjectile = new teleportShot();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 5://Big Shot
 				newProjectile = new basicShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				newProjectile.size = 50;
 				break;
 			case 6://Roller
 				newProjectile = new rollShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 7://Crazy Bomb
 				newProjectile = new crazyBombShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 8://Meteor Clash
 				newProjectile = new meteorClashClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 9://Rain Shot
 				newProjectile = new rainShot();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 10://Ground Shot
 				newProjectile = new groundShotClass();
 				soundFire.play();
-        		this.muzzleFlash();
+				this.muzzleFlash();
 				break;
 			case 11://Grenade
 				newProjectile = new grenadeShot();
 				soundFire.play();
-        		this.muzzleFlash();
-         		break;
+				this.muzzleFlash();
+				break;
 			case 12: //Delayed Multi Shot
 			  newProjectile = new delayedMultiShotClass();
 			  soundFire.play();
 			  this.muzzleFlash();
-		      break;
+			  break;
 			case 13://Self Destruct
 				newProjectile = new empty();
 				var newExplosion = new basicExplosionClass();

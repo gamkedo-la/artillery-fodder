@@ -4,7 +4,8 @@ var arrayOfPlayerBlocks = [];
 var page = 0;
 
 var playerTypeIndex = ["Human",
-					   "Computer"]
+					   "Computer 1",
+					   "Computer 2"]
 
 function modePlayer(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "orange");
@@ -215,39 +216,27 @@ function playerBlock(tankClass) {
 	}
 
 	this.setNewPlayerType = function() {
-        
-        /* 
-        //old version with three classes
-        switch (playerType) {
-			case 0:
-				arrayOfPlayers[imageLookupOffset] = new tankPlayerClass();
-				break;
-			case 1:
-				arrayOfPlayers[imageLookupOffset] = new tankDummyClass();
-				break;
-			case 2:
-				arrayOfPlayers[imageLookupOffset] = new tankBrainlessClass();
-				break;
-        }
-		arrayOfPlayers[imageLookupOffset].name = name;
-		arrayOfPlayers[imageLookupOffset].color = color;
-		arrayOfPlayers[imageLookupOffset].tankSkinIndex = tankSkinIndex;
-		arrayOfPlayers[imageLookupOffset].imageLookupOffset = imageLookupOffset;
-		this.tank = arrayOfPlayers[imageLookupOffset];
-        */
-
-        // new version - all tanks are tankPlayerClass, with AI flag set
-        var newTank = new tankPlayerClass();
+		var newTank = new tankPlayerClass();
         newTank.name = name;
-        if (playerType>0) {
-            newTank.usesAI = true;
-        }
 		newTank.color = color;
 		newTank.tankSkinIndex = tankSkinIndex;
 		newTank.imageLookupOffset = imageLookupOffset;
         
         arrayOfPlayers[imageLookupOffset] = newTank;
         this.tank = newTank;
-
+        
+        switch (playerType) {
+			case 0:
+				arrayOfPlayers[imageLookupOffset].usesAI = false;
+				break;
+			case 1:
+				arrayOfPlayers[imageLookupOffset].usesAI = true;
+				arrayOfPlayers[imageLookupOffset].aiType = 0;
+				break;
+			case 2:
+				arrayOfPlayers[imageLookupOffset].usesAI = true;
+				arrayOfPlayers[imageLookupOffset].aiType = 1;
+				break;
+		}
 	}
 }
