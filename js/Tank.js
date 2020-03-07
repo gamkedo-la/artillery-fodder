@@ -315,10 +315,10 @@ function tankPlayerClass() {
 
 		//Draw body
 		canvasContext.drawImage(tankSkinCanvas, 
-			this.imageLookupOffset * 30, 20, 
-			30, 20, 
-			this.x-w/2 - 5, this.y-h - 5, 
-			w+10, h+10);
+			this.imageLookupOffset * 30, 0, 
+			30, 40, 
+			this.x-w/2 - 5, this.y-h - 25, 
+			w+10, h+30);
 
 		//Draw Cannon
 		canvasContext.save();

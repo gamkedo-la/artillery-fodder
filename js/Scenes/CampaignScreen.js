@@ -39,6 +39,9 @@ function startChapter(chapterNumber) {
 			//startMatch() set properties
 			arrayOfPlayers[0].usesAI = false;
 			arrayOfPlayers[1].usesAI = true;
+			arrayOfPlayers[1].tankSkinIndex = 14;
+			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
+			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
 			//angles, health, weapon inventories, etc
@@ -61,6 +64,11 @@ function startChapter(chapterNumber) {
 			arrayOfPlayers[0].usesAI = false;
 			arrayOfPlayers[1].usesAI = true;
 			arrayOfPlayers[2].usesAI = true;
+			arrayOfPlayers[1].tankSkinIndex = 15;
+			arrayOfPlayers[2].tankSkinIndex = 15;
+			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[2].targetTank = arrayOfPlayers[0];
+			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
 			//angles, health, weapon inventories, etc
@@ -84,6 +92,13 @@ function startChapter(chapterNumber) {
 			arrayOfPlayers[1].usesAI = true;
 			arrayOfPlayers[2].usesAI = true;
 			arrayOfPlayers[3].usesAI = true;
+			arrayOfPlayers[1].tankSkinIndex = 13;
+			arrayOfPlayers[2].tankSkinIndex = 13;
+			arrayOfPlayers[3].tankSkinIndex = 17;
+			arrayOfPlayers[1].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[2].targetTank = arrayOfPlayers[0];
+			arrayOfPlayers[3].targetTank = arrayOfPlayers[0];
+			buildTankSkinsSheet();
 			arrayOfPlayers[0].x = 150;
 			arrayOfPlayers[0].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[0].x);
 			//angles, health, weapon inventories, etc
