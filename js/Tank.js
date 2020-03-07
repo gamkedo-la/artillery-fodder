@@ -93,12 +93,30 @@ function tankPlayerClass() {
 				} else if (this.angle > 180) {
 					this.angle = 180;
 				}
-				if (this.targetTank.x < targetX) {
-					ai.left = 1;
-					ai.right = 0;
+				if (this.targetTank.x < this.x) {
+					if (this.targetTank.x < targetX) {
+						ai.left = 1;
+						ai.right = 0;
+						ai.up = 1;
+						ai.down = 0;
+					} else {
+						ai.left = 0;
+						ai.right = 1;
+						ai.up = 0;
+						ai.down = 1;
+					}
 				} else {
-					ai.left = 0;
-					ai.right = 1;
+					if (this.targetTank.x < targetX) {
+						ai.left = 0;
+						ai.right = 1;
+						ai.up = 0;
+						ai.down = 1;
+					} else {
+						ai.left = 1;
+						ai.right = 0;
+						ai.up = 1;
+						ai.down = 0;
+					}
 				}
 				if (Math.random()  < 0.01) {
 					ai.next = 1;
@@ -117,7 +135,6 @@ function tankPlayerClass() {
 					ai.fire=0;
 				}
 			}
-			//colorLine(this.x, this.y, mouseX, mouseY, 4, "magenta")
 			/*
 			var radians = degreesToRadians(this.angle);
 			xVel += Math.cos(radians) * this.power;
@@ -335,8 +352,8 @@ function tankPlayerClass() {
 			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
 			canvasContext.restore();
 
-			//colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
-			//colorCircle(targetX, targetY, 5, "LimeGreen")
+			colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
+			colorCircle(targetX, targetY, 5, "LimeGreen")
 		}
 
 		//Draw body
@@ -518,6 +535,10 @@ function tankPlayerClass() {
 		if(this.weaponInventory[this.weapon] == 0 || !this.myTurn) {
 			return;
 		}
+
+		if (this.usesAI && this.aiType == 1) {
+			this.angle += Math.random() * 10 - 5;
+		}
 		
 		stats.shots++;
 
@@ -618,7 +639,6 @@ function tankPlayerClass() {
 
 
 		this.myTurn = false;
-
 	}
 }
 

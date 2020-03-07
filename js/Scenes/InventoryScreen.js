@@ -54,7 +54,7 @@ function modeInventory(frameTime) {
 
 function weaponManagement(weaponTier) {
 		if(weaponTier == 1){
-			weaponInventoryMaster = [3,0,0,0,0,0,0,0,0,0,0,0,0];
+			weaponInventoryMaster = [-1,0,0,0,0,0,0,0,0,0,0,0,0];
 			console.log("weaponTier" + weaponTier);
 		}
 	}

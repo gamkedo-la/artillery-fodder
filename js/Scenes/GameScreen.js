@@ -35,8 +35,8 @@ function modeGame(frameTime) {
 	particles.update(frameTime);
 	particles.draw();
 	
-    // Draw grass/pebbles/cracks/etc
-    decorations.draw();
+	// Draw grass/pebbles/cracks/etc
+	decorations.draw();
 
 	//Update and draw tanks
 	for (var i = 0; i < numberOfPlayers; i++) {
@@ -217,6 +217,6 @@ function modeGame(frameTime) {
 		soundt06.stop();
 	}
 
-    // temp: show mini stats window
-    stats.draw();
+	// temp: show mini stats window
+	stats.draw();
 }
