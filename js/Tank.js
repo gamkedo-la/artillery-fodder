@@ -87,48 +87,15 @@ function tankPlayerClass() {
 
 		if (this.aiType == 1) {
 			if (this.targetTank != null && this.myTurn) {
-				this.recalcTargetX();
-				if (this.angle >= 270) {
-					this.angle = 0;
-				} else if (this.angle > 180) {
-					this.angle = 180;
-				}
-				if (this.targetTank.x < this.x) {
+				for (var i = 0; i < 100; i++) {
+					this.recalcTargetX();
 					if (this.targetTank.x < targetX) {
-						ai.left = 1;
-						ai.right = 0;
-						ai.up = 1;
-						ai.down = 0;
+						this.angle += 0.01;
 					} else {
-						ai.left = 0;
-						ai.right = 1;
-						ai.up = 0;
-						ai.down = 1;
-					}
-				} else {
-					if (this.targetTank.x < targetX) {
-						ai.left = 0;
-						ai.right = 1;
-						ai.up = 0;
-						ai.down = 1;
-					} else {
-						ai.left = 1;
-						ai.right = 0;
-						ai.up = 1;
-						ai.down = 0;
+						this.angle -= 0.01;
 					}
 				}
-				if (Math.random()  < 0.01) {
-					ai.next = 1;
-					ai.prev = 0;
-				} else if (Math.random()  < 0.01) {
-					ai.next = 0;
-					ai.prev = 1;
-				} else {
-					ai.next = 0;
-					ai.prev = 0;
-				}
-				if (aiBufferTimer > 1) {
+				if (aiBufferTimer > 1.5) {
 					ai.fire=1;
 					aiBufferTimer = 0;
 				} else {
@@ -352,8 +319,8 @@ function tankPlayerClass() {
 			canvasContext.drawImage(imageLoader.getImage("selector"), -12.5, -12.5);
 			canvasContext.restore();
 
-			colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
-			colorCircle(targetX, targetY, 5, "LimeGreen")
+			//colorLine(this.x, this.y, this.targetTank.x, this.targetTank.y, 1, "magenta");
+			//colorCircle(targetX, targetY, 5, "LimeGreen")
 		}
 
 		//Draw body
