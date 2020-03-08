@@ -32,7 +32,8 @@ function modePlayer(frameTime) {
 
 
 	//Player numbers buttons
-	colorRect(canvas.width - 70, 120, 60, 20, "White");
+	colorRect(canvas.width - 70, 100, 60, 40, "White");
+	colorText("Tanks", canvas.width - 40,115, "Black", font = "15px Arial")
 	colorText(numberOfPlayers, canvas.width - 40,135, "Black", font = "15px Arial")
 	canvasContext.drawImage(buttonImg,
 		0, 0,
@@ -45,8 +46,9 @@ function modePlayer(frameTime) {
 		canvas.width - 70, 120,
 		20, 20);
 	//Page buttons
-	colorRect(canvas.width - 70, canvas.height - 75, 60, 20, "White");
+	colorRect(canvas.width - 70, canvas.height - 75, 60, 40, "White");
 	colorText(page, canvas.width - 40,canvas.height - 60, "Black", font = "15px Arial")
+	colorText("Page", canvas.width - 40,canvas.height - 40, "Black", font = "15px Arial")
 	canvasContext.drawImage(buttonImg,
 		60, 0,
 		20, 20,
