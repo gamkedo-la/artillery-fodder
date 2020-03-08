@@ -101,6 +101,7 @@ var buttonImg;
 var gameScreenOverlayImg;
 
 var map = new terrain();
+map.type = rndInt(0,6);
 var SpeechRecognition = new SpeechRecognitionEngine();
 
 window.onload = function() {
