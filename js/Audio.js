@@ -33,6 +33,7 @@ var soundt06 = new soundLoopsClass("./audio/t06.mp3");
 
 const mainScreenBGM = "./audio/music/gameplayMusicV1.mp3";
 const allBackgroundMusics = [ "./audio/music/artillery_fodder-klaim.mp3"
+							, "./audio/music/metal_fodder-klaim-low_volume.mp3"
 							, mainScreenBGM
 							];
 
