@@ -248,7 +248,7 @@ class buttonsCreate
 	//Speech recognition toggle button
 	this.speechToggle = new toggleFactory(250,400,200,"Speech Recognition","Black")
 	
-	this.controlOptions = new radioFactory (250,170,200,100,"Black","Standart","Mouse Only","Reflex click")
+	this.controlOptions = new radioFactory (250,170,200,100,"Black","Standart","Mouse Only","Reflex Click")
 	this.controlOptions.checkEmpty()
 	
 	}
