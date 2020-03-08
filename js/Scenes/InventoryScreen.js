@@ -46,7 +46,7 @@ function modeInventory(frameTime) {
 	}
 
 
-	colorText("WEAPON INVENTORY", canvas.width/2, 100, "White", "50px Arial");
+	canvasContext.drawImage(imageLoader.getImage("ST-Weapons"),canvas.width/2-280,42);
 
 	btnManager.mainMenuButton.draw()
 
