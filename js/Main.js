@@ -33,12 +33,12 @@ var clockMinuteCountdown = 0;
 var dayTime;
 var colorOfTextforClock;
 
-//damage amount indicator 
+//damage amount indicator
 var damageAmountIndicatorTimer = 0;
 var damageAmountFloat = 20;
 var damageAmountShake = 20;
 
-//sky 
+//sky
 //variables for morning sky colors
 var skyColorGradient01 = 128;
 var skyColorGradient02 = 128;
@@ -131,7 +131,7 @@ function applicationStart() {
 		arrayOfPlayers[i].name = "Player " + pad(i+1, 2);
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
-		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1)); 
+		arrayOfPlayers[i].angle = lerp(45, 135, i/(numberOfPlayers-1));
 		arrayOfPlayers[i].color = rndFloat(359);
 		arrayOfPlayers[i].tankSkinIndex = rndInt(0, 3);
 		arrayOfPlayers[i].imageLookupOffset = i;
@@ -155,9 +155,9 @@ function applicationStart() {
 	gameScreenOverlayImg = imageLoader.getImage("gamescreen-overlay");
 
 	window.requestAnimationFrame(frameLoop);
-	
+
 	btnManager=new buttonsCreate()
-	
+
 }
 
 function frameLoop() {
@@ -176,7 +176,7 @@ function frameLoop() {
 	window.requestAnimationFrame(frameLoop);
 }
 
-function update(frameTime) {	
+function update(frameTime) {
 
     stats.frames++;
     stats.seconds += frameTime;
@@ -230,7 +230,7 @@ function update(frameTime) {
 	if (Key.isJustPressed(Key.BRACKET_RIGHT)){
 		turnMusicVolumeUp();
 	}
-	
+
 	if (Key.isJustPressed(Key.MINUS)){
 		turnEffectsVolumeDown()
 	}
@@ -242,9 +242,9 @@ function update(frameTime) {
 	playerScreenWave += frameTime * 45;
 
 	backgroundMusic.updateMusic(frameTime);
-	
+
 	btnManager.update();
-	
+
 	Key.update();
 }
 
@@ -253,7 +253,7 @@ function modePrevMode(prevMode) {
 }
 
 function startMatch() {
-	
+
 	groundColor = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	groundColorGradient = fullColorHex(rndInt(0,255), rndInt(0,255), rndInt(0,255));
 	skyColorGradientDay01 = rndInt(0,255);
@@ -265,7 +265,7 @@ function startMatch() {
 	skyColorGradient01 = skyColorGradientDay01;
 	skyColorGradient02 = skyColorGradientDay02;
 	skyColorGradient03 = skyColorGradientDay03;
-	
+
 	for (var i = 0; i < numberOfPlayers; i++) {
 		arrayOfPlayers[i].x = lerp(0, canvas.width, (i+1)/(numberOfPlayers+1));
 		arrayOfPlayers[i].y = canvas.height - UI_HEIGHT - map.getHeightAtX(arrayOfPlayers[i].x);
@@ -283,10 +283,11 @@ function startMatch() {
 
 	arrayOfPlayers[0].myTurn = true;
 	buildTankSkinsSheet();
+	playNewBackgroundMusic();
 }
 
 function gameClock() {
- 
+
 	clockHourCountdown ++;
 	clockMinuteCountdown ++;
 
@@ -301,15 +302,15 @@ function gameClock() {
 				clockMinute = 0;
 			}
 		}
-	} 
+	}
 
-	if (clockHourCountdown >= 960) { 
+	if (clockHourCountdown >= 960) {
 		for (var i = 0; i < 1; i++) {
 			clockHour += 1;
 			clockHourCountdown = 0;
 
 			if (clockHour >= 25) {
-				clockHour = 0;	
+				clockHour = 0;
 			}
 
 			if(clockHour == 7 || clockHour == 19) {
@@ -346,7 +347,7 @@ function handlingWeather() {
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
 			rndFloat(0, canvas.height), // spawning point for y
-			0, // how much it sways as its falling 
+			0, // how much it sways as its falling
 			rndFloat(200,400), // dropping speed
 			1,
 			rndFloat(2,4),
@@ -361,7 +362,7 @@ function handlingWeather() {
 			particles.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
 			rndFloat(0, canvas.height), // spawning point for y
-			rndFloat(-40,40), // how much it sways as its falling 
+			rndFloat(-40,40), // how much it sways as its falling
 			rndFloat(10,40), // dropping speed
 			1,
 			1,
@@ -402,17 +403,17 @@ function nightSky() {
 		if(clockHour == 6) { // fading out stars before morning hits
 			if (clockMinute >= 15){
 				starlife = 0;
-			} else { 
+			} else {
 				starlife = 900;
 			}
 		}
-		
+
 		let stars = 2;
 		while(--stars){
 			particlesStars.spawn(
 			rndFloat(0, canvas.width), //spawning point for x
 			rndFloat(0, canvas.height), // spawning point for y
-			0, // how much it sways as its falling 
+			0, // how much it sways as its falling
 			0, // dropping speed
 			1,
 			1,
@@ -420,7 +421,7 @@ function nightSky() {
 			0)
 		}
 	}
-	
+
 }
 
 function dayNight() {
@@ -431,10 +432,10 @@ function dayNight() {
 	}
 
 	//night sky transition
-	if (dayTime == false) { 
+	if (dayTime == false) {
 
 		colorOfTextforClock = 'white';
-		
+
 
 		//black = 0,0,0
 		if(skyColor01 >= 1) { // turning down to 0

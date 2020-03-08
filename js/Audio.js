@@ -31,8 +31,21 @@ var soundt04 = new soundLoopsClass("./audio/t04.mp3");
 var soundt05 = new soundLoopsClass("./audio/t05.mp3");
 var soundt06 = new soundLoopsClass("./audio/t06.mp3");
 
+const mainScreenBGM = "./audio/music/gameplayMusicV1.mp3";
+const allBackgroundMusics = [ "./audio/music/artillery_fodder-klaim.mp3"
+							, mainScreenBGM
+							];
+
+function chooseRandomBGM() { return allBackgroundMusics[Math.floor(Math.random()*allBackgroundMusics.length)]; }
+function playNewBackgroundMusic() {
+	backgroundMusic.loopSong(chooseRandomBGM());
+}
+function playMainMenyBackgroundMusic() {
+	backgroundMusic.loopSong(mainScreenBGM);
+}
+
 var backgroundMusic = new backgroundMusicClass();
-backgroundMusic.loopSong("./audio/music/gameplayMusicV1.mp3");
+playMainMenyBackgroundMusic();
 
 //sound classes
 
@@ -40,7 +53,7 @@ function backgroundMusicClass() {
 
 	var musicSound = null;
 	var fadeTrack = null;
-	
+
 	this.loopSong = function(filenameWithPath) {
 		if (musicSound != null) {
 			fadeTrack = musicSound;
@@ -60,12 +73,12 @@ function backgroundMusicClass() {
 	this.resumeSound = function() {
 		musicSound.play();
 	}
-	
+
 	this.setVolume = function(value) {
 		// Multipliction by a boolean serves as 1 for true and 0 for false
 		if (musicSound == null) {return;}
 		musicSound.volume = Math.pow(value * !isMuted, 2);
-		
+
 		if(musicSound.volume == 0) {
 			musicSound.pause();
 		} else if (musicSound.paused) {
