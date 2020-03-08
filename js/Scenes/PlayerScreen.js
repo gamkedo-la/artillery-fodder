@@ -89,6 +89,7 @@ function modePlayer(frameTime) {
 			populatePlayerScreen();
 			buildTankSkinsSheet();
 		}
+		changePage()
 	}
 
 	//Subtract page
@@ -107,14 +108,17 @@ function modePlayer(frameTime) {
 
 function populatePlayerScreen() {
 	var numberAcross = 3;
-	var yOffset = 1;
+	var yOffset = 0;
 	for (var i = 0; i < numberOfPlayers; i++) {
 		if (arrayOfPlayerBlocks[i] == null) {
 			arrayOfPlayerBlocks[i] =  new playerBlock(arrayOfPlayers[i]);
 		}
 		arrayOfPlayerBlocks[i].x = 150 + 250*(i%3);
-		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125*3;
+		arrayOfPlayerBlocks[i].y = 125 + yOffset*125 - page*125*4;
 		if (i%3 == 2) {
+			yOffset += 1;
+		}
+		if (i%9 == 8) {
 			yOffset += 1;
 		}
 	}
@@ -126,10 +130,13 @@ function changePage() {
 	} else if (page > Math.floor((numberOfPlayers-1)/9)) {
 		page = Math.floor((numberOfPlayers-1)/9);
 	}
-	var yOffset = 1;
+	var yOffset = 0;
 	for (var i = 0; i < numberOfPlayers; i++) {
-		arrayOfPlayerBlocks[i].y = 25 + yOffset*125 - page*125*3;
+		arrayOfPlayerBlocks[i].y = 125 + yOffset*125 - page*125*4;
 		if (i%3 == 2) {
+			yOffset += 1;
+		}
+		if (i%9 == 8) {
 			yOffset += 1;
 		}
 	}
@@ -208,14 +215,14 @@ function playerBlock(tankClass) {
 			50, 34);
 		canvasContext.restore();
 
-		colorRect(this.x, this.y + 15, 75, 20, "White");
-		colorText(this.tank.name, this.x + 37, this.y + 30, "Black", "15px Arial");
+		colorRect(this.x-5, this.y + 15, 90, 20, "White");
+		colorText(this.tank.name, this.x + 40, this.y + 30, "Black", "15px Arial");
 
-		colorRect(this.x, this.y + 40, 75, 20, "White");
-		colorText("Color", this.x + 37, this.y + 55, "Black", "15px Arial");
+		colorRect(this.x-5, this.y + 40, 90, 20, "White");
+		colorText("Color", this.x + 40, this.y + 55, "Black", "15px Arial");
 
-		colorRect(this.x, this.y + 65, 75, 20, "White");
-		colorText(playerTypeIndex[playerType], this.x + 37, this.y + 80, "Black", "15px Arial");
+		colorRect(this.x-5, this.y + 65, 90, 20, "White");
+		colorText(playerTypeIndex[playerType], this.x + 40, this.y + 80, "Black", "15px Arial");
 	}
 
 	this.setNewPlayerType = function() {
