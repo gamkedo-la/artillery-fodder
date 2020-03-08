@@ -2,12 +2,12 @@ var damageAmount;
 var damageAmountPosX;
 var damageAmountPosY;
 var damageAmountIndicator = false;
-var mouseLastPosX = 0;
-var mouseLastPosY = 0;
 var aiBufferTimer = 0;
 var weaponTier = 0;
 var luckyReflexState = 0;
 var luckyReflexCountUp = true;
+var mouseLastPosX = 0;
+var mouseLastPosY = 0;
 
 function tankPlayerClass() {
 	this.x = 400;
@@ -200,100 +200,113 @@ function tankPlayerClass() {
 				}
 
 
-				//Input
-				if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire){
-					if(this.weaponInventory[this.weapon] != 0) {
-						this.fire();
-					}
-				}
+				//btnManager.controlOptions.getValue(0) = Standart Input
+				//btnManager.controlOptions.getValue(1) = Mouse Only
+				//btnManager.controlOptions.getValue(2) = Lucky Reflex
 				
-				if ((Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) && !this.usesAI) || ai.left) {
-					this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
-				}
-				if ((Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && !btnManager.controlMouseHoverClick.getValue()) && !this.usesAI)  || ai.right){
-					this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
-				}
-				if ((Key.isDown(Key.UP) && !this.usesAI) || ai.up){					
-					this.power += 30 * frameTime;
-				}
-				if ((Key.isDown(Key.DOWN) && !this.usesAI) || ai.down){
-					this.power -= 30 * frameTime;
-				}
-				if ((Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand()) && !this.usesAI) ||  mouseScrollY > 0 || ai.prev){
-					this.weapon--;
-					this.weaponIndextIncreesing = false;
-					mouseScrollY = 0; //mouse wheel bug fix
-				}
-				if ((Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand()) && !this.usesAI) || mouseScrollY < 0|| ai.next){
-					this.weapon++;
-					this.weaponIndextIncreesing = true;
-					mouseScrollY = 0; //mouse wheel bug fix
-				}
-				
-				// mouse Hover and Click Input	
-				document.onkeydown = function(){
-					mouseLastPosX = mouseX;
-					mouseLastPosY = mouseY;
-					}
-				
-				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
-					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.controlMouseHoverClick.getValue()){
-					this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
-
-					this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
-				}
-				
-				// mouse Lucky reflex Input
-				if (btnManager.controlLuckReflex.getValue()){
+				if (!this.usesAI){
 					
-					switch (luckyReflexState) {
-						case 0:
-							this.angle = Math.random() * 360;
-							this.power = 60;
-							luckyReflexState = rndInt(1,2);
-							break;
-						
-						case 1:
-							this.angle += 60 * frameTime;
-							
-							if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
-								&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
-								|| Key.isJustPressed(Key.SPACE) || ai.fire
-								|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
-									
-								luckyReflexState++;
+				// Standart Input
+					if (!btnManager.controlOptions.getValue(2)){
+						if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire && !btnManager.controlOptions.getValue(2)){
+							if(this.weaponInventory[this.weapon] != 0) {
+								this.fire();
 							}
-							break;
-							
-						case 2:
-							if (luckyReflexCountUp){
-								this.power += 70 * frameTime;
-							}else{
-								this.power -= 70 * frameTime;
-							}
-							
-							if (this.power <= 1){
-								luckyReflexCountUp = true;
-							}
-							if (this.power >= 100){
-								luckyReflexCountUp = false;
 						}
 						
-							if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
-								&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
-								|| Key.isJustPressed(Key.SPACE) || ai.fire
-								|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
-								while (this.weaponInventory[this.weapon] == 0){								
-									this.weapon++;
-									this.weaponIndextIncreesing = true;
-									}
-								if (this.weaponInventory[this.weapon] != 0){
-									this.fire();
-									luckyReflexState = 0;
-								}
+						if ((Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && btnManager.controlOptions.getValue(0))) || ai.left) {
+							this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
+						}
+						if ((Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && btnManager.controlOptions.getValue(0)))  || ai.right){
+							this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
+						}
+						if ((Key.isDown(Key.UP)) || ai.up){					
+							this.power += 30 * frameTime;
+						}
+						if ((Key.isDown(Key.DOWN)) || ai.down){
+							this.power -= 30 * frameTime;
+						}
+					}
+					
+					if ((Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand())) ||  mouseScrollY > 0 || ai.prev){
+						this.weapon--;
+						this.weaponIndextIncreesing = false;
+						mouseScrollY = 0; //mouse wheel bug fix
+					}
+					if ((Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand())) || mouseScrollY < 0|| ai.next){
+						this.weapon++;
+						this.weaponIndextIncreesing = true;
+						mouseScrollY = 0; //mouse wheel bug fix
+					}
+					
+				// mouse Only Input	
+					
+					if (btnManager.controlOptions.getValue(1)){
+						
+						document.onkeydown = function(){
+							mouseLastPosX = mouseX;
+							mouseLastPosY = mouseY;
 							}
-							break;
+						
+						if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
+							&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY ){
+							this.angle = angleBetween2Points({x:this.x, y:this.y}, {x:mouseX, y:mouseY});
+
+							this.power = Math.sqrt((Math.pow(mouseX-this.x,2))+(Math.pow(mouseY-this.y,2))) -55;
+						}
+					}
+					
+					// Reflex Tap Input
+					if (btnManager.controlOptions.getValue(2)){
+						
+						switch (luckyReflexState) {
+							case 0:
+								this.angle = Math.random() * 360;
+								this.power = 60;
+								luckyReflexState++;
+								break;
+							
+							case 1:
+								this.angle += 60 * frameTime;
+								
+								if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
+									&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
+									|| Key.isJustPressed(Key.SPACE) || ai.fire
+									|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
+										
+									luckyReflexState++;
+								}
+								break;
+								
+							case 2:
+								if (luckyReflexCountUp){
+									this.power += 70 * frameTime;
+								}else{
+									this.power -= 70 * frameTime;
+								}
+								
+								if (this.power <= 1){
+									luckyReflexCountUp = true;
+								}
+								if (this.power >= 100){
+									luckyReflexCountUp = false;
+							}
+							
+								if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
+									&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
+									|| Key.isJustPressed(Key.SPACE) || ai.fire
+									|| (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
+									while (this.weaponInventory[this.weapon] == 0){								
+										this.weapon++;
+										this.weaponIndextIncreesing = true;
+										}
+									if (this.weaponInventory[this.weapon] != 0){
+										this.fire();
+										luckyReflexState = 0;
+									}
+								}
+								break;
+						}
 					}
 				}
 			
@@ -325,7 +338,7 @@ function tankPlayerClass() {
 
 				if (mouseX > 0 && mouseX < canvas.width && mouseLastPosX != mouseX 
 					&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT && mouseLastPosY != mouseY 
-					&& btnManager.controlMouseHoverClick.getValue()){
+					&& btnManager.controlOptions.getValue(1)){
 
 					if( mouseJustPressed && this.weaponInventory[this.weapon] != 0) {
 						this.fire();
@@ -334,10 +347,6 @@ function tankPlayerClass() {
 			} else {
 				incrementTurn = true;
 			}
-		}
-				//cheat code
-		if (Key.isJustPressed(Key.f)){
-			this.health -= 15;
 		}
 	}
 

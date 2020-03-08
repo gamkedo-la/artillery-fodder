@@ -247,9 +247,10 @@ class buttonsCreate
 	
 	//Speech recognition toggle button
 	this.speechToggle = new toggleFactory(250,400,200,"Speech Recognition","Black")
-
-	this.controlMouseHoverClick = new toggleFactory(250,400,200,"Hover and click","Black")
-	this.controlLuckReflex = new toggleFactory(250,300,200,"Lucky reflex","Black")
+	
+	this.controlOptions = new radioFactory (250,170,200,100,"Black","Standart","Mouse Only","Reflex click")
+	this.controlOptions.checkEmpty()
+	
 	}
 
 
@@ -301,8 +302,7 @@ class buttonsCreate
 
 			case CONTROLS_SCREEN:
 				this.mainMenuButton.process()
-				this.controlMouseHoverClick.process()
-				this.controlLuckReflex.process()
+				this.controlOptions.process()
 				break;
 
 			default:

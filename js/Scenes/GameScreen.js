@@ -119,23 +119,28 @@ function modeGame(frameTime) {
 	dayNight();
 	skyFlickers();
 
+	if (!btnManager.controlOptions.getValue(2)){
+		if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+			arrayOfPlayers[playerTurn].angle += 30 * frameTime;
+		}
 
-	if (isMouseInArea(canvas.width*1/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].angle += 30 * frameTime;
+		if (isMouseInArea(canvas.width*1/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+			arrayOfPlayers[playerTurn].angle -= 30 * frameTime;
+		}
+
+		if (isMouseInArea(canvas.width*2/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+			arrayOfPlayers[playerTurn].power -= 10 * frameTime;
+		}
+
+		if (isMouseInArea(canvas.width*2/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
+			arrayOfPlayers[playerTurn].power += 10 * frameTime;
+		}
+
+		if (isMouseInArea(canvas.width*1/2 - 60, canvas.height - UI_HEIGHT, 140, 40) && mouseJustPressed) {
+			arrayOfPlayers[playerTurn].fire();
+		}
 	}
-
-	if (isMouseInArea(canvas.width*1/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].angle -= 30 * frameTime;
-	}
-
-	if (isMouseInArea(canvas.width*2/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].power -= 10 * frameTime;
-	}
-
-	if (isMouseInArea(canvas.width*2/4 + 30, canvas.height - UI_HEIGHT + 50, 60, 60) && mousePressed) {
-		arrayOfPlayers[playerTurn].power += 10 * frameTime;
-	}
-
+	
 	if (isMouseInArea(canvas.width*3/4 - 90, canvas.height - UI_HEIGHT + 50, 60, 60) && mouseJustPressed) {
 		arrayOfPlayers[playerTurn].weapon -= 1;
 		arrayOfPlayers[playerTurn].weaponIndextIncreesing = false;
@@ -146,9 +151,6 @@ function modeGame(frameTime) {
 		arrayOfPlayers[playerTurn].weaponIndextIncreesing = true;
 	}
 
-	if (isMouseInArea(canvas.width*1/2 - 60, canvas.height - UI_HEIGHT, 140, 40) && mouseJustPressed) {
-		arrayOfPlayers[playerTurn].fire();
-	}
 
 	if (Key.isJustPressed(Key.q)){
 		mode = MAIN_MENU;

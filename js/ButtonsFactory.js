@@ -225,12 +225,77 @@ class toggleFactory
 		//Message
 		colorText(this.message, this.x + this.length/2 , this.y + 30, this.textColor, "25px Arial");
 		//Toggle Text
-		colorText(this.value?"yes":"no",this.x+25 + this.length+50, this.y+30 , this.value?"Yellow":"Red", "20px Arial");
+		colorText(this.value?"ON":"OFF",this.x+25 + this.length+50, this.y+30 , this.value?"Yellow":"Red", "20px Arial");
 	}
 	
 	getValue()
 	{
 		return this.value
+	}
+	
+}
+
+class radioFactory
+{
+	constructor(_x,_y,_length,_spacing,_textColor,..._message)
+	{
+		this.x=_x
+		this.y=_y
+		this.length=_length
+		this.message=_message
+		this.spacing=_spacing
+		this.textColor=_textColor
+		this.btnFrame=imageLoader.getImage("buttonFrame")
+		this.value=[]
+		this.active=0
+	}
+	
+	checkEmpty()
+	{
+		for (var i = 0; i < this.message.length; i++){
+			if(this.value.length <= i){
+				
+				if (i == 0){
+					this.value.push(true);
+				}else{
+					this.value.push(false);
+				}
+			}	
+		}
+	}
+	process()
+	{
+	     // if we JUST pressed the mouse button toggle everything around
+		for (var i = 0; i < this.message.length; i++){
+			if (isMouseInArea(this.x + this.length+50, this.y+i*this.spacing, 50, 50) && mouseJustPressed) {
+					this.active = i;	
+			}
+			
+			if (i == this.active){				
+				this.value[i] = true;
+				
+			}else{
+				this.value[i] = false;
+			}
+		}
+	}
+	
+	draw()
+	{
+		for(var i = 0; i < this.message.length; i++){
+			canvasContext.drawImage(this.btnFrame,this.x + this.length+50,this.y+i*this.spacing,50,50)
+			colorRoundedRect(this.x,this.y+i*this.spacing,this.length,50,"DeepSkyBlue")
+			
+			//Message
+			colorText(this.message[i], this.x + this.length/2 , this.y + 30 + (i*this.spacing), this.textColor, "25px Arial");
+			//Toggle Text
+			colorText(this.value[i]?"ON":"OFF",this.x+25 + this.length+50, this.y+30 + (i*this.spacing) , this.value[i]?"Green":"Red", "20px Arial");
+		}
+	}
+	
+	getValue(N)
+	{
+		return this.value[N]
 	}
 }
 
