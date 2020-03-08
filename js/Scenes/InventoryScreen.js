@@ -19,15 +19,15 @@ var weaponInventoryMaster = [-1,//Basic Shot
 							 1,//Sniper Shot
 							 2,//Hop
 							 2,//Teleport Shot
-							 3,//Big Shot
-							 3,//Roller
+							 2,//Big Shot
+							 2,//Roller
 							 1,//Crazy Bomb
 							 2,//Meteor Clash
-							 5,// Rain Shot
+							 2,// Rain Shot
 							 3,// Ground Shot
 							 3,// Grenade
-							 3,// Delayed Multi Shot
-							 1]//Self Destruct 
+							 2,// Delayed Multi Shot
+							 0]//Self Destruct 
 
 function modeInventory(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, "purple");
@@ -46,7 +46,7 @@ function modeInventory(frameTime) {
 	}
 
 
-	colorText("WEAPON INVENTORY", canvas.width/2, 100, "White", "50px Arial");
+	canvasContext.drawImage(imageLoader.getImage("ST-Weapons"),canvas.width/2-280,42);
 
 	btnManager.mainMenuButton.draw()
 

@@ -24,6 +24,8 @@ function modeOptions(frameTime) {
 	gradient.addColorStop(0.9,"#8B0000FF");
 	gradient.addColorStop(1,  "#00000000");
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
+
+	canvasContext.drawImage(imageLoader.getImage("ST-Audio"),canvas.width/2-85,42);
 /*
 
     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition

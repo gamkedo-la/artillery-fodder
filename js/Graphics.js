@@ -23,7 +23,14 @@ const imageLoader = new (function() {
         {id: "buttonFrame", src:"./images/buttonFrame.png"},
         {id: "map", src:"./images/map.png"},
 		{id: "BgTile",src:"./images/af_menu_bg_tile.png"},
-		{id: "BgTileWhite",src:"./images/af_menu_bg_tile_w.png"}
+		{id: "BgTileWhite",src:"./images/af_menu_bg_tile_w.png"},
+		{id: "ST-Campaign",src:"./images/ScreenTitle-Campaign.png"},
+		{id: "ST-MainMenu",src:"./images/ScreenTitle-MainMenu.png"},
+		{id: "ST-PlayerSelect",src:"./images/ScreenTitle-PlayerSelect.png"},
+		{id: "ST-Terrain",src:"./images/ScreenTitle-Terrain.png"},
+		{id: "ST-Weapons",src:"./images/ScreenTitle-Weapons.png"},
+		{id: "ST-Audio",src:"./images/ScreenTitle-Audio.png"},
+		{id: "ST-Controls",src:"./images/ScreenTitle-Controls.png"},
 		
 		
 		

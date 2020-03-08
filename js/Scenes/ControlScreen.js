@@ -12,6 +12,8 @@ function modeControls(frameTime) {
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 	
 	colorText("CONTROLS", canvas.width/2, 100, "White", "50px Arial", true);
+	canvasContext.drawImage(imageLoader.getImage("ST-Controls"),canvas.width/2-136,42);
+
 
 	
 	btnManager.controlOptions.draw()

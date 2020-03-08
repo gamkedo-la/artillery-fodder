@@ -23,8 +23,7 @@ function modeMainMenu(frameTime) {
 	gradient.addColorStop(1, "#00000000");
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-	//colorRect(300, 0, 200, canvas.height, "LightGrey");
-	colorText("MAIN MENU", canvas.width/2, 100, "White", "50px Arial", true);
+	canvasContext.drawImage(imageLoader.getImage("ST-MainMenu"),canvas.width/2-150,50);
 
 	btnManager.gameButton.draw()
 	btnManager.campaignButton.draw()

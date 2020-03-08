@@ -28,7 +28,7 @@ function modePlayer(frameTime) {
 	//colorRect(0, 0, canvas.width, 150, "orange");
 	//colorRect(0, canvas.height - 75, canvas.width, 75, "orange");
 	
-	colorText("PLAYER SELECTION", canvas.width/2, 100, "White", "50px Arial");
+	canvasContext.drawImage(imageLoader.getImage("ST-PlayerSelect"),canvas.width/2-240,42);
 
 
 	//Player numbers buttons

@@ -34,7 +34,7 @@ function empty() {
 function basicShotClass() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 25;
 	this.damage = 20;
 	this.tank;
 
@@ -111,7 +111,7 @@ function basicShotClass() {
 function multiShotClass() {
   this.x = 0;
   this.y = 0;
-  this.size = 10;
+  this.size = 15;
   this.damage = 10;
   this.tank;
   this.numberOfShots = 3;
@@ -276,7 +276,7 @@ function teleportShot() {
 function rollShotClass() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 25;
 	this.damage = 20;
 	this.tank;
 
@@ -364,7 +364,7 @@ function crazyBombShotClass() {
 	this.x = 0;
 	this.y = 0;
 	this.size = 30;
-	this.damage = 20;
+	this.damage = 30;
 	this.tank;
 
 	var xVel = 0;
@@ -441,8 +441,8 @@ function meteorClashClass() {
 
 	this.x = 0;
 	this.y = 0;
-	this.size = 30;
-	this.damage = 30;
+	this.size = 40;
+	this.damage = 40;
 	this.tank;
 
 	var xVel = 0;
@@ -547,7 +547,7 @@ function rainShot() {
 	this.x = 0;
 	this.y = 0;
 	this.size = 10;
-	this.damage = 1;
+	this.damage = 2;
 	this.tank;
 
 	var xVel = 0;
@@ -629,7 +629,7 @@ function rainShot() {
 function groundShotClass() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 25;
 	this.damage = 20;
 	this.tank;
 
@@ -730,7 +730,7 @@ function groundShotClass() {
 function grenadeShot() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 25;
 	this.damage = 20;
 	this.tank;
 

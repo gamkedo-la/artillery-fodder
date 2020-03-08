@@ -112,6 +112,10 @@ function tankPlayerClass() {
 		}
 
 		if (this.aiType >= 1) {
+
+			if (ai.next) ai.next--;
+			if (ai.prev) ai.prev--;
+
 			if (this.targetTank != null && this.myTurn) {
 				for (var i = 0; i < 15; i++) {
 					this.recalcTargetX();
@@ -137,6 +141,10 @@ function tankPlayerClass() {
 				if (aiBufferTimer > 1.5) {
 					ai.fire=1;
 					aiBufferTimer = 0;
+
+					var rand = rndInt(1,10);
+					if (rand==9) ai.next = rndInt(1,5);
+					else if (rand==10) ai.prev = rndInt(1,5);
 				} else {
 					ai.fire=0;
 				}
@@ -592,6 +600,7 @@ function tankPlayerClass() {
 				soundFire.play();
 				this.muzzleFlash();
 				newProjectile.size = 50;
+				newProjectile.damage = 30;
 				break;
 			case 6://Roller
 				newProjectile = new rollShotClass();
@@ -634,7 +643,7 @@ function tankPlayerClass() {
 				newExplosion.x = this.x;
 				newExplosion.y = this.y - 5;
 				newExplosion.size = 40;
-				newExplosion.damage = 40;
+				newExplosion.damage = 60;
 				newExplosion.color = "White";
 				newExplosion.tank = this;
 				newExplosion.active = true;

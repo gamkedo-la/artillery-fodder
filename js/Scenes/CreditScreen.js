@@ -17,6 +17,7 @@ var creditNameList = [
 "Vaan Hope Khani: Tank skins, arrow and crosshair art"," ",
 "Zak Ali: Headline color changes based on time of day"," ",
 "Ryan Malm: Particle effects (initial functionality)"," ",
+"Klaim (Joël Lamotte): gameplay background music, music selection system"," ",
 "Chris DeLeon: Basic mouse code, compiled credits",
 " ",
 " ",
@@ -66,7 +67,7 @@ function lineWrapCredits() { // note: gets calling immediately after definition
             newCut.push(creditNameList[i].substring(0, findEnd));
             creditNameList[i] = creditNameList[i].substring(findEnd, creditNameList[i].length);
         }
-    }   
+    }
     creditNameList = newCut;
 }
 lineWrapCredits(); // note: calling immediately as part of init, so the creditNameList will be autosliced whenever it's needed

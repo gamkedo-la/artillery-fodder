@@ -70,6 +70,7 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
+					playMainMenyBackgroundMusic();
 					backgroundMusic.resumeSound();
 					break;
 
@@ -145,7 +146,7 @@ class sliderFactory
 		this.leftBtnX=this.x-this.height
 		this.leftBtnY=this.y
 		this.buttonDimension=this.height
-		
+
 		//Slider parameters
 		this.sliderValue=0
 		this.sliderText=_text
@@ -166,12 +167,12 @@ class sliderFactory
 		if (isMouseInArea(this.leftBtnX, this.leftBtnY, this.buttonDimension,this.buttonDimension) && mouseJustPressed || Key.isJustPressed(this.keyLeftBtn))
 		{
 			_func2()
-		}	
-		
-		this.sliderValue=_valueToUpdate	
+		}
+
+		this.sliderValue=_valueToUpdate
 	}
-	
-	
+
+
 	draw(reposition=false,_x,_y)
 	{
 		//Text for slider
@@ -206,28 +207,28 @@ class toggleFactory
 		this.btnFrame=imageLoader.getImage("buttonFrame")
 		this.value=false;
 	}
-	
+
 	process()
 	{
 	     // if we JUST pressed the mouse button, maybe create or toggle existing speech recognition
 		if (isMouseInArea(this.x + this.length+50, this.y, 50, 50) && mouseJustPressed) {
-			this.value = !this.value;	
+			this.value = !this.value;
 		}
-		
+
 	}
-	
+
 	draw()
 	{
-		
+
 		canvasContext.drawImage(this.btnFrame,this.x + this.length+50,this.y,50,50)
 		colorRoundedRect(this.x,this.y,this.length,50,"DeepSkyBlue")
-		
+
 		//Message
 		colorText(this.message, this.x + this.length/2 , this.y + 30, this.textColor, "25px Arial");
 		//Toggle Text
 		colorText(this.value?"ON":"OFF",this.x+25 + this.length+50, this.y+30 , this.value?"Yellow":"Red", "20px Arial");
 	}
-	
+
 	getValue()
 	{
 		return this.value
