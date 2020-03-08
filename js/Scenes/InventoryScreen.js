@@ -46,7 +46,7 @@ function modeInventory(frameTime) {
 	}
 
 
-	colorText("WEAPON SCREEN", canvas.width/2, 100, "White", "50px Arial");
+	colorText("WEAPON INVENTORY", canvas.width/2, 100, "White", "50px Arial");
 
 	btnManager.mainMenuButton.draw()
 

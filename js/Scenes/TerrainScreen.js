@@ -18,7 +18,7 @@ function modeTerrain(frameTime) {
 	gradient.addColorStop(1, "#00000000");
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 
-	colorText("TERRAIN SCREEN", canvas.width/2, 100, "White", "50px Arial");
+	colorText("TERRAIN STYLE", canvas.width/2, 100, "White", "50px Arial");
 
 	groundColor = "white";
 	groundColorGradient = "black";

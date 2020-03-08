@@ -10,7 +10,7 @@ function modeControls(frameTime) {
 	gradient.addColorStop(1, "black");
 	colorRect(0, 0, canvas.width, canvas.height, gradient);
 	
-	colorText("MOUSE CONTROLS", canvas.width/2, canvas.height/2-100, "White", "50px Arial", true);
+	colorText("CONTROLS", canvas.width/2, canvas.height/2-100, "White", "50px Arial", true);
 	//colorText("[Space Bar] MAIN MENU", canvas.width/2, canvas.height/2 - 50, "white", "20px Arial", true);
 
 
