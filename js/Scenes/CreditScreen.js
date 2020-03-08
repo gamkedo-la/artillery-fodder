@@ -5,7 +5,7 @@ var creditsScrollRate = 0.48;
 
 var creditNameList = [
 " "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ",
-"Michael \"Misha\" Fewkes: Project lead, core gameplay, initial terrain randomization, tank physics, majority of weapon types (jetpack, big shot, teleport shot, rolling shot, crazy bomb...), tank destruction desaturation, skin sprite sheet support, sound integration and related randomization, early test AI, button graphics, support for variable player count, song randomization, crosshair, terrain variation options, assorted bug fixes"," ",
+"Michael \"Misha\" Fewkes: Project lead, core gameplay, initial terrain randomization, tank physics, majority of weapon types (jetpack, big shot, teleport shot, rolling shot, crazy bomb...), tank destruction desaturation, skin sprite sheet support, sound integration and related randomization, AI, button graphics, support for variable player count, song randomization, crosshair, terrain variation options, assorted bug fixes"," ",
 "Simon J Hoffiz: Majority of menu code, turns support, game clock, time of day, cloud drift, weapons (meteor clash, rain shot), star particles, damage indicator, grenade weapon physics fixes, assorted UI improvements and related refactoring, "," ",
 "I-wei Chen: Unified button functionality, start screen setup, logo animation, UI layout improvements, pause bug fix, slider widget, toggle button support, volume controls, scrolling menu background effect, graphic bug fixes"," ",
 "Jeff \"Axphin\" Hanlon: Title screen support, metal and screw tile decorations for edges, logo, sound effects (20), 6 tank skins, button styling, game over screen"," ",

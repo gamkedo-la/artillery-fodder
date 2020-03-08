@@ -204,44 +204,38 @@ function tankPlayerClass() {
 				if (this.usesAI) {
 					aiBufferTimer += frameTime;
 					this.aiThink();
-					
 				}
-
-
-				//btnManager.controlOptions.getValue(0) = Standart Input
-				//btnManager.controlOptions.getValue(1) = Mouse Only
-				//btnManager.controlOptions.getValue(2) = Lucky Reflex
 				
 				if (!this.usesAI){
 					
 				// Standart Input
 					if (!btnManager.controlOptions.getValue(2)){
-						if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand()) || ai.fire && !btnManager.controlOptions.getValue(2)){
+						if (Key.isJustPressed(Key.SPACE) || (SpeechRecognition && SpeechRecognition.pendingFireCommand())){
 							if(this.weaponInventory[this.weapon] != 0) {
 								this.fire();
 							}
 						}
 						
-						if ((Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && btnManager.controlOptions.getValue(0))) || ai.left) {
+						if ((Key.isDown(Key.LEFT) || (mouseMovementX < -0 && mousePressed && btnManager.controlOptions.getValue(0)))) {
 							this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 						}
-						if ((Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && btnManager.controlOptions.getValue(0)))  || ai.right){
+						if ((Key.isDown(Key.RIGHT) || (mouseMovementX > 0 && mousePressed && btnManager.controlOptions.getValue(0)))){
 							this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
 						}
-						if ((Key.isDown(Key.UP)) || ai.up){					
+						if ((Key.isDown(Key.UP))){					
 							this.power += 30 * frameTime;
 						}
-						if ((Key.isDown(Key.DOWN)) || ai.down){
+						if ((Key.isDown(Key.DOWN))){
 							this.power -= 30 * frameTime;
 						}
 					}
 					
-					if ((Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand())) ||  mouseScrollY > 0 || ai.prev){
+					if ((Key.isJustPressed(Key.COMMA) || (SpeechRecognition && SpeechRecognition.pendingPrevCommand())) ||  mouseScrollY > 0){
 						this.weapon--;
 						this.weaponIndextIncreesing = false;
 						mouseScrollY = 0; //mouse wheel bug fix
 					}
-					if ((Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand())) || mouseScrollY < 0|| ai.next){
+					if ((Key.isJustPressed(Key.PERIOD) || (SpeechRecognition && SpeechRecognition.pendingNextCommand())) || mouseScrollY < 0){
 						this.weapon++;
 						this.weaponIndextIncreesing = true;
 						mouseScrollY = 0; //mouse wheel bug fix
@@ -298,7 +292,7 @@ function tankPlayerClass() {
 								}
 								if (this.power >= 100){
 									luckyReflexCountUp = false;
-							}
+								}
 							
 								if ( (mouseJustPressed && mouseX > 0 && mouseX < canvas.width 
 									&& mouseY > 0 && mouseY < canvas.height - UI_HEIGHT)
@@ -307,7 +301,7 @@ function tankPlayerClass() {
 									while (this.weaponInventory[this.weapon] == 0){								
 										this.weapon++;
 										this.weaponIndextIncreesing = true;
-										}
+									}
 									if (this.weaponInventory[this.weapon] != 0){
 										this.fire();
 										luckyReflexState = 0;
@@ -316,6 +310,39 @@ function tankPlayerClass() {
 								break;
 						}
 					}
+				} else {
+					if (!btnManager.controlOptions.getValue(2)){
+						if (ai.fire){
+							if(this.weaponInventory[this.weapon] != 0) {
+								this.fire();
+							}
+						}
+						
+						if (ai.left) {
+							this.angle += 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
+						}
+						if (ai.right){
+							this.angle -= 30 * frameTime * Math.max(Math.abs(mouseMovementX * 0.5), 1);
+						}
+						if (ai.up){					
+							this.power += 30 * frameTime;
+						}
+						if (ai.down){
+							this.power -= 30 * frameTime;
+						}
+					}
+					
+					if (ai.prev){
+						this.weapon--;
+						this.weaponIndextIncreesing = false;
+						mouseScrollY = 0; //mouse wheel bug fix
+					}
+					if (ai.next){
+						this.weapon++;
+						this.weaponIndextIncreesing = true;
+						mouseScrollY = 0; //mouse wheel bug fix
+					}
+
 				}
 			
 
