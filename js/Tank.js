@@ -583,6 +583,7 @@ function tankPlayerClass() {
 				soundFire.play();
 				this.muzzleFlash();
 				newProjectile.size = 50;
+				newProjectile.damage = 30;
 				break;
 			case 6://Roller
 				newProjectile = new rollShotClass();
@@ -625,7 +626,7 @@ function tankPlayerClass() {
 				newExplosion.x = this.x;
 				newExplosion.y = this.y - 5;
 				newExplosion.size = 40;
-				newExplosion.damage = 40;
+				newExplosion.damage = 60;
 				newExplosion.color = "White";
 				newExplosion.tank = this;
 				newExplosion.active = true;
