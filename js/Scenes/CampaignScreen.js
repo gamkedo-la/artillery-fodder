@@ -6,7 +6,7 @@ function modeCampaign(frameTime) {
 	//colorRect(0, 0, canvas.width, canvas.height, "LightGrey");
 	
 	canvasContext.drawImage(imageLoader.getImage("map"),0,0);
-	colorText("CAMPAIGN", canvas.width/2, 100, "White", "50px Arial", true);
+	canvasContext.drawImage(imageLoader.getImage("ST-Campaign"),canvas.width/2-134,48);
 
 	//campaign buttons
 	btnManager.chapter01.draw()

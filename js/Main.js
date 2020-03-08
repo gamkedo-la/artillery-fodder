@@ -110,9 +110,11 @@ window.onload = function() {
 	mouseInit();
 
 	window.addEventListener('blur', function () {
+		isMuted = false;
 		toggleMute();
 	});
 	window.addEventListener('focus', function () {
+		isMuted = true;
 		toggleMute();
 	});
 
