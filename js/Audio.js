@@ -39,9 +39,12 @@ const allBackgroundMusics = [ "./audio/music/artillery_fodder-klaim.mp3"
 
 function chooseRandomBGM() { return allBackgroundMusics[Math.floor(Math.random()*allBackgroundMusics.length)]; }
 function playNewBackgroundMusic() {
-	backgroundMusic.loopSong(chooseRandomBGM());
+	let randomMusic = chooseRandomBGM();
+	console.log(`play music: ${randomMusic}`);
+	backgroundMusic.loopSong(randomMusic);
 }
 function playMainMenuBackgroundMusic() {
+	console.log(`play menu music: ${mainScreenBGM}`);
 	backgroundMusic.loopSong(mainScreenBGM);
 }
 
@@ -118,6 +121,7 @@ function soundLoopsClass(filenameWithPath) {
 			sound.currentTime = 0;
 			sound.volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
 			sound.play();
+			console.log(`soundLoopsClass.play: ${fullFilename}`);
 		}
 	}
 
@@ -142,6 +146,7 @@ function soundOverlapsClass(filenameWithPath) {
 		sounds[soundIndex].play();
 
 		soundIndex = (++soundIndex) % sounds.length;
+		console.log(`soundOverlapsClass.play: ${fullFilename}`);
 	}
 }
 
@@ -166,6 +171,7 @@ function soundRandomClass(arrayOfFilenames) {
 		sounds[soundIndex].currentTime = 0;
 		sounds[soundIndex].volume = Math.pow(getRandomVolume() * effectsVolume * !isMuted, 2);
 		sounds[soundIndex].play();
+		console.log(`soundRandomClass.play: ${sounds[soundIndex].src} - volume = ${sounds[soundIndex].volume}` );
 	}
 }
 
