@@ -41,12 +41,12 @@ function chooseRandomBGM() { return allBackgroundMusics[Math.floor(Math.random()
 function playNewBackgroundMusic() {
 	backgroundMusic.loopSong(chooseRandomBGM());
 }
-function playMainMenyBackgroundMusic() {
+function playMainMenuBackgroundMusic() {
 	backgroundMusic.loopSong(mainScreenBGM);
 }
 
 var backgroundMusic = new backgroundMusicClass();
-playMainMenyBackgroundMusic();
+playMainMenuBackgroundMusic();
 
 //sound classes
 

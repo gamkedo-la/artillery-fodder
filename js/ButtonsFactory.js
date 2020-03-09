@@ -70,7 +70,7 @@ class buttonFactory
 
 				case MAIN_MENU:
 					map.init(canvas.width, canvas.height-UI_HEIGHT);
-					playMainMenyBackgroundMusic();
+					playMainMenuBackgroundMusic();
 					backgroundMusic.resumeSound();
 					break;
 
@@ -233,7 +233,7 @@ class toggleFactory
 	{
 		return this.value
 	}
-	
+
 }
 
 class radioFactory
@@ -250,18 +250,18 @@ class radioFactory
 		this.value=[]
 		this.active=0
 	}
-	
+
 	checkEmpty()
 	{
 		for (var i = 0; i < this.message.length; i++){
 			if(this.value.length <= i){
-				
+
 				if (i == 0){
 					this.value.push(true);
 				}else{
 					this.value.push(false);
 				}
-			}	
+			}
 		}
 	}
 	process()
@@ -269,31 +269,31 @@ class radioFactory
 	     // if we JUST pressed the mouse button toggle everything around
 		for (var i = 0; i < this.message.length; i++){
 			if (isMouseInArea(this.x + this.length+50, this.y+i*this.spacing, 50, 50) && mouseJustPressed) {
-					this.active = i;	
+					this.active = i;
 			}
-			
-			if (i == this.active){				
+
+			if (i == this.active){
 				this.value[i] = true;
-				
+
 			}else{
 				this.value[i] = false;
 			}
 		}
 	}
-	
+
 	draw()
 	{
 		for(var i = 0; i < this.message.length; i++){
 			canvasContext.drawImage(this.btnFrame,this.x + this.length+50,this.y+i*this.spacing,50,50)
 			colorRoundedRect(this.x,this.y+i*this.spacing,this.length,50,"DeepSkyBlue")
-			
+
 			//Message
 			colorText(this.message[i], this.x + this.length/2 , this.y + 30 + (i*this.spacing), this.textColor, "25px Arial");
 			//Toggle Text
 			colorText(this.value[i]?"ON":"OFF",this.x+25 + this.length+50, this.y+30 + (i*this.spacing) , this.value[i]?"Green":"Red", "20px Arial");
 		}
 	}
-	
+
 	getValue(N)
 	{
 		return this.value[N]
