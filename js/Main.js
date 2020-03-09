@@ -239,6 +239,10 @@ function update(frameTime) {
 		turnEffectsVolumeUp();
 	}
 
+	if (Key.isDown(Key.CTRL) && Key.isJustReleased(Key.m)){
+		winGame();
+	}
+
 
 	playerScreenWave += frameTime * 45;
 
@@ -604,6 +608,10 @@ function inGameAnnoucements() {
 	}
 }
 
+function winGame() {
+	mode = WIN_SCREEN;
+}
+
 function nextTurn() {
 	if (incrementTurn) {
 
@@ -626,7 +634,7 @@ function nextTurn() {
 			if (arrayOfPlayers[i].active == false) {remaningPlayers--;}
 		}
 		if (remaningPlayers <= 1) {
-			mode = WIN_SCREEN;
+			winGame();
 		}
 	}
 }
