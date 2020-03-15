@@ -4,6 +4,7 @@ window.addEventListener('keydown',  function (event) { Key.onKeydown(event); eve
 function mouseInit() {
 	document.addEventListener('pointerdown', mouseDown);
 	document.addEventListener('pointerup', mouseUp);
+	canvas.addEventListener('contextmenu', evt => evt.preventDefault());
 	document.addEventListener('mousemove', mouseMove);
 	document.addEventListener('wheel', mouseWheel);
 	document.getElementById('gameCanvas').addEventListener('pointermove', calculateMousePos);
@@ -21,7 +22,7 @@ var focus=false;
 
 
 function mouseDown(evt) {
-	calculateMousePos(evt);
+	calculateMousePos(evt);	
 	mousePressed = true;
 	mouseJustPressed = true;
 	mouseMovementX = 0;
