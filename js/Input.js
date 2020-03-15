@@ -81,6 +81,7 @@ const Key = {
 	ENTER: 13,
 	CTRL: 17,
 	ALT: 18,
+	TAB: 9,
 	SPACE: 32,
 	LEFT: 37,
 	UP: 38,

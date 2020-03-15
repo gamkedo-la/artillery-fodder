@@ -425,7 +425,7 @@ function tankPlayerClass() {
 		canvasContext.restore();
 		
 		// Draw the health bar
-		if (this.isPointColliding(mouseX,mouseY)) {
+		if (this.isPointColliding(mouseX,mouseY) || Key.isDown(Key.TAB)) {
 			drawHealthbar(this.x,this.y, Math.floor(this.health));
 		}
 	}
