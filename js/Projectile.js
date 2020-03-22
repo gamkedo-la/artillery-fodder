@@ -96,7 +96,7 @@ function basicShotClass() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
@@ -349,7 +349,7 @@ function rollShotClass() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
@@ -426,7 +426,7 @@ function crazyBombShotClass() {
 		var newExplosion = new multiExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = color;
 		newExplosion.tank = this.tank;
@@ -531,7 +531,7 @@ function meteorClashClass() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "Black";
 		newExplosion.tank = this.tank;
@@ -614,7 +614,7 @@ function rainShot() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
@@ -716,7 +716,7 @@ function groundShotClass() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;
@@ -799,7 +799,7 @@ function grenadeShot() {
 		var newExplosion = new basicExplosionClass();
 		newExplosion.x = this.x;
 		newExplosion.y = this.y;
-		newExplosion.size = this.size;
+		newExplosion.maxSize = this.size;
 		newExplosion.damage = this.damage;
 		newExplosion.color = "White";
 		newExplosion.tank = this.tank;

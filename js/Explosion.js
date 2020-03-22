@@ -1,7 +1,10 @@
 function basicExplosionClass() {
 	this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 0;
+	this.maxSize = 20;
+	this.expandingRate = 2;
+	this.contractingRate = 10;
 	this.damage = 20;
 	this.color = "White";
 	this.tank;
@@ -13,6 +16,8 @@ function basicExplosionClass() {
 	this.particles = true;
 
 	this.update = function update(frameTime) {
+		this.size = this.size >= this.maxSize * 1.1 ? this.size - this.contractingRate : this.size + this.expandingRate;
+
 		if (this.active) {
 			if (!damageDone) {
 				for (var i = 0; i < numberOfPlayers; i++) {
@@ -46,7 +51,6 @@ function basicExplosionClass() {
 
 	this.draw = function draw(frameTime) {
 		colorCircle(this.x, this.y, this.size, this.color);
-		
 	}
 
 	this.calculateDamage = function calculateDamage(targetTank) {
@@ -61,11 +65,13 @@ function basicExplosionClass() {
 	}
 }
 
-function multiExplosionClass() {
-    
+function multiExplosionClass() {    
     this.x = 0;
 	this.y = 0;
-	this.size = 20;
+	this.size = 0;
+	this.maxSize = 20;
+	this.expandingRate = 2;
+	this.contractingRate = 10;
 	this.damage = 10;
 	this.color = "White";
 	this.tank;
@@ -78,6 +84,8 @@ function multiExplosionClass() {
 	this.numberOfIterations = 10;
 
 	this.update = function update(frameTime) {
+		this.size = this.size >= this.maxSize * 1.1 ? this.size - this.contractingRate : this.size + this.expandingRate;
+
 		if (this.active) {
 			if (!damageDone) {
 				for (var i = 0; i < numberOfPlayers; i++) {
@@ -110,7 +118,7 @@ function multiExplosionClass() {
 	}
 
 	this.draw = function draw(frameTime) {
-		colorCircle(this.x, this.y, this.size, this.color);		
+		colorCircle(this.x, this.y, this.size, this.color);
 	}
 
 	this.calculateDamage = function calculateDamage(targetTank) {
